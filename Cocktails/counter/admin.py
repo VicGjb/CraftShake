@@ -4,7 +4,7 @@ from django import forms
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from .models import (
-    Customer, 
+    Place, 
     ManagerOfPlace,
     Product,
     MenuPosition, 
@@ -27,7 +27,7 @@ class InvoiceForm(forms.ModelForm):
 """Inlaines"""
 class ManagerOfPlaceInLine(admin.TabularInline):
     model = ManagerOfPlace
-    extra = 1
+    extra = 0
     fieldsets = (
         (None, {
             'fields':(
@@ -40,7 +40,7 @@ class ManagerOfPlaceInLine(admin.TabularInline):
 class MenuInLine(admin.TabularInline):
     model = Menu
     show_change_link = True
-    extra = 1
+    extra = 0
     readonly_fields = ('name',)
     fieldsets = (
         (None, {
@@ -53,7 +53,7 @@ class MenuInLine(admin.TabularInline):
 
 class MenuPositionInLine(admin.TabularInline):
     model = MenuPosition
-    extra = 1
+    extra = 0
     show_change_link = True
     fieldsets = (
         (None, {
@@ -67,11 +67,11 @@ class MenuPositionInLine(admin.TabularInline):
 class InvoiceInLine(admin.TabularInline):
     model = Invoice
     show_change_link = True
-    extra = 1
+    extra = 0
     fieldsets = (
         (None, {
             'fields':(
-                (('customer','date','amount','is_vat','total_amount'),)
+                (('place','date','amount','is_vat','total_amount'),)
             )
         }),
     )
@@ -80,11 +80,11 @@ class InvoiceInLine(admin.TabularInline):
 class OrderInline(admin.TabularInline):
     model = Order
     show_change_link = True
-    extra = 1
+    extra = 0
     fieldsets = (
         (None, {
             'fields':(
-                (('customer', 'menu', 'date', 'total_price',))
+                (('place', 'date', 'total_price',))
             )
         }),
     )
@@ -92,7 +92,7 @@ class OrderInline(admin.TabularInline):
 
 class OrderItemInLine(admin.TabularInline):
     model = OrderItem
-    extra = 1
+    extra = 0
     fieldsets = (
         (None, {
             'fields':(
@@ -103,9 +103,9 @@ class OrderItemInLine(admin.TabularInline):
 
 
 """Admin Modeles"""
-@admin.register(Customer)
-class CustomerAdmin(admin.ModelAdmin):
-    """Customer admin"""
+@admin.register(Place)
+class PlaceAdmin(admin.ModelAdmin):
+    """Place admin"""
     list_display = ('name','address', 'phone')
     list_display_links = ('name',)
     save_on_top = True
@@ -136,43 +136,43 @@ class ManagerOfPlace(admin.ModelAdmin):
 @admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
     inlines = [MenuPositionInLine]
-    list_display = ('name','customer','is_current_menu')
+    list_display = ('name','place','is_current_menu')
     list_display_links = ('name',)
     save_on_top = True
 
 
 @admin.register(MenuPosition)
 class MenuPositionAdmin(admin.ModelAdmin):
-    list_display = ('product', 'menu', 'sale_price')
-    list_display_links =  ('product',)
-    save_on_top =True
+    list_display = ('get_name', 'menu', 'sale_price')
+    list_display_links =  ('get_name',)
+    save_on_top = True
+
+    def get_name(self,obj) -> str:
+        return obj.product.name
 
 
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'date', 'total_amount')
-    list_display_links = ('customer',)
+    list_display = ('place', 'date', 'total_amount')
+    list_display_links = ('place',)
     inlines = [OrderInline]
     save_on_top = True
-    # form = InvoiceForm
     
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('customer', 'date', 'total_price')
-    list_display_links = ('customer',)
+    list_display = ('place', 'date', 'total_price')
+    list_display_links = ('place',)
     inlines = [OrderItemInLine]
-    search_fields = ('customer','date')
+    search_fields = ('place','date')
     save_on_top = True
 
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
-    # readonly_fields = ('item_price',)
     list_display = ('order', 'quantity', 'item_price')
     list_display_links = ('order',)
     save_on_top = True
-    # prepopulated_fields = {'item_price':'get_price'}
 
     def get_price(self, obj):
         result = obj.item_price * obj.quantity

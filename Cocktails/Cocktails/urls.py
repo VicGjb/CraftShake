@@ -9,6 +9,7 @@ from .yasg import urlpatterns as doc_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/counter/', include('counter.urls')),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
 
 urlpatterns += doc_urls

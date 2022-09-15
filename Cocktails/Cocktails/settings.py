@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
+
     'rest_framework',
     'drf_yasg',
+    'django_filters',
+    'compressor',
 
     'counter',
 ]
@@ -52,6 +56,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
 ]
 
 ROOT_URLCONF = 'Cocktails.urls'
@@ -59,7 +72,7 @@ ROOT_URLCONF = 'Cocktails.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,10 +133,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-# STATIC_DIR = os.path.join[BASE_DIR,'static']
-# STATICFILES_DIRS = [STATIC_DIR]
-STATIC_ROOT=os.path.join(BASE_DIR, 'static')    
+
+STATICFILES_FINDERS = [
+    'compressor.finders.CompressorFinder',
+]
+STATIC_URL = '/static/'
+STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+STATIC_DIR=os.path.join(BASE_DIR, 'static/files')
+STATICFILES_DIRS=[STATIC_DIR]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -133,7 +150,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 30,
+
+    'DEFAULT_FILTER_BACKENDS':(
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
 }

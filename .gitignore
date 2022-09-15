@@ -21,7 +21,8 @@ venv.bak/
 .history
 
 .Python build/ 
-develop-eggs/ 
+develop-eggs/
+static/ 
 dist/ 
 downloads/ 
 eggs/ 
@@ -37,6 +38,7 @@ wheels/
 *.egg 
 *.manifest 
 *.spec 
+
 
 htmlcov/ 
 .tox/ 

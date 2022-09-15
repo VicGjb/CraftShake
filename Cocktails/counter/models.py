@@ -1,14 +1,15 @@
+from sqlite3 import Date
+from unicodedata import name
 from django.db import models
-from django.db.models.deletion import CASCADE
+from django.db.models.deletion import CASCADE, SET_NULL
 from django.db.models.fields.related import ManyToManyField
 from django.utils import timezone
 
-
-class Customer(models.Model):
+class Place(models.Model):
     """Comment"""
     class Meta:
-        verbose_name = 'Customer'
-        verbose_name_plural = 'Customers'
+        verbose_name = 'Place'
+        verbose_name_plural = 'Places'
 
 
     name = models.CharField(
@@ -30,9 +31,9 @@ class Customer(models.Model):
         verbose_name='E-mail',
         blank=True
         )
-    is_current_customer = models.BooleanField(
+    is_current_place = models.BooleanField(
         default=True,
-        verbose_name='Current customer'
+        verbose_name='Current place'
     )
 
     def __str__ (self)  -> str:
@@ -47,7 +48,7 @@ class ManagerOfPlace(models.Model):
     
 
     place = models.ForeignKey(
-        Customer,
+        Place,
         on_delete=CASCADE
     )
     name = models.CharField(
@@ -58,6 +59,12 @@ class ManagerOfPlace(models.Model):
         max_length=20,
         verbose_name='Phone number'
     )
+    description = models.TextField(
+        max_length=500,
+        verbose_name='About',
+        blank=True
+    )
+
 
     def __str__ (self)  -> str:
         return f'{self.name} manager of {self.place}'
@@ -90,9 +97,10 @@ class Product(models.Model):
         verbose_name='Sale price'
     )
     photo = models.ImageField(
-        'Photo',
+        verbose_name='Photo',
         upload_to='Product_photo',
-        blank=True
+        blank=True,
+        default = '../media/cocktailDefault.jpeg'
     )
 
     def __str__ (self)  -> str:
@@ -113,9 +121,10 @@ class Menu(models.Model):
         max_length=50,
         verbose_name='Name'
     )
-    customer = models.ForeignKey(
-        Customer, 
-        on_delete=CASCADE
+    place = models.ForeignKey(
+        Place, 
+        on_delete=SET_NULL,
+        null=True
     )
     is_current_menu = models.BooleanField(
         default=True,
@@ -123,10 +132,10 @@ class Menu(models.Model):
     )
 
     def __str__ (self)  -> str:
-        return f'{self.name} of {self.customer}'
+        return f'{self.name} of {self.place}'
 
-    def get_customer(self) -> str:
-        return self.customer_set.name()
+    def get_place(self) -> str:
+        return self.place_set.name()
         
     def get_product(self) -> list:
         return self.product_set.all()
@@ -138,18 +147,22 @@ class MenuPosition(models.Model):
         verbose_name = 'Position for menu'
         verbose_name_plural = 'Positions for menu'
 
-
     menu = models.ForeignKey(
         Menu,
         on_delete=CASCADE,
         verbose_name='Menu',
         related_name='position_in_menu',
-        blank=True
+
     )
     product = models.ForeignKey(
         Product,
         on_delete=CASCADE,
-        verbose_name='Product'
+        verbose_name='Product',
+    )
+    name = models.CharField(
+        max_length=50,
+        verbose_name='Name',
+        default=''
     )
     sale_price = models.DecimalField(
         max_digits=7,
@@ -160,9 +173,18 @@ class MenuPosition(models.Model):
     def __str__(self) -> str:
         return f'{self.product} in {self.menu}'
 
-    def get_default_price (self) ->float:
+    def get_default_price (self) -> float:
         return self.product.sale_price
     
+    def get_product_name(self) -> str:
+        return self.product.name
+    
+    def get_photo(self) -> str:
+        return f'http://127.0.0.1:8000/media/{self.product.photo}'
+    
+    def get_discription(self) -> str:
+        return self.product.discription
+
 
 class Invoice(models.Model):
     """Comment"""
@@ -171,10 +193,10 @@ class Invoice(models.Model):
         verbose_name_plural = 'Invoices'
     
 
-    customer = models.ForeignKey(
-        Customer,
+    place = models.ForeignKey(
+        Place,
         on_delete=CASCADE,
-        verbose_name='Customer'
+        verbose_name='Place',
     )
     date = models.DateField(
         verbose_name='Date',
@@ -187,7 +209,7 @@ class Invoice(models.Model):
     )
     is_vat = models.BooleanField(
         default=False,
-        verbose_name='Add VAT'
+        verbose_name='Add VAT',
     )
     total_amount = models.DecimalField(
         max_digits=8,
@@ -196,9 +218,12 @@ class Invoice(models.Model):
     )
 
     def __str__(self) -> str:
-        return f'Invoice to {self.customer} on {self.date}'
+        return f'Invoice to {self.place} on {self.date}'
 
-   
+    def get_place_name(self):
+        return self.place.name
+
+    
 class Order(models.Model):
     """Comment"""
     class Meta:
@@ -206,24 +231,20 @@ class Order(models.Model):
         verbose_name_plural = 'Orders'
     
 
-    customer = models.ForeignKey(
-        Customer,
+    place = models.ForeignKey(
+        Place,
         on_delete=CASCADE,
-        verbose_name='Customer',
-        related_name='customer_order'
+        verbose_name='Place',
+        related_name='place_order'
     )
     invoice = models.ForeignKey(
         Invoice,
-        on_delete=CASCADE,
+        on_delete=SET_NULL,
         verbose_name='Invoice',
-        related_name='order_in_invoice',
+        related_name='orders',
         blank=True,
-        null=True,
-    )
-    menu = models.ForeignKey(
-        Menu,
-        on_delete=CASCADE,
-        verbose_name='Menu'
+        null=True
+
     )
     date = models.DateField(
         verbose_name='Date',
@@ -232,16 +253,21 @@ class Order(models.Model):
     total_price = models.DecimalField(
         max_digits=7,
         decimal_places=2,
-        verbose_name='Total'
+        verbose_name='Total',
+        default = 0
     )
     
-
     def __str__(self) ->str:
-        return f'Order of {self.customer} on {self.date}'
+        return f'Order of {self.place} on {self.date}'
+
+    def get_place_name(self):
+        return self.place.name
+
 
 
 class OrderItem(models.Model):
     """Comment"""
+    
     class Meta:
         verbose_name = 'Order item'
         verbose_name_plural = 'Order items'
@@ -250,12 +276,20 @@ class OrderItem(models.Model):
     order = models.ForeignKey(
         Order,
         on_delete=CASCADE,
-        verbose_name='Order'
+        verbose_name='Order',
+        related_name='order_item',
+    )
+    name = models.CharField(
+        max_length=50, 
+        verbose_name='Name',
+        default='unknow name',
+        blank=True
     )
     position = models.ForeignKey(
         MenuPosition,
-        on_delete=CASCADE,
-        verbose_name='Position'
+        on_delete=SET_NULL,
+        verbose_name='Position',
+        null=True
     )
     quantity = models.PositiveIntegerField(
         default=1,
@@ -269,8 +303,8 @@ class OrderItem(models.Model):
 
     def __str__(self) ->str:
         return f'{self.position} in {self.order}'
-    
-    def calculate_amount_price(self):
-        self.item_price = self.quantity * self.position.sale_price 
-        return self.item_price
 
+    def get_name_position(self):
+        return self.position.product
+    
+    

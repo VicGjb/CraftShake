@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  frontend:
+      user: ${UID}:${GID} #имя пользователя и группы в нутри докера, равные мимени пользователя на локальной машине
+      #image: node:16.13.0
+      build: 
+        context: ./frontend
+      hostname: frontend  #Кастомное навание хоста
+      container_name: frontend #имя контейнера которое понимет докерв
+      ports:
+        - "3000:3000"
+      environment:
+        HOST: "0.0.0.0"
+      tty: true #контейнер живет до явногой команды отключиться
+      volumes:
+        - ./frontend:/app  #общая папка для локальной машини и контейнера
+      depends_on:   #зависимость он другого докера
+        - backend  
+
+  backend:
+      user: ${UID}:${GID}
+      #image: python:latest
+      build:
+          context: ./Cocktails
+      hostname: backend
+      container_name: backend
+      ports:
+        - "8000:8000"
+      tty: true
+      volumes:
+        - ./Test_project:/app
+      # depends_on:
+      #   - database
