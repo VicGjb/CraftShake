@@ -4,15 +4,20 @@ import {useParams} from 'react-router-dom';
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupUploadProductPhoto } from "../../components/popup/popup_change_photo";
 import { PopupChangeProduct } from "../../components/popup/popup_change_product";
+import { PopupDelete } from "../../components/popup/popup_delete";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export function ProductDetaile(){
     let [product, setProduct] = useState({});
     let [is_loaded, setIsLoaded] = useState(false)
     let {productId} = useParams();
+    let navigate = useNavigate();
+
     let [upload_product_photo_active, setUploadProductPhotoActive] = useState(false);
     let [change_product_active, setChangeProductActive] = useState(false);
-    
+    let [delete_active,setDelete_active] = useState(false)
+
     useEffect(() => {
         axios({
           method: 'GET',
@@ -33,6 +38,7 @@ export function ProductDetaile(){
             console.log(error);
             throw error;
         });
+        navigate(`/products`)
     }   
 
     function ProductDetaileView(){
@@ -72,12 +78,8 @@ export function ProductDetaile(){
                                 <div className="change_btn" onClick={()=>setChangeProductActive(true)}>
                                     <RegularButton lable={'Change product'} />   
                                 </div>
-                                
-                                
-                                <div className="product_detaile_delete_btn" onClick={deleteProduct}>
-                                    <Link to={{pathname:`/products`}}>
-                                        <RegularButton lable={'Delete product'}/>
-                                    </Link>
+                                <div className="product_detaile_delete_btn" onClick={()=> setDelete_active(true)}>
+                                    <RegularButton lable={'Delete product'}/>
                                 </div>
                             </div>
                         </div>                     
@@ -85,6 +87,7 @@ export function ProductDetaile(){
                 </div>
                 <PopupUploadProductPhoto upload_product_photo_active={upload_product_photo_active} setUploadProductPhotoActive={setUploadProductPhotoActive}/>
                 <PopupChangeProduct product={product} change_product_active={change_product_active} setChangeProductActive={setChangeProductActive}/>
+                <PopupDelete subject={`product ${product.name}`} delete_active={delete_active} setDelete_active={setDelete_active} func={deleteProduct}/>            
             </div>
         )
         

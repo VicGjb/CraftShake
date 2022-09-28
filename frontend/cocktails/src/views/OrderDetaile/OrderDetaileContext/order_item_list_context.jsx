@@ -2,26 +2,10 @@ import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 
 let OrderItemListContext = React.createContext();
-// let OrederMenuItemContext = React.createContext();
-
-// export function useOrderMenuItemContext(){
-//     return useContext(OrederMenuItemContext)
-// }
 
 export function useOrderItemListContext(){
     return useContext(OrderItemListContext)
 }
-
-// export function OrederMenuItemContextProvider({children}){
-//     let [qnty,setQnty] = useState(0)
-
-
-//     return(
-//         <OrederMenuItemContext.Provider>
-//             {children}
-//         </OrederMenuItemContext.Provider>
-//     )
-// }
 
 export function OrderItemListContextProvider({children}){
     let [item_list, setItemList] = useState([]);

@@ -1,13 +1,16 @@
 import React, { Component, useEffect, useState } from 'react';
 import axios from 'axios';
 import { RegularButton } from '../../components/buttons/regular_button';
+import { useParams } from 'react-router-dom';
 
 export function AddManagerOfPlace({place, setAdd_manager_active}) {
+    let {placeId} = useParams();
+    let {placeName} = useParams();
 	let defaultForm = {
         name:'',
         phone:'',
         description:'',
-        place:place.id,
+        place:placeId,
     }
     let [form, setForm] =  useState(defaultForm);
 

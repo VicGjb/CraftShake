@@ -1,25 +1,39 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { PlaceCardBtn } from "../../components/buttons/place_card_btn";
 import { AddButton } from "../../components/buttons/add_button";
+import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupAddPlace } from "../../components/popup/popup_add_place";
+import { useManeContext } from "../../components/main_context";
+import { useAuthContext } from "../../components/auth_context";
 
 
 export function PlaceList(){
+    let main_context = useManeContext();   
+    let auth_context = useAuthContext();
+    let navigate = useNavigate();
     let [place, setPlace] = useState([]);
     let [loaded, setLoaded] = useState(false)
 
     let [add_place_active, setAdd_place_active] = useState(false)
+    let token = auth_context.getAuth()
 
     useEffect(()=> {
+        console.log('AAADDDKKKERCE',token)
         axios({
             method: 'GET',
-            url: 'http://127.0.0.1:8000/api/counter/places/'
+            url: 'http://127.0.0.1:8000/api/counter/places/', 
+            headers:{'Authorization':token}  
         }).then(response => {
             setPlace(response.data.results);
             setLoaded(true);
         })
     }, [])
+  
+    function goBack(){  
+        navigate(-1)
+    }
 
     function PlaceListView(){
         return(
@@ -27,10 +41,12 @@ export function PlaceList(){
             <div className="place_list">
                 <div className="place_list__content">
                     <div className="place_list_button_row" >
+                        <div onClick={goBack}>
+                            <RegularButton lable={'Back'}/>
+                        </div>
                         <div onClick={()=>setAdd_place_active(true)}> 
                           <AddButton lable={'Add place'}/>  
                         </div>
-                        
                     </div>
                     <div className="place_list_cards_buttons">
                         {place.map(p => (

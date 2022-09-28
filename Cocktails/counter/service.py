@@ -1,7 +1,8 @@
-from dataclasses import field
+from dataclasses import field, fields
 from decimal import Decimal
 # from multiprocessing.dummy import Manager
 from pyexpat import model
+from unicodedata import name
 from django_filters import rest_framework as filters
 from django_filters import DateRangeFilter
 from .models import (
@@ -11,6 +12,7 @@ from .models import (
     Invoice, 
     Order, 
     OrderItem,
+    Product,
     )
 
 '''Const'''
@@ -63,7 +65,15 @@ class OrderItemFilter(filters.FilterSet):
 
 class InvoiceFilter(filters.FilterSet):
     place = filters.BaseInFilter()
+    date = filters.DateFromToRangeFilter()
 
     class Meta:
         model = Invoice
-        fields = ['place']
+        fields = ['place','date']
+
+
+class ProductFilter(filters.FilterSet):
+    name = filters.CharFilter()
+    class Meta:
+        model = Product
+        fields = ['name']

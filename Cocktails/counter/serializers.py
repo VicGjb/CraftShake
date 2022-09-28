@@ -1,10 +1,5 @@
-from dataclasses import field, fields
-from pyexpat import model
 from django.db.models import Sum
 from rest_framework import serializers
-
-from .service import Rate
-
 from .models import (
     Place, 
     ManagerOfPlace,
@@ -190,6 +185,14 @@ class InvoiceSerializer(serializers.ModelSerializer):
         read_only_fields = (
             'orders     ',
         )
+
+
+class InvoiceUpdateSerializer(serializers.ModelSerializer):
+    is_vat = serializers.BooleanField(required=True)
+    class Meta:
+        model = Invoice
+        fields = ('state','is_vat')
+        extra_kwargs = {'is_vat':{'required': True, 'allow_null': False}}
 
 
 class InvoiceCreateSerializer(serializers.ModelSerializer):

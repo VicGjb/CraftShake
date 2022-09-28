@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.db.models import Sum
 from django.template.loader import get_template
 from django.http import HttpResponse
-from .service import Rate
+from django.urls import is_valid_path
+from .service import ProductFilter, Rate
 # import pdfkit
 from rest_framework import (
     serializers,
@@ -48,6 +49,7 @@ from .serializers import(
     MenuUpdateSerializer,
     InvoiceSerializer,
     InvoiceCreateSerializer,
+    InvoiceUpdateSerializer,
     OrderViewSerializer,
     OrderCreateSerializer,
     OrderUpdateSerializer,
@@ -60,6 +62,7 @@ from .file_operation import get_invoice_pdf
 
 """Place views"""
 class PlaceView(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         place = Place.objects.all()
@@ -70,7 +73,13 @@ class PlaceView(viewsets.ReadOnlyModelViewSet):
             return PlaceSerializer
         elif self.action == "retrieve":
             return PlaceDetailSerializer
+
+class PlaceUpdateView(viewsets.ModelViewSet):
+    serializer_class = PlaceDetailSerializer
     
+    def get_queryset(self):
+        product = Place.objects.all() 
+        return product
 
 class PlaceCreateView(viewsets.ModelViewSet):
 
@@ -111,6 +120,8 @@ class ManagerOfPlaceCreateView(viewsets.ModelViewSet):
 
 """Product views"""
 class ProductView(viewsets.ReadOnlyModelViewSet):
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = ProductFilter
 
     def get_queryset(self):
         product = Product.objects.all()
@@ -216,7 +227,7 @@ class MenuPositionCreateView(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def add_menu_position(self,request,pk=None):
         menu_position = MenuPositionCreateSerializer(data=request.data)
-        if menu_position.is_valid(  ):
+        if menu_position.is_valid():
             return Response(status=201)
 
 
@@ -237,21 +248,43 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
     @action(detail=True, methods=['get','html_view'])
     def html_view(self, request, pk=None):
         invoice = Invoice.objects.get(id=pk)
-        orders = Order.objects.filter(invoice = pk)
+        orders = Order.objects.filter(invoice = pk).order_by('date')
         return render(request, 'invoice.html', {'invoice': invoice, 'orders':orders})
 
 
     @action(detail=True, methods=['get','create_pdf'])
     def create_pdf(self, request, pk=None):
         invoice = Invoice.objects.get(id=pk)
-        orders = Order.objects.filter(invoice = pk)
+        orders = Order.objects.filter(invoice = pk).order_by('date')
         context = {'invoice': invoice, 'orders':orders}
         return InvoicePdfCreator.render_pdf_view(request=request, context=context)
 
 
 class InvoiceDeleteView(viewsets.ModelViewSet):
     queryset = Invoice.objects.all()
-    serializer_class = OrderViewSerializer
+    serializer_class = InvoiceSerializer
+
+
+class InvoiceUpdateView(viewsets.ModelViewSet):
+    
+    serializer_class = InvoiceUpdateSerializer
+
+    @action(detail=True, methods=['update'])
+    def update(self, request, pk=None):
+        invoice_update_data = InvoiceUpdateSerializer(data=request.data)
+        invoice = Invoice.objects.get(id = pk)
+        if invoice_update_data.is_valid():
+            if invoice_update_data.data['is_vat']:
+                total_amount = invoice.amount * Rate.VAT_RATE
+                invoice.total_amount=total_amount
+            else:
+                total_amount = invoice.amount
+                invoice.total_amount=total_amount
+            invoice.is_vat=invoice_update_data.data['is_vat']
+            invoice.state=invoice_update_data.data['state']
+            invoice.save()
+        return Response(status=201)
+
 
 
 class InvoiceCreateView(viewsets.ModelViewSet):
@@ -270,7 +303,8 @@ class InvoiceCreateView(viewsets.ModelViewSet):
                 date__lte = data_for_new_invioce['until_date'],
                 place = data_for_new_invioce['place'],
                 invoice = None 
-                )
+                ).order_by('date')
+            print(orders)
             amount = Decimal(f'{orders.aggregate(Sum("total_price"))["total_price__sum"]}')
             
             if data_for_new_invioce['is_vat']:

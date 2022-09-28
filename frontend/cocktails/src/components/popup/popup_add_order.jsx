@@ -1,19 +1,21 @@
 import React, { useState} from "react";
 import axios from "axios";
 import { RegularButton } from "../buttons/regular_button";
-import {useNavigate,} from "react-router-dom";
+import {useNavigate, useParams,} from "react-router-dom";
 
-export const PopupAddOrder =({add_order_active, setAdd_order_active, place})=>{
+export const PopupAddOrder =({add_order_active, setAdd_order_active})=>{
+    let {placeId} = useParams();
+    let {placeName} = useParams();
     let defaultForm = {
         date: '',
-        place: {place}
+        place: {placeId}
     }
     let [form, setForm] = useState(defaultForm);
     let navigate = useNavigate();
 
 
     let changeHandler = e =>{
-        setForm({...form, ['date']:e.target.value, ['place']:place.id});
+        setForm({...form, ['date']:e.target.value, ['place']:placeId});
     }
 
     let submitHandler = e =>{
@@ -28,8 +30,8 @@ export const PopupAddOrder =({add_order_active, setAdd_order_active, place})=>{
 				console.log(error);
 				throw error;
 			});
-        // navigate(`/${place.id}/${place.name}/orders`, {state:{from:place}});   
-        // window.location.reload();
+        navigate(`/${placeName}/${placeId}/orders`,);   
+        window.location.reload();
 	}
 
     function ToGo(){
@@ -40,7 +42,7 @@ export const PopupAddOrder =({add_order_active, setAdd_order_active, place})=>{
         <div className={add_order_active ? 'popup_wrapper active' : 'popup_wrapper'} onClick={()=>setAdd_order_active(false)}>
             <div className="popup_content" onClick={e => e.stopPropagation()}>
                 <div className="popup_title">
-                    Add order for <br/>{place.name}
+                    Add order for <br/>{placeName}
                 </div>
                 <form onSubmit={submitHandler} className='add_order_form'>
                     <div className="add_order_popup_date">

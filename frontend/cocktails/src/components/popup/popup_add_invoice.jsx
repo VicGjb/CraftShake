@@ -2,13 +2,14 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { RegularButton } from "../buttons/regular_button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
-export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active, place}){
-
+export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active}){
+    let {placeId} = useParams();
+    let {placeName} = useParams();
     let defaultForm = {
-        place: place.id,
+        place: placeId,
         date:'',
         from_date:'',
         until_date:'',
@@ -31,7 +32,7 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active, plac
                 console.log(error);
                 throw error;
             });
-            navigate(`/${place.id}/${place.name}/invoices`, {state:{from:place}})
+            navigate(`/${placeName}/${placeId}/invoices`,)
             window.location.reload();
 
     }
@@ -40,7 +41,7 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active, plac
         console.log('Change')
         console.log('submit',form)
         axios
-            .get(`http://127.0.0.1:8000/api/counter/order/?place=${place.id}&date_after=${form.from_date}&date_before=${form.until_date}`)
+            .get(`http://127.0.0.1:8000/api/counter/order/?place=${placeId}&date_after=${form.from_date}&date_before=${form.until_date}`)
             .then(response =>{
                 setOrders(response.data.results)
                 console.log(response.data.results)
@@ -61,7 +62,7 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active, plac
         <div className={add_invoice_active ? 'popup_wrapper active' : 'popup_wrapper'} onClick={()=>setAdd_invoice_active(false)}>
             <div className="add_invoice" onClick={e => e.stopPropagation()}>
                 <div className="add_invoice_title regular_text  ">
-                    Add new invoice for {place.name}
+                    Add new invoice for {placeName}
                 </div>
                 <div className="add_invoice_content regular_text_small">
                     <form  className="add_invoice_form" onSubmit={submitHandler}>

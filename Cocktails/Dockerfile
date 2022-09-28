@@ -13,3 +13,7 @@ RUN pip install django-libsass
 RUN pip install xhtml2pdf
 
 RUN pip install pdfkit 
+
+RUN pip install djoser
+
+ RUN pip install djangorestframework_simplejwt

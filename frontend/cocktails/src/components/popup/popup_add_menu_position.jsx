@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { RegularButton } from "../buttons/regular_button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_position_active, menu}){
-
+    let {placeId}=useParams()
     let defaultForm = {
         name:'',
         sale_price:0.00,
@@ -28,7 +28,6 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
 
     function submitHandler(e){
         e.preventDefault()
-        console.log(form)
         axios
 			.post('http://127.0.0.1:8000/api/counter/menu-position/create/', form)
 			.then(response => {
@@ -38,7 +37,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
 				console.log(error);
 				throw error;
 			});	
-            navigate(`/menus/${menu.id}`, {state:{from:menu}})
+            navigate(`${placeId}/menus/${menu.id}`, {state:{from:menu}})
             window.location.reload();	
     }
     function changeHandler(e){

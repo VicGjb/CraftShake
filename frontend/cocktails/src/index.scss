@@ -93,8 +93,21 @@ body{
     fill:#F30505 ;
   }
 }
-
-
+.search_btn{
+  background-color:#424040;
+  .icon_search_btn{
+    @include adaptiv(15, 7, width);
+    @include adaptiv(15, 7, height);
+  }
+}
+.search_btn:hover{
+  background-color:#424040;
+  .icon_search_btn{
+    @include adaptiv(15, 7, width);
+    @include adaptiv(15, 7, height);
+    fill:#FFBF1C ;
+  }
+}
 
 // Table 
 .tbody{
@@ -222,17 +235,39 @@ body{
 .place_list_button_row{
   @include adaptiv(10, 5, margin-top);
   display: flex;
-  justify-content: end;
+  justify-content:space-between;
   width: 100%;
 }
 .place_list_cards_buttons{
   margin: 0px auto;
+  @include adaptiv(10, 5, margin-top);
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 .place_card_btn{
   margin-top: 20px;
+}
+
+
+// popup delete
+
+.popup_delete_content{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  @include adaptiv(180,150 ,height);
+  @include adaptiv(180,150 ,width);
+  .popup_delete_masssege{
+    margin: 0px auto;
+  }
+  .popup_delete_button_line{
+    display: flex;
+    justify-content: space-between;
+    .button{
+      @include adaptiv(80, 40, width);
+    }
+  }
 }
 
 // Place detaile
@@ -268,8 +303,28 @@ body{
   @include adaptiv(16, 8, font-size); 
   line-height: 19px;
   color: #909090;
+}
+
+.service_button_row{
+  @include adaptiv(750, 190, width);
+  @include adaptiv(30, 20, height);
+  display: flex;
+  justify-content: space-between;
+  @include adaptiv(10,5 , margin-top);
+  @include adaptiv(10,5 , margin-bottom);
+  // border-bottom: 0.5px solid #605f5e70;
+  
+  .service_row_button_wrapper{
+    align-self: center;
+  }
+  .button{
+    @include adaptiv(30,20 , height);
+    @include adaptiv(110, 60, width);
+  
+  }
 
 }
+
 .place_detaile_button_wrapper{
   @include adaptiv(20, 10, margin-top);
 }
@@ -297,6 +352,7 @@ body{
 
 .palce_detaile_content{
   display: flex;
+  @include adaptiv(20, 10, margin-top); 
 }
 
 .place_detaile_main_buttons_wrapper{
@@ -377,6 +433,15 @@ body{
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
+  .message_content{
+    display: flex;
+    flex-direction: column;
+    @include adaptiv(200,120 ,height);
+    justify-content: space-between;
+    .button_set{
+      margin: 0px auto;
+    }
+  }
 }
 
 .popup_wrapper.active{
@@ -408,16 +473,18 @@ body{
 
 .add_order_popup_date{
   display: flex;
-  width: 100%;
+  @include adaptiv(150,50 ,width);
   @include adaptiv(20, 10, margin-top);
   justify-content: space-between;
+  flex-wrap: wrap;
   .date_lable{
     font-family: 'Fira Mono';
     font-style: normal;
     font-weight: 400;
-    @include adaptiv(20, 14, font-size);
+    @include adaptiv(20, 8, font-size);
     line-height: 19px;
     color: #909090;
+    @include adaptiv(5, 3, margin-right);
   }
   input[type=date]{
     font-family: 'Fira Mono';
@@ -454,7 +521,7 @@ body{
 .order_list_content_title{
   margin: 0px auto;
   @include adaptiv(10, 5, margin-top);
-  @include adaptiv(10, 5, margin-bottom);
+  // @include adaptiv(10, 5, margin-bottom);
 }
 .order_list_container{
   display: flex;
@@ -494,9 +561,28 @@ body{
   border-bottom: 1px solid #909090;
 }
 .order_list_table_row:hover{
-  color: #FFBF1C;
+
+  .regular_text_small{
+    color: #FFBF1C;
+  }
 } 
 
+.order_list_button_set{
+  @include adaptiv(15, 5,margin-top );
+  @include adaptiv(160, 150,max-height );
+  @include adaptiv(180, 80, width );
+  border: 1px solid #605F5E;
+  padding: 5px 0px;
+  display: flex;
+  flex-direction: column;
+  .title{
+    margin: 0 auto;
+  }
+  .button{
+    @include adaptiv(120, 40,width);
+    @include adaptiv(30, 10,height);
+  }
+}
 
 //Order detaile
 .order_detaile_content{
@@ -727,6 +813,22 @@ body{
   @include adaptiv(48, 20, line-height);
   // line-height: 48px;
   color: #909090;
+}
+
+.product_list_found_input{
+    background-color:#424040;
+    @include adaptiv(150,90 ,width );
+    color: #909090;
+    @include adaptiv(14,10 ,font-size );
+    padding-left: 5px;
+}
+.product_list_found_wrapper{
+    background-color:#424040;
+    @include adaptiv(150,150 ,width );
+    // color: #ecdede;
+    @include adaptiv(14,10 ,font-size );
+    padding-left: 5px;
+    display: flex;
 }
 
 .products_list_contetn{
@@ -1012,6 +1114,19 @@ body{
   display: flex;
   flex-direction: column;
 }
+.invoice_list_table_head{
+@include adaptiv(500, 190, width);
+}
+.invoice_list_table_body{
+  @include adaptiv(500, 190, width);
+}
+.invoice_list_table_search{
+  display: flex;
+  // background-color: #ecdede;
+  @include adaptiv(750, 190, max-width);
+  justify-content: space-between;
+  flex-wrap: wrap-reverse;
+}
 .invoise_list_button_set{
   align-self: flex-end;
 }
@@ -1192,7 +1307,9 @@ body{
   flex-direction: column;
 }
 .menu_list_button_set{
-  align-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  // align-self: flex-end;
 }
 .menu_list_table{
   @include adaptiv(15,10 ,margin-top );
@@ -1331,7 +1448,7 @@ body{
 .managers_list_content__conteiner___button_set{
   @include adaptiv(20,10 ,margin-top);
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
 }
 .managers_list_content__conteiner___table{
   @include adaptiv(20,10 ,margin-top);

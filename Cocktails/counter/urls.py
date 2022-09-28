@@ -6,6 +6,7 @@ from .views import(
     PlaceView,
     PlaceDeleteView,
     PlaceCreateView,
+    PlaceUpdateView,
     ManagerOfPlaceView,
     ManagerOfPlaceCreateView,
     ProductView,
@@ -23,6 +24,7 @@ from .views import(
     InvoiceView,
     InvoiceCreateView,
     InvoiceDeleteView,
+    InvoiceUpdateView,
     OrderView,
     OrderCreateView,
     OrderDeleteView,
@@ -37,6 +39,7 @@ urlpatterns = format_suffix_patterns(
     [
         path('places/', PlaceView.as_view({'get':'list'})),
         path('place/<int:pk>', PlaceView.as_view({'get':'retrieve'})),
+        path('place/update/<int:pk>', PlaceUpdateView.as_view({'post':'update'})),
         path('place/delete/<int:pk>', PlaceDeleteView.as_view({'post':'destroy'})),
         path('place/create/', PlaceCreateView.as_view({'post':'create'})),
 
@@ -70,6 +73,7 @@ urlpatterns = format_suffix_patterns(
         path('invoice/create/', InvoiceCreateView.as_view({'post':'create'})),
         path('invoice/delete/<int:pk>/', InvoiceDeleteView.as_view({'post':'destroy'})),
         path('invoice/create_pdf/<int:pk>/', InvoiceView.as_view({'get':'create_pdf'})),
+        path('invoice/update/<int:pk>/', InvoiceUpdateView.as_view({'post':'update'})),
         path('invoice/html/<int:pk>/', InvoiceView.as_view({'get':'html_view'})),
 
         path('order/', OrderView.as_view({'get':'list'})),

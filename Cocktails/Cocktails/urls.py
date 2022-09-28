@@ -1,4 +1,3 @@
-from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -9,7 +8,10 @@ from .yasg import urlpatterns as doc_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/counter/', include('counter.urls')),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
+
 ]
 
 urlpatterns += doc_urls

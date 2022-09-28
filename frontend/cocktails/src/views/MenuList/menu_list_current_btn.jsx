@@ -23,12 +23,12 @@ export function CurrentMenuChackBox({menu}){
 }
     return(
         <div>
-        <input 
-                    type="checkbox"
-                    name="is_current_menu"
-                    checked={form.is_current_menu}
-                    onChange={setCurrent}
-                    />
+            <input 
+                type="checkbox"
+                name="is_current_menu"
+                checked={form.is_current_menu}
+                onChange={setCurrent}
+                />
         </div>
         
     )

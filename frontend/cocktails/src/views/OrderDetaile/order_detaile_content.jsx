@@ -1,14 +1,19 @@
 import React from "react";
 import axios from "axios";
 import { RegularButton } from "../../components/buttons/regular_button";
-import { Link, NavLink,Route, Routes, Outlet } from "react-router-dom";
-import { MenuPositions } from "./menu_position/menu_position";
+import { useState } from "react";
+import { Link, NavLink,useParams, useNavigate} from "react-router-dom";
 import { OrderPositions } from "./order_positions/order_positions";
 import { useOrderItemListContext } from "./OrderDetaileContext/order_item_list_context";
 import { OrderDetaileMenuRoute } from "./order_detaile_router";
+import { PopupDelete } from "../../components/popup/popup_delete";
 
-export function OrderDetaileContent({order, menus, place}){
+export function OrderDetaileContent({order, menus}){
+    let {placeName} = useParams();
+    let {placeId} = useParams();
     let order_positions = useOrderItemListContext();
+    let [delete_active,setDelete_active] = useState(false)
+    let navigate = useNavigate();
 
     function calculateTotal(){
         let result = 0
@@ -75,13 +80,14 @@ export function OrderDetaileContent({order, menus, place}){
             console.log(error);
             throw error;
         });
+        navigate(`/${placeName}/${placeId}/orders`)
     }
 
     function MenuRender(menu){
         if(menu.is_current_menu){
             return(
                 <div key={menu.id}>
-                    <NavLink className='regular_text_small menu_name_link' to={`menu/${menu.id}`}  state={{from: place}}>
+                    <NavLink className='regular_text_small menu_name_link' to={`menu/${menu.id}`}>
                         {menu.name}
                     </NavLink>  
                 </div>
@@ -96,17 +102,15 @@ export function OrderDetaileContent({order, menus, place}){
             </div>
             <div className="order_detaile_buttons_line">
                 <div className="order_detaile_back_btn">
-                    <Link to={{pathname: `/${place.id}/${place.name}/orders`,}} replace state={{from: place}}>
+                    <Link to={{pathname: `/${placeName}/${placeId}/orders`,}} replace>
                         <RegularButton lable={'Back'}/>
                     </Link> 
                 </div>
-                <div className="order_detaile_delete_btn" onClick={deleteOrder}>
-                <Link to={{pathname: `/${place.id}/${place.name}/orders`,}} replace state={{from: place}}>
+                <div className="order_detaile_delete_btn" onClick={()=>setDelete_active(true)}>            
                     <RegularButton lable={'Delete order'} />
-                </Link>
                 </div>
                 <div className='order_update_btn' onClick={updateOrder}>
-                    <Link to={{pathname:`/${place.id}/${place.name}/orders`}} replace state={{from: place}}>
+                    <Link to={{pathname:`/${placeName}/${placeId}/orders`}} replace>
                         <RegularButton lable={'Update'}/>
                     </Link>
                 </div>
@@ -123,9 +127,7 @@ export function OrderDetaileContent({order, menus, place}){
                 </div>
                 <OrderPositions order={order}/>
             </div>
-
-            
-
+            <PopupDelete subject={`Order №: ${order.id} on ${order.date}`}  delete_active={delete_active} setDelete_active={setDelete_active} func={deleteOrder}/>
         </div>
     )
 }

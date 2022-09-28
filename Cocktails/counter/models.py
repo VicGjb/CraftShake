@@ -216,6 +216,11 @@ class Invoice(models.Model):
         decimal_places=2,
         verbose_name='Total amount'
     )
+    state = models.CharField(
+        max_length=10,
+        verbose_name='State',
+        default='No state'
+    )
 
     def __str__(self) -> str:
         return f'Invoice to {self.place} on {self.date}'

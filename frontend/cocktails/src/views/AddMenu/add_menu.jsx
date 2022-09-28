@@ -1,14 +1,18 @@
 import React, { Component, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { RegularButton } from '../../components/buttons/regular_button';
 
-export function AddMenu({place,  setAdd_menu_active}) {
-	let defaultForm = {
+export function AddMenu({ setAdd_menu_active}) {
+	let {placeId} = useParams();
+    let {placeName} = useParams();
+
+    let defaultForm = {
         name:'',
         is_current_menu:false,
-        place:place.id,
-    }
+        place: placeId,
+    };
+
     let [form, setForm] =  useState(defaultForm);
     let navigate = useNavigate();
     let changeHandler = e => {
@@ -28,7 +32,7 @@ export function AddMenu({place,  setAdd_menu_active}) {
 				console.log(error);
 				throw error;
 			});	
-            navigate(`/${place.id}/${place.name}/menus`, {state:{from:place}});   
+            navigate(`/${placeName}/${placeId}/menus`);   
             window.location.reload();	
 	}
     function ToGo(){
