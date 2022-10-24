@@ -31,7 +31,9 @@ from .views import(
     OrderUpdateView,
     OrderItemView,
     OrderItemCreateView,
-    OrderItemDeleteView
+    OrderItemDeleteView,
+
+    BlacklistTokenUpdateView
 )
 
 
@@ -86,5 +88,7 @@ urlpatterns = format_suffix_patterns(
         path('order-item/<int:pk>/', OrderItemView.as_view({'get':'retrieve'})),
         path('order-item/create/', OrderItemCreateView.as_view({'post':'create'})),
         path('order-item/<int:pk>/delete/', OrderItemDeleteView.as_view({'post':'destroy'})),
+
+        path('logout/blacklist/',BlacklistTokenUpdateView.as_view(), name='blacklist')
     ]
 ) 

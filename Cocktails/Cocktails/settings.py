@@ -43,12 +43,13 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt.token_blacklist',
     'drf_yasg',
     'django_filters',
     'compressor',
-
+    
     'counter',
-
+    
     'djoser',
 ]
 
@@ -170,6 +171,10 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS':(
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
 }
 
 
@@ -183,10 +188,9 @@ DJOSER = {
 }
 
 
-
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,
 
@@ -206,6 +210,6 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(seconds=10),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=10),
 }

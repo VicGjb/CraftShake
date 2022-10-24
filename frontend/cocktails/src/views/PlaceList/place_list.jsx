@@ -1,34 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../../components/axios";
 import axios from 'axios';
 import { PlaceCardBtn } from "../../components/buttons/place_card_btn";
 import { AddButton } from "../../components/buttons/add_button";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupAddPlace } from "../../components/popup/popup_add_place";
-import { useManeContext } from "../../components/main_context";
-import { useAuthContext } from "../../components/auth_context";
+import { Logout } from "../Auth/logout";
 
 
 export function PlaceList(){
-    let main_context = useManeContext();   
-    let auth_context = useAuthContext();
     let navigate = useNavigate();
     let [place, setPlace] = useState([]);
     let [loaded, setLoaded] = useState(false)
-
     let [add_place_active, setAdd_place_active] = useState(false)
-    let token = auth_context.getAuth()
 
     useEffect(()=> {
-        console.log('AAADDDKKKERCE',token)
-        axios({
-            method: 'GET',
-            url: 'http://127.0.0.1:8000/api/counter/places/', 
-            headers:{'Authorization':token}  
-        }).then(response => {
-            setPlace(response.data.results);
-            setLoaded(true);
-        })
+        axiosInstance
+            .get('counter/places/')
+            .then(response => {
+                setPlace(response.data.results);
+                setLoaded(true);
+            })
     }, [])
   
     function goBack(){  
@@ -40,6 +33,7 @@ export function PlaceList(){
         <div className='place_list_wrapper'>
             <div className="place_list">
                 <div className="place_list__content">
+                    <Logout/>
                     <div className="place_list_button_row" >
                         <div onClick={goBack}>
                             <RegularButton lable={'Back'}/>

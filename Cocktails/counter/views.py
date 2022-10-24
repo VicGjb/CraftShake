@@ -1,9 +1,7 @@
 from decimal import ROUND_05UP, Decimal, ROUND_HALF_UP
 from django.shortcuts import render
 from django.db.models import Sum
-from django.template.loader import get_template
 from django.http import HttpResponse
-from django.urls import is_valid_path
 from .service import ProductFilter, Rate
 # import pdfkit
 from rest_framework import (
@@ -16,6 +14,8 @@ from rest_framework.decorators import (
     action, 
     permission_classes
 )
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend  
 from .service import (
     ManagerFilter,
@@ -58,7 +58,8 @@ from .serializers import(
     ProductUploadPhotoSerializer,
 )
 from .invoice_pdf import InvoicePdfCreator
-from .file_operation import get_invoice_pdf
+
+from rest_framework.views import APIView
 
 """Place views"""
 class PlaceView(viewsets.ReadOnlyModelViewSet):
@@ -93,6 +94,7 @@ class PlaceCreateView(viewsets.ModelViewSet):
 
 
 class PlaceDeleteView(viewsets.ModelViewSet):
+    # permission_classes = [permissions.IsAuthenticated]
     queryset = Place.objects.all()
     serializer_class = PlaceDetailSerializer
 
@@ -120,6 +122,7 @@ class ManagerOfPlaceCreateView(viewsets.ModelViewSet):
 
 """Product views"""
 class ProductView(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ProductFilter
 
@@ -153,6 +156,7 @@ class ProductUpdateView(viewsets.ModelViewSet):
 
 
 class ProductDeleteView(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = ProductDetailSerializer
 
@@ -397,3 +401,18 @@ class OrderItemCreateView(viewsets.ModelViewSet):
             )
             new_order_item.save()
             return Response(status=201)
+
+
+
+class BlacklistTokenUpdateView(APIView):
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = ()
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)

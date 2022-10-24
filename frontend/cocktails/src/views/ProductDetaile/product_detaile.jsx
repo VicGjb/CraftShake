@@ -1,5 +1,6 @@
 import React, {useEffect,useState} from "react";
 import axios from 'axios';
+import { axiosInstance } from "../../components/axios";
 import {useParams} from 'react-router-dom';
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupUploadProductPhoto } from "../../components/popup/popup_change_photo";
@@ -19,9 +20,9 @@ export function ProductDetaile(){
     let [delete_active,setDelete_active] = useState(false)
 
     useEffect(() => {
-        axios({
+        axiosInstance({
           method: 'GET',
-          url: `http://127.0.0.1:8000/api/counter/product/${productId}`
+          url: `counter/product/${productId}`
             }).then(response => { 
                 setProduct(response.data);
                 setIsLoaded(true);

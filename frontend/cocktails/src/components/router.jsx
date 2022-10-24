@@ -20,6 +20,7 @@ import { MenuList } from "../views/MenuList/menu_list";
 import { MenuDetaile } from "../views/MenuDetaile/menu_detaile";
 import { ManagersList } from "../views/ManagersList/managers_list";
 import { Auth } from "../views/Auth/auth";
+import SignIn from "../views/Auth/login";
 
 export function Routing(){
 
@@ -30,10 +31,8 @@ export function Routing(){
         <Router>
             <Routes>
                 <Route path="/" element={<MainContextProvider><Layout/></MainContextProvider>}>
-                    <Route path="auth/" element={<Auth/>}/>
                         <Route path='placeList' element={ <PlaceList/>}/>    
                         <Route path=':placeName/:placeId/*' element={<LayoutPlace/>}>
-
                             <Route path='detaile' element={<PlaceDetaile/>}/>
                             <Route path='orders' element={<OrderList/>}/>
                             <Route path='orders/:orderId/*' element={<OrderDetaile/>}/>
@@ -42,13 +41,10 @@ export function Routing(){
                             <Route path='menus' element={<MenuList/>} />
                             <Route path='menus/:menuId/*' element={<MenuDetaile/>}/>
                             <Route path='managers/' element={<ManagersList/>}/>
-                        
                         </Route>
-                        
-
                         <Route path='products/' element={<ProductList/>}/>
                         <Route path='products/:productId' element={<ProductDetaile/>}/>
-                    
+                        <Route path='login' element={<SignIn/>}/>
                 </Route>
             </Routes>
         </Router>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { PlaceSubtitle } from "./place_subtitle";
-import axios from "axios";
+import { axiosInstance } from "./axios";
 
 export function LayoutPlace(){
     let {placeId} = useParams()
@@ -9,9 +9,9 @@ export function LayoutPlace(){
     let [loaded, setLoaded] = useState()
     
     useEffect(() => {
-        axios({
+        axiosInstance({
           method: 'GET',
-          url: `http://127.0.0.1:8000/api/counter/place/${placeId}`
+          url: `counter/place/${placeId}`
             }).then(response => { 
                 setPlace(response.data);
                 setLoaded(true);

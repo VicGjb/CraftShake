@@ -1,9 +1,9 @@
 import React, {useEffect,useState} from "react";
+import { axiosInstance } from "../../components/axios";
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { useManeContext } from "../../components/main_context";
-import { useAuthContext } from "../../components/auth_context";
 import { InvoicesMainBtn } from "../../components/buttons/invoices_main_btn";
 import { OrdersMainBtn } from "../../components/buttons/orders_main_btn";
 import { MenusMainBtn } from "../../components/buttons/menus_main_btn";
@@ -32,15 +32,12 @@ export function PlaceDetaile(){
     let [delete_active,setDelete_active] = useState(false)
     let navigate = useNavigate();
     let main_context = useManeContext();
-    let auth_context = useAuthContext();
-    let token = auth_context.getAuth()
+
  
     useEffect(() => {
-        console.log('Detile token', token)
-        axios({
+        axiosInstance({
           method: 'GET',
-          url: `http://127.0.0.1:8000/api/counter/place/${placeId}`,
-          headers:{'Authorization':token} 
+          url: `counter/place/${placeId}`,
             }).then(response => {  
                 setPlace(response.data);
                 setLoaded(true);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import { axiosInstance } from "../../components/axios";
 import { AddButton } from "../../components/buttons/add_button";
 import { Link } from "react-router-dom";
 import { PopupAddProduct } from "../../components/popup/popup_add_product";
@@ -9,17 +10,17 @@ export function ProductList(){
     let [products, setProducts] = useState([]);
     let [add_product_active, setAddProductActive] = useState(false)
     let [search_name, setSearchName] = useState('')
+    
     useEffect(()=> {
-        axios({
+        axiosInstance({
             method: 'GET',
-            url: 'http://127.0.0.1:8000/api/counter/product/'
+            url: 'counter/product/'
         }).then(response => {setProducts(response.data.results);
     })
     }, [])
 
     function ChangeHendler(e){
         setSearchName(e.target.value)
-        console.log('fwfew',e.target.value)
     }
 
     function SearchProduct(e){
