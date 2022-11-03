@@ -1,7 +1,7 @@
 from decimal import ROUND_05UP, Decimal, ROUND_HALF_UP
 from django.shortcuts import render
 from django.db.models import Sum
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .service import ProductFilter, Rate
 # import pdfkit
 from rest_framework import (
@@ -175,6 +175,7 @@ class ProductUploadPhotoView(viewsets.ModelViewSet):
 
 """Menu views"""
 class MenuView(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
 
     serializer_class = MenuSerializer
     filter_backends = (DjangoFilterBackend,)
@@ -186,6 +187,7 @@ class MenuView(viewsets.ReadOnlyModelViewSet):
 
 
 class MenuUpdateView(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
 
     serializer_class = MenuUpdateSerializer
     queryset = Menu.objects.all()
@@ -338,7 +340,6 @@ class OrderView(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         order = Order.objects.all().order_by('-date')
         return order
-
 
 class OrderCreateView(viewsets.ModelViewSet):
     serializer_class = OrderCreateSerializer

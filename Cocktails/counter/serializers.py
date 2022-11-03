@@ -1,3 +1,5 @@
+from pyexpat import model
+from re import S
 from django.db.models import Sum
 from rest_framework import serializers
 from .models import (
@@ -104,7 +106,7 @@ class MenuSerializer(serializers.ModelSerializer):
         model = Menu
         fields = '__all__'
         read_only_fields = (
-            'position_in_menu     ',
+            'position_in_menu',
         )
 
 class MenuCreteSerializer(serializers.ModelSerializer):
@@ -144,10 +146,12 @@ class OrderItemCreateSerializer(OrderItemSerializer):
 
 """Order serializers"""
 class OrderSerializer(serializers.ModelSerializer):
-
+    menus = MenuSerializer(source='get_menus',many=True)
+    
     class Meta:
         model = Order
         fields = '__all__'
+    
 
     # def update(self, instance, validated_data):
     #     instance.total_price = validated_data.get('total_price',instance.total_price)
@@ -160,7 +164,7 @@ class OrderViewSerializer(OrderSerializer):
 
 
 class OrderCreateSerializer(OrderSerializer):
-    
+    menus=None
     class Meta:
         model = Order
         exclude = ('invoice',)
@@ -208,3 +212,4 @@ class InvoiceCreateSerializer(serializers.ModelSerializer):
             'until_date',
             'is_vat'
             )
+

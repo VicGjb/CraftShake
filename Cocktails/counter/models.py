@@ -123,6 +123,7 @@ class Menu(models.Model):
     )
     place = models.ForeignKey(
         Place, 
+        related_name = 'menu',
         on_delete=SET_NULL,
         null=True
     )
@@ -249,7 +250,6 @@ class Order(models.Model):
         related_name='orders',
         blank=True,
         null=True
-
     )
     date = models.DateField(
         verbose_name='Date',
@@ -265,8 +265,11 @@ class Order(models.Model):
     def __str__(self) ->str:
         return f'Order of {self.place} on {self.date}'
 
-    def get_place_name(self):
+    def get_place_name(self) -> object:
         return self.place.name
+
+    def get_menus(self) -> object:
+        return self.place.menu.all()
 
 
 
