@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import { NetworkManager } from "../../components/network_manager";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useManeContext } from "../../components/main_context";
@@ -9,10 +9,9 @@ import { RegularButton } from "../../components/buttons/regular_button";
 
 export function OrderList(){
     let main_context = useManeContext()
+    let network_manager = new NetworkManager()
     let [order, setOrder] = useState([]);
-    let {placeNmae} = useParams();
     let {placeId} = useParams();
-
     let [add_order_active, setAdd_order_active] = useState(false)
     let defaultForm = {
         date_from: '',
@@ -22,11 +21,9 @@ export function OrderList(){
     let [form, setForm] = useState(defaultForm);
 
     useEffect(()=> {
-        axios({
-            method: 'GET',
-            url: `http://127.0.0.1:8000/api/counter/order/?place=${placeId}`
-        }).then(response => {
-            setOrder(response.data.results);
+        network_manager.get_orders_list(placeId)
+        .then(orders => {
+            setOrder(orders);
     })
     }, [placeId])
 
@@ -35,11 +32,10 @@ export function OrderList(){
     }
     function SearchOrders(e){
         e.preventDefault()
-        axios
-            .get(`http://127.0.0.1:8000/api/counter/order/?place=${placeId}&date_after=${form.date_from}&date_before=${form.date_to}`)
-            .then(response =>{
-                setOrder(response.data.results);
-                console.log('Hui gavni=o',response)
+        network_manager.search_order(placeId, form.date_from, form.date_to)
+        .then(orders =>{
+                setOrder(orders);
+                console.log('Orders',orders)
             })
     }
     

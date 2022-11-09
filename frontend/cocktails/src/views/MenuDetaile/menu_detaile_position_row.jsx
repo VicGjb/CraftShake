@@ -1,13 +1,14 @@
 import React from "react";
-import axios from "axios";
+import { NetworkManager } from "../../components/network_manager";
 import { ReactComponent as CrossDel } from "../../svg/cross_del.svg";
 
 export function MenuDetailePositionRow({position}){
     
+    let network_manager = new NetworkManager(
 
+    )
     function DeletePosition(){
-        axios
-            .post (`http://127.0.0.1:8000/api/counter/menu-position/delete/${position.id}/`)
+        network_manager.delete_menu_position(position.id)
             .then(responce =>{
                 console.log(responce);
             })

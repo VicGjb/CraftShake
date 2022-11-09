@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import { NetworkManager } from '../../components/network_manager';
 import { useParams } from 'react-router-dom';
 import { RegularButton } from '../../components/buttons/regular_button';
 
@@ -7,22 +7,17 @@ export function UploadProductFile ()  {
     let [file, setFile] = useState();
     let {productId} = useParams();
     let [uploadData,setUploadData] = useState(new FormData());
+    let network_manager = new NetworkManager()
 
     function newFile(){
       uploadData.append('photo',file);  
-
-      axios
-      .post(`http://127.0.0.1:8000/api/counter/product/upload-photo/${productId}`, uploadData, {
-        headers: {
-          "Content-type": "multipart/form-data",
-        },
-      })
-      .then((result) => {
-        console.log(`Success` + result.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      network_manager.upload_photo_product(productId, uploadData)
+        .then((result) => {
+          console.log(`Success` + result.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
     function changeHandler(e){

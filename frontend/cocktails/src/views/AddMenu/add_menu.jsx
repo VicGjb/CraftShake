@@ -1,12 +1,12 @@
 import React, { Component, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import { NetworkManager } from '../../components/network_manager';
 import { RegularButton } from '../../components/buttons/regular_button';
 
 export function AddMenu({ setAdd_menu_active}) {
 	let {placeId} = useParams();
     let {placeName} = useParams();
-
+    let network_manager = new NetworkManager()
     let defaultForm = {
         name:'',
         is_current_menu:false,
@@ -23,8 +23,7 @@ export function AddMenu({ setAdd_menu_active}) {
     let submitHandler = e => {
 		e.preventDefault()
         console.log(form)
-        axios
-			.post('http://127.0.0.1:8000/api/counter/menu/create/', form)
+        network_manager.create_menu(form)
 			.then(response => {
 				console.log(response);
 			})

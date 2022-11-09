@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
-import { axiosInstance } from "../../components/axios";
+import { NetworkManager } from "../../components/network_manager";
 import { AddButton } from "../../components/buttons/add_button";
 import { Link } from "react-router-dom";
 import { PopupAddProduct } from "../../components/popup/popup_add_product";
@@ -10,12 +9,11 @@ export function ProductList(){
     let [products, setProducts] = useState([]);
     let [add_product_active, setAddProductActive] = useState(false)
     let [search_name, setSearchName] = useState('')
+    let network_manager = new NetworkManager()
     
     useEffect(()=> {
-        axiosInstance({
-            method: 'GET',
-            url: 'counter/product/'
-        }).then(response => {setProducts(response.data.results);
+        network_manager.get_product_list()
+        .then(products => {setProducts(products);
     })
     }, [])
 
@@ -26,12 +24,11 @@ export function ProductList(){
     function SearchProduct(e){
         e.preventDefault()
         console.log('dcsc', search_name)
-        axios
-            .get(`http://127.0.0.1:8000/api/counter/product/?name=${search_name}`)
-            .then(responce =>{
-                setProducts(responce.data.results)
-                console.log(responce.data.results)
-            })
+        network_manager.search_product(search_name)
+        .then(products =>{
+            setProducts(products)
+            console.log(products)
+        })
     }
 
     return (

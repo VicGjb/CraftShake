@@ -1,5 +1,6 @@
 import React, { useState} from "react";
 import axios from "axios";
+import { NetworkManager } from "../network_manager";
 import { RegularButton } from "../buttons/regular_button";
 import {useNavigate, useParams,} from "react-router-dom";
 
@@ -11,6 +12,7 @@ export const PopupAddOrder =({add_order_active, setAdd_order_active})=>{
         place: {placeId}
     }
     let [form, setForm] = useState(defaultForm);
+    let network_manager = new NetworkManager()
     let navigate = useNavigate();
 
 
@@ -21,8 +23,7 @@ export const PopupAddOrder =({add_order_active, setAdd_order_active})=>{
     let submitHandler = e =>{
         e.preventDefault()
         console.log(form)
-        axios
-			.post('http://127.0.0.1:8000/api/counter/order/create/', form)
+        network_manager.create_order(form)
 			.then(response => {
 				console.log(response);
 			})

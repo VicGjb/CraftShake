@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import axios from 'axios';
+import { NetworkManager } from "../../components/network_manager";
 import { useNavigate } from "react-router-dom";
 import {useParams} from 'react-router-dom';
 import { useManeContext } from "../../components/main_context";
@@ -11,6 +11,7 @@ export function InvoiceDetaile(){
     let {placeId} = useParams();
     let {placeName} = useParams();
     let navigate = useNavigate();
+    let network_manager = new NetworkManager()
     let [invoice, setInvoice] = useState({});
     let [loaded, setLoaded] = useState(false);
     let {invoiceId} = useParams();
@@ -27,34 +28,31 @@ export function InvoiceDetaile(){
     let [delete_active,setDelete_active] = useState(false)
 
     useEffect(() => {
-        axios({
-          method: 'GET',
-          url: `http://127.0.0.1:8000/api/counter/invoice/${invoiceId}/`
-            }).then(response => { 
-                setInvoice(response.data);
+        network_manager.get_invoice_detaile(invoiceId)
+            .then(invoice => { 
+                setInvoice(invoice);
                 setLoaded(true);
-                setForm({...form, ['state']:response.data.state, ['is_vat']:response.data.is_vat })
+                setForm({...form, ['state']:invoice.state, ['is_vat']:invoice.is_vat})
         })
     }, [invoiceId])
     
     function DeleteInvoice(){
         console.log('Order ID', invoice.id)
         if(invoice.state=='No state'){
-            axios
-            .post(`http://127.0.0.1:8000/api/counter/invoice/delete/${invoice.id}/`)
-            .then(response =>{
-                console.log('invoice was deleted', response);
-            })
-            .catch(error=>{
-                console.log(error);
-                throw error;
-            });
-            navigate(`/${placeName}/${placeId}/invoices`)
+            network_manager.delete_invoice(invoice.id)
+                .then(response =>{
+                    console.log('invoice was deleted', response);
+                    navigate(`/${placeName}/${placeId}/invoices`,{replace:false})
+                })
+                .catch(error=>{
+                    console.log(error);
+                    throw error;
+                });
+                
         }else{
             setRegular_message_active(true)
             setDelete_active(false)
         }
-        
     }
     
     function changeHendler(e){
@@ -67,8 +65,7 @@ export function InvoiceDetaile(){
     }
 
     function updateInvoice(){
-        axios
-            .post(`http://127.0.0.1:8000/api/counter/invoice/update/${invoice.id}/`,form)
+        network_manager.update_invoice(invoice.id, form)
             .then(response => {
 				console.log('UPDATE INVOICE',response);
             })
@@ -76,7 +73,7 @@ export function InvoiceDetaile(){
 				console.log(error);
 				throw error;
 			});
-        navigate(`/${placeName}/${placeId}/invoices`)
+        navigate(`/${placeName}/${placeId}/invoices`, {replace:false})
     }
     
     function stateOptions(){
@@ -200,7 +197,7 @@ export function InvoiceDetaile(){
                                 <RegularButton lable={'Back'}/>
                             </div>
                             <div className="invoice_detaile_content_body_button_set_button">
-                                <a href={`http://127.0.0.1:8000/api/counter/invoice/create_pdf/${invoiceId}/`}>
+                                <a href={network_manager.get_invoice_pdf(invoiceId)}>
                                     <RegularButton lable={'PDF'} />
                                 </a>
                             </div>

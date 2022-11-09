@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { PlaceSubtitle } from "./place_subtitle";
-import { axiosInstance } from "./axios";
+import { NetworkManager } from "./network_manager";
 
 export function LayoutPlace(){
     let {placeId} = useParams()
     let [place, setPlace] = useState()
     let [loaded, setLoaded] = useState()
+    let network_manager = new NetworkManager()
     
     useEffect(() => {
-        axiosInstance({
-          method: 'GET',
-          url: `counter/place/${placeId}`
-            }).then(response => { 
-                setPlace(response.data);
+        network_manager.get_place_detaile(placeId)
+            .then(place => { 
+                setPlace(place);
                 setLoaded(true);
         })
     }, [placeId])

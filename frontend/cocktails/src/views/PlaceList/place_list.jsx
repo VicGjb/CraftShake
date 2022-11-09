@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance } from "../../components/axios";
-import axios from 'axios';
 import { PlaceCardBtn } from "../../components/buttons/place_card_btn";
 import { AddButton } from "../../components/buttons/add_button";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupAddPlace } from "../../components/popup/popup_add_place";
 import { Logout } from "../Auth/logout";
+import { NetworkManager } from "../../components/network_manager";
 
 
 export function PlaceList(){
@@ -14,14 +13,14 @@ export function PlaceList(){
     let [place, setPlace] = useState([]);
     let [loaded, setLoaded] = useState(false)
     let [add_place_active, setAdd_place_active] = useState(false)
-
+    let network_manager = new NetworkManager()
+   
     useEffect(()=> {
-        axiosInstance
-            .get('counter/places/')
-            .then(response => {
-                setPlace(response.data.results);
-                setLoaded(true);
-            })
+        network_manager.get_place_list()
+        .then(place=>{
+            setPlace(place);
+            setLoaded(true);
+        })
     }, [])
   
     function goBack(){  
@@ -56,7 +55,7 @@ export function PlaceList(){
 
     function Render(props){
         let isLoaded = props;
-        console.log(isLoaded)
+        // console.log(isLoaded)
         if(isLoaded){
             return PlaceListView()
         } else {

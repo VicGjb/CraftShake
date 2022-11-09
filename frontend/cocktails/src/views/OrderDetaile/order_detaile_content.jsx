@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import { NetworkManager } from "../../components/network_manager";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { useState } from "react";
 import { Link, NavLink,useParams, useNavigate} from "react-router-dom";
@@ -13,6 +13,7 @@ export function OrderDetaileContent({order, menus}){
     let {placeId} = useParams();
     let order_positions = useOrderItemListContext();
     let [delete_active,setDelete_active] = useState(false)
+    let network_manager =  new NetworkManager()
     let navigate = useNavigate();
 
     function calculateTotal(){
@@ -30,8 +31,7 @@ export function OrderDetaileContent({order, menus}){
         } 
         order_positions.add_list.map(order_item =>{
             if(order_item.new_item){
-                axios
-                    .post('http://127.0.0.1:8000/api/counter/order-item/create/', order_item)
+                network_manager.create_order_item(order_item)
                     .then(response => {
                         console.log(response);
                     })
@@ -44,8 +44,8 @@ export function OrderDetaileContent({order, menus}){
         });
         order_positions.delete_list.map((order_item,index) =>{
             console.log('deleted',order_positions.delete_list)
-            axios
-                .post(`http://127.0.0.1:8000/api/counter/order-item/${order_item.id}/delete/`)
+
+            network_manager.delete_order_item(order_item.id)
                 .then(response =>{
                     console.log('item deleted', response);
                 })
@@ -53,34 +53,33 @@ export function OrderDetaileContent({order, menus}){
                     console.log(error);  
                     throw error;
                 });
-                console.log('deleted',order_positions.delete_list)
+            console.log('deleted',order_positions.delete_list)
         });
         
-
-        axios
-			.post(`http://127.0.0.1:8000/api/counter/order/update/${order.id}/`, total)
-			.then(response => {
-				console.log('UPDATE',response);
+        network_manager.update_order_total(order.id, total)
+            .then(response => {
+                console.log('UPDATE',response);
             })
             .catch(error => {
-				console.log(error);
-				throw error;
-			});
+                console.log(error);
+                throw error;
+            });
         order_positions.clean()
     }
 
     function deleteOrder(){
         console.log('Order ID', order.id)
-        axios
-        .post(`http://127.0.0.1:8000/api/counter/order/${order.id}/delete/`)
-        .then(response =>{
-            console.log('order was deleted', response);
-        })
-        .catch(error=>{
-            console.log(error);
-            throw error;
-        });
-        navigate(`/${placeName}/${placeId}/orders`)
+        network_manager.delete_order(order.id)
+            .then(response =>{
+                console.log('order was deleted', response);
+                navigate(`/${placeName}/${placeId}/orders`)
+            })
+            .catch(error=>{
+                console.log(error);
+                throw error;
+            });
+        
+        
     }
 
     function MenuRender(menu){

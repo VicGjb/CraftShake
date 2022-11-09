@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react";
-import axios from 'axios';
+import { NetworkManager} from "../../components/network_manager";
 import {useParams} from 'react-router-dom';
 import { useManeContext } from "../../components/main_context";
 import { AddButton } from "../../components/buttons/add_button";
@@ -14,15 +14,15 @@ export function MenuList(){
     let [menus, setMenus] = useState([]);
     let {placeId} = useParams();
     let {placeName} = useParams();
-    let [add_menu_active, setAdd_menu_active] = useState(false)
-    let main_context = useManeContext()
+    let [add_menu_active, setAdd_menu_active] = useState(false);
+    let network_manager = new NetworkManager();
+    let main_context = useManeContext();
 
     useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/counter/menu/?place=${placeId}`)
-            .then((response) => {
-                setMenus(response.data.results);
-                console.log('Response', response.data.results);
+        network_manager.get_menus_list(placeId)
+            .then((menus) => {
+                setMenus(menus);
+                console.log('Menus', menus);
         })},[placeId])
         
     function MenuListView(){

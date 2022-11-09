@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import { NetworkManager } from "../network_manager";
 import { useState } from "react";
 import { RegularButton } from "../buttons/regular_button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,7 +15,7 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active}){
         until_date:'',
         is_vat:false,
     }
-    
+    let network_manager = new NetworkManager()
     let [form, setForm] = useState(defaultForm);
     let [orders, setOrders] = useState([]);
     let navigate = useNavigate();
@@ -23,8 +23,7 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active}){
     function submitHandler(e){
         e.preventDefault()
         console.log('submit_form',form)
-        axios
-            .post(`http://127.0.0.1:8000/api/counter/invoice/create/`, form)
+        network_manager.create_invoice(form)
             .then(response=>{
                 console.log(response);
             })
@@ -40,12 +39,11 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active}){
         setForm({...form, [e.target.name]:e.target.value})
         console.log('Change')
         console.log('submit',form)
-        axios
-            .get(`http://127.0.0.1:8000/api/counter/order/?place=${placeId}&date_after=${form.from_date}&date_before=${form.until_date}`)
-            .then(response =>{
-                setOrders(response.data.results)
-                console.log(response.data.results)
-            })
+        // network_manager.change_invoice(placeId, form.from_date, form.until_date)
+        //     .then(response =>{
+        //         setOrders(response.data.results)
+        //         console.log(response.data.results)
+        //     })
     }
 
 

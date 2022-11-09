@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import { NetworkManager } from "../network_manager";
 import { useEffect } from "react";
 import { RegularButton } from "../buttons/regular_button";
 import { useNavigate, useParams } from "react-router-dom";
@@ -15,21 +15,19 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
     let [form, setForm] =  useState(defaultForm);
     let[products, setProducts] = useState([]);
     let navigate = useNavigate();
+    let network_manager = new NetworkManager()
     
     useEffect(() => {
-		axios({
-		  method: 'GET',
-		  url: 'http://127.0.0.1:8000/api/counter/product/'
-		})
-        .then(response => {setProducts(response.data.results);
-            console.log(response.data.results);
-        })
+        network_manager.get_product_list()
+            .then(products => {
+                setProducts(products);
+                console.log(products);
+                })
 	  }, [])
 
     function submitHandler(e){
         e.preventDefault()
-        axios
-			.post('http://127.0.0.1:8000/api/counter/menu-position/create/', form)
+        network_manager.create_menu_position(form)
 			.then(response => {
 				console.log(response);
 			})
@@ -37,7 +35,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
 				console.log(error);
 				throw error;
 			});	
-            navigate(`${placeId}/menus/${menu.id}`, {state:{from:menu}})
+            navigate(`${placeId}/menus/${menu.id}`, {state:{from:menu},replace:false})
             window.location.reload();	
     }
     function changeHandler(e){

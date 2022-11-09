@@ -3,10 +3,8 @@ import axios from "axios";
 import { useState } from "react";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../components/auth_context";
 
 export function Auth(){
-    let auth_context=useAuthContext();
     let defaultForm = {
         username:'',
         password:''
@@ -24,7 +22,6 @@ export function Auth(){
         axios
             .post(`http://127.0.0.1:8000/auth/token/login/`,form)
             .then(response=>(
-                auth_context.setAuth(response.data),
                 console.log('Hui',response)
             ))
             .then(

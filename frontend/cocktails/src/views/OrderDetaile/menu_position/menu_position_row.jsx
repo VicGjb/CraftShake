@@ -31,14 +31,12 @@ export function MenuPositionRow(props){
    
     function calculateTotal(qnty){
         let result = Number(qnty) * Number(menu_position.sale_price);
-        
         setForm({...form, ['item_price']:result.toFixed(2),['quantity']:qnty})
     }
 
     function ChangeHendler(qnty){
         setQnty(qnty)
         calculateTotal(qnty)
-        // setNumValue(qnty)
     }
 
     return(

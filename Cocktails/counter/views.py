@@ -63,7 +63,7 @@ from rest_framework.views import APIView
 
 """Place views"""
 class PlaceView(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminUser]
 
     def get_queryset(self):
         place = Place.objects.all()

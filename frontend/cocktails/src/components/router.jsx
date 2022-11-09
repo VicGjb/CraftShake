@@ -1,11 +1,12 @@
 import React from "react";
 import {
     BrowserRouter as Router,
+    Navigate,
     Route,
     Routes,
   } from 'react-router-dom';
+import { CheckAuth } from "./auth_service";
 import { MainContextProvider } from "./main_context";
-import { AuthContextProvider } from "./auth_context";
 import { OrderList } from "../views/OrderList/order_list";
 import { OrderDetaile } from "../views/OrderDetaile/order_detaile";
 import { PlaceDetaile } from "../views/PlaceDetaile/place_detaile";
@@ -19,19 +20,17 @@ import { InvoiceDetaile } from "../views/InvoiceDetaile/invoice_detaile";
 import { MenuList } from "../views/MenuList/menu_list";
 import { MenuDetaile } from "../views/MenuDetaile/menu_detaile";
 import { ManagersList } from "../views/ManagersList/managers_list";
-import { Auth } from "../views/Auth/auth";
+import { AuthLayout } from "./auth_layout";
+import { GetCodeGoogleLogin } from "../views/Auth/get_code_google_login";
 import SignIn from "../views/Auth/login";
 
 export function Routing(){
-
     return(
-        <AuthContextProvider>
-
-        
         <Router>
             <Routes>
                 <Route path="/" element={<MainContextProvider><Layout/></MainContextProvider>}>
-                        <Route path='placeList' element={ <PlaceList/>}/>    
+                    <Route element={<AuthLayout/>}>
+                        <Route path='placeList' element={<PlaceList/>}/>    
                         <Route path=':placeName/:placeId/*' element={<LayoutPlace/>}>
                             <Route path='detaile' element={<PlaceDetaile/>}/>
                             <Route path='orders' element={<OrderList/>}/>
@@ -44,11 +43,11 @@ export function Routing(){
                         </Route>
                         <Route path='products/' element={<ProductList/>}/>
                         <Route path='products/:productId' element={<ProductDetaile/>}/>
-                        <Route path='login' element={<SignIn/>}/>
-                </Route>
+                    </Route>    
+                        <Route path='login' element={<SignIn/>}/>      
+                </Route>  
+                <Route path='get_code' element={<GetCodeGoogleLogin/>}/>
             </Routes>
         </Router>
-        </AuthContextProvider>
     )
   }
-

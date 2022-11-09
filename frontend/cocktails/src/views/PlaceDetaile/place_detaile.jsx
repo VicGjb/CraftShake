@@ -1,8 +1,7 @@
 import React, {useEffect,useState} from "react";
-import { axiosInstance } from "../../components/axios";
-import axios from 'axios';
 import {useParams} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { NetworkManager } from "../../components/network_manager";
 import { useManeContext } from "../../components/main_context";
 import { InvoicesMainBtn } from "../../components/buttons/invoices_main_btn";
 import { OrdersMainBtn } from "../../components/buttons/orders_main_btn";
@@ -16,13 +15,13 @@ import { PopupAddManager } from "../../components/popup/popup_add_manager";
 import { PopupChangePlace } from "../../components/popup/popup_change_place";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { RegularButton } from "../../components/buttons/regular_button";
-import { Link } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 
 export function PlaceDetaile(){
     let [place, setPlace] = useState({});
     let {placeId} = useParams();
     let [loaded, setLoaded] = useState(false);
+    let network_manager = new NetworkManager()
 
     let [add_order_active, setAdd_order_active] = useState(false)
     let [add_invoice_active, setAdd_invoce_active] = useState(false)
@@ -31,30 +30,28 @@ export function PlaceDetaile(){
     let [add_change_place_active, setAdd_Change_place_active] = useState(false)
     let [delete_active,setDelete_active] = useState(false)
     let navigate = useNavigate();
+    let location = useLocation()
     let main_context = useManeContext();
-
+    let reload='b'
  
     useEffect(() => {
-        axiosInstance({
-          method: 'GET',
-          url: `counter/place/${placeId}`,
-            }).then(response => {  
-                setPlace(response.data);
+        network_manager.get_place_detaile(placeId)
+        .then(place_detaile => {  
+                setPlace(place_detaile);
                 setLoaded(true);
         })
     }, [placeId])
 
     function DeletePlace(){
-        axios
-            .post(`http://127.0.0.1:8000/api/counter/place/delete/${placeId}`)
-            .then(response=>(
-                console.log('Place deleted')
-            ))
-            .catch(error=>{
-                console.log(error);
-                throw error;
-            });
-            navigate(`/placeList`)
+        network_manager.delete_place(placeId)
+        .then(response=>(
+            console.log('Place deleted'),
+            navigate(`/placeList` ,{replace:false, state:reload})
+        ))
+        .catch(error=>{
+            console.log(error);
+            throw error;
+        });
     }
 
     function PlaceDetileView(){

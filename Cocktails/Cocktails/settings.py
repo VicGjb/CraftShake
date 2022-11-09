@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,11 +39,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
     'corsheaders',
 
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
+    'dj_rest_auth',
+
+
     'drf_yasg',
     'django_filters',
     'compressor',
@@ -158,6 +168,47 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
+
+SITE_ID=1
+
+# Provider specific settings
+SOCIALACCOUNT_AUTO_SIGNUP = True
+LOGIN_URL='https://google.com'
+# ACCOUNT_ADAPTER='Cocktails.servise.account_adapter.DefaultAccountAdapterCustom'
+SOCIALACCOUNT_LOGIN_ON_GET=True
+JWT_AUTH_COOKIE = 'auth-token'
+JWT_AUTH_REFRESH_COOKIE = 'refresh_token'
+REST_USE_JWT = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '644928208439-6rq3msjhv9l4u5ppcvd15tb1uv6v05a7.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
+# Auth backends
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+REST_USE_JWT = True
+
+
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(

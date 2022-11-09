@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import axios from 'axios';
+import { NetworkManager } from '../../components/network_manager';
+
 import { RegularButton } from '../../components/buttons/regular_button';
 
 export function AddProduct({setAddProductActive}) {
@@ -9,6 +10,7 @@ export function AddProduct({setAddProductActive}) {
         discription:'',
         sale_price:'0.00',
     }
+    let network_manager = new NetworkManager()
 	let [form, setForm] =  useState(defaultForm);
     let [product, setProduct] = useState([]);
     let changeHandler = e => {
@@ -17,8 +19,7 @@ export function AddProduct({setAddProductActive}) {
 
     let submitHandler = e => {
 		e.preventDefault()
-        axios
-			.post('http://127.0.0.1:8000/api/counter/product/create/', form)
+        network_manager.create_product(form)
 			.then(response => {
 				console.log(response);
 				setProduct([...product, response.data]);

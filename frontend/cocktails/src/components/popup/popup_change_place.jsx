@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
+import { NetworkManager } from "../network_manager";
 import { RegularButton } from "../buttons/regular_button";
 
 
 export function PopupChangePlace({place, add_change_place_active, setAdd_Change_place_active}){
+
     let defaultForm = {
         name: place.name,
         address:place.address,
@@ -12,27 +13,24 @@ export function PopupChangePlace({place, add_change_place_active, setAdd_Change_
         email:place.email,
         is_current_place:place.is_current_place,
     }
-
+    let network_manager = new NetworkManager();
 	let [form, setForm] =  useState(defaultForm);
-    
     let changeHandler = e => {
 		setForm({...form, [e.target.name]:e.target.value})
-        console.log(form)
+        // console.log(form)
 	}
-
     let submitHandler = e => {
 		e.preventDefault()
-		axios
-			.post(`http://127.0.0.1:8000/api/counter/place/update/${place.id}`, form)
-			.then(response => {
-				console.log(response);
-				setForm(defaultForm);
-			})
-			.catch(error => {
-				console.log(error);
-				throw error;
-			});		
-            window.location.reload()
+        network_manager.change_place(place.id, form)
+        .then(response => {
+            // console.log(response);
+            setForm(defaultForm);
+        })
+        .catch(error => {
+            console.log(error);
+            throw error;
+        });		
+        window.location.reload()
 	}
 
     return(

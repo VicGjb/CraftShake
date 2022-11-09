@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import { NetworkManager } from "../../components/network_manager";
 import { useState } from "react";
 
 export function InvoiceListState({invoice}){
@@ -8,12 +8,13 @@ export function InvoiceListState({invoice}){
         is_vat:invoice.is_vat,
     }
     let [form, setForm] = useState(defaultForm);
+    let network_manager = new NetworkManager()
+
 
     function changeHendler(e){
         setForm({...form, [e.target.name]:e.target.value})
         console.log('Form',form)
-        axios
-            .post(`http://127.0.0.1:8000/api/counter/invoice/update/${invoice.id}/`,{'state':e.target.value, 'is_vat':invoice.is_vat})
+        network_manager.change_invoice_state(invoice.id,{'state':e.target.value, 'is_vat':invoice.is_vat} )
             .then(response => {
 				console.log('UPDATE INVOICE',response);
             })

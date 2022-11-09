@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { axiosInstance } from '../../components/axios';
+import React from 'react';
+import { NetworkManager } from '../../components/network_manager';
 import { useNavigate } from 'react-router-dom';
 
 export function Logout() {
-	const navigate = useNavigate();
-
+	let navigate = useNavigate();
+    let network_manager = new NetworkManager()
     function Logout_1(){
-        // useEffect(() => {
-            const response = axiosInstance.post('counter/logout/blacklist/', {
-                refresh_token: localStorage.getItem('refresh_token'),
-            });
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('refresh_token');
-            axiosInstance.defaults.headers['Authorization'] = null;
-            navigate('/login');
-        // });  
+        let response = network_manager.LogOut()
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        window.location.href = '/login/'
+        // navigate('/login/',{replace:false})
     }
 	
     return (

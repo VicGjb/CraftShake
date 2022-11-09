@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import axios from "axios";
+import { NetworkManager } from "../../components/network_manager";
 import { RegularButton } from "../../components/buttons/regular_button";
 
 export function ChangeProduct({setChangeProductActive, product}) {
@@ -10,6 +10,7 @@ export function ChangeProduct({setChangeProductActive, product}) {
         discription: product.discription,
         sale_price: product.sale_price,
     }
+    let network_manager = new NetworkManager();
 	let [form, setForm] =  useState(defaultForm);
 
     let changeHandler = e => {
@@ -18,17 +19,16 @@ export function ChangeProduct({setChangeProductActive, product}) {
 
     let submitHandler = e => {
 		e.preventDefault()
-        axios
-			.post(`http://127.0.0.1:8000/api/counter/product/update/${product.id}`, form)
-			.then(response => {
-				console.log(response);
-				setForm(defaultForm);
-                console.log(form)
-			})
-			.catch(error => {
-				console.log(error);
-				throw error;
-			});		
+        network_manager.change_product(product.id, form)
+        .then(product => {
+            console.log(product);
+            setForm(defaultForm);
+            console.log(form)
+        })
+        .catch(error => {
+            console.log(error);
+            throw error;
+        });		
         window.location.reload();
         
 	}

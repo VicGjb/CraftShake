@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { NetworkManager } from "../../../components/network_manager";
 import { MenuPositionRow } from "./menu_position_row";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
 import { useParams } from "react-router-dom";
@@ -10,15 +10,14 @@ export function MenuPositions(props){
     let [menu_positions, setMenu_positions] = useState({});
     let [loaded, setLoaded] = useState(false);
     let {menuId} = useParams([]);
+    let network_manager = new NetworkManager()
 
     useEffect(()=>{
-        axios({
-            method: 'GET',
-            url: `http://127.0.0.1:8000/api/counter/menu-position/?menu=${menuId}`
-        }).then(response =>{
-            setMenu_positions(response.data.results);
-            setLoaded(true);
-        })
+        network_manager.get_menu_positions_list(menuId)
+            .then(menu_positions =>{
+                setMenu_positions(menu_positions);
+                setLoaded(true);
+            })
     },[menuId])
 
 

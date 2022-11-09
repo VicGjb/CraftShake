@@ -1,11 +1,12 @@
-import React, {useEffect,useState} from "react";
-import axios from 'axios';
-import {useLocation, useParams} from 'react-router-dom';
+import React, {useEffect,useState} from "react"
+import { NetworkManager } from "../../components/network_manager";
+import {useParams} from 'react-router-dom';
 import { OrderItemListContextProvider } from "./OrderDetaileContext/order_item_list_context";
 import {OrderDetaileContent} from "./order_detaile_content"; 
 
 export function OrderDetaile(){
     let {placeId} = useParams();
+    let network_manager = new NetworkManager()
     let [order, setOrder] = useState({});
     let {orderId} = useParams();
     let [menus, setMenus] = useState([])
@@ -13,21 +14,13 @@ export function OrderDetaile(){
     let [menu_loaded, setMenuLoaded] = useState(false);
 
     useEffect(() => {
-        axios({
-          method: 'GET',
-          url: `http://127.0.0.1:8000/api/counter/order/${orderId}/`
-            }).then(response => { 
-                setOrder(response.data);
-                setLoaded(true);
-        }).then(
-            axios({
-                method: 'GET',
-                url: `http://127.0.0.1:8000/api/counter/menu/?place=${placeId}`
-                }).then(response => { 
-                    setMenus(response.data.results);
+        network_manager.get_order_detaile(orderId)
+            .then(order => { 
+                    setOrder(order);
+                    setMenus(order.menus);
                     setMenuLoaded(true);
-                })
-        )
+                    setLoaded(true);
+            })
     }, [orderId])
 
 
@@ -35,6 +28,7 @@ export function OrderDetaile(){
         if(menu_loaded){
             return(
             <div>
+                {/* <div>{order.menus}</div> */}
                 <OrderDetaileContent place={placeId} menus={menus} order={order}/>
             </div>
             )

@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
-import axios from 'axios';
+import { NetworkManager } from '../../components/network_manager';
 import { RegularButton } from '../../components/buttons/regular_button';
+import { useNavigate } from 'react-router-dom';
 
 export function AddPlace() {
 	let defaultForm = {
@@ -10,16 +11,15 @@ export function AddPlace() {
         email:'',
         is_current_place:true,
     }
+    let navigate = useNavigate()
 	let [form, setForm] =  useState(defaultForm);
-
+    let network_manager = new NetworkManager()
 	let changeHandler = e => {
 		setForm({...form, [e.target.name]:e.target.value})
 	}
-    
 	let submitHandler = e => {
 		e.preventDefault()
-		axios
-			.post('http://127.0.0.1:8000/api/counter/place/create/', form)
+        network_manager.create_place(form)
 			.then(response => {
 				console.log(response);
 				setForm(defaultForm);

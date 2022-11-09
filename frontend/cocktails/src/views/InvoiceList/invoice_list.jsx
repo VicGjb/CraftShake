@@ -1,4 +1,5 @@
 import React from "react";
+import { NetworkManager } from "../../components/network_manager";
 import { useState, useEffect } from "react";
 import { useManeContext} from "../../components/main_context";
 import { Link, useParams } from "react-router-dom";
@@ -6,7 +7,6 @@ import { AddButton } from "../../components/buttons/add_button";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupAddInvoice } from "../../components/popup/popup_add_invoice";
 import { InvoiceListState } from "./invoice_list_state";
-import axios from "axios";
 
 export function InvoiceList(){
     let [invoices, setInvoices] = useState([]);
@@ -14,6 +14,7 @@ export function InvoiceList(){
     let {placeId} = useParams();
     let {placeName} = useParams();
     let main_context = useManeContext();
+    let network_manager = new NetworkManager()
     let defaultForm = {
         date_from: '',
         date_to:'',
@@ -24,14 +25,12 @@ export function InvoiceList(){
 
 
     useEffect(()=>{
-        axios({
-            method:'GET',
-            url:`http://127.0.0.1:8000/api/counter/invoice/?place=${placeId}`
-            }).then(response =>{
-                setInvoices(response.data.results)
-                setIsLoaded(true)
-                
-            })
+        network_manager.get_invoice_list(placeId)
+            .then(invoices =>{
+                    setInvoices(invoices)
+                    setIsLoaded(true)
+                    
+                })
     },[placeId])
 
 
@@ -40,11 +39,10 @@ export function InvoiceList(){
     }
     function SearchInvoice(e){
         e.preventDefault()
-        axios
-            .get(`http://127.0.0.1:8000/api/counter/invoice/?place=${placeId}&date_after=${form.date_from}&date_before=${form.date_to}`)
-            .then(response =>{
-                setInvoices(response.data.results);
-                console.log('Hui gavni=o',response)
+        network_manager.search_invoice(placeId, form.date_from, form.date_to)
+            .then(invoices =>{
+                setInvoices(invoices);
+                console.log('res',invoices)
             })
     }
 

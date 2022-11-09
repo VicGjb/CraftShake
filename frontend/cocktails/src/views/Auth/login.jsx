@@ -1,46 +1,79 @@
 import React, { useState } from 'react';
-import { axiosInstance } from '../../components/axios';
+import { useEffect } from 'react';
+import { NetworkManager } from '../../components/network_manager';
 import { useNavigate } from 'react-router-dom';
-
+import { PopupGoogleLogin } from '../../components/popup/popup_google_login';
 
 
 export default function SignIn() {
-	const navigate = useNavigate();
-	const initialFormData = Object.freeze({
+	let navigate = useNavigate();
+	let initialFormData = Object.freeze({
 		username: '',
 		password: '',
 	});
-
-	const [formData, setFormData] = useState(initialFormData);
-
-	const handleChange = (e) => {
+    let [google_login_active, setGoogle_login_active] = useState(false)
+    let network_manager = new NetworkManager()
+	let [formData, setFormData] = useState(initialFormData);
+    let [externalPopup, setExternalPopup] = useState(null);
+	let handleChange = (e) => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value.trim(),
 		});
 	};  
 
-	const handleSubmit = (e) => {
+    function onClickGoogle(){
+        console.log('her')
+        network_manager.GoogleLogIn()
+        let top = window.screenY + (window.outerHeight - 400) / 2.5;
+        let left = window.screenX + (window.outerWidth - 500) / 2;
+        let url = network_manager.GoogleLogIn()
+        // window.location.href = url
+        let win=window.open(url,'qwe',`width=500, height=400, left=${left},top=${top}`)
+        setExternalPopup(win)
+    }
+
+    useEffect(() => {
+        if (!externalPopup) {
+          return;
+        }else{
+        let timer = setInterval(() => {
+            if(externalPopup.closed)
+            window.location.href = '/placeList/'
+            // navigate('/placeList')
+            return;
+            }, 500)
+        }    
+      },
+      [externalPopup]
+    )
+ 
+
+
+	let handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(formData);
-
-		axiosInstance
-			.post(`token/`, {
-				username: formData.username,
-				password: formData.password,
-			})
-			.then((res) => {
-				localStorage.setItem('access_token', res.data.access);
-				localStorage.setItem('refresh_token', res.data.refresh);
-				axiosInstance.defaults.headers['Authorization'] =
-					'JWT ' + localStorage.getItem('access_token');
-                navigate('/placeList');
-				console.log(res);
-				console.log(res.data);
-			});
+        network_manager.SingIn(formData)
+        .then(response=>{
+            console.log("LOGIN RESPONSE", response)
+            window.location.href = '/placeList/'
+            // console.log(response);
+            // console.log(response.data);           
+            }       
+        )
+        .catch(error => {
+            console.log(error);
+            throw error;
+        });		
 	};
 
+    function getTokens(){
+        console.log('access_token',localStorage.getItem('access_token'))
+        console.log('refresh_token',localStorage.getItem('refresh_token'))
+    }
+
 	return (
+        <div>
             <form className='add_product_form' noValidate>
                 <input
                     className='add_product_input_wrapper'
@@ -75,5 +108,11 @@ export default function SignIn() {
                     Sign In
                 </button>
             </form>
+            <button onClick={onClickGoogle}>Login With Gooogle</button>
+            <div> </div>
+            <div> </div>
+            <button onClick={getTokens}> get tokens</button>
+            <PopupGoogleLogin google_login_active={google_login_active}  setGoogle_login_active={setGoogle_login_active}/>
+        </div>
 );
 }

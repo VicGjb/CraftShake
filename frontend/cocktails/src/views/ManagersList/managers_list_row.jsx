@@ -1,12 +1,13 @@
-import axios from "axios";
+import { NetworkManager } from "../../components/network_manager";
 import React from "react";
 import { ReactComponent as CrossDel } from "../../svg/cross_del.svg";
 
 export function ManagersListRow({manager}){
     
+    let network_manager = new NetworkManager()
+
     function DeleteManager(){
-        axios
-            .post(`http://127.0.0.1:8000/api/counter/manager/delete/${manager.id}`)
+        network_manager.delete_manager(manager.id)
             .then(response =>{
                 console.log('manager deleted',response);
             })

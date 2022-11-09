@@ -1,11 +1,12 @@
 import React, { Component, useEffect, useState } from 'react';
-import axios from 'axios';
+import { NetworkManager } from '../../components/network_manager';
 import { RegularButton } from '../../components/buttons/regular_button';
 import { useParams } from 'react-router-dom';
 
 export function AddManagerOfPlace({place, setAdd_manager_active}) {
     let {placeId} = useParams();
     let {placeName} = useParams();
+    let network_manager = new NetworkManager()
 	let defaultForm = {
         name:'',
         phone:'',
@@ -20,8 +21,7 @@ export function AddManagerOfPlace({place, setAdd_manager_active}) {
 	}
     let submitHandler = e => {
 		e.preventDefault()
-        axios
-			.post('http://127.0.0.1:8000/api/counter/manager/create/', form)
+        network_manager.create_manager(form)
 			.then(response => {
 				console.log(response);
                 console.log(form)

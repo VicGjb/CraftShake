@@ -8,8 +8,7 @@ import { AddButton } from "../../components/buttons/add_button";
 import { MenuDetailePositionRow } from "./menu_detaile_position_row";
 import { PopupAddMenuPosition } from "../../components/popup/popup_add_menu_position";
 import { PopupDelete } from "../../components/popup/popup_delete";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { NetworkManager } from "../../components/network_manager";
 
 export function MenuDetaile(){
     let {placeName} = useParams();
@@ -19,31 +18,30 @@ export function MenuDetaile(){
     let [loaded, setLoaded] = useState(false);
     let {menuId} = useParams();
     let navigate = useNavigate();
+    let network_manager = new NetworkManager()
 
     let [add_menu_position_active, setAdd_menu_position_active] = useState(false)
     let [delete_active,setDelete_active] = useState(false)
 
     useEffect(() => {
-        axios({
-            method:'GET',
-            url:`http://127.0.0.1:8000/api/counter/menu/${menuId}/`
-        }).then(response => {
-            setMenu(response.data);
-            setLoaded(true);
-        })
+        network_manager.get_menu_detaile(menuId)
+            .then(menu => {
+                setMenu(menu);
+                setLoaded(true);
+            })
     },[menuId])
 
     function DeleteMenu(){
-        axios
-            .post(`http://127.0.0.1:8000/api/counter/menu/delete/${menu.id}/`)
+        network_manager.delete_menu(menu.id)
             .then(response =>{
                 console.log('Menu was deleted', response);
+                navigate(`/${placeName}/${placeId}/menus`, {replace:false})
             })
             .catch(error=>{
                 console.log(error);
                 throw error;
             });
-            navigate(`/${placeName}/${placeId}/menus`)
+            
     }
 
     function MenuView(){
