@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
+
 import os
 from pathlib import Path
 from datetime import timedelta
@@ -28,7 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,11 +40,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
     'corsheaders',
 
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt.token_blacklist',
+    'dj_rest_auth',
+
+    # 'rest_auth.registration',
+
+    # 'oauth2_provider',
+    # 'social_django',
+    # # 'drf_social_oauth2',
+    # 'rest_framework_social_oauth2',
+
     'drf_yasg',
     'django_filters',
     'compressor',
@@ -51,7 +68,10 @@ INSTALLED_APPS = [
     'counter',
     
     'djoser',
+    
+    "sslserver",
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,6 +86,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 
 ]
+
+# SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
@@ -159,11 +181,54 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
+
+SITE_ID=1
+
+# Provider specific settings
+SOCIALACCOUNT_LOGIN_ON_GET=True
+
+# ACCOUNT_ADAPTER = 'Cocktails.servise.accaunt_adapter.DefaultAccountAdapterCustom'
+
+JWT_AUTH_COOKIE = 'auth-token'
+JWT_AUTH_REFRESH_COOKIE = 'refresh_token'
+REST_USE_JWT = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '644928208439-6rq3msjhv9l4u5ppcvd15tb1uv6v05a7.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        },
+        # 'OAUTH_PKCE_ENABLED': True,
+    }
+}
+
+
+# Auth backends
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+REST_USE_JWT = True
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 30,
@@ -176,6 +241,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ],
 }
+
 
 
 # Djoser
@@ -213,3 +279,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(seconds=10),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=10),
 }
+
+

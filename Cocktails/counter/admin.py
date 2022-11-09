@@ -13,6 +13,7 @@ from .models import (
     Order,
     OrderItem,
 )
+from rest_framework_simplejwt import token_blacklist
 
 """Forms"""
 class InvoiceForm(forms.ModelForm):
@@ -177,3 +178,11 @@ class OrderItemAdmin(admin.ModelAdmin):
     def get_price(self, obj):
         result = obj.item_price * obj.quantity
         return result
+
+
+class OutstandingTokenAdmin(token_blacklist.admin.OutstandingTokenAdmin):
+
+    def has_delete_permission(self, *args, **kwargs):
+        return True 
+admin.site.unregister(token_blacklist.models.OutstandingToken)
+admin.site.register(token_blacklist.models.OutstandingToken, OutstandingTokenAdmin)
