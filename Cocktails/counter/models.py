@@ -299,8 +299,10 @@ class OrderItem(models.Model):
         verbose_name='Position',
         null=True
     )
-    quantity = models.PositiveIntegerField(
+    quantity = models.DecimalField(
         default=1,
+        max_digits=7,
+        decimal_places=2,
         verbose_name='Quantity'
     )
     item_price = models.DecimalField(

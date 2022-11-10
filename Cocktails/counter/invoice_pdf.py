@@ -39,11 +39,11 @@ class InvoicePdfCreator():
                 return path
 
 
-        def render_pdf_view(request,context):
+        def render_pdf_view(request,context,place_name,date):
                 template_path = '../templates/invoice_pdf.html'
                 # Create a Django response object, and specify content_type as pdf
                 response = HttpResponse(content_type='application/pdf')
-                response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+                response['Content-Disposition'] = f'attachment; filename=invoice for {place_name} on {date}.pdf"'
                 # find the template and render it.
                 template = get_template(template_path)
                 html = template.render(context)

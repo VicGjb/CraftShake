@@ -263,7 +263,15 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
         invoice = Invoice.objects.get(id=pk)
         orders = Order.objects.filter(invoice = pk).order_by('date')
         context = {'invoice': invoice, 'orders':orders}
-        return InvoicePdfCreator.render_pdf_view(request=request, context=context)
+        place_name = invoice.get_place_name()
+        date = invoice.date
+        print(f'place name: {place_name}, date: {date}')
+        return InvoicePdfCreator.render_pdf_view(
+            request=request, 
+            context=context, 
+            place_name=place_name, 
+            date=date,
+            )
 
 
 class InvoiceDeleteView(viewsets.ModelViewSet):
