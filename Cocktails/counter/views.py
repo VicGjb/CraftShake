@@ -8,16 +8,18 @@ from rest_framework import (
     serializers,
     permissions,
     viewsets,
+    generics,
 )
 from rest_framework.response import Response
 from rest_framework.decorators import (
     action, 
     permission_classes
 )
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework import status
+# from rest_framework_simplejwt.tokens import RefreshToken
+# from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend  
 from .service import (
+    PlaceFilter,
     ManagerFilter,
     MenuFilter,
     MenuPositionFilter,
@@ -58,12 +60,30 @@ from .serializers import(
     ProductUploadPhotoSerializer,
 )
 from .invoice_pdf import InvoicePdfCreator
+from .permissions import (
+    CraftShakeCounterPermissions,
+    CraftShakeCustomerPermissions,
+)
 
-from rest_framework.views import APIView
+# from rest_framework.views import APIView
 
 """Place views"""
-class PlaceView(viewsets.ReadOnlyModelViewSet):
+class PlaceAPIListView(generics.ListAPIView):
     permission_classes = [permissions.IsAdminUser]
+    queryset = Place.objects.all()
+    serializer_class = PlaceSerializer
+
+class PlaceAPIDetaileView(generics.RetrieveAPIView):
+    permission_classes = [CraftShakeCustomerPermissions]
+    queryset = Place.objects.all()
+    serializer_class = PlaceDetailSerializer
+
+
+class PlaceView(viewsets.ReadOnlyModelViewSet):
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [CraftShakeCustomerPermissions]
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = PlaceFilter
 
     def get_queryset(self):
         place = Place.objects.all()
@@ -77,13 +97,15 @@ class PlaceView(viewsets.ReadOnlyModelViewSet):
 
 class PlaceUpdateView(viewsets.ModelViewSet):
     serializer_class = PlaceDetailSerializer
+    permission_classes = [CraftShakeCustomerPermissions]
     
     def get_queryset(self):
         product = Place.objects.all() 
         return product
 
 class PlaceCreateView(viewsets.ModelViewSet):
-
+    # permission_classes = [permissions.IsAdminUser]
+    # permission_classes = [CraftShakeCustomerPermissions, CraftShakeCounterPermissions]
     serializer_class = PlaceDetailSerializer
 
     @action(detail=True, method=['post'])
@@ -95,6 +117,7 @@ class PlaceCreateView(viewsets.ModelViewSet):
 
 class PlaceDeleteView(viewsets.ModelViewSet):
     # permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [CraftShakeCounterPermissions]
     queryset = Place.objects.all()
     serializer_class = PlaceDetailSerializer
 
@@ -341,6 +364,7 @@ class InvoiceCreateView(viewsets.ModelViewSet):
 
 """Order views"""
 class OrderView(viewsets.ReadOnlyModelViewSet):
+ 
     serializer_class = OrderViewSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = OrderFilter
@@ -351,7 +375,7 @@ class OrderView(viewsets.ReadOnlyModelViewSet):
 
 class OrderCreateView(viewsets.ModelViewSet):
     serializer_class = OrderCreateSerializer
-
+    permission_classes = [CraftShakeCustomerPermissions]
     @action(detail=True, methods=['post', 'create'])
     def add_order(self, request, pk=None):
         order = OrderCreateSerializer(data=request.data)
@@ -360,6 +384,7 @@ class OrderCreateView(viewsets.ModelViewSet):
 
 
 class OrderDeleteView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCustomerPermissions]
     queryset = Order.objects.all()
     serializer_class = OrderViewSerializer
     
@@ -413,15 +438,15 @@ class OrderItemCreateView(viewsets.ModelViewSet):
 
 
 
-class BlacklistTokenUpdateView(APIView):
-    permission_classes = [permissions.AllowAny]
-    authentication_classes = ()
+# class BlacklistTokenUpdateView(APIView):
+#     permission_classes = [permissions.AllowAny]
+#     authentication_classes = ()
 
-    def post(self, request):
-        try:
-            refresh_token = request.data["refresh_token"]
-            token = RefreshToken(refresh_token)
-            token.blacklist()
-            return Response(status=status.HTTP_205_RESET_CONTENT)
-        except Exception as e:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+#     def post(self, request):
+#         try:
+#             refresh_token = request.data["refresh_token"]
+#             token = RefreshToken(refresh_token)
+#             token.blacklist()
+#             return Response(status=status.HTTP_205_RESET_CONTENT)
+#         except Exception as e:
+#             return Response(status=status.HTTP_400_BAD_REQUEST)

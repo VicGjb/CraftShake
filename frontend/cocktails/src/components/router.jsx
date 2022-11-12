@@ -1,11 +1,9 @@
 import React from "react";
 import {
     BrowserRouter as Router,
-    Navigate,
     Route,
     Routes,
   } from 'react-router-dom';
-import { CheckAuth } from "./auth_service";
 import { MainContextProvider } from "./main_context";
 import { OrderList } from "../views/OrderList/order_list";
 import { OrderDetaile } from "../views/OrderDetaile/order_detaile";
@@ -22,7 +20,9 @@ import { MenuDetaile } from "../views/MenuDetaile/menu_detaile";
 import { ManagersList } from "../views/ManagersList/managers_list";
 import { AuthLayout } from "./auth_layout";
 import { GetCodeGoogleLogin } from "../views/Auth/get_code_google_login";
-import SignIn from "../views/Auth/login";
+import {SignIn} from "../views/Auth/login";
+import { PersonalAccount } from "../views_customer/personal_account";
+
 
 export function Routing(){
     return(
@@ -43,6 +43,8 @@ export function Routing(){
                         </Route>
                         <Route path='products/' element={<ProductList/>}/>
                         <Route path='products/:productId' element={<ProductDetaile/>}/>
+
+                        <Route path=':userId/' element={<PersonalAccount/>}/>
                     </Route>    
                         <Route path='login' element={<SignIn/>}/>      
                 </Route>  

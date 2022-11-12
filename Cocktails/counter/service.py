@@ -6,6 +6,7 @@ from unicodedata import name
 from django_filters import rest_framework as filters
 from django_filters import DateRangeFilter
 from .models import (
+    Place,
     ManagerOfPlace,
     Menu, 
     MenuPosition,
@@ -22,6 +23,14 @@ class Rate():
 
 
 '''Filters'''
+class PlaceFilter(filters.FilterSet):
+    user = filters.BaseInFilter()
+
+    class Meta:
+        model = Place
+        fields = ['user']
+
+
 class ManagerFilter(filters.FilterSet):
     place = filters.BaseInFilter()
 

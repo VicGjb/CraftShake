@@ -3,9 +3,11 @@ import { useEffect } from 'react';
 import { NetworkManager } from '../../components/network_manager';
 import { useNavigate } from 'react-router-dom';
 import { PopupGoogleLogin } from '../../components/popup/popup_google_login';
+import { AuthServise } from './auth_service';
 
 
-export default function SignIn() {
+
+export function SignIn() {
 	let navigate = useNavigate();
 	let initialFormData = Object.freeze({
 		username: '',
@@ -13,6 +15,7 @@ export default function SignIn() {
 	});
     let [google_login_active, setGoogle_login_active] = useState(false)
     let network_manager = new NetworkManager()
+    let auth_service = new AuthServise()
 	let [formData, setFormData] = useState(initialFormData);
     let [externalPopup, setExternalPopup] = useState(null);
 	let handleChange = (e) => {
@@ -28,20 +31,37 @@ export default function SignIn() {
         let top = window.screenY + (window.outerHeight - 400) / 2.5;
         let left = window.screenX + (window.outerWidth - 500) / 2;
         let url = network_manager.GoogleLogIn()
-        // window.location.href = url
         let win=window.open(url,'qwe',`width=500, height=400, left=${left},top=${top}`)
         setExternalPopup(win)
     }
 
     useEffect(() => {
+        let access_token = localStorage.getItem('access_token')
+        if(access_token){
+            let userId = auth_service.GetAccessTokenData().user_id
+            console.log('IDD',userId)
+            network_manager.GetUserData(userId)
+                .then(user=>{
+                    console.log('user',user)
+                    if (user.role_name == 'counter'){
+                        window.location.href = `/placeList/`
+                        return;
+                        // console.log('go to placeList')
+                    }else{
+                        window.location.href = `/${userId}`
+                        return;
+                        // console.log('go to my id')
+                    }
+                })
+        }
         if (!externalPopup) {
           return;
         }else{
         let timer = setInterval(() => {
-            if(externalPopup.closed)
-            window.location.href = '/placeList/'
-            // navigate('/placeList')
-            return;
+            if(externalPopup.closed){
+                window.location.reload()
+            return;  
+            }
             }, 500)
         }    
       },
@@ -56,9 +76,18 @@ export default function SignIn() {
         network_manager.SingIn(formData)
         .then(response=>{
             console.log("LOGIN RESPONSE", response)
-            window.location.href = '/placeList/'
-            // console.log(response);
-            // console.log(response.data);           
+            let userId = auth_service.GetTokenData(response.data.refresh).user_id
+            network_manager.GetUserData(userId)
+            .then(user=>{
+                console.log('user',user)
+                if (user.role_name == 'counter'){
+                    window.location.href = `/placeList/`
+                    // console.log('go to placeList')
+                }else{
+                    window.location.href = `/${userId}`
+                    // console.log('go to my id')
+                }
+            })          
             }       
         )
         .catch(error => {
@@ -70,6 +99,8 @@ export default function SignIn() {
     function getTokens(){
         console.log('access_token',localStorage.getItem('access_token'))
         console.log('refresh_token',localStorage.getItem('refresh_token'))
+        let access_token_data = auth_service.GetAccessTokenData()
+        console.log('access token data', access_token_data)
     }
 
 	return (

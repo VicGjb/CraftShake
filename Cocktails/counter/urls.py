@@ -33,14 +33,20 @@ from .views import(
     OrderItemCreateView,
     OrderItemDeleteView,
 
-    BlacklistTokenUpdateView
+
+    PlaceAPIDetaileView,
+    PlaceAPIListView
 )
 
 
 urlpatterns = format_suffix_patterns(
     [
-        path('places/', PlaceView.as_view({'get':'list'})),
-        path('place/<int:pk>', PlaceView.as_view({'get':'retrieve'})),
+        # path('places/', PlaceView.as_view({'get':'list'})),
+        # path('place/<int:pk>', PlaceView.as_view({'get':'retrieve'})),
+
+        path('places/', PlaceAPIListView.as_view()),
+        path('place/<int:pk>', PlaceAPIDetaileView.as_view()),
+
         path('place/update/<int:pk>', PlaceUpdateView.as_view({'post':'update'})),
         path('place/delete/<int:pk>', PlaceDeleteView.as_view({'post':'destroy'})),
         path('place/create/', PlaceCreateView.as_view({'post':'create'})),
@@ -89,6 +95,6 @@ urlpatterns = format_suffix_patterns(
         path('order-item/create/', OrderItemCreateView.as_view({'post':'create'})),
         path('order-item/<int:pk>/delete/', OrderItemDeleteView.as_view({'post':'destroy'})),
 
-        path('logout/blacklist/',BlacklistTokenUpdateView.as_view(), name='blacklist')
+        # path('logout/blacklist/',BlacklistTokenUpdateView.as_view(), name='blacklist')
     ]
 ) 

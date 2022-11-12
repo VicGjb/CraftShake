@@ -13,6 +13,9 @@ from .models import (
     Order,
     OrderItem,
 )
+from craft_shake_auth.models import(
+    CustomUser,
+)
 from rest_framework_simplejwt import token_blacklist
 
 """Forms"""
@@ -26,6 +29,18 @@ class InvoiceForm(forms.ModelForm):
 
 
 """Inlaines"""
+class UserInLine(admin.TabularInline):
+    model = CustomUser
+    extra = 0
+    fieldsets = (
+        (None, {
+            'fields':(
+                (('place', 'username', 'email'),)
+            )
+        }),
+    )
+
+
 class ManagerOfPlaceInLine(admin.TabularInline):
     model = ManagerOfPlace
     extra = 0
@@ -107,10 +122,10 @@ class OrderItemInLine(admin.TabularInline):
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     """Place admin"""
-    list_display = ('name','address', 'phone')
+    list_display = ('name', 'address', 'phone')
     list_display_links = ('name',)
     save_on_top = True
-    inlines = [ManagerOfPlaceInLine, MenuInLine, InvoiceInLine]
+    inlines = [UserInLine, ManagerOfPlaceInLine, MenuInLine, InvoiceInLine]
 
 
 @admin.register(Product)

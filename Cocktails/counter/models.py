@@ -35,9 +35,13 @@ class Place(models.Model):
         default=True,
         verbose_name='Current place'
     )
+    
 
     def __str__ (self)  -> str:
         return self.name
+
+    def get_users(self):
+        return self.user_set.all()
 
 
 class ManagerOfPlace(models.Model):

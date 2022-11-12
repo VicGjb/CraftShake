@@ -26,6 +26,11 @@ export function PlaceList(){
     function goBack(){  
         navigate(-1)
     }
+    function readToken(){
+        let refresh_token = localStorage.getItem('refresh_token')
+        let refresh_token_data = JSON.parse(atob(refresh_token.split('.')[1]));
+        console.log('Token', refresh_token_data)
+    }
 
     function PlaceListView(){
         return(
@@ -48,6 +53,7 @@ export function PlaceList(){
                     </div>
                 </div>            
             </div>   
+            <button onClick={readToken}>TOKEN</button>
             <PopupAddPlace add_place_active={add_place_active} setAdd_place_active={setAdd_place_active} />
         </div>       
         )

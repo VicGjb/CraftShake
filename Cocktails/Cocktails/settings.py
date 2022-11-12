@@ -59,9 +59,12 @@ INSTALLED_APPS = [
     'compressor',
     
     'counter',
+    'craft_shake_auth',
     
     'djoser',
 ]
+
+AUTH_USER_MODEL = 'craft_shake_auth.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,7 +77,6 @@ MIDDLEWARE = [
 
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -101,7 +103,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Cocktails.wsgi.application'
-
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -173,7 +175,6 @@ SITE_ID=1
 
 # Provider specific settings
 SOCIALACCOUNT_AUTO_SIGNUP = True
-LOGIN_URL='https://google.com'
 # ACCOUNT_ADAPTER='Cocktails.servise.account_adapter.DefaultAccountAdapterCustom'
 SOCIALACCOUNT_LOGIN_ON_GET=True
 JWT_AUTH_COOKIE = 'auth-token'
@@ -208,14 +209,13 @@ AUTHENTICATION_BACKENDS = (
 REST_USE_JWT = True
 
 
-
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+    
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 30,
 
@@ -240,7 +240,7 @@ DJOSER = {
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=5),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
@@ -261,6 +261,6 @@ SIMPLE_JWT = {
     'JTI_CLAIM': 'jti',
 
     'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(seconds=10),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=1),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=10),
 }

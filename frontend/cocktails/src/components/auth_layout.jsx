@@ -1,8 +1,10 @@
 import React from "react";
-import { CheckAuth } from "./auth_service";
 import { Navigate, Outlet } from "react-router-dom";
+import {AuthServise} from "../views/Auth/auth_service"
 
-    let isLoggedIn = CheckAuth()
+    let auth_servise = new AuthServise()
+
+    let isLoggedIn = auth_servise.CheckAuth()
 
 export function AuthLayout(){
 

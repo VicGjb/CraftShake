@@ -215,6 +215,15 @@ export class NetworkManager{
 			})
 	}
 
+	async get_place_by_user_id(userId){
+		console.log('Axios ',userId)
+		return this.axiosInstance
+			.get(`counter/places/?users=${userId}`)
+			.then(response =>{
+				return response.data.results[0]
+			})
+	}	
+
 	async delete_place(placeId){
 		return this.axiosInstance
 			.post(`counter/place/delete/${placeId}`)
@@ -487,7 +496,7 @@ export class NetworkManager{
 
 	async LogOut(){
 		return this.axiosInstance
-			.post('counter/logout/blacklist/', {
+			.post('craft_shake_auth/logout/blacklist/', {
 				refresh_token: localStorage.getItem('refresh_token'),
 				}
 			)
@@ -518,6 +527,15 @@ export class NetworkManager{
 				this.axiosInstance.defaults.headers['Authorization'] =
 						'JWT ' + localStorage.getItem('access_token');
 				return response
+			})
+	}
+
+	async GetUserData(id){
+		console.log('Try to get user by ID', id)
+		return this.axiosInstance
+			.get(`craft_shake_auth/user/${id}/`)
+			.then(response=>{
+				return response.data
 			})
 	}
 }

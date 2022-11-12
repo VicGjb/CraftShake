@@ -15,6 +15,7 @@ from .views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/counter/', include('counter.urls')),
+    path('api/craft_shake_auth/', include('craft_shake_auth.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),

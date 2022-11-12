@@ -12,6 +12,9 @@ from .models import (
     Order,
     OrderItem,
 )
+from craft_shake_auth.serializers import(
+    UserSerialaizer
+)
 
 """Place serializers"""
 class PlaceSerializer(serializers.ModelSerializer):
@@ -23,15 +26,23 @@ class PlaceSerializer(serializers.ModelSerializer):
             'name',
             'address',
             'phone',
-            'is_current_place'
+            'is_current_place',
+            'users'
         )
 
 
 class PlaceDetailSerializer (serializers.ModelSerializer):
-
-    class Meta:
-        model = Place
-        fields = '__all__'
+    
+        class Meta:
+            model = Place
+            fields = (
+            'id',
+            'name',
+            'address',
+            'phone',
+            'is_current_place',
+            'users'
+        )
 
 
 """Manager serializers"""
