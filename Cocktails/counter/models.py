@@ -41,7 +41,7 @@ class Place(models.Model):
         return self.name
 
     def get_users(self):
-        return self.user_set.all()
+        return self.users__set.all()
 
 
 class ManagerOfPlace(models.Model):
@@ -169,10 +169,16 @@ class MenuPosition(models.Model):
         verbose_name='Name',
         default=''
     )
+    volume = models.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+        verbose_name='Vol. ml',
+    )
     sale_price = models.DecimalField(
         max_digits=7,
         decimal_places=2,
         verbose_name='Sale price',
+        default=100.00,
     )
 
     def __str__(self) -> str:
@@ -233,6 +239,40 @@ class Invoice(models.Model):
     def get_place_name(self):
         return self.place.name
 
+
+class CustomerStatement(models.Model):
+    """Comment"""
+    class Meta:
+        verbose_name = 'Statement'
+        verbose_name_plural = 'Statements'
+    
+
+    place = models.ForeignKey(
+        Place,
+        on_delete=CASCADE,
+        verbose_name='Place',
+    )
+    date = models.DateField(
+        verbose_name='Date',
+        default=timezone.now
+    )
+    amount = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        verbose_name='Amount without VAT'
+    )
+    total_amount = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        verbose_name='Total amount'
+    )
+
+    def __str__(self) -> str:
+        return f'Statement to {self.place} on {self.date}'
+
+    def get_place_name(self):
+        return self.place.name
+
     
 class Order(models.Model):
     """Comment"""
@@ -265,6 +305,18 @@ class Order(models.Model):
         verbose_name='Total',
         default = 0
     )
+    open_to_customer = models.BooleanField(
+        default=True,
+        verbose_name='open_to_customer'
+    )
+    customer_statement = models.ForeignKey(
+        CustomerStatement,
+        related_name='orders_customer_statement',
+        verbose_name='orders',
+        on_delete=SET_NULL,
+        blank=True,
+        null=True,
+    )
     
     def __str__(self) ->str:
         return f'Order of {self.place} on {self.date}'
@@ -274,6 +326,9 @@ class Order(models.Model):
 
     def get_menus(self) -> object:
         return self.place.menu.all()
+    
+    def get_users(self) ->object:
+        return self.place.users.all()
 
 
 
@@ -314,6 +369,11 @@ class OrderItem(models.Model):
         decimal_places=2,
         verbose_name='Amount price'
     )
+    volume = models.DecimalField(
+        max_digits=7,
+        decimal_places=2,
+        verbose_name='Vol. ml'
+    )
 
     def __str__(self) ->str:
         return f'{self.position} in {self.order}'
@@ -322,3 +382,4 @@ class OrderItem(models.Model):
         return self.position.product
     
     
+

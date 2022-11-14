@@ -15,8 +15,6 @@ from rest_framework.decorators import (
     action, 
     permission_classes
 )
-# from rest_framework_simplejwt.tokens import RefreshToken
-# from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend  
 from .service import (
     PlaceFilter,
@@ -34,6 +32,7 @@ from .models import (
     MenuPosition, 
     Menu, 
     Invoice,
+    CustomerStatement,
     Order,
     OrderItem
 )
@@ -52,6 +51,8 @@ from .serializers import(
     InvoiceSerializer,
     InvoiceCreateSerializer,
     InvoiceUpdateSerializer,
+    CustomerStatementSerializer,
+    CustomerStatementCreateSerializer,
     OrderViewSerializer,
     OrderCreateSerializer,
     OrderUpdateSerializer,
@@ -59,13 +60,11 @@ from .serializers import(
     OrderItemCreateSerializer,
     ProductUploadPhotoSerializer,
 )
-from .invoice_pdf import InvoicePdfCreator
+from .invoice_pdf import PdfCreator
 from .permissions import (
     CraftShakeCounterPermissions,
     CraftShakeCustomerPermissions,
 )
-
-# from rest_framework.views import APIView
 
 """Place views"""
 class PlaceAPIListView(generics.ListAPIView):
@@ -80,20 +79,21 @@ class PlaceAPIDetaileView(generics.RetrieveAPIView):
 
 
 class PlaceView(viewsets.ReadOnlyModelViewSet):
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-    permission_classes = [CraftShakeCustomerPermissions]
-    filter_backends = (DjangoFilterBackend,)
-    filterset_class = PlaceFilter
+    pass
+    # # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    # permission_classes = [CraftShakeCustomerPermissions]
+    # filter_backends = (DjangoFilterBackend,)
+    # filterset_class = PlaceFilter
 
-    def get_queryset(self):
-        place = Place.objects.all()
-        return place
+    # def get_queryset(self):
+    #     place = Place.objects.all()
+    #     return place
 
-    def get_serializer_class(self):
-        if self.action == 'list':                                                                                                                           
-            return PlaceSerializer
-        elif self.action == "retrieve":
-            return PlaceDetailSerializer
+    # def get_serializer_class(self):
+    #     if self.action == 'list':                                                                                                                           
+    #         return PlaceSerializer
+    #     elif self.action == "retrieve":
+    #         return PlaceDetailSerializer
 
 class PlaceUpdateView(viewsets.ModelViewSet):
     serializer_class = PlaceDetailSerializer
@@ -104,7 +104,7 @@ class PlaceUpdateView(viewsets.ModelViewSet):
         return product
 
 class PlaceCreateView(viewsets.ModelViewSet):
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAdminUser]
     # permission_classes = [CraftShakeCustomerPermissions, CraftShakeCounterPermissions]
     serializer_class = PlaceDetailSerializer
 
@@ -123,6 +123,7 @@ class PlaceDeleteView(viewsets.ModelViewSet):
 
 """Manager of place views"""
 class ManagerOfPlaceView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCustomerPermissions]
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ManagerFilter
 
@@ -135,6 +136,7 @@ class ManagerOfPlaceView(viewsets.ModelViewSet):
 
 
 class ManagerOfPlaceCreateView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCustomerPermissions]
     serializer_class = ManagerOfPlaceSerializer
     @action(detail=True, method=['post'])
     def add_manager(self, request, pk=None):
@@ -145,7 +147,7 @@ class ManagerOfPlaceCreateView(viewsets.ModelViewSet):
 
 """Product views"""
 class ProductView(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [CraftShakeCounterPermissions]
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ProductFilter
 
@@ -161,7 +163,9 @@ class ProductView(viewsets.ReadOnlyModelViewSet):
 
 
 class ProductCreateView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCounterPermissions]
     serializer_class = ProductDetailSerializer
+    
 
     @action(detail=True, method=['post'])
     def add_product(self, request, pk=None):
@@ -171,7 +175,9 @@ class ProductCreateView(viewsets.ModelViewSet):
 
 
 class ProductUpdateView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCounterPermissions]
     serializer_class = ProductUpdateSerializer
+    
     
     def get_queryset(self):
         product = Product.objects.all() 
@@ -179,13 +185,13 @@ class ProductUpdateView(viewsets.ModelViewSet):
 
 
 class ProductDeleteView(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [CraftShakeCounterPermissions]
     queryset = Product.objects.all()
     serializer_class = ProductDetailSerializer
 
 
 class ProductUploadPhotoView(viewsets.ModelViewSet):
-
+    permission_classes = [CraftShakeCounterPermissions]
     serializer_class = ProductUploadPhotoSerializer
     queryset = Product.objects.all()
 
@@ -198,7 +204,6 @@ class ProductUploadPhotoView(viewsets.ModelViewSet):
 
 """Menu views"""
 class MenuView(viewsets.ReadOnlyModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
 
     serializer_class = MenuSerializer
     filter_backends = (DjangoFilterBackend,)
@@ -210,19 +215,19 @@ class MenuView(viewsets.ReadOnlyModelViewSet):
 
 
 class MenuUpdateView(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
-
+    permission_classes = [CraftShakeCounterPermissions]
     serializer_class = MenuUpdateSerializer
     queryset = Menu.objects.all()
 
 
 class MenuDeleteView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCounterPermissions]
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
 
 
 class MenuCreateView(viewsets.ModelViewSet):
-
+    permission_classes = [CraftShakeCounterPermissions]
     serializer_class = MenuCreteSerializer
 
     @action(detail=True, methods=['post'])
@@ -245,12 +250,13 @@ class MenuPositionView(viewsets.ReadOnlyModelViewSet):
 
 
 class MenuPositionDeleteView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCounterPermissions]
     queryset = MenuPosition.objects.all()
     serializer_class = MenuPositionCreateSerializer
 
 
 class MenuPositionCreateView(viewsets.ModelViewSet):
-
+    permission_classes = [CraftShakeCounterPermissions]
     serializer_class = MenuPositionCreateSerializer
 
     @action(detail=True, methods=['post'])
@@ -264,7 +270,6 @@ class MenuPositionCreateView(viewsets.ModelViewSet):
 
 """Invoice views""" 
 class InvoiceView(viewsets.ReadOnlyModelViewSet):
-
     serializer_class = InvoiceSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = InvoiceFilter
@@ -284,26 +289,34 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
     @action(detail=True, methods=['get','create_pdf'])
     def create_pdf(self, request, pk=None):
         invoice = Invoice.objects.get(id=pk)
-        orders = Order.objects.filter(invoice = pk).order_by('date')
-        context = {'invoice': invoice, 'orders':orders}
-        place_name = invoice.get_place_name()
-        date = invoice.date
-        print(f'place name: {place_name}, date: {date}')
-        return InvoicePdfCreator.render_pdf_view(
-            request=request, 
-            context=context, 
-            place_name=place_name, 
-            date=date,
-            )
+        users = invoice.place.users.filter(place=invoice.place)
+        if request.user in users:
+            print('HAKUNA MATATA')
+            print(f'USERS create pdf {invoice.place.users.filter(place=invoice.place)}')
+
+            orders = Order.objects.filter(invoice = pk).order_by('date')
+            context = {'invoice': invoice, 'orders':orders}
+            place_name = invoice.get_place_name()
+            date = invoice.date
+            print(f'place name: {place_name}, date: {date}')
+            return PdfCreator.render_pdf_invoice(
+                request=request, 
+                context=context, 
+                place_name=place_name, 
+                date=date,
+                )
+        else:
+            return Response(status=403)
 
 
 class InvoiceDeleteView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCounterPermissions]
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
 
 
 class InvoiceUpdateView(viewsets.ModelViewSet):
-    
+    permission_classes = [CraftShakeCounterPermissions]
     serializer_class = InvoiceUpdateSerializer
 
     @action(detail=True, methods=['update'])
@@ -325,7 +338,7 @@ class InvoiceUpdateView(viewsets.ModelViewSet):
 
 
 class InvoiceCreateView(viewsets.ModelViewSet):
-    
+    permission_classes = [CraftShakeCounterPermissions]
     serializer_class = InvoiceCreateSerializer
 
     @action(detail=True, methods=['create'])
@@ -362,9 +375,72 @@ class InvoiceCreateView(viewsets.ModelViewSet):
             return Response(serializer.data)
     
 
+
+
+"""Customer statements views"""
+class CustomerStatementCreateView(viewsets.ModelViewSet):
+    # permission_classes = [CraftShakeCounterPermissions]
+    serializer_class = CustomerStatementCreateSerializer
+
+    @action(detail=True, methods=['create'])
+    def  create(self, request):
+        statement_data = CustomerStatementCreateSerializer(data=request.data)
+
+        if statement_data.is_valid():
+
+            new_statement_data = statement_data.data
+            orders = Order.objects.filter(
+                date__gte = new_statement_data['from_date'],
+                date__lte = new_statement_data['until_date'],
+                place = new_statement_data['place'], 
+                ).order_by('date')
+            print(orders)
+            amount = Decimal(f'{orders.aggregate(Sum("total_price"))["total_price__sum"]}')            
+            new_statement = CustomerStatement.objects.create(
+                place=Place.objects.get(id=new_statement_data['place']),
+                date=new_statement_data['date'],
+                amount=amount.quantize(Decimal("0.01"), ROUND_HALF_UP),
+                total_amount=amount.quantize(Decimal("0.01"), ROUND_HALF_UP),
+            )   
+            new_statement.save()
+            orders.update(customer_statement=new_statement)
+            serializer = CustomerStatementSerializer(new_statement)
+            return Response(serializer.data)
+
+class CustomerStatementView(viewsets.ReadOnlyModelViewSet):
+    serializer_class = CustomerStatement
+    filter_backends = (DjangoFilterBackend,)
+
+    def get_queryset(self):
+        statement = CustomerStatement.objects.all() 
+        return statement  
+
+
+    @action(detail=True, methods=['get','create_pdf'])
+    def create_pdf(self, request, pk=None):
+        statement = CustomerStatement.objects.get(id=pk)
+        users = statement.place.users.filter(place=statement.place)
+        if request.user in users or request.user.is_staff:
+            # print(f'HAKUNA MATATA {statement.date_from}') 
+            orders = Order.objects.filter(customer_statement = pk).order_by('date')
+            context = {'statement': statement, 'orders':orders}
+            place_name = statement.get_place_name()
+            date = statement.date
+            print(f'place name: {place_name}, date: {date}')
+            
+            return PdfCreator.render_pdf_customer_statement(
+                request=request, 
+                context=context, 
+                place_name=place_name, 
+                date=date,
+                )
+        else:
+            return Response(status=403)
+
+
 """Order views"""
 class OrderView(viewsets.ReadOnlyModelViewSet):
- 
+
     serializer_class = OrderViewSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = OrderFilter
@@ -374,6 +450,7 @@ class OrderView(viewsets.ReadOnlyModelViewSet):
         return order
 
 class OrderCreateView(viewsets.ModelViewSet):
+    """Dont forget to close the order"""
     serializer_class = OrderCreateSerializer
     permission_classes = [CraftShakeCustomerPermissions]
     @action(detail=True, methods=['post', 'create'])
@@ -384,13 +461,27 @@ class OrderCreateView(viewsets.ModelViewSet):
 
 
 class OrderDeleteView(viewsets.ModelViewSet):
-    permission_classes = [CraftShakeCustomerPermissions]
+    permission_classes = [CraftShakeCounterPermissions]
     queryset = Order.objects.all()
     serializer_class = OrderViewSerializer
     
     
 class OrderUpdateView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCustomerPermissions]
     serializer_class = OrderUpdateSerializer
+
+    @action(detail=True, methods=['post','update'])
+    def update(self, request, pk=None, *args, **kwargs):
+        order = Order.objects.get(id=pk)
+        print(f'Update reqest{request}')
+        if order.open_to_customer or request.user.is_staff:
+            order_update_data = OrderUpdateSerializer(data=request.data)
+            if order_update_data.is_valid():
+                order.total_price = order_update_data.data['total_price']
+                order.save()
+                return Response(status=201)
+        else:
+            return Response(status=403)
     
     def get_queryset(self):
         order = Order.objects.all() 
@@ -399,6 +490,7 @@ class OrderUpdateView(viewsets.ModelViewSet):
 
 """Order item views"""
 class OrderItemView(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [CraftShakeCustomerPermissions]
     serializer_class = OrderItemVeiwSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = OrderItemFilter
@@ -410,43 +502,43 @@ class OrderItemView(viewsets.ReadOnlyModelViewSet):
 
 
 class OrderItemDeleteView(viewsets.ModelViewSet):
-    queryset = OrderItem.objects.all()
+    permission_classes = [CraftShakeCustomerPermissions]
     serializer_class = OrderItemVeiwSerializer
+    @action(detail=True, methods=['post','destroy'])
+    def destroy(self, request, pk=None, *args, **kwargs):
+        order_item =  OrderItem.objects.get(id=pk)
+        if order_item.order.open_to_customer or request.user.is_staff:
+            print('Hello Im destryoer')
+            order_item.delete()
+            return Response(status=201)
+        else:
+            return Response(status=403)   
     
 
-class OrderItemCreateView(viewsets.ModelViewSet):
+class OrderItemCreateView(viewsets.ModelViewSet):   
     serializer_class = OrderItemCreateSerializer
+    permission_classes = [CraftShakeCustomerPermissions]
 
     @action(detail=True,methods=['create'])
     def create(self,request, pk=None):
         order_item = OrderItemCreateSerializer(data=request.data)
+        # print(f'order_intem_create_request {request.data}')
         if order_item.is_valid():
-            print(order_item.data)
-            menu_position = MenuPosition.objects.get(
-                id = order_item.data['position']
-            )
-            print(f'Hey {menu_position.name}')
-            new_order_item = OrderItem.objects.create(
-                name=menu_position.name,
-                quantity=order_item.data['quantity'],
-                item_price=order_item.data['item_price'],
-                order=Order.objects.get(id=order_item.data['order']),
-                position=MenuPosition.objects.get(id=order_item.data['position']),
-            )
-            new_order_item.save()
-            return Response(status=201)
-
-
-
-# class BlacklistTokenUpdateView(APIView):
-#     permission_classes = [permissions.AllowAny]
-#     authentication_classes = ()
-
-#     def post(self, request):
-#         try:
-#             refresh_token = request.data["refresh_token"]
-#             token = RefreshToken(refresh_token)
-#             token.blacklist()
-#             return Response(status=status.HTTP_205_RESET_CONTENT)
-#         except Exception as e:
-#             return Response(status=status.HTTP_400_BAD_REQUEST)
+            order = Order.objects.get(id=order_item.data['order'])
+            if order.open_to_customer or request.user.is_staff:
+                # print(f'order {order.id} open')
+                menu_position = MenuPosition.objects.get(
+                    id = order_item.data['position']
+                )
+                # print(f'Hey {menu_position.name}')
+                new_order_item = OrderItem.objects.create(
+                    name=menu_position.name,
+                    quantity=order_item.data['quantity'],
+                    item_price=order_item.data['item_price'],
+                    order=Order.objects.get(id=order_item.data['order']),
+                    position=MenuPosition.objects.get(id=order_item.data['position']),
+                )
+                new_order_item.save()
+                return Response(status=201)
+            else:
+                return Response(status=403)

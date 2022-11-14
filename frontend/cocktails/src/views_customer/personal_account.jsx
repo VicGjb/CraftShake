@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { NetworkManager } from "../components/network_manager";
+import { Logout } from "../views/Auth/logout";
+
 
 export function PersonalAccount(){
     let network_manager = new NetworkManager()
@@ -24,6 +26,7 @@ export function PersonalAccount(){
     return(
         <div>
             <div>Hello place {place.name}</div>
+            <Logout/>
         </div>
     )
 }

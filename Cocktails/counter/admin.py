@@ -10,6 +10,7 @@ from .models import (
     MenuPosition, 
     Menu, 
     Invoice,
+    CustomerStatement,
     Order,
     OrderItem,
 )
@@ -193,6 +194,13 @@ class OrderItemAdmin(admin.ModelAdmin):
     def get_price(self, obj):
         result = obj.item_price * obj.quantity
         return result
+
+@admin.register(CustomerStatement)
+class CustomerStatementAdmin(admin.ModelAdmin):
+    list_display = ('place', 'date', 'total_amount')
+    list_display_links = ('place',)
+    # inlines = [OrderInline]
+    save_on_top = True
 
 class OutstandingTokenAdmin(token_blacklist.admin.OutstandingTokenAdmin):
 

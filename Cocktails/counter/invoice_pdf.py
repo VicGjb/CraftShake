@@ -5,7 +5,7 @@ from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.contrib.staticfiles import finders
 
-class InvoicePdfCreator():
+class PdfCreator():
 
         def link_callback(uri, rel):
                 """
@@ -39,7 +39,7 @@ class InvoicePdfCreator():
                 return path
 
 
-        def render_pdf_view(request,context,place_name,date):
+        def render_pdf_invoice(request,context,place_name,date):
                 template_path = '../templates/invoice_pdf.html'
                 # Create a Django response object, and specify content_type as pdf
                 response = HttpResponse(content_type='application/pdf')
@@ -50,7 +50,25 @@ class InvoicePdfCreator():
 
                 # create a pdf
                 pisa_status = pisa.CreatePDF(
-                html, dest=response, link_callback=InvoicePdfCreator.link_callback)
+                html, dest=response, link_callback=PdfCreator.link_callback)
+                # if error then show some funny view
+                if pisa_status.err:
+                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+                return response
+
+
+        def render_pdf_customer_statement(request,context,place_name,date):
+                template_path = '../templates/customer_statement.html'
+                # Create a Django response object, and specify content_type as pdf
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename=Statement for {place_name}.pdf"'
+                # find the template and render it.
+                template = get_template(template_path)
+                html = template.render(context)
+
+                # create a pdf
+                pisa_status = pisa.CreatePDF(
+                html, dest=response, link_callback=PdfCreator.link_callback)
                 # if error then show some funny view
                 if pisa_status.err:
                         return HttpResponse('We had some errors <pre>' + html + '</pre>')

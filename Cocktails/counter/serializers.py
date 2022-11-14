@@ -9,6 +9,7 @@ from .models import (
     MenuPosition, 
     Menu, 
     Invoice,
+    CustomerStatement,
     Order,
     OrderItem,
 )
@@ -158,7 +159,7 @@ class OrderItemCreateSerializer(OrderItemSerializer):
 """Order serializers"""
 class OrderSerializer(serializers.ModelSerializer):
     menus = MenuSerializer(source='get_menus',many=True)
-    
+    users = UserSerialaizer(source='get_users',many=True)
     class Meta:
         model = Order
         fields = '__all__'
@@ -223,4 +224,30 @@ class InvoiceCreateSerializer(serializers.ModelSerializer):
             'until_date',
             'is_vat'
             )
+
+
+"""Customer Statement views"""
+class CustomerStatementCreateSerializer(serializers.ModelSerializer):
+    from_date = serializers.DateField()
+    until_date = serializers.DateField()
+    
+    class Meta:
+        model = CustomerStatement
+        fields = (
+            'place',
+            'date', 
+            'from_date', 
+            'until_date',
+            )
+
+
+class CustomerStatementSerializer(serializers.ModelSerializer):
+    orders_customer_statement = OrderViewSerializer(many=True)
+    place_name = serializers.CharField(source='get_place_name')
+    class Meta:
+        model = CustomerStatement
+        fields = '__all__'
+        read_only_fields = (
+            'orders_customer_statement',
+        )
 

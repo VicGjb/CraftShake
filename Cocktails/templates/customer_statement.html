@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+{% load static %}
+{% load compress %}
+<html lang="ru">
+<head>
+    <!-- //Meta tag Keywords -->
+    <title>{% block title %} {% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- //Meta tag Keywords -->
+
+    <!--/ Style-CSS -->
+    {% comment %} {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/style.scss' %}" type="text/x-scss" media="screen">
+    {% endcompress %}  {% endcomment %}
+    <!--// Style-CSS -->
+    <style>
+        .content {
+            width: 500px;
+       }
+        .title {
+            margin-left: 250px;
+            font-size: 32px;
+            font-weight: bold;
+       }
+        .statement_info {
+            margin-left: 530px;
+            font-size: 18px;
+            font-weight: bold;
+       }
+        .statement_info p {
+            margin-top: 0px;    
+            margin-bottom: 0px;
+       }
+        .order {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-left: 1px solid #bdc6cc;
+            border-right: 1px solid #bdc6cc;
+        }
+        .order_date {
+            padding-top: 10px;
+            padding-bottom: 0px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            border-left: 0px;
+            border-right: 0px;
+        }
+        .order_head th {
+            width: 280px;
+            font-size: 16px;
+            background-color: #bdc6cc;
+        }
+        .order_head .name {
+            text-align: left;
+        }
+        .order_head .price {
+            text-align: right;
+        }
+        .order_body_row1 td {
+            font-size: 16px;
+            background-color:#dadfe2;
+        }
+       .order_body_row2 td {
+            font-size: 16px;
+            background-color:#f4f8fa
+        }
+
+        .order_body_row1 .cocktail_name {
+            text-align: left;
+        }
+        .order_body_row2 .cocktail_name {
+            text-align: left;
+        }
+
+        .order_body_row1 .cocktail_qty {
+            text-align: center;
+        }
+        .order_body_row2 .cocktail_qty {
+            text-align: center;
+        }
+
+        .order_body_row1 .cocktail_price {
+            text-align: right;
+        }
+        .order_body_row2 .cocktail_price {
+            text-align: right;
+        }
+
+        .order_total .lable {
+            text-align: right;
+            font-size: 16px;
+            font-weight: bold;
+       }
+        .order_total td {
+            padding-top: 5px;
+            background-color: #bdc6cc;
+            text-align: right;
+            font-size: 16px;
+            font-weight: bold;
+       }
+        table tr{
+            padding-top: 5px;
+       }
+        .statement_total {
+            margin-left: 550px;
+            font-size: 18px;
+            font-weight: bold;
+       }
+        .statement_total p {
+            margin-top: 0px;
+            margin-bottom: 0px;
+       } 
+    </style>
+</head>
+
+<body>
+    {%block statement%}
+    <div class='wrapper'>
+        <div class="content">
+            <div class='title'>
+                CraftShake
+            </div>
+            <div class="statement_info_wrap">
+                <div></div>
+                <div class="statement_info">
+                    <p>Place: {{statement.place}}</p>
+                </div>
+            </div>
+
+            {% for order in orders %}
+            
+            <div class="order">
+                <div class="order_date">
+                    Order  #{{order.id}} on {{order.date}}    
+                </div>
+                <table> 
+                    <tr class="order_head">
+                        <th class="name">Name</th>
+                        <th class="qty">Qty</th>
+                        <th class="price">Price</th>
+                    </tr>
+                    {%for item in order.order_item.all%}
+                    <tr class="order_body_{% cycle 'row1' 'row2' %}">
+                        <td class="cocktail_name">{{item.name}}</td>
+                        <td class="cocktail_qty">{{item.quantity}}</td>
+                        <td class="cocktail_price">{{item.item_price}}</td>
+                    </tr>
+                    {%endfor%}
+                    <tr class="order_total">
+                        <td class="lable" colspan='2'>Total:</td>
+                        <td>{{order.total_price}}</td>
+                    </tr>
+                </table>
+            </div>
+            {%endfor%}
+            
+            <div class="statement_total_wrap">
+                <div class="statement_total">
+                    <p>Amount: {{statement.amount}}</p>
+                    
+                    <p>TOTAL: {{statement.total_amount}}</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {% endblock statement %}
+</body>

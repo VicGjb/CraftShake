@@ -2,8 +2,7 @@ from django.db import router
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from .views import(
-    
-    PlaceView,
+    # PlaceView,
     PlaceDeleteView,
     PlaceCreateView,
     PlaceUpdateView,
@@ -25,6 +24,10 @@ from .views import(
     InvoiceCreateView,
     InvoiceDeleteView,
     InvoiceUpdateView,
+
+    CustomerStatementView,
+    CustomerStatementCreateView,
+    
     OrderView,
     OrderCreateView,
     OrderDeleteView,
@@ -95,6 +98,8 @@ urlpatterns = format_suffix_patterns(
         path('order-item/create/', OrderItemCreateView.as_view({'post':'create'})),
         path('order-item/<int:pk>/delete/', OrderItemDeleteView.as_view({'post':'destroy'})),
 
-        # path('logout/blacklist/',BlacklistTokenUpdateView.as_view(), name='blacklist')
+        path('customer-statement/create/', CustomerStatementCreateView.as_view({'post':'create'})),
+        path('customer-statement/create_pdf/<int:pk>', CustomerStatementView.as_view({'get':'create_pdf'})),
+
     ]
 ) 
