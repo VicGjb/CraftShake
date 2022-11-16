@@ -26,16 +26,16 @@ export class AuthServise{
     
     CheckAuth(){
         if (this.refresh_token){
-            console.log('Ihave a refresh token',this.refresh_token)
+            console.log('I have a refresh token')
             let refresh_token_data = this.GetRefreshTokenData()
             console.log('refresh_token exp',refresh_token_data)
             let time_now = Math.ceil(Date.now() / 1000)
             console.log('date now',time_now)
             if (refresh_token_data.exp>time_now){
-                console.log('hey')
+                console.log('refresh token not expired')
                 return true
             } else {
-                console.log('refresh token is exp')
+                console.log('refresh token is expired')
                 return false
             }
         } else {

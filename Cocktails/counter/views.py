@@ -34,7 +34,8 @@ from .models import (
     Invoice,
     CustomerStatement,
     Order,
-    OrderItem
+    OrderItem,
+    OrderItemVolume
 )
 from .serializers import(
     PlaceSerializer,
@@ -58,6 +59,7 @@ from .serializers import(
     OrderUpdateSerializer,
     OrderItemVeiwSerializer,
     OrderItemCreateSerializer,
+    OrderItemVolumeSerializer,
     ProductUploadPhotoSerializer,
 )
 from .invoice_pdf import PdfCreator
@@ -455,6 +457,7 @@ class OrderCreateView(viewsets.ModelViewSet):
     permission_classes = [CraftShakeCustomerPermissions]
     @action(detail=True, methods=['post', 'create'])
     def add_order(self, request, pk=None):
+        print(f'create order {request}')
         order = OrderCreateSerializer(data=request.data)
         if order.is_valid():
             return Response(status=201) 
@@ -486,7 +489,18 @@ class OrderUpdateView(viewsets.ModelViewSet):
     def get_queryset(self):
         order = Order.objects.all() 
         return order
-    
+
+
+
+"""Order item volume views"""
+class OrderItemVolumeView(viewsets.ModelViewSet):
+    permission_classes = [CraftShakeCustomerPermissions]
+    serializer_class = OrderItemVolumeSerializer
+
+    def get_queryset(self):
+        order_item_volume = OrderItemVolume.objects.all()
+        return order_item_volume
+
 
 """Order item views"""
 class OrderItemView(viewsets.ReadOnlyModelViewSet):
@@ -531,12 +545,24 @@ class OrderItemCreateView(viewsets.ModelViewSet):
                     id = order_item.data['position']
                 )
                 # print(f'Hey {menu_position.name}')
+                volume = OrderItemVolume.objects.get(
+                    id=order_item.data['volume']
+                )
+                # print(f"volume {volume.value}")
+                item_amout_volume = Decimal(order_item.data['quantity'])*Decimal(volume.value)
+                # print(f'Volume {item_amout_volume}')
+                item_price = Decimal(item_amout_volume) / Decimal(menu_position.volume) * Decimal(menu_position.sale_price)
+                item_price = item_price.quantize(Decimal('0.01'), ROUND_HALF_UP)
+                # print(f'item price  {item_price}')
+                if str(item_price) == order_item.data['item_price']:
+                    print('everything ok')
                 new_order_item = OrderItem.objects.create(
                     name=menu_position.name,
                     quantity=order_item.data['quantity'],
-                    item_price=order_item.data['item_price'],
+                    item_price = item_price,
                     order=Order.objects.get(id=order_item.data['order']),
-                    position=MenuPosition.objects.get(id=order_item.data['position']),
+                    position=menu_position,
+                    volume = volume,
                 )
                 new_order_item.save()
                 return Response(status=201)

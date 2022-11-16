@@ -509,13 +509,17 @@ export class NetworkManager{
 	}
 
 	GoogleLogIn(){
-		let url = 'https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://127.0.0.1:3000/get_code&prompt=consent&response_type=code&client_id=644928208439-6rq3msjhv9l4u5ppcvd15tb1uv6v05a7.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline'
-		return url
+		// console.log('URL',window.location.href)
+		let url = new URL(window.location.href)
+		let host = url.host
+		// console.log('host',host)
+		let result = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://${host}/get_code&prompt=consent&response_type=code&client_id=644928208439-6rq3msjhv9l4u5ppcvd15tb1uv6v05a7.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline`
+		return result
 	}
 
 	async GooglePain(code){
 		let form = {  
-            "access_token": "",
+            "access_token": "",	
             "code": code,
             "id_token": ""
         }

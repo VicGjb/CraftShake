@@ -12,6 +12,7 @@ from .models import (
     CustomerStatement,
     Order,
     OrderItem,
+    OrderItemVolume,
 )
 from craft_shake_auth.serializers import(
     UserSerialaizer
@@ -136,12 +137,21 @@ class MenuUpdateSerializer(serializers.ModelSerializer):
             )
 
 
+"""OrderItemVolume serializers"""
+class OrderItemVolumeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OrderItemVolume
+        fields = '__all__'
+
+
 """OrderItem serializers"""
 class OrderItemSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = OrderItem
         fields = '__all__'
+        # exclude = ('item_price',)
 
 
 class OrderItemVeiwSerializer(OrderItemSerializer):
@@ -158,19 +168,16 @@ class OrderItemCreateSerializer(OrderItemSerializer):
 
 """Order serializers"""
 class OrderSerializer(serializers.ModelSerializer):
-    menus = MenuSerializer(source='get_menus',many=True)
-    users = UserSerialaizer(source='get_users',many=True)
+   
     class Meta:
         model = Order
         fields = '__all__'
     
 
-    # def update(self, instance, validated_data):
-    #     instance.total_price = validated_data.get('total_price',instance.total_price)
-    #     return instance
-
 
 class OrderViewSerializer(OrderSerializer):
+    menus = MenuSerializer(source='get_menus',many=True)
+    users = UserSerialaizer(source='get_users',many=True)
     order_item = OrderItemVeiwSerializer(many=True)
     place_name = serializers.CharField(source='get_place_name')
 
@@ -179,7 +186,7 @@ class OrderCreateSerializer(OrderSerializer):
     menus=None
     class Meta:
         model = Order
-        exclude = ('invoice',)
+        exclude = ('invoice','customer_statement',)
 
 
 class OrderUpdateSerializer(OrderSerializer):

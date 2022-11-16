@@ -13,6 +13,7 @@ from .models import (
     CustomerStatement,
     Order,
     OrderItem,
+    OrderItemVolume,
 )
 from craft_shake_auth.models import(
     CustomUser,
@@ -201,6 +202,12 @@ class CustomerStatementAdmin(admin.ModelAdmin):
     list_display_links = ('place',)
     # inlines = [OrderInline]
     save_on_top = True
+
+@admin.register(OrderItemVolume)
+class OrderItemValue(admin.ModelAdmin):
+    list_display = ('id','value')
+    list_display_links = ('id','value')
+
 
 class OutstandingTokenAdmin(token_blacklist.admin.OutstandingTokenAdmin):
 

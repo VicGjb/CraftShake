@@ -9,7 +9,8 @@ export const PopupAddOrder =({add_order_active, setAdd_order_active})=>{
     let {placeName} = useParams();
     let defaultForm = {
         date: '',
-        place: {placeId}
+        place: {placeId},
+        open_to_customer:true,
     }
     let [form, setForm] = useState(defaultForm);
     let network_manager = new NetworkManager()

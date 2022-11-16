@@ -1,7 +1,7 @@
 from sqlite3 import Date
 from unicodedata import name
 from django.db import models
-from django.db.models.deletion import CASCADE, SET_NULL
+from django.db.models.deletion import CASCADE, SET_NULL, PROTECT
 from django.db.models.fields.related import ManyToManyField
 from django.utils import timezone
 
@@ -173,12 +173,13 @@ class MenuPosition(models.Model):
         max_digits=7,
         decimal_places=2,
         verbose_name='Vol. ml',
+        default=100,
     )
     sale_price = models.DecimalField(
         max_digits=7,
         decimal_places=2,
         verbose_name='Sale price',
-        default=100.00,
+        default=0.00,
     )
 
     def __str__(self) -> str:
@@ -332,6 +333,22 @@ class Order(models.Model):
 
 
 
+class OrderItemVolume(models.Model):
+
+    class Meta:
+        verbose_name = 'Order item volume'
+        verbose_name_plural = 'Order item volumes'
+    
+    value = models.DecimalField(
+        default=500.00,
+        max_digits=5,
+        decimal_places=2,
+        verbose_name='Vol.ml',
+    )
+
+    def __str__(self) -> str:
+        return f'{self.value}ml'
+
 class OrderItem(models.Model):
     """Comment"""
     
@@ -369,17 +386,18 @@ class OrderItem(models.Model):
         decimal_places=2,
         verbose_name='Amount price'
     )
-    volume = models.DecimalField(
-        max_digits=7,
-        decimal_places=2,
-        verbose_name='Vol. ml'
+    volume = models.ForeignKey(
+        OrderItemVolume,
+        on_delete=PROTECT,
+        verbose_name='volume',
+        related_name='order_item',
+        null=True,
+        blank=True,
     )
+    
 
     def __str__(self) ->str:
         return f'{self.position} in {self.order}'
 
     def get_name_position(self):
         return self.position.product
-    
-    
-

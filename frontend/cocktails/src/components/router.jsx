@@ -28,26 +28,31 @@ export function Routing(){
     return(
         <Router>
             <Routes>
-                <Route path="/" element={<MainContextProvider><Layout/></MainContextProvider>}>
-                    <Route element={<AuthLayout/>}>
-                        <Route path='placeList' element={<PlaceList/>}/>    
-                        <Route path=':placeName/:placeId/*' element={<LayoutPlace/>}>
-                            <Route path='detaile' element={<PlaceDetaile/>}/>
-                            <Route path='orders' element={<OrderList/>}/>
-                            <Route path='orders/:orderId/*' element={<OrderDetaile/>}/>
-                            <Route path='invoices' element={<InvoiceList/>}/>
-                            <Route path='invoices/:invoiceId/*' element={<InvoiceDetaile/>}/>
-                            <Route path='menus' element={<MenuList/>} />
-                            <Route path='menus/:menuId/*' element={<MenuDetaile/>}/>
-                            <Route path='managers/' element={<ManagersList/>}/>
-                        </Route>
-                        <Route path='products/' element={<ProductList/>}/>
-                        <Route path='products/:productId' element={<ProductDetaile/>}/>
 
-                        <Route path=':userId/' element={<PersonalAccount/>}/>
-                    </Route>    
-                        <Route path='login' element={<SignIn/>}/>      
-                </Route>  
+                <Route path="/" element={<MainContextProvider><Layout/></MainContextProvider>}>
+                     {/* <Route path="/" element={<Layout/>}> */}
+                            <Route element={<AuthLayout></AuthLayout>}>
+                                    <Route path='placeList' element={<PlaceList/>}/>    
+                                    <Route path=':placeName/:placeId/*' element={<LayoutPlace/>}>
+                                        <Route path='detaile' element={<PlaceDetaile/>}/>
+                                        <Route path='orders' element={<OrderList/>}/>
+                                        <Route path='orders/:orderId/*' element={<OrderDetaile/>}/>
+                                        <Route path='invoices' element={<InvoiceList/>}/>
+                                        <Route path='invoices/:invoiceId/*' element={<InvoiceDetaile/>}/>
+                                        <Route path='menus' element={<MenuList/>}/>
+                                        <Route path='menus/:menuId/*' element={<MenuDetaile/>}/>
+                                        <Route path='managers/' element={<ManagersList/>}/>
+                                    </Route>
+                                <Route path='products/' element={<ProductList/>}/>
+                                <Route path='products/:productId' element={<ProductDetaile/>}/>
+                                <Route path=':userId/' element={<PersonalAccount/>}/>
+                            </Route>    
+                        {/* </Route> */}
+
+                </Route> 
+                <Route path='login' element={<MainContextProvider><SignIn/></MainContextProvider>}/> 
+
+
                 <Route path='get_code' element={<GetCodeGoogleLogin/>}/>
             </Routes>
         </Router>

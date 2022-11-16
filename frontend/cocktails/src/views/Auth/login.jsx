@@ -2,31 +2,36 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { NetworkManager } from '../../components/network_manager';
 import { useNavigate } from 'react-router-dom';
-import { PopupGoogleLogin } from '../../components/popup/popup_google_login';
 import { AuthServise } from './auth_service';
-
+import { useManeContext } from '../../components/main_context';
 
 
 export function SignIn() {
 	let navigate = useNavigate();
+    let main_context = useManeContext();
 	let initialFormData = Object.freeze({
 		username: '',
 		password: '',
 	});
-    let [google_login_active, setGoogle_login_active] = useState(false)
     let network_manager = new NetworkManager()
     let auth_service = new AuthServise()
 	let [formData, setFormData] = useState(initialFormData);
     let [externalPopup, setExternalPopup] = useState(null);
+    let user = main_context.getUserFromMainContext
+    let access_token = localStorage.getItem('access_token')
+
+
+
 	let handleChange = (e) => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value.trim(),
 		});
 	};  
+   
+
 
     function onClickGoogle(){
-        console.log('her')
         network_manager.GoogleLogIn()
         let top = window.screenY + (window.outerHeight - 400) / 2.5;
         let left = window.screenX + (window.outerWidth - 500) / 2;
@@ -36,24 +41,30 @@ export function SignIn() {
     }
 
     useEffect(() => {
-        let access_token = localStorage.getItem('access_token')
-        if(access_token){
-            let userId = auth_service.GetAccessTokenData().user_id
-            console.log('IDD',userId)
-            network_manager.GetUserData(userId)
-                .then(user=>{
-                    console.log('user',user)
-                    if (user.role_name == 'counter'){
-                        window.location.href = `/placeList/`
-                        return;
-                        // console.log('go to placeList')
-                    }else{
-                        window.location.href = `/${userId}`
-                        return;
-                        // console.log('go to my id')
-                    }
+        console.log('Check user in login',main_context.getUserFromMainContext)
+        if(user){
+            console.log('i have user in login',user)
+            if (user.role_name == 'counter'){
+                console.log('go to placeList')  
+                navigate(`/placeList/`)
+                return;
+            }else{
+                console.log('go to my id',user)
+                navigate(`/${user.id}/`)
+                return;
+            }
+        }else{
+            if(access_token){
+                let userId = auth_service.GetAccessTokenData().user_id
+                network_manager.GetUserData(userId)
+                    .then((response)=>{
+                        main_context.setUserInMainContext(response)
+                        console.log('Seting user in login')
                 })
+            }
+
         }
+        
         if (!externalPopup) {
           return;
         }else{
@@ -65,7 +76,7 @@ export function SignIn() {
             }, 500)
         }    
       },
-      [externalPopup]
+      [externalPopup,user]
     )
  
 
@@ -74,22 +85,9 @@ export function SignIn() {
 		e.preventDefault();
 		console.log(formData);
         network_manager.SingIn(formData)
-        .then(response=>{
-            console.log("LOGIN RESPONSE", response)
-            let userId = auth_service.GetTokenData(response.data.refresh).user_id
-            network_manager.GetUserData(userId)
-            .then(user=>{
-                console.log('user',user)
-                if (user.role_name == 'counter'){
-                    window.location.href = `/placeList/`
-                    // console.log('go to placeList')
-                }else{
-                    window.location.href = `/${userId}`
-                    // console.log('go to my id')
-                }
-            })          
-            }       
-        )
+        .then(()=>{
+            window.location.reload()
+        })  
         .catch(error => {
             console.log(error);
             throw error;
@@ -101,6 +99,7 @@ export function SignIn() {
         console.log('refresh_token',localStorage.getItem('refresh_token'))
         let access_token_data = auth_service.GetAccessTokenData()
         console.log('access token data', access_token_data)
+        console.log('USER',main_context.getUserFromMainContext)
     }
 
 	return (
@@ -143,7 +142,6 @@ export function SignIn() {
             <div> </div>
             <div> </div>
             <button onClick={getTokens}> get tokens</button>
-            <PopupGoogleLogin google_login_active={google_login_active}  setGoogle_login_active={setGoogle_login_active}/>
         </div>
 );
 }
