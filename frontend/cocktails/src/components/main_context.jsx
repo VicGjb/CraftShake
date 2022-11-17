@@ -11,24 +11,35 @@ export function useManeContext(){
 export function MainContextProvider({children}){
     let navigate = useNavigate();
     let [user, setUser] = useState();
+    let [volumes, setVolumes] = useState([]);
     function goBack(){
         navigate(-1)
     }
-    function a(b){
-       setUser(b)
+    function setUserInContext(param){
+       setUser(param)
        return
     }
-    function c(){
+    function getUserFromContext(){
         console.log('dddddd',user)
         return user
+    }
+    
+    function setVolumesInContext(param){
+        setVolumes(param)
+        return
+     }
+    function getVolumeFromContext(){
+        return volumes
     }
 
 
     return(
         <MainContext.Provider value={{
             goBack:goBack,
-            setUserInMainContext:a,
-            getUserFromMainContext:user,
+            setUserInMainContext:setUserInContext,
+            getUserFromMainContext:getUserFromContext,
+            setVolumesInMainContext:setVolumesInContext,
+            getVolumeFromMainContext:getVolumeFromContext,
         }}>
             {children}
         </MainContext.Provider>

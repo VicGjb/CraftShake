@@ -39,7 +39,6 @@ export function OrderDetaileContent({order, menus}){
                         console.log(error);
                         throw error;
                     });
-                    
                 }
         });
         order_positions.delete_list.map((order_item,index) =>{
