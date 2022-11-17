@@ -308,6 +308,14 @@ export class NetworkManager{
 			})
 	}
 
+	async get_order_item_volume_list(){
+		return this.axiosInstance
+			.post(`counter/order-item-volume/`)
+			.then(response =>{
+				return response.data.results
+			})
+	}
+
 
 	// Menu
 	async create_menu(form){
@@ -538,6 +546,15 @@ export class NetworkManager{
 		console.log('Try to get user by ID', id)
 		return this.axiosInstance
 			.get(`craft_shake_auth/user/${id}/`)
+			.then(response=>{
+				return response.data
+			})
+	}
+
+	async GetConfig(id){
+		console.log('Try to get user by ID', id)
+		return this.axiosInstance
+			.get(`craft_shake_auth/config/${id}/`)
 			.then(response=>{
 				return response.data
 			})

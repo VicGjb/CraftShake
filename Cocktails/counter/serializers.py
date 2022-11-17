@@ -102,6 +102,7 @@ class MenuPositionSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source='get_product_name')
     photo = serializers.CharField(source='get_photo')
     discription = serializers.CharField(source='get_discription')
+    
     class Meta:
         model = MenuPosition
         fields = '__all__'
@@ -139,6 +140,7 @@ class MenuUpdateSerializer(serializers.ModelSerializer):
 
 """OrderItemVolume serializers"""
 class OrderItemVolumeSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source = 'get_name')
 
     class Meta:
         model = OrderItemVolume

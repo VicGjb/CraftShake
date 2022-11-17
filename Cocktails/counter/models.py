@@ -348,6 +348,10 @@ class OrderItemVolume(models.Model):
 
     def __str__(self) -> str:
         return f'{self.value}ml'
+    
+    def get_name(self) ->str:
+        result = round(self.value / 1000,2)
+        return f'{result}L'
 
 class OrderItem(models.Model):
     """Comment"""

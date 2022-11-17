@@ -4,6 +4,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from .views import (
     BlacklistTokenUpdateView,
     UserView,
+    ConfigView,
 )
 
 
@@ -11,5 +12,6 @@ urlpatterns = format_suffix_patterns(
     [
         path('logout/blacklist/', BlacklistTokenUpdateView.as_view(), name='blacklist'),
         path('user/<int:pk>/', UserView.as_view({'get':'retrieve'})),
+        path('config/<int:pk>/',ConfigView.as_view())
     ]
 )

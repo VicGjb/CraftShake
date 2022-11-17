@@ -6,6 +6,7 @@ import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupAddPlace } from "../../components/popup/popup_add_place";
 import { Logout } from "../Auth/logout";
 import { NetworkManager } from "../../components/network_manager";
+import { useManeContext } from "../../components/main_context";
 
 
 export function PlaceList(){
@@ -14,7 +15,7 @@ export function PlaceList(){
     let [loaded, setLoaded] = useState(false)
     let [add_place_active, setAdd_place_active] = useState(false)
     let network_manager = new NetworkManager()
-   
+    let main_context =  useManeContext()
     useEffect(()=> {
         network_manager.get_place_list()
         .then(place=>{
@@ -30,6 +31,7 @@ export function PlaceList(){
         let refresh_token = localStorage.getItem('refresh_token')
         let refresh_token_data = JSON.parse(atob(refresh_token.split('.')[1]));
         console.log('Token', refresh_token_data)
+        console.log('volume', main_context.getVolumeFromMainContext())
     }
 
     function PlaceListView(){

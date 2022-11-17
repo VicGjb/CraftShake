@@ -17,7 +17,7 @@ export function SignIn() {
     let auth_service = new AuthServise()
 	let [formData, setFormData] = useState(initialFormData);
     let [externalPopup, setExternalPopup] = useState(null);
-    let user = main_context.getUserFromMainContext
+    let user = main_context.getUserFromMainContext()
     let access_token = localStorage.getItem('access_token')
 
 
@@ -41,7 +41,7 @@ export function SignIn() {
     }
 
     useEffect(() => {
-        console.log('Check user in login',main_context.getUserFromMainContext)
+        console.log('Check user in login',main_context.getUserFromMainContext())
         if(user){
             console.log('i have user in login',user)
             if (user.role_name == 'counter'){
@@ -56,9 +56,10 @@ export function SignIn() {
         }else{
             if(access_token){
                 let userId = auth_service.GetAccessTokenData().user_id
-                network_manager.GetUserData(userId)
+                network_manager.GetConfig(userId)
                     .then((response)=>{
-                        main_context.setUserInMainContext(response)
+                        main_context.setUserInMainContext(response.user)
+                        main_context.setVolumesInMainContext(response.volumes)
                         console.log('Seting user in login')
                 })
             }
@@ -99,7 +100,11 @@ export function SignIn() {
         console.log('refresh_token',localStorage.getItem('refresh_token'))
         let access_token_data = auth_service.GetAccessTokenData()
         console.log('access token data', access_token_data)
-        console.log('USER',main_context.getUserFromMainContext)
+        console.log('USER',main_context.getUserFromMainContext())
+        network_manager.GetConfig(1)
+        .then(response=>{
+            console.log('HGEEEEE',response)
+        })
     }
 
 	return (

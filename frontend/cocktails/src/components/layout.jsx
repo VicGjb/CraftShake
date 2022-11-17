@@ -13,14 +13,8 @@ export const Layout = () =>{
     let navigate = useNavigate()
     let network_manager = new NetworkManager()
     let auth_service = new AuthServise()
-    let user = main_context.getUserFromMainContext
+    let user = main_context.getUserFromMainContext()
     let access_token = localStorage.getItem('access_token')
-
-
-
-    // useEffect(()=>{
-    //     renderLayout()
-    // },[])
 
 
     function renderCounterView(){
@@ -72,10 +66,11 @@ export const Layout = () =>{
             }else{
                 console.log('No User in Layout')
                 let userId = auth_service.GetAccessTokenData().user_id
-                network_manager.GetUserData(userId)
+                network_manager.GetConfig(userId)
                 .then(response =>{
-                    console.log('Got user in layout')
-                    main_context.setUserInMainContext(response)
+                    console.log('Got user in layout',response.volumes)
+                    main_context.setUserInMainContext(response.user)
+                    main_context.setVolumesInMainContext(response.volumes)
                     }
                 )
             }
