@@ -1,44 +1,46 @@
 import React, { useEffect, useSyncExternalStore } from "react";
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid'; 
 import { InputNumber } from "../../../components/input_number";
 import { RegularButton } from "../../../components/buttons/regular_button";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
 import { useManeContext } from "../../../components/main_context";
+import { SelectVolume } from "../../../components/select_volume";
 
-export function MenuPositionRow(props){
-    let order_positions = useOrderItemListContext()
-    let menu_position = props.position;
+export function MenuPositionRow({position,order}){
+
+    let menu_position = position;
     let main_context = useManeContext()
+    let volumes = main_context.getVolumesFromMainContext()
+    let order_detile_context = useOrderItemListContext()
     let defaultForm = {
-        order:props.order.id,
+        uuid:uuidv4(),
+        order:order.id,
         name:menu_position.name,
-        quantity:0,    
-        position:props.position.id,
-        item_price:0,
+        quantity:1,    
+        volume:main_context.getDefaultVolume().id,
+        position:position.id,
         new_item:true,
     }
-    let [qnty, setQnty] = useState(0);
     let [form, setForm] = useState(defaultForm);
-    let [num_value, setNumValue] = useState(0);
-    let volumes = main_context.getVolumeFromMainContext()
 
 
     function Addbutton(){
-        if(form.quantity>0){
-            order_positions.add(form);
-            order_positions.update_order_positions();
-            setNumValue(0);
-        }
-    }
-   
-    function calculateTotal(qnty){
-        let result = Number(qnty) * Number(menu_position.sale_price);
-        setForm({...form, ['item_price']:result.toFixed(2),['quantity']:qnty})
+            let amount_volume = Number(form['quantity']) * Number(volumes.filter(volume=>(volume.id == form['volume']))[0].value)
+            let item_price = amount_volume/Number(menu_position.volume) * Number(menu_position.sale_price)
+            form.item_price = item_price.toFixed(2)
+            if(form.quantity>0){
+                order_detile_context.addItem(form)
+                setForm({...form, ['uuid']:uuidv4()})
+            }
     }
 
     function ChangeHendler(qnty){
-        setQnty(qnty)
-        calculateTotal(qnty)
+        setForm({...form, ['quantity']:qnty})   
+    }
+
+    function changeVolumeHandler(prop){
+        setForm({...form, ['volume']:prop.id})
     }
 
     return(
@@ -48,15 +50,10 @@ export function MenuPositionRow(props){
             </div>
             <div className="position_row_slot">
                 <div className="position_row_slot_name regular_text_small">{menu_position.name}
-                <select name="volume">
-                    {volumes.map(volume=>(
-                        <option key={volume.id} value={volume.id}>{volume.name}</option>  
-                    ))}
-                    
-                </select>
+                <SelectVolume onChange={changeVolumeHandler} />
                 </div>
             </div>
-            <InputNumber onChange={ChangeHendler}/>
+            <InputNumber onChange={ChangeHendler} name='qnty'/>
             <div className="button_slot" onClick={Addbutton}><RegularButton lable={'add'}/></div>
         </div>
     )

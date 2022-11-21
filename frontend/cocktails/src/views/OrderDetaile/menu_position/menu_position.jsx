@@ -6,11 +6,12 @@ import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_
 import { useParams } from "react-router-dom";
 
 
-export function MenuPositions(props){
+export function MenuPositions({order}){
     let [menu_positions, setMenu_positions] = useState({});
     let [loaded, setLoaded] = useState(false);
     let {menuId} = useParams([]);
     let network_manager = new NetworkManager()
+    let order_detaile_context = useOrderItemListContext()
 
     useEffect(()=>{
         network_manager.get_menu_positions_list(menuId)
@@ -25,7 +26,11 @@ export function MenuPositions(props){
         return(
             <div>
                 {menu_positions.map(position =>(
-                    <MenuPositionRow position={position} order={props.order} key={position.id}/>
+                    <MenuPositionRow 
+                        key={position.id} 
+                        position={position} 
+                        order={order} 
+                        />
                 ))}
             </div>
         )

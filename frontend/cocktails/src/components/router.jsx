@@ -22,7 +22,7 @@ import { AuthLayout } from "./auth_layout";
 import { GetCodeGoogleLogin } from "../views/Auth/get_code_google_login";
 import {SignIn} from "../views/Auth/login";
 import { PersonalAccount } from "../views_customer/personal_account";
-
+import { MainPage } from "../views/TestProps/MainPage";
 
 export function Routing(){
     return(
@@ -51,7 +51,7 @@ export function Routing(){
 
                 </Route> 
                 <Route path='login' element={<MainContextProvider><SignIn/></MainContextProvider>}/> 
-
+                <Route path='test' element={<MainPage/>}/>
 
                 <Route path='get_code' element={<GetCodeGoogleLogin/>}/>
             </Routes>

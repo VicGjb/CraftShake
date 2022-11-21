@@ -5,7 +5,9 @@ import { MenuPositions } from "./menu_position/menu_position";
 export function OrderDetaileMenuRoute({order}){
     return(
         <Routes>
-            <Route path='menu/:menuId' element={<MenuPositions order={order}/>}/>
+            <Route path='menu/:menuId'
+            element={<MenuPositions order={order}/>}
+            />
         </Routes> 
     )
 }

@@ -28,7 +28,6 @@ export function OrderDetaile(){
         if(menu_loaded){
             return(
             <div>
-                {/* <div>{order.menus}</div> */}
                 <OrderDetaileContent place={placeId} menus={menus} order={order}/>
             </div>
             )

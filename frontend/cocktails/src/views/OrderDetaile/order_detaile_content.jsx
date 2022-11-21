@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NetworkManager } from "../../components/network_manager";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { useState } from "react";
@@ -11,26 +11,32 @@ import { PopupDelete } from "../../components/popup/popup_delete";
 export function OrderDetaileContent({order, menus}){
     let {placeName} = useParams();
     let {placeId} = useParams();
-    let order_positions = useOrderItemListContext();
+    let order_detaile_context = useOrderItemListContext();
     let [delete_active,setDelete_active] = useState(false)
     let network_manager =  new NetworkManager()
     let navigate = useNavigate();
 
+    useEffect(()=>{
+        console.log('ORDER',order)
+        order_detaile_context.setUUIDForListFromBase(order.order_item)
+        order_detaile_context.setItemList(order.order_item)
+    },[])
+
     function calculateTotal(){
         let result = 0
-        order.order_item.map(item =>(
+        order_detaile_context.item_list.map(item =>(
             result = Number(result) + Number(item.item_price)
         ))
         return (result.toFixed(2))
     }
-
-
+ 
     function updateOrder(){
         let total = {
-            total_price: calculateTotal()
+            total_price: calculateTotal() 
         } 
-        order_positions.add_list.map(order_item =>{
+        order_detaile_context.item_list.map(order_item =>{
             if(order_item.new_item){
+                console.log('new_order_item_update',order_item)
                 network_manager.create_order_item(order_item)
                     .then(response => {
                         console.log(response);
@@ -41,8 +47,8 @@ export function OrderDetaileContent({order, menus}){
                     });
                 }
         });
-        order_positions.delete_list.map((order_item,index) =>{
-            console.log('deleted',order_positions.delete_list)
+        order_detaile_context.delete_item_list.map((order_item,index) =>{
+            console.log('deleted',order_detaile_context.delete_item_list)
 
             network_manager.delete_order_item(order_item.id)
                 .then(response =>{
@@ -52,7 +58,7 @@ export function OrderDetaileContent({order, menus}){
                     console.log(error);  
                     throw error;
                 });
-            console.log('deleted',order_positions.delete_list)
+            console.log('deleted',order_detaile_context.delete_item_list)
         });
         
         network_manager.update_order_total(order.id, total)
@@ -63,7 +69,7 @@ export function OrderDetaileContent({order, menus}){
                 console.log(error);
                 throw error;
             });
-        order_positions.clean()
+            navigate(`/${placeName}/${placeId}/orders`)
     }
 
     function deleteOrder(){
@@ -77,8 +83,6 @@ export function OrderDetaileContent({order, menus}){
                 console.log(error);
                 throw error;
             });
-        
-        
     }
 
     function MenuRender(menu){
@@ -108,12 +112,11 @@ export function OrderDetaileContent({order, menus}){
                     <RegularButton lable={'Delete order'} />
                 </div>
                 <div className='order_update_btn' onClick={updateOrder}>
-                    <Link to={{pathname:`/${placeName}/${placeId}/orders`}} replace>
+                    {/* <Link to={{pathname:`/${placeName}/${placeId}/orders`}} replace> */}
                         <RegularButton lable={'Update'}/>
-                    </Link>
+                    {/* </Link> */}
                 </div>
             </div>
-
             <div className="order_detaile_tables_wrapper">
                 <div className="menu_positions_table">
                     <div className="order_detaile_menu_name">

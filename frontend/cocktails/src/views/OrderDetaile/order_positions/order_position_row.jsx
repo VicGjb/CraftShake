@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ReactComponent as CrossDel } from "../../../svg/cross_del.svg";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
+import { useManeContext } from "../../../components/main_context";
 
-export function OrderPositionRow(props){
-    let order_positions = useOrderItemListContext()
-    let order_item = props.order_item
-    let onChange = props.onChange
+export function OrderPositionRow({
+    order_item, 
+    onChange,
+}){
+    let main_context = useManeContext()
+    let order_detile_context = useOrderItemListContext()
+    let volume = main_context.getVolomeNameFromMainContext(order_item.volume)
+
     
     function DeleteItem(){
-        order_positions.remove(order_item)
+        order_detile_context.removeItem(order_item)
         ChangeHendler()
     }
 
     function ChangeHendler(){
-        onChange(order_positions.list);
+        onChange(order_detile_context.item_list);
     }
 
     return(
         <div className="order_positions_table_row regular_text_small" key={order_item.id}>
             <div className="order_positions_table_row_slot name">
-                {order_item.name}
+                {order_item.name} {volume}
             </div>
             <div className="order_positions_table_row_slot qnt">
                 x{order_item.quantity}
@@ -32,4 +37,4 @@ export function OrderPositionRow(props){
             </div>
         </div>
     )
-}
+} 

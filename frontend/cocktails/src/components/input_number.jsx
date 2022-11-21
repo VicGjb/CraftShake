@@ -3,7 +3,7 @@ import { useState } from "react";
 
 
 export function InputNumber({onChange}){
-    let[qnty, setQnty] = useState(0)
+    let[qnty, setQnty] = useState(1)
 
     const plus =()=>{
         setQnty(qnty+1)
@@ -24,7 +24,6 @@ export function InputNumber({onChange}){
     function ChangeHendler(e){
         onChange(Number(e.target.value));
         setQnty(Number(e.target.value));
-        console.log('yes')
     }
     
     return(

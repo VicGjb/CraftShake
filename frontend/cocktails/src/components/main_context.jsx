@@ -12,6 +12,7 @@ export function MainContextProvider({children}){
     let navigate = useNavigate();
     let [user, setUser] = useState();
     let [volumes, setVolumes] = useState([]);
+    
     function goBack(){
         navigate(-1)
     }
@@ -20,17 +21,25 @@ export function MainContextProvider({children}){
        return
     }
     function getUserFromContext(){
-        console.log('dddddd',user)
         return user
     }
-    
+
+    // Volumes for order item and menu position
     function setVolumesInContext(param){
         setVolumes(param)
         return
      }
-    function getVolumeFromContext(){
+    function getVolumesFromContext(){
         return volumes
     }
+    function getVolumeNameFromContext(id){
+       return volumes.filter(volume=>(volume.id == id))[0].name
+    }
+    function getDefaultVolume(){
+        console.log('Default', volumes[0].id)
+        return volumes[0]
+    }
+
 
 
     return(
@@ -39,7 +48,9 @@ export function MainContextProvider({children}){
             setUserInMainContext:setUserInContext,
             getUserFromMainContext:getUserFromContext,
             setVolumesInMainContext:setVolumesInContext,
-            getVolumeFromMainContext:getVolumeFromContext,
+            getVolumesFromMainContext:getVolumesFromContext,
+            getVolomeNameFromMainContext:getVolumeNameFromContext,
+            getDefaultVolume:getDefaultVolume,
         }}>
             {children}
         </MainContext.Provider>

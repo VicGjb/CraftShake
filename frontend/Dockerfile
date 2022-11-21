@@ -13,3 +13,5 @@ RUN yarn add react-dropzone
 RUN yarn add react-hook-form
 
 RUN yarn add react-select
+
+RUN yarn add uuid
