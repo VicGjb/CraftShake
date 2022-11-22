@@ -25,6 +25,7 @@ export function ProductDetaile(){
         .then(product => { 
                 setProduct(product);
                 setIsLoaded(true);
+                console.log(product)
             })
         }, [productId])
 

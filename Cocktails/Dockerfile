@@ -16,4 +16,4 @@ RUN pip install pdfkit
 
 RUN pip install djoser
 
- RUN pip install djangorestframework_simplejwt
+RUN pip install djangorestframework_simplejwt

@@ -31,7 +31,6 @@ export function PlaceList(){
         let refresh_token = localStorage.getItem('refresh_token')
         let refresh_token_data = JSON.parse(atob(refresh_token.split('.')[1]));
         console.log('Token', refresh_token_data)
-        console.log('volume', main_context.getVolumeFromMainContext())
     }
 
     function PlaceListView(){

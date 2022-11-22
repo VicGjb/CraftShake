@@ -27,6 +27,7 @@ export function MenuDetailePositionRow({position}){
                 </div>    
             </div>
             <div className="td">{position.discription}</div>
+            <div className="td">{Number(position.volume).toFixed(0)} ml</div>
             <div className="td">{position.sale_price}</div>
             <div className="td">
                 <button className="cross_del_btn" onClick={DeletePosition}>

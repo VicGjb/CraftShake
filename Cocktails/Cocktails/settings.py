@@ -62,6 +62,10 @@ INSTALLED_APPS = [
     'craft_shake_auth',
     
     'djoser',
+
+
+    'dal',
+    'dal_select2',
 ]
 
 AUTH_USER_MODEL = 'craft_shake_auth.CustomUser'

@@ -1,18 +1,23 @@
 import React, { useState } from "react";
+import { useRef } from "react";
 import { NetworkManager } from "../network_manager";
 import { useEffect } from "react";
 import { RegularButton } from "../buttons/regular_button";
 import { useNavigate, useParams } from "react-router-dom";
+import Autocomplete from '@mui/material/Autocomplete';
 
 export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_position_active, menu}){
     let {placeId}=useParams()
     let defaultForm = {
         name:'',
+        volume:100,
         sale_price:0.00,
         menu:menu.id,
         product:'',
     }
+    let product_name = useRef()
     let [form, setForm] =  useState(defaultForm);
+    let [on_focus, setOnFocus] = useState(false);
     let[products, setProducts] = useState([]);
     let navigate = useNavigate();
     let network_manager = new NetworkManager()
@@ -24,6 +29,13 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                 console.log(products);
                 })
 	  }, [])
+
+    function onFocusChange(){
+        setOnFocus(true)
+    }
+    function onBlurChange(){
+        setOnFocus(false)
+    }
 
     function submitHandler(e){
         e.preventDefault()
@@ -42,13 +54,32 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
         setForm({...form, [e.target.name]:e.target.value});
         console.log(form)
     }
+
+
     function changeProductHandler(e){
-        setForm({...form, [e.target.name]:e.target.value, ['name']:products.filter(product=>product.id == e.target.value)[0].name});
+        setForm({...form, [e.target.name]:e.target.value, ['name']:products.filter(product=>product.id === e.target.value)[0].name});
         console.log(form)
     }
-    
-    function ToGo(){
-        console.log('HHH')
+
+    function getProductListByName(e){
+        if (e.target.value === ''){
+            network_manager.get_product_list()
+            .then(products => {
+                setProducts(products);
+                })
+                return
+            }
+        network_manager.get_products_by_name(e.target.value)
+            .then(response=>{
+                setProducts(response)
+            })
+    }
+    function onChoiseProduct(e){
+        console.log('IamHere')
+        setForm({...form,['product']:e.target.value, ['name']:products.filter(product=>product.id === e.target.value)[0].name});
+        product_name.current.value = products.filter(product=>product.id === e.target.value)[0].name
+        console.log('FORm',form)
+        onBlurChange()
     }
 
     return(
@@ -59,21 +90,38 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                 </div>
                 <form onSubmit={submitHandler} className='add_menu_position_form regular_text_small'>
                     <div className="add_menu_position_wrapper">
+                        <div></div>
                         <div className="sale_price_lable">
                             Product: 
                         </div>
                         <div>
-                            <select 
-                                    name='product' 
-                                    value={form.product}
-                                    onChange={changeProductHandler}
-                                    required
-                                >
-                                <option></option>
-                                {products.map(product=>(
-                                    <option key={product.id} value={product.id}>{product.name}</option>
-                                ))}
-                            </select> 
+                            <input
+                                type="text"
+                                name="product"
+                                className="form-control"
+                                onFocus={onFocusChange}
+                                // onBlur = {onBlurChange}
+                                onChange={getProductListByName}
+                                ref={product_name}
+                                />
+                                {on_focus === true ?(
+                                    <div>
+                                        {/* <div></div> */}
+                                        <ul
+                                        >
+                                            {products.map(product=>(
+                                                <li 
+                                                    key={product.id} 
+                                                    value={product.id}
+                                                    onClick={onChoiseProduct}
+                                                    style={{ padding: 5, borderBottom: "1px solid lightgrey" }}
+                                                    >
+                                                        {product.name}
+                                                    </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ):('')}
                         </div>
                     </div>
 
@@ -90,6 +138,23 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                     </div>
                     <div className="add_menu_position_wrapper">
                         <div className="sale_price_lable">
+                            Volume: 
+                        </div>
+                        <div>
+                            <input
+                                className='volume'
+                                type="number"
+                                step={10.00}
+                                min='0'
+                                name="volume"
+                                value={form.volume}
+                                onChange={changeHandler}
+                            />
+                        </div>
+                    </div>
+                    
+                    <div className="add_menu_position_wrapper">
+                        <div className="sale_price_lable">
                             Sale price: 
                         </div>
                         <div>
@@ -104,7 +169,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                             />
                         </div>
                     </div>
-                    <div type="submit"  onClick={ToGo} className='add_menu_position_submit_btn'>
+                    <div type="submit"  className='add_menu_position_submit_btn'>
                         <RegularButton lable={'Add'}></RegularButton>
                     </div>               
                 </form>           

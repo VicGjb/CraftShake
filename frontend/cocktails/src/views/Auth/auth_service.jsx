@@ -36,6 +36,8 @@ export class AuthServise{
                 return true
             } else {
                 console.log('refresh token is expired')
+                localStorage.removeItem('access_token')
+                localStorage.removeItem('refresh_token')
                 return false
             }
         } else {

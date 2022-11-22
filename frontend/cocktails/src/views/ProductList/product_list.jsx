@@ -21,14 +21,18 @@ export function ProductList(){
         setSearchName(e.target.value)
     }
 
-    function SearchProduct(e){
-        e.preventDefault()
-        console.log('dcsc', search_name)
-        network_manager.search_product(search_name)
-        .then(products =>{
-            setProducts(products)
-            console.log(products)
-        })
+    function getProductListByName(e){
+        if (e.target.value === ''){
+            network_manager.get_product_list()
+            .then(products => {
+                setProducts(products);
+                })
+                return
+            }
+        network_manager.get_products_by_name(e.target.value)
+            .then(response=>{
+                setProducts(response)
+            })
     }
 
     return (
@@ -37,15 +41,14 @@ export function ProductList(){
                 <div>Products</div>
             </div>
             <div className="product_list_found">
-                <form onSubmit={SearchProduct}> 
+                <form > 
                     <div className="product_list_found_wrapper">
                         <input 
                             type="text" 
-                            name="text"  
+                            name="search_product"  
                             className="product_list_found_input"
-                            onChange={ChangeHendler}
+                            onChange={getProductListByName}
                             />
-                        <button className='search_btn' type="submit"> <SearchBtn className='icon_search_btn'/> </button> 
                     </div>    
                 </form>
             </div>

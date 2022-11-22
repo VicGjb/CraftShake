@@ -145,7 +145,14 @@ export class NetworkManager{
 				return response.data.results
 			})
 	}
+	async get_products_by_name(name){
+		return this.axiosInstance
+			.get(`counter/product/by-name/${name}`)
+			.then(response=>{
+				return response.data.results
+		})
 
+	}
 	async get_product_detaile(productId){
 		return this.axiosInstance
 			.get(`counter/product/${productId}`)

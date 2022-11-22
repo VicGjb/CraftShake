@@ -6,20 +6,26 @@ from .views import(
     PlaceDeleteView,
     PlaceCreateView,
     PlaceUpdateView,
+
     ManagerOfPlaceView,
     ManagerOfPlaceCreateView,
+    
     ProductView,
     ProductDeleteView,
     ProductCreateView,
     ProductUpdateView,
     ProductUploadPhotoView,
+    ProductByNameView,
+
     MenuView,   
     MenuCreateView,
     MenuDeleteView,
     MenuUpdateView,
+    
     MenuPositionView,
     MenuPositionCreateView,
     MenuPositionDeleteView,
+    
     InvoiceView,
     InvoiceCreateView,
     InvoiceDeleteView,
@@ -32,6 +38,7 @@ from .views import(
     OrderCreateView,
     OrderDeleteView,
     OrderUpdateView,
+    
     OrderItemView,
     OrderItemCreateView,
     OrderItemDeleteView,
@@ -61,6 +68,7 @@ urlpatterns = format_suffix_patterns(
         path('manager/delete/<int:pk>', ManagerOfPlaceView.as_view({'post':'destroy'})),
 
         path('product/', ProductView.as_view({'get':'list'})),
+        path('product/by-name/<str:name>', ProductByNameView.as_view()),
         path('product/<int:pk>', ProductView.as_view({'get':'retrieve'})),
         path('product/update/<int:pk>',ProductUpdateView.as_view({'post':'update'})),
         path('product/<int:pk>/delete', ProductDeleteView.as_view({'post':'destroy'})),

@@ -1,8 +1,9 @@
 from decimal import ROUND_05UP, Decimal, ROUND_HALF_UP
 from django.shortcuts import render
 from django.db.models import Sum
-from django.http import HttpResponse, JsonResponse
+from dal import autocomplete
 from .service import ProductFilter, Rate
+
 # import pdfkit
 from rest_framework import (
     serializers,
@@ -67,6 +68,7 @@ from .permissions import (
     CraftShakeCounterPermissions,
     CraftShakeCustomerPermissions,
 )
+
 
 """Place views"""
 class PlaceAPIListView(generics.ListAPIView):
@@ -184,6 +186,12 @@ class ProductUpdateView(viewsets.ModelViewSet):
     def get_queryset(self):
         product = Product.objects.all() 
         return product
+
+class ProductByNameView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+    def get_queryset(self):
+        name = self.kwargs["name"]
+        return Product.objects.filter(name__contains=name)
 
 
 class ProductDeleteView(viewsets.ModelViewSet):

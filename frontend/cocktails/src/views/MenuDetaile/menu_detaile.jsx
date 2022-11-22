@@ -77,6 +77,7 @@ export function MenuDetaile(){
                                     <div className="th">Name</div>
                                     <div className="th">Photo</div>
                                     <div className="th">Description</div>
+                                    <div className="th">Volume</div>
                                     <div className="th">Price</div>
                                     <div className="th"></div>
                                 </div>
