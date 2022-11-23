@@ -1,7 +1,7 @@
 from decimal import ROUND_05UP, Decimal, ROUND_HALF_UP
 from django.shortcuts import render
 from django.db.models import Sum
-from dal import autocomplete
+
 from .service import ProductFilter, Rate
 
 # import pdfkit

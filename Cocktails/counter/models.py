@@ -104,7 +104,7 @@ class Product(models.Model):
         verbose_name='Photo',
         upload_to='Product_photo',
         blank=True,
-        default = '../media/cocktailDefault.jpeg'
+        default = '/Product_photo/cocktailDefault.jpeg'
     )
 
     def __str__ (self)  -> str:
@@ -192,8 +192,7 @@ class MenuPosition(models.Model):
         return self.product.name
     
     def get_photo(self) -> str:
-        return f'http://127.0.0.1:8000/media/{self.product.photo}'
-    
+        return f'https://craftshake.s3.eu-central-1.amazonaws.com/{self.product.photo}'
     def get_discription(self) -> str:
         return self.product.discription
 
