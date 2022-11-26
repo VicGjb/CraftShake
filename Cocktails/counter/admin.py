@@ -2,6 +2,7 @@ from dataclasses import field
 from webbrowser import get
 from django import forms
 from django.contrib import admin
+from .service import DeafaultImages
 from django.utils.safestring import mark_safe
 from .models import (
     Place, 
@@ -20,6 +21,9 @@ from craft_shake_auth.models import(
     CustomUser,
 )
 from rest_framework_simplejwt import token_blacklist
+
+default_images = DeafaultImages()
+
 
 """Forms"""
 class InvoiceForm(forms.ModelForm):
@@ -133,15 +137,17 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'discription', 'cost_price', 'get_image',)
+    list_display = ('name', 'discription', 'cost_price','get_image',)
     list_display_links = ('name',)
     search_fields = ('name',)
     save_on_top = True
     readonly_fields = ('get_image',)
     
     def get_image(self, obj):
-        if obj.photo.url:
+        if obj.photo:
             return mark_safe(f'<img src={obj.photo.url} width="110" height="110"')
+        else:
+            return mark_safe(f'<img src={default_images.get_product_photo()} width="110" height="110"') 
     get_image.short_description='Photo'
 
 
@@ -187,11 +193,69 @@ class OrderStateAdmin(admin.ModelAdmin):
     
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('place', 'date', 'total_price')
+
+    list_display = ('place', 'date','state', 'total_price','get_image')
     list_display_links = ('place',)
     inlines = [OrderItemInLine]
     search_fields = ('place','date')
     save_on_top = True
+    readonly_fields = ('get_image',)
+    fieldsets = (
+        (None, {
+            "fields": (
+                (('place', 'date',),)
+            ),
+        }),
+        (None, {
+            "fields": (
+                (('state'),)
+            ),
+        }),
+        (None, {
+            "fields": (
+                (('open_to_customer'),)
+            ),
+        }),
+        (None, {
+            "fields": (
+                (('get_image',),)
+            ),
+        }),
+        
+        (None, {
+            "fields": (
+                (('invoice','customer_statement'),)
+            ),
+        }),
+        (None, {
+            "fields": (
+                (('total_price'),)
+            ),
+        }),
+
+        # (None, {
+        #     "fields": (
+        #         ('about',)
+        #     ),
+        # }),
+        # (None, {
+        #     "fields": (
+        #         ('facebook','linkedin', 'instagram', 'twitter', 'github')
+        #     ),
+        # }),
+        # (None, {
+        #     "fields": (
+        #         ('url',)
+        #     ),
+        # }),
+    )
+
+    def get_image(self, obj):
+        if obj.photo:
+            return mark_safe(f'<img src={obj.photo.url} width="110" height="110"')
+        else:
+            return mark_safe(f'<img src={default_images.get_order_image()} width="200" height="110"')
+    get_image.short_description='Photo'
 
 
 @admin.register(OrderItem)

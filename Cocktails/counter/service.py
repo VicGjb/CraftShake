@@ -21,6 +21,20 @@ class Rate():
     __VAT_RATE = Decimal("1.17")
     VAT_RATE = __VAT_RATE.quantize(Decimal("0.01"))
 
+'''Default images'''
+class DeafaultImages():
+    
+    def __init__(self):
+        __DEFAULT_PRODUCT_IMAGE = "https://craftshake.s3.eu-central-1.amazonaws.com/Product_photo/cocktailDefault.jpeg"
+        __DEFAULT_ORDER_IMAGE = 'https://craftshake.s3.eu-central-1.amazonaws.com/Order_photo/default_order.webp'
+        self.DEFAULT_PRODUCT_IMAGE = __DEFAULT_PRODUCT_IMAGE
+        self.DEFAULT_ORDER_IMAGE = __DEFAULT_ORDER_IMAGE
+
+    
+    def get_product_photo(self):
+        return self.DEFAULT_PRODUCT_IMAGE
+    def get_order_image(self):
+        return self.DEFAULT_ORDER_IMAGE
 
 '''Filters'''
 class PlaceFilter(filters.FilterSet):

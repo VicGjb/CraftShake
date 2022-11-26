@@ -319,10 +319,17 @@ class Order(models.Model):
         verbose_name='Total',
         default = 0
     )
+    photo = models.ImageField(
+        verbose_name='Photo',
+        upload_to='Order_photo',
+        blank=True,
+        null=True,
+    )
+
     state = models.ForeignKey(
         OrderState,
         related_name='order_state',
-        verbose_name='orders',
+        verbose_name='state',
         on_delete=SET_NULL,
         blank=True,
         null=True,
@@ -334,7 +341,7 @@ class Order(models.Model):
     customer_statement = models.ForeignKey(
         CustomerStatement,
         related_name='orders_customer_statement',
-        verbose_name='orders',
+        verbose_name='Customer statement',
         on_delete=SET_NULL,
         blank=True,
         null=True,
