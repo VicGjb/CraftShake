@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import { RegularButton } from '../../components/buttons/regular_button';
 
 export function UploadProductFile ()  {
-    let [file, setFile] = useState();
+    // let [file, setFile] = useState();
+    let file = ''
     let {productId} = useParams();
     let [uploadData,setUploadData] = useState(new FormData());
     let network_manager = new NetworkManager()
@@ -14,6 +15,7 @@ export function UploadProductFile ()  {
       network_manager.upload_photo_product(productId, uploadData)
         .then((result) => {
           console.log(`Success` + result.data);
+          window.location.href = '/test';
         })
         .catch((err) => {
           console.log(err);
@@ -21,7 +23,8 @@ export function UploadProductFile ()  {
     }
 
     function changeHandler(e){
-      setFile(e.target.files[0])
+      file = e.target.files[0]
+      // setFile(e.target.files[0])
     }
     
     return (

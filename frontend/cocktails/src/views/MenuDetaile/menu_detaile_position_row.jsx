@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NetworkManager } from "../../components/network_manager";
 import { ReactComponent as CrossDel } from "../../svg/cross_del.svg";
+import { useManeContext } from "../../components/main_context";
 
 export function MenuDetailePositionRow({position}){
-    
-    let network_manager = new NetworkManager(
+    let mainContext = useManeContext()
+    let network_manager = new NetworkManager()
 
-    )
+    useEffect(()=>{
+        console.log('Menu Position Row Photo', position.photo)
+    })
+
     function DeletePosition(){
         network_manager.delete_menu_position(position.id)
             .then(responce =>{
@@ -23,7 +27,7 @@ export function MenuDetailePositionRow({position}){
             <div className="td">{position.name}</div>
             <div className="td">
                 <div className="position_photo">
-                    <img src={position.photo} alt="" />  
+                    <img src={mainContext.getPhoto(position.photo)} alt="" />  
                 </div>    
             </div>
             <div className="td">{position.discription}</div>

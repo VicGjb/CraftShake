@@ -12,6 +12,7 @@ export function MainContextProvider({children}){
     let navigate = useNavigate();
     let [user, setUser] = useState();
     let [volumes, setVolumes] = useState([]);
+    let placeHolderPhoto = 'https://craftshake.s3.eu-central-1.amazonaws.com/Product_photo/cocktailDefault.jpeg'
     
     function goBack(){
         navigate(-1)
@@ -39,7 +40,16 @@ export function MainContextProvider({children}){
         console.log('Default', volumes[0].id)
         return volumes[0]
     }
+    
+    // Photo for product
+    function getPhoto(photo){
+        if (photo){
+            return photo
+        }else{
+            return placeHolderPhoto
+        }
 
+    }
 
 
     return(
@@ -51,6 +61,7 @@ export function MainContextProvider({children}){
             getVolumesFromMainContext:getVolumesFromContext,
             getVolomeNameFromMainContext:getVolumeNameFromContext,
             getDefaultVolume:getDefaultVolume,
+            getPhoto:getPhoto
         }}>
             {children}
         </MainContext.Provider>

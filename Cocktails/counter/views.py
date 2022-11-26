@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.db.models import Sum
 
 from .service import ProductFilter, Rate
+from Cocktails.aws_manager import remove_file
 
 # import pdfkit
 from rest_framework import (
-    serializers,
     permissions,
     viewsets,
     generics,
@@ -68,7 +68,10 @@ from .permissions import (
     CraftShakeCounterPermissions,
     CraftShakeCustomerPermissions,
 )
-
+from .telegram_alarm import (
+    telegram_send_massege_new_order,
+    telegram_send_massege_update_order
+)
 
 """Place views"""
 class PlaceAPIListView(generics.ListAPIView):
@@ -206,9 +209,17 @@ class ProductUploadPhotoView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
 
     @action (detail=True, method=['post'])
-    def upload_photo(self, request, pk=None):
+    def update(self, request, pk=None):
+        product = Product.objects.get(id=pk)
         photo = ProductUploadPhotoSerializer(data=request.data)
         if photo.is_valid():
+            remove_file(product.photo)
+            print(f'photo {request.data["photo"].name}')
+            filename_parts = request.data["photo"].name.split('.')
+            filename =f'{product.id}-'+ filename_parts[0]+'.'+filename_parts[1]
+            request.data["photo"].name = filename
+            product.photo = request.data["photo"]
+            product.save()
             return Response(status=201)
 
 
@@ -463,12 +474,15 @@ class OrderCreateView(viewsets.ModelViewSet):
     """Dont forget to close the order"""
     serializer_class = OrderCreateSerializer
     permission_classes = [CraftShakeCustomerPermissions]
+    
     @action(detail=True, methods=['post', 'create'])
-    def add_order(self, request, pk=None):
+    def create(self, request, pk=None):
         print(f'create order {request}')
         order = OrderCreateSerializer(data=request.data)
         if order.is_valid():
-            return Response(status=201) 
+            order.save()
+            telegram_send_massege_new_order(order.data)
+            return  Response(status=201) 
 
 
 class OrderDeleteView(viewsets.ModelViewSet):
@@ -490,6 +504,8 @@ class OrderUpdateView(viewsets.ModelViewSet):
             if order_update_data.is_valid():
                 order.total_price = order_update_data.data['total_price']
                 order.save()
+                
+                telegram_send_massege_update_order(order)
                 return Response(status=201)
         else:
             return Response(status=403)

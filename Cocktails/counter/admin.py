@@ -12,6 +12,7 @@ from .models import (
     Invoice,
     CustomerStatement,
     Order,
+    OrderState,
     OrderItem,
     OrderItemVolume,
 )
@@ -177,6 +178,13 @@ class InvoiceAdmin(admin.ModelAdmin):
     save_on_top = True
     
 
+@admin.register(OrderState)
+class OrderStateAdmin(admin.ModelAdmin):
+    list_display = ('id','name')
+    list_display_links = ('id','name')
+    save_on_top = True
+
+    
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('place', 'date', 'total_price')

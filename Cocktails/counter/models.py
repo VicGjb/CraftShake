@@ -104,7 +104,8 @@ class Product(models.Model):
         verbose_name='Photo',
         upload_to='Product_photo',
         blank=True,
-        default = '/Product_photo/cocktailDefault.jpeg'
+        null=True,
+        # default = '/Product_photo/cocktailDefault.jpeg'
     )
 
     def __str__ (self)  -> str:
@@ -192,7 +193,8 @@ class MenuPosition(models.Model):
         return self.product.name
     
     def get_photo(self) -> str:
-        return f'https://craftshake.s3.eu-central-1.amazonaws.com/{self.product.photo}'
+        return self.product.photo
+    
     def get_discription(self) -> str:
         return self.product.discription
 
@@ -273,7 +275,19 @@ class CustomerStatement(models.Model):
     def get_place_name(self):
         return self.place.name
 
-    
+class OrderState(models.Model):
+    """stateset for order"""
+    class Meta:
+        verbose_name = 'OrderState'
+        verbose_name_plural = 'OrderStates'
+    name = models.CharField(
+        max_length=10,
+        verbose_name='name'
+    )
+    def __str__(self) -> str:
+        return self.name
+
+
 class Order(models.Model):
     """Comment"""
     class Meta:
@@ -285,7 +299,7 @@ class Order(models.Model):
         Place,
         on_delete=CASCADE,
         verbose_name='Place',
-        related_name='place_order'
+        related_name='place_order',
     )
     invoice = models.ForeignKey(
         Invoice,
@@ -293,7 +307,7 @@ class Order(models.Model):
         verbose_name='Invoice',
         related_name='orders',
         blank=True,
-        null=True
+        null=True,
     )
     date = models.DateField(
         verbose_name='Date',
@@ -304,6 +318,14 @@ class Order(models.Model):
         decimal_places=2,
         verbose_name='Total',
         default = 0
+    )
+    state = models.ForeignKey(
+        OrderState,
+        related_name='order_state',
+        verbose_name='orders',
+        on_delete=SET_NULL,
+        blank=True,
+        null=True,
     )
     open_to_customer = models.BooleanField(
         default=True,
@@ -378,10 +400,8 @@ class OrderItem(models.Model):
         verbose_name='Position',
         null=True
     )
-    quantity = models.DecimalField(
+    quantity = models.PositiveIntegerField(
         default=1,
-        max_digits=7,
-        decimal_places=2,
         verbose_name='Quantity'
     )
     item_price = models.DecimalField(

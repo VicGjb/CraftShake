@@ -11,7 +11,6 @@ class UserRole(models.Model):
         verbose_name="User role"
         verbose_name_plural = 'User roles'
 
-
     name = models.CharField(max_length=20, verbose_name='Name')
 
     def __str__(self) -> str:

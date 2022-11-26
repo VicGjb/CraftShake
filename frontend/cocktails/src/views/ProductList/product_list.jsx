@@ -4,12 +4,14 @@ import { AddButton } from "../../components/buttons/add_button";
 import { Link } from "react-router-dom";
 import { PopupAddProduct } from "../../components/popup/popup_add_product";
 import {ReactComponent as SearchBtn} from "../../svg/search.svg"
+import { useManeContext } from "../../components/main_context";
 
 export function ProductList(){
     let [products, setProducts] = useState([]);
     let [add_product_active, setAddProductActive] = useState(false)
     let [search_name, setSearchName] = useState('')
     let network_manager = new NetworkManager()
+    let mainContext = useManeContext()
     
     useEffect(()=> {
         network_manager.get_product_list()
@@ -70,7 +72,8 @@ export function ProductList(){
                                         <div className="td"><div className="regular_text_small">{product.name}</div></div>
                                         <div className="td">
                                             <div className="product_photo">
-                                                <img src={product.photo} alt="" /> 
+                                            {/* mainContext.setProductPhoto(product.photo) */}
+                                                <img src={mainContext.getPhoto(product.photo)} alt="" /> 
                                             </div>
                                         </div>
                                         

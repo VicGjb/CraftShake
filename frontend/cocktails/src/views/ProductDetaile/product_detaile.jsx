@@ -7,12 +7,14 @@ import { PopupChangeProduct } from "../../components/popup/popup_change_product"
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useManeContext } from "../../components/main_context";
 
 export function ProductDetaile(){
     let [product, setProduct] = useState({});
     let [is_loaded, setIsLoaded] = useState(false)
     let {productId} = useParams();
     let network_manager = new NetworkManager();
+    let mainContext = useManeContext()
     let navigate = useNavigate();
     let location = useLocation();
 
@@ -56,7 +58,7 @@ export function ProductDetaile(){
                     <div className="product_detaile__content">
                         <div className="product_detaile_conteiner">
                             <div className="product_detaile_photo">
-                                <img src={product.photo} alt="" />
+                                <img src={mainContext.getPhoto(product.photo)} alt="" />
                             </div>
                             <div className="product_detaile_info">
                                 <div className="product_detaile_discription ">

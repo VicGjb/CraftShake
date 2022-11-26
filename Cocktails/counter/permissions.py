@@ -13,8 +13,8 @@ class CraftShakeCustomerPermissions(permissions.BasePermission):
         permitted_methods = ('GET', 'HEAD', 'OPTIONS','POST')
         if (request.method in permitted_methods):
             print(request.user)
-            print('---------------------------------------------s')
-            print(obj.users.filter(id=request.user.id))
+            # print('---------------------------------------------s')
+            # print(obj.users.filter(id=request.user.id))
             user = obj.users.filter(id=request.user.id)
             if (user or request.user.is_staff):
                 return True

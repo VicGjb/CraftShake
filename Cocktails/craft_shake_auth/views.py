@@ -53,7 +53,7 @@ class ConfigView(APIView):
         user = CustomUser.objects.get(id=pk)
         user_serialaizer = UserSerialaizer(user)
         volumes = OrderItemVolume.objects.all()
-        print(volumes)
+        # print(volumes)
         volumes_data = []
         for volume in volumes:
             volumes_data.append(OrderItemVolumeSerializer(volume).data)

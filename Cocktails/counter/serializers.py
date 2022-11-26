@@ -100,7 +100,7 @@ class MenuPositionCreateSerializer(serializers.ModelSerializer):
 
 class MenuPositionSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source='get_product_name')
-    photo = serializers.CharField(source='get_photo')
+    photo = serializers.ImageField(source='get_photo')
     discription = serializers.CharField(source='get_discription')
     
     class Meta:
@@ -192,7 +192,7 @@ class OrderCreateSerializer(OrderSerializer):
 
 
 class OrderUpdateSerializer(OrderSerializer):
-
+    
     class Meta:
         model = Order
         fields = ('total_price',)
