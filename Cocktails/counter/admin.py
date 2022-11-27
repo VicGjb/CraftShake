@@ -194,12 +194,12 @@ class OrderStateAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
 
-    list_display = ('place', 'date','state', 'total_price','get_image')
+    list_display = ('id','place', 'date','state', 'total_price','get_image')
     list_display_links = ('place',)
     inlines = [OrderItemInLine]
     search_fields = ('place','date')
     save_on_top = True
-    readonly_fields = ('get_image',)
+    readonly_fields = ('state',)
     fieldsets = (
         (None, {
             "fields": (
@@ -218,7 +218,7 @@ class OrderAdmin(admin.ModelAdmin):
         }),
         (None, {
             "fields": (
-                (('get_image',),)
+                (('photo',),)
             ),
         }),
         
@@ -232,22 +232,6 @@ class OrderAdmin(admin.ModelAdmin):
                 (('total_price'),)
             ),
         }),
-
-        # (None, {
-        #     "fields": (
-        #         ('about',)
-        #     ),
-        # }),
-        # (None, {
-        #     "fields": (
-        #         ('facebook','linkedin', 'instagram', 'twitter', 'github')
-        #     ),
-        # }),
-        # (None, {
-        #     "fields": (
-        #         ('url',)
-        #     ),
-        # }),
     )
 
     def get_image(self, obj):

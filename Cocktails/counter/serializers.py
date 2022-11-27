@@ -153,7 +153,6 @@ class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = '__all__'
-        # exclude = ('item_price',)
 
 
 class OrderItemVeiwSerializer(OrderItemSerializer):
@@ -161,9 +160,11 @@ class OrderItemVeiwSerializer(OrderItemSerializer):
     # position_name = serializers.CharField(source='get_name_position')
 
 
-class OrderItemCreateSerializer(OrderItemSerializer):
+class OrderItemCreateSerializer(serializers.ModelSerializer):
     # name = serializers.CharField(source='get_name_position')
-    pass
+    class Meta:
+        model = OrderItem
+        exclude = ('order',)
 
 
 
@@ -184,19 +185,61 @@ class OrderViewSerializer(OrderSerializer):
     place_name = serializers.CharField(source='get_place_name')
 
 
-class OrderCreateSerializer(OrderSerializer):
-    menus=None
+class OrderCreateSerializer(serializers.ModelSerializer):
+   
     class Meta:
         model = Order
         exclude = ('invoice','customer_statement',)
+
+
+class OrderUploadPhotoSerializer(serializers.ModelSerializer):
+     
+     class Meta:
+         model = Order
+         fields = ('photo',)
+
+
+class OrderAndItemCreateSerializer(serializers.Serializer):
+    
+    order = OrderCreateSerializer()
+    order_item_list = OrderItemCreateSerializer(many=True)
+    
+#     class ItemCreateSerializer(serializers.ModelSerializer):
+#         class Meta:
+#             model = OrderItem
+#             exclude = ('order',)
+
+#     order_item = ItemCreateSerializer()
+
+#     class Meta:
+#         model = Order
+#         exclude = ('invoice','customer_statement',)
+    
+    # def create(self, validated_data):
+    #     item_data = validated_data.pop('item')
+    #     order_instance = Order.objects.create(**validated_data)
+    #     OrderItem.objects.create(
+    #         order = order_instance,
+    #         **item_data
+    #     )
+    #     return order_instance
+
+
+
 
 
 class OrderUpdateSerializer(OrderSerializer):
     
     class Meta:
         model = Order
-        fields = ('total_price',)
+        fields = ('total_price','state')
 
+class OrderChangeStateSerializer(OrderSerializer):
+
+    class Meta:
+        model = Order
+        fields =('state','photo')
+        
 
 """Invoice serializers"""
 class InvoiceSerializer(serializers.ModelSerializer):

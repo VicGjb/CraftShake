@@ -6,6 +6,7 @@ from .service import ProductFilter, Rate
 from Cocktails.aws_manager import remove_file
 
 # import pdfkit
+from rest_framework.views import APIView
 from rest_framework import (
     permissions,
     viewsets,
@@ -58,6 +59,9 @@ from .serializers import(
     OrderViewSerializer,
     OrderCreateSerializer,
     OrderUpdateSerializer,
+    OrderChangeStateSerializer,
+    OrderAndItemCreateSerializer,
+    OrderUploadPhotoSerializer,
     OrderItemVeiwSerializer,
     OrderItemCreateSerializer,
     OrderItemVolumeSerializer,
@@ -201,6 +205,13 @@ class ProductDeleteView(viewsets.ModelViewSet):
     permission_classes = [CraftShakeCounterPermissions]
     queryset = Product.objects.all()
     serializer_class = ProductDetailSerializer
+
+    @action(detail=True, methods=['post','destroy'])
+    def destroy(self, request,pk=None, *args, **kwargs):
+        product = Product.objects.get(id=pk)
+        print(product.photo)
+        remove_file(product.photo)
+        return super().destroy(request, *args, **kwargs)
 
 
 class ProductUploadPhotoView(viewsets.ModelViewSet):
@@ -460,7 +471,7 @@ class CustomerStatementView(viewsets.ReadOnlyModelViewSet):
 
 
 """Order views"""
-class OrderView(viewsets.ReadOnlyModelViewSet):
+class OrderView(viewsets.ModelViewSet):
 
     serializer_class = OrderViewSerializer
     filter_backends = (DjangoFilterBackend,)
@@ -470,45 +481,115 @@ class OrderView(viewsets.ReadOnlyModelViewSet):
         order = Order.objects.all().order_by('-date')
         return order
 
+    @action(detail=True, methods=['post','approve'])
+    def approve(self, request, pk=None):
+        order = Order.objects.get(id=pk)
+        order.open_to_customer = False
+        order.approve()
+        order.save()
+        data = OrderViewSerializer(order)
+        return Response(status=201, data=data.data)
+
+    @action(detail=True, methods=['post','delivered'])
+    def delivered(self, request, pk=None):
+        order = Order.objects.get(id=pk)
+        photo = OrderUploadPhotoSerializer(data=request.data)
+        if photo.is_valid and request.data['photo']:
+            filename_parts = request.data["photo"].name.split('.')
+            filename =f'{order.id}-'+ f'{order.place}-'+f'{order.date}'+'.'+filename_parts[1]
+            request.data["photo"].name = filename
+            order.photo = request.data["photo"]
+            order.delivered()
+            order.save()
+            data = OrderViewSerializer(order)
+            return Response(status=201,data=data.data)
+        else:
+            print('no photo')
+            return Response(status=403)
+        
+    @action(detail=True, methods=['post','paid'])
+    def paid(self, request, pk=None):
+        order = Order.objects.get(id=pk)
+        order.paid()
+        order.save()
+        data = OrderViewSerializer(order)
+        return Response(status=201,data=data.data)
+
+    @action(detail=True, methods=['post','destroy'])
+    def destroy(self, request,pk=None, *args, **kwargs):
+        order = Order.objects.get(id=pk)
+        print(order.photo)
+        remove_file(order.photo)
+        return super().destroy(request, *args, **kwargs)
+    
+    # @action(detail=True, methods=['post','upload_photo'])
+    # def upload_photo(self, request, pk=None):
+    #     order = Order.objects.get(id=pk)
+    #     photo = OrderUploadPhotoSerializer(data=request.data)
+    #     if photo.is_valid():
+    #         print(f'ok  {order.photo}')
+    #         filename_parts = request.data["photo"].name.split('.')
+    #         filename =f'{order.id}-'+ f'{order.place}-'+f'{order.date}'+'.'+filename_parts[1]
+    #         request.data["photo"].name = filename
+    #         order.photo = request.data["photo"]
+    #         order.save()
+    #         data = OrderViewSerializer(order)
+    #     return Response(status=201,data=data.data)
+
+
 class OrderCreateView(viewsets.ModelViewSet):
     """Dont forget to close the order"""
-    serializer_class = OrderCreateSerializer
+    serializer_class = OrderAndItemCreateSerializer
     permission_classes = [CraftShakeCustomerPermissions]
     
-    @action(detail=True, methods=['post', 'create'])
-    def create(self, request, pk=None):
-        print(f'create order {request}')
-        order = OrderCreateSerializer(data=request.data)
-        if order.is_valid():
-            order.save()
-            telegram_send_massege_new_order(order.data)
+    @action(detail=True, methods=['post', 'create_new'])
+    def create_new(self, request, pk=None):
+        request_data = OrderAndItemCreateSerializer(data=request.data)
+        if request_data.is_valid():
+            item_order_list = request.data["order_item_list"]
+            place = Place.objects.get(id=request.data['order'].pop('place'))
+            order = Order.objects.create(place=place, **request.data['order'])
+            print(f'create order {item_order_list}')
+            for item_data in item_order_list:
+                order_item = OrderItemCreateSerializer(item_data)
+                if order_item.is_valid():
+                    volume = OrderItemVolume.objects.get(id=item_data['volume'])
+                    position = MenuPosition.objects.get(id=item_data['position'])
+                    OrderItem.objects.create(
+                        order=order,
+                        name=item_data['name'],
+                        position=position,
+                        quantity=item_data['quantity'],
+                        volume=volume,
+                        item_price=item_data['item_price']
+                    )
+                else:
+                    Order.objects.get(id=order.id).delete()
+                    return Response(status=403)
             return  Response(status=201) 
+        else:
+            return Response(status=403)
 
 
-class OrderDeleteView(viewsets.ModelViewSet):
-    permission_classes = [CraftShakeCounterPermissions]
-    queryset = Order.objects.all()
-    serializer_class = OrderViewSerializer
-    
-    
 class OrderUpdateView(viewsets.ModelViewSet):
+
     permission_classes = [CraftShakeCustomerPermissions]
     serializer_class = OrderUpdateSerializer
 
     @action(detail=True, methods=['post','update'])
     def update(self, request, pk=None, *args, **kwargs):
+        print('i am here')
         order = Order.objects.get(id=pk)
-        print(f'Update reqest{request}')
         if order.open_to_customer or request.user.is_staff:
             order_update_data = OrderUpdateSerializer(data=request.data)
             if order_update_data.is_valid():
+                print('AIM HERE')
                 order.total_price = order_update_data.data['total_price']
                 order.save()
-                
                 telegram_send_massege_update_order(order)
                 return Response(status=201)
         else:
-            return Response(status=403)
+            return Response(status=403)        
     
     def get_queryset(self):
         order = Order.objects.all() 
@@ -550,7 +631,7 @@ class OrderItemDeleteView(viewsets.ModelViewSet):
             order_item.delete()
             return Response(status=201)
         else:
-            return Response(status=403)   
+            return Response(status=401)   
     
 
 class OrderItemCreateView(viewsets.ModelViewSet):   

@@ -46,7 +46,7 @@ export function MenuPositionRow({position,order}){
     return(
         <div className="position_row regular_text_small" key={menu_position.id}>
             <div className="position_row_photo">
-                <img src={menu_position.photo} alt="" />    
+                <img src={main_context.getPhoto(menu_position.photo)} alt="" />    
             </div>
             <div className="position_row_slot">
                 <div className="position_row_slot_name regular_text_small">{menu_position.name}

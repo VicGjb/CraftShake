@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.deletion import CASCADE, SET_NULL, PROTECT
 from django.db.models.fields.related import ManyToManyField
 from django.utils import timezone
+from django_fsm import transition, FSMIntegerField
 
 class Place(models.Model):
     """Comment"""
@@ -290,6 +291,18 @@ class OrderState(models.Model):
 
 class Order(models.Model):
     """Comment"""
+
+    STATUS_CREATED = 0
+    STATUS_APPROVED = 1
+    STATUS_DELIVERED = 2
+    STATUS_PAID = 3
+    STATUS_CHOICES = (
+        (STATUS_CREATED, 'CREATED'),
+        (STATUS_APPROVED, 'APPROVED'),
+        (STATUS_DELIVERED, 'DELIVERED'),
+        (STATUS_PAID, 'PAID'),
+    )
+
     class Meta:
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'
@@ -326,13 +339,10 @@ class Order(models.Model):
         null=True,
     )
 
-    state = models.ForeignKey(
-        OrderState,
-        related_name='order_state',
-        verbose_name='state',
-        on_delete=SET_NULL,
-        blank=True,
-        null=True,
+    state = FSMIntegerField(
+        choices=STATUS_CHOICES,
+        default=STATUS_CREATED,
+        protected=True,   
     )
     open_to_customer = models.BooleanField(
         default=True,
@@ -358,6 +368,18 @@ class Order(models.Model):
     
     def get_users(self) ->object:
         return self.place.users.all()
+
+    @transition(field=state, source=STATUS_CREATED, target=STATUS_APPROVED)
+    def approve(self):
+        print(f'approved')
+
+    @transition(field=state, source=STATUS_APPROVED, target=STATUS_DELIVERED)
+    def delivered(self):
+        print(f'delivered')
+
+    @transition(field=state, source=STATUS_DELIVERED, target=STATUS_PAID)
+    def paid(self):
+        print(f'paid')
 
 
 
