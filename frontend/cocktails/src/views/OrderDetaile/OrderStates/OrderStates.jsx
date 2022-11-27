@@ -28,26 +28,26 @@ export function OrderStats({order, setOrder}){
         if (orderId){
             console.log('order_state',order.state)
             switch (order.state){
-                case 0:
+                case 'Created':
                     return(
                         <div onClick={setStateApproved}>
                             <RegularButton lable={'Approve'}/>
                         </div>
                     )
-                case 1:
+                case 'Approved':
                     return(
                         <div onClick={()=>{setUploadPhotoActive(true)}}>
                             <RegularButton lable={'set Delivered'}/>
                             <UploadOrderPhotoPopup upload_photo_active={upload_photo_active} setUploadPhotoActive={setUploadPhotoActive} />
                         </div>
                     )
-                case 2:
+                case 'Delivered':
                     return(
                         <div onClick={setStatePaid}>
                             <RegularButton lable={'Set Paid'}/>
                         </div>
                     )
-                case 3:
+                case 'Paid':
                     return(
                         <div className="regular_text">
                             Paid

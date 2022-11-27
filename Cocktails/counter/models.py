@@ -4,7 +4,7 @@ from django.db import models
 from django.db.models.deletion import CASCADE, SET_NULL, PROTECT
 from django.db.models.fields.related import ManyToManyField
 from django.utils import timezone
-from django_fsm import transition, FSMIntegerField
+from django_fsm import transition, FSMIntegerField, FSMField
 
 class Place(models.Model):
     """Comment"""
@@ -292,10 +292,10 @@ class OrderState(models.Model):
 class Order(models.Model):
     """Comment"""
 
-    STATUS_CREATED = 0
-    STATUS_APPROVED = 1
-    STATUS_DELIVERED = 2
-    STATUS_PAID = 3
+    STATUS_CREATED = 'Created'
+    STATUS_APPROVED = 'Approved'
+    STATUS_DELIVERED = 'Delivered'
+    STATUS_PAID = 'Paid'
     STATUS_CHOICES = (
         (STATUS_CREATED, 'CREATED'),
         (STATUS_APPROVED, 'APPROVED'),
@@ -340,7 +340,7 @@ class Order(models.Model):
         null=True,
     )
 
-    state = FSMIntegerField(
+    state = FSMField(
         choices=STATUS_CHOICES,
         default=STATUS_CREATED,
         protected=True,
