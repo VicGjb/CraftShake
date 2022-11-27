@@ -330,10 +330,11 @@ class Order(models.Model):
         max_digits=7,
         decimal_places=2,
         verbose_name='Total',
-        default = 0
+        default = 0,
+        blank=True,
     )
     photo = models.ImageField(
-        verbose_name='Photo',
+        verbose_name='Photo', 
         upload_to='Order_photo',
         blank=True,
         null=True,
@@ -342,7 +343,9 @@ class Order(models.Model):
     state = FSMIntegerField(
         choices=STATUS_CHOICES,
         default=STATUS_CREATED,
-        protected=True,   
+        protected=True,
+        blank=True,
+        null = True 
     )
     open_to_customer = models.BooleanField(
         default=True,

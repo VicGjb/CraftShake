@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'craft_shake_auth',
     
     'djoser',
-    'django_fsm',
+    'django_fsm', 
 ]
 
 AUTH_USER_MODEL = 'craft_shake_auth.CustomUser'

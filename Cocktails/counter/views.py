@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.db.models import Sum
 
 from .service import ProductFilter, Rate
-from Cocktails.aws_manager import remove_file
+from Cocktails.aws_manager import remove_file_from_aws_3
 
 # import pdfkit
 from rest_framework.views import APIView
@@ -210,7 +210,7 @@ class ProductDeleteView(viewsets.ModelViewSet):
     def destroy(self, request,pk=None, *args, **kwargs):
         product = Product.objects.get(id=pk)
         print(product.photo)
-        remove_file(product.photo)
+        remove_file_from_aws_3(product.photo)
         return super().destroy(request, *args, **kwargs)
 
 
@@ -224,7 +224,7 @@ class ProductUploadPhotoView(viewsets.ModelViewSet):
         product = Product.objects.get(id=pk)
         photo = ProductUploadPhotoSerializer(data=request.data)
         if photo.is_valid():
-            remove_file(product.photo)
+            remove_file_from_aws_3(product.photo)
             print(f'photo {request.data["photo"].name}')
             filename_parts = request.data["photo"].name.split('.')
             filename =f'{product.id}-'+ filename_parts[0]+'.'+filename_parts[1]
@@ -518,8 +518,9 @@ class OrderView(viewsets.ModelViewSet):
     @action(detail=True, methods=['post','destroy'])
     def destroy(self, request,pk=None, *args, **kwargs):
         order = Order.objects.get(id=pk)
-        print(order.photo)
-        remove_file(order.photo)
+        if order.photo:
+            print('order have photo')
+            remove_file_from_aws_3(order.photo)
         return super().destroy(request, *args, **kwargs)
     
     # @action(detail=True, methods=['post','upload_photo'])
@@ -551,8 +552,9 @@ class OrderCreateView(viewsets.ModelViewSet):
             order = Order.objects.create(place=place, **request.data['order'])
             print(f'create order {item_order_list}')
             for item_data in item_order_list:
-                order_item = OrderItemCreateSerializer(item_data)
+                order_item = OrderItemCreateSerializer(data=item_data)
                 if order_item.is_valid():
+                    print('order_item is valid')
                     volume = OrderItemVolume.objects.get(id=item_data['volume'])
                     position = MenuPosition.objects.get(id=item_data['position'])
                     OrderItem.objects.create(
@@ -566,8 +568,10 @@ class OrderCreateView(viewsets.ModelViewSet):
                 else:
                     Order.objects.get(id=order.id).delete()
                     return Response(status=403)
-            return  Response(status=201) 
+            data = OrderViewSerializer(order)
+            return  Response(status=201, data=data.data) 
         else:
+            print('not valid')
             return Response(status=403)
 
 
@@ -643,7 +647,8 @@ class OrderItemCreateView(viewsets.ModelViewSet):
         order_item = OrderItemCreateSerializer(data=request.data)
         # print(f'order_intem_create_request {request.data}')
         if order_item.is_valid():
-            order = Order.objects.get(id=order_item.data['order'])
+            print(f"rrrr {request.data}")
+            order = Order.objects.get(id=request.data['order'])
             if order.open_to_customer or request.user.is_staff:
                 # print(f'order {order.id} open')
                 menu_position = MenuPosition.objects.get(
@@ -665,7 +670,7 @@ class OrderItemCreateView(viewsets.ModelViewSet):
                     name=menu_position.name,
                     quantity=order_item.data['quantity'],
                     item_price = item_price,
-                    order=Order.objects.get(id=order_item.data['order']),
+                    order=Order.objects.get(id=request.data['order']),
                     position=menu_position,
                     volume = volume,
                 )

@@ -297,6 +297,34 @@ export class NetworkManager{
 				return response.data
 			})
 		}
+	
+	async set_order_approved(orderId){
+		return this.axiosInstance
+			.post(`counter/order/${orderId}/set-approve/`)
+			.then(response=>{
+				return response.data
+			})
+		}
+	
+	async set_order_delivered(orderId, data){
+		return this.axiosInstance
+			.post(`counter/order/${orderId}/set-delivered/`,data)
+			.then(response=>{
+				return response.data
+			})
+		}
+	
+	async set_order_paid(orderId){
+		return this.axiosInstance
+			.post(`counter/order/${orderId}/set-paid/`)
+			.then(response=>{
+				return response.data
+			})
+		}
+
+	
+
+	
 
 	//Order_item 
 	async create_order_item(order_item){

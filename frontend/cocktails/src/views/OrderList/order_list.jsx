@@ -62,6 +62,7 @@ export function OrderList(){
                                     <div className="order_list_table_head tr">
                                         <div className="th"><div className="regular_text">Date</div></div>
                                         <div className="th"><div className="regular_text">Id</div></div>
+                                        <div className="th"><div className="regular_text">State</div></div>
                                         <div className="th"><div className="regular_text">Total</div></div>
                                     </div>
                                 </div >
@@ -71,6 +72,7 @@ export function OrderList(){
                                             <div className="order_list_table_row tr">
                                                 <div className="td"><div className="regular_text_small">{order.date}</div></div>
                                                 <div className="td"><div className="regular_text_small">{order.id}</div></div>
+                                                <div className="td"><div className="regular_text_small">{order.state}</div></div>
                                                 <div className="td"><div className="regular_text_small">{order.total_price}</div></div>
                                             </div>
                                         </Link>

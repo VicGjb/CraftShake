@@ -37,6 +37,7 @@ export function Routing(){
                                         <Route path='detaile' element={<PlaceDetaile/>}/>
                                         <Route path='orders' element={<OrderList/>}/>
                                         <Route path='orders/:orderId/*' element={<OrderDetaile/>}/>
+                                        <Route path='orders/new_order/*' element={<OrderDetaile/>}/>
                                         <Route path='invoices' element={<InvoiceList/>}/>
                                         <Route path='invoices/:invoiceId/*' element={<InvoiceDetaile/>}/>
                                         <Route path='menus' element={<MenuList/>}/>

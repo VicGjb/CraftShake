@@ -22,9 +22,6 @@ export function PopupUploadProductPhoto({upload_product_photo_active, setUploadP
           console.log(err);
         });
     }
-    function hui(){
-        console.log('Hui')
-    }
 
     function changeHandler(e){
         file = e.target.files[0]

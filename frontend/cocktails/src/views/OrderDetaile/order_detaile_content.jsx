@@ -7,19 +7,30 @@ import { OrderPositions } from "./order_positions/order_positions";
 import { useOrderItemListContext } from "./OrderDetaileContext/order_item_list_context";
 import { OrderDetaileMenuRoute } from "./order_detaile_router";
 import { PopupDelete } from "../../components/popup/popup_delete";
+import { OrderStats } from "./OrderStates/OrderStates";
 
-export function OrderDetaileContent({order, menus}){
+export function OrderDetaileContent({orderId, menus}){
     let {placeName} = useParams();
     let {placeId} = useParams();
+    let [order, setOrder] = useState();
+    let [loaded, setLoaded] = useState(false);
     let order_detaile_context = useOrderItemListContext();
-    let [delete_active,setDelete_active] = useState(false)
-    let network_manager =  new NetworkManager()
+    let [delete_active,setDelete_active] = useState(false);
+    let network_manager =  new NetworkManager();
     let navigate = useNavigate();
+    let [date,setDate] = useState();
 
     useEffect(()=>{
-        console.log('ORDER',order)
-        order_detaile_context.setUUIDForListFromBase(order.order_item)
-        order_detaile_context.setItemList(order.order_item)
+        if (orderId){
+            order_detaile_context.setOrderIdContext(orderId)
+            network_manager.get_order_detaile(orderId)
+            .then(order =>{
+                setOrder(order)
+                setLoaded(true)
+                order_detaile_context.setUUIDForListFromBase(order.order_item)
+                order_detaile_context.setItemList(order.order_item) 
+            })
+        }
     },[])
 
     function calculateTotal(){
@@ -28,6 +39,21 @@ export function OrderDetaileContent({order, menus}){
             result = Number(result) + Number(item.item_price)
         ))
         return (result.toFixed(2))
+    }
+
+
+    function createOrder(){
+        let total = calculateTotal()
+        let form ={
+            order:{
+                place:placeId,
+                date:date,
+                total_price:calculateTotal(),
+                },
+                order_item_list:order_detaile_context.item_list
+        }
+        network_manager.create_order(form)
+        navigate(`/${placeName}/${placeId}/orders`)
     }
  
     function updateOrder(){
@@ -61,7 +87,7 @@ export function OrderDetaileContent({order, menus}){
             console.log('deleted',order_detaile_context.delete_item_list)
         });
         
-        network_manager.update_order_total(order.id, total)
+        network_manager.update_order_total(orderId, total)
             .then(response => {
                 console.log('UPDATE',response);
             })
@@ -73,8 +99,8 @@ export function OrderDetaileContent({order, menus}){
     }
 
     function deleteOrder(){
-        console.log('Order ID', order.id)
-        network_manager.delete_order(order.id)
+        console.log('Order ID', orderId)
+        network_manager.delete_order(orderId)
             .then(response =>{
                 console.log('order was deleted', response);
                 navigate(`/${placeName}/${placeId}/orders`)
@@ -85,7 +111,7 @@ export function OrderDetaileContent({order, menus}){
             });
     }
 
-    function MenuRender(menu){
+    function renderMenu(menu){
         if(menu.is_current_menu){
             return(
                 <div key={menu.id}>
@@ -97,38 +123,141 @@ export function OrderDetaileContent({order, menus}){
         }
     }
 
+    function renderButtonLine(props){
+        if (props){
+            return(
+                <div className="order_detaile_buttons_line">
+                    <div className="order_detaile_back_btn">
+                                <Link to={{pathname: `/${placeName}/${placeId}/orders`,}} replace>
+                                    <RegularButton lable={'Back'}/>
+                                </Link> 
+                    </div>
+                    <div className="order_detaile_delete_btn" onClick={()=>setDelete_active(true)}>            
+                                <RegularButton lable={'Delete order'} />
+                    </div>
+                    <div className='order_update_btn' onClick={updateOrder}>
+                        {/* <Link to={{pathname:`/${placeName}/${placeId}/orders`}} replace> */}
+                            <RegularButton lable={'Update'}/>
+                        {/* </Link> */}
+                    </div>
+                </div>
+            )    
+        }else{
+            return(
+                <div className="order_detaile_buttons_line">
+                    <div className="order_detaile_back_btn">
+                                <Link to={{pathname: `/${placeName}/${placeId}/orders`,}} replace>
+                                    <RegularButton lable={'Back'}/>
+                                </Link> 
+                    </div>
+                    
+                    <div className='order_update_btn' onClick={createOrder}>
+                        {/* <Link to={{pathname:`/${placeName}/${placeId}/orders`}} replace> */}
+                            <RegularButton lable={'Create'}/>
+                        {/* </Link> */}
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    function dateChangeHendler(e){
+        console.log(e.target.value)
+        setDate(e.target.value)
+    }
+
+    function renderNewOrderDate(orderId){
+        if (!orderId){
+            return(
+            <div className="add_order_popup_date">
+                <div className="date_lable">
+                    Date
+                </div>
+                <div>
+                    <input
+                        className="date_input"
+                        type='date'
+                        name='date'
+                        onChange={dateChangeHendler}
+                    />
+                </div>
+            </div>
+        )
+        }
+    }
+
+
+    function renderStateButton(orderId){
+        if (orderId){
+            return(
+                <OrderStats order={order} setOrder={setOrder}/>
+            )
+        }
+        
+    }
+    function renderOrderPhoto(orderId){
+        if(orderId && order.photo){
+            return(
+                <img src={order.photo} />
+            )
+        }
+    }
+    
+    function OrderDetaileContentView(){
+        return(
+            <div className="order_detaile_content">
+                <div className="order_detaile_content_title regular_text">
+                    {orderId 
+                        ? `Order №: ${order.id} on ${order.date}`
+                        : `New Order`
+                    }
+                </div>
+                {renderButtonLine(orderId)}
+                
+                <div className="order_detaile_tables_wrapper">
+                    <div className="menu_positions_table">
+                        <div className="order_detaile_menu_name">
+                            {menus.map(menu=>(
+                                renderMenu(menu)
+                            ))}
+                        </div> 
+                    <OrderDetaileMenuRoute/> 
+                    </div>
+                    <div>
+                    
+                    {renderNewOrderDate(orderId)}
+                    {renderStateButton(orderId)}
+                        <OrderPositions/>
+                    </div>
+                
+                        {renderOrderPhoto(orderId)}
+                    
+                                
+                </div>
+                {orderId
+                    ?<PopupDelete subject={`Order №: ${order.id} on ${order.date}`}  delete_active={delete_active} setDelete_active={setDelete_active} func={deleteOrder}/>
+                    :''
+                }
+            </div>
+        )
+    }
+
+    function renderPage(props){
+        if(props.orderId){
+            if(props.loaded){
+                return OrderDetaileContentView()
+            }else{
+                return(
+                    <div>Loading</div>
+                )
+            } 
+        }else{
+            return OrderDetaileContentView() 
+        }
+    }
     return(
-        <div className="order_detaile_content">
-            <div className="order_detaile_content_title regular_text">
-                Order №: {order.id} on {order.date} 
-            </div>
-            <div className="order_detaile_buttons_line">
-                <div className="order_detaile_back_btn">
-                    <Link to={{pathname: `/${placeName}/${placeId}/orders`,}} replace>
-                        <RegularButton lable={'Back'}/>
-                    </Link> 
-                </div>
-                <div className="order_detaile_delete_btn" onClick={()=>setDelete_active(true)}>            
-                    <RegularButton lable={'Delete order'} />
-                </div>
-                <div className='order_update_btn' onClick={updateOrder}>
-                    {/* <Link to={{pathname:`/${placeName}/${placeId}/orders`}} replace> */}
-                        <RegularButton lable={'Update'}/>
-                    {/* </Link> */}
-                </div>
-            </div>
-            <div className="order_detaile_tables_wrapper">
-                <div className="menu_positions_table">
-                    <div className="order_detaile_menu_name">
-                        {menus.map(menu=>(
-                            MenuRender(menu)
-                        ))}
-                    </div> 
-                <OrderDetaileMenuRoute order={order}/> 
-                </div>
-                <OrderPositions order={order}/>
-            </div>
-            <PopupDelete subject={`Order №: ${order.id} on ${order.date}`}  delete_active={delete_active} setDelete_active={setDelete_active} func={deleteOrder}/>
-        </div>
+       <div>
+           {renderPage({loaded,orderId})}
+       </div>
     )
 }

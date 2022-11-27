@@ -9,10 +9,13 @@ export function useOrderItemListContext(){
 }
 
 export function OrderItemListContextProvider({children}){
-
+    let [orderId, setOrderId] = useState();
     let [item_list, setItemList] = useState([]);
     let [delete_item_list, setDeleteItemList] =useState([]);
 
+    function setOrderIdContext(id){
+        setOrderId(id)
+    }
 
     function setUUIDForListFromBase(list){
         list.map(item=>{
@@ -38,15 +41,18 @@ export function OrderItemListContextProvider({children}){
             }
     }
 
+
+
     return(
         <OrderItemListContext.Provider value={{
+            setOrderIdContext:setOrderIdContext,
+            getOrderIdContext:orderId,
             addItem:addItemInList,
             removeItem:removeItemContext,
             setItemList:setItemListContext,
             setUUIDForListFromBase:setUUIDForListFromBase,
             item_list:item_list,
             delete_item_list:delete_item_list
-
             }}>
             {children}
         </OrderItemListContext.Provider>

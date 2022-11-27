@@ -6,7 +6,7 @@ import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_
 import { useParams } from "react-router-dom";
 
 
-export function MenuPositions({order}){
+export function MenuPositions(){
     let [menu_positions, setMenu_positions] = useState({});
     let [loaded, setLoaded] = useState(false);
     let {menuId} = useParams([]);
@@ -28,8 +28,7 @@ export function MenuPositions({order}){
                 {menu_positions.map(position =>(
                     <MenuPositionRow 
                         key={position.id} 
-                        position={position} 
-                        order={order} 
+                        position={position}  
                         />
                 ))}
             </div>

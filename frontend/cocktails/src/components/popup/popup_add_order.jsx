@@ -8,22 +8,24 @@ export const PopupAddOrder =({add_order_active, setAdd_order_active})=>{
     let {placeId} = useParams();
     let {placeName} = useParams();
     let defaultForm = {
-        date: '',
-        place: {placeId},
-        open_to_customer:true,
+        order:{
+            date: '',
+            place: {placeId},
+        },
+        order_item_list: [],
     }
     let [form, setForm] = useState(defaultForm);
     let network_manager = new NetworkManager()
     let navigate = useNavigate();
 
-
     let changeHandler = e =>{
-        setForm({...form, ['date']:e.target.value, ['place']:placeId});
+        setForm({...form, ['order']:{['date']:e.target.value, ['place']:placeId}})
+        console.log('ayyyy', form)
     }
 
     let submitHandler = e =>{
         e.preventDefault()
-        console.log(form)
+        console.log('FOrm',form)
         network_manager.create_order(form)
 			.then(response => {
 				console.log(response);

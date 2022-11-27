@@ -9,14 +9,8 @@ client = boto3.client(
 bucket = AWS_S3['AWS_STORAGE_BUCKET_NAME']
 
 
-def remove_file(filename):
+def remove_file_from_aws_3(filename):
     client.delete_object(
         Bucket = bucket,
         Key = str(filename)
     ) 
-
-
-
-    # https://craftshake.s3.amazonaws.com/Product_photo/4-Naked-and-Famous-Cocktail-002.webp
-
-    # https://craftshake.s3.amazonaws.com/Product_photo/4-whiskeysour_card.jpg

@@ -7,7 +7,7 @@ import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_
 import { useManeContext } from "../../../components/main_context";
 import { SelectVolume } from "../../../components/select_volume";
 
-export function MenuPositionRow({position,order}){
+export function MenuPositionRow({position}){
 
     let menu_position = position;
     let main_context = useManeContext()
@@ -15,7 +15,7 @@ export function MenuPositionRow({position,order}){
     let order_detile_context = useOrderItemListContext()
     let defaultForm = {
         uuid:uuidv4(),
-        order:order.id,
+        order:order_detile_context.getOrderIdContext,
         name:menu_position.name,
         quantity:1,    
         volume:main_context.getDefaultVolume().id,

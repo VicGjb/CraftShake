@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { OrderPositionRow } from "./order_position_row";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
 
-export function OrderPositions({order}){   
+export function OrderPositions(){   
 
     let order_detaile_context = useOrderItemListContext()
 
@@ -27,7 +27,6 @@ export function OrderPositions({order}){
                         <OrderPositionRow 
                         order_item={order_item} 
                         onChange={ChangeHendler} 
-                        order={order} 
                         />
                     </div>
                 ))}
