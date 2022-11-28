@@ -11,7 +11,6 @@ export function MenuPositions(){
     let [loaded, setLoaded] = useState(false);
     let {menuId} = useParams([]);
     let network_manager = new NetworkManager()
-    let order_detaile_context = useOrderItemListContext()
 
     useEffect(()=>{
         network_manager.get_menu_positions_list(menuId)

@@ -188,7 +188,7 @@ body{
   flex-direction: column;
   @include adaptiv (145, 15, margin-left);
   @include adaptiv (58, 20, width);
-  height: 960px;
+  height: 1200px;
   align-items: center;
   box-shadow: 0px 0px 6px 0px #FEFAF0;
   @include adaptiv (10, 5, border-radius);
@@ -590,14 +590,35 @@ body{
   }
 }
 
+
 //Order detaile
+.green{
+  background-color: rgb(94, 165, 96);
+  color: #222;
+}
+.yellow{
+  background-color: rgb(166, 166, 96);
+  color: #222;
+}
+.order_title{
+  // margin: 0,300px;
+  // padding-left: 300px;
+  justify-self: center;
+}
+.state_button_set{
+  justify-self: right; 
+}
+
 .order_detaile_content{
   @include adaptiv(750, 190, width);
   display: flex;
   flex-direction: column;
 }
 .order_detaile_content_title{
-  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  // margin: 0 auto;
   @include adaptiv(20,5,margin-top )
 }
 
@@ -1092,6 +1113,7 @@ body{
 }
 .upload_product_photo_submit_btn{
   @include adaptiv(20,10 ,margin-top );
+  width: 100%;
 }
 .popup_add_product_form_wrapper{
   display: flex;

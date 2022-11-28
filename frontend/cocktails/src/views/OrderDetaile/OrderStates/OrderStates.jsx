@@ -5,39 +5,41 @@ import { UploadOrderPhotoPopup } from "./UploadOrderPhoto"
 import { RegularButton } from "../../../components/buttons/regular_button"
 import { NetworkManager } from "../../../components/network_manager"
 
-export function OrderStats({order, setOrder}){
+export function OrderStats(){
     let orderItemContext = useOrderItemListContext()
-    let orderId = orderItemContext.getOrderIdContext
     let [upload_photo_active, setUploadPhotoActive] = useState(false);
     let network_manager = new NetworkManager()
+    let order = orderItemContext.getOrderContext
     
     function setStateApproved(){
-        network_manager.set_order_approved(orderId)
+        network_manager.set_order_approved(order.id)
         .then(order=>{
-            setOrder(order)
+            orderItemContext.setOrderContext(order)
         })
     }
     function setStatePaid(){
-        network_manager.set_order_paid(orderId)
+        network_manager.set_order_paid(order.id)
         .then(order=>{
-            setOrder(order)
+            orderItemContext.setOrderContext(order)
         })
     }
 
-    function renderStateButton(orederId){
-        if (orderId){
-            console.log('order_state',order.state)
+    function renderStateButton(){
+        if (order){
+            console.log('order_state',upload_photo_active)
             switch (order.state){
                 case 'Created':
                     return(
-                        <div onClick={setStateApproved}>
-                            <RegularButton lable={'Approve'}/>
+                        <div onClick={setStateApproved} className='appruve_btn'>
+                            <RegularButton className='appruve_btn' lable={'Approve'} backround={'green'}/>
                         </div>
                     )
                 case 'Approved':
                     return(
-                        <div onClick={()=>{setUploadPhotoActive(true)}}>
-                            <RegularButton lable={'set Delivered'}/>
+                        <div>
+                            <div onClick={()=>{setUploadPhotoActive(true)}}>
+                                <RegularButton lable={'set Delivered'} backround={'yellow'}/>
+                            </div>
                             <UploadOrderPhotoPopup upload_photo_active={upload_photo_active} setUploadPhotoActive={setUploadPhotoActive} />
                         </div>
                     )
@@ -59,7 +61,7 @@ export function OrderStats({order, setOrder}){
 
     return(
         <div>
-            {renderStateButton(orderId)}
+            {renderStateButton(order)}
         </div>
     )
 

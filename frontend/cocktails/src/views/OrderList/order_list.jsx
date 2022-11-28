@@ -50,8 +50,10 @@ export function OrderList(){
                         <div className="service_row_button_wrapper" onClick={main_context.goBack}>
                             <RegularButton lable={'Back'}/>
                         </div>
-                    <div className="add_batton_wrapper" onClick={()=>setAdd_order_active(true)}>
-                                <AddButton  lable={'Add order'} />   
+                    <div className="add_batton_wrapper">
+                        <Link to={`new_order`} key={order.id}>
+                            <AddButton  lable={'Add order'} />   
+                        </Link>
                     </div>
                 
             </div>   

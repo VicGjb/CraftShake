@@ -47,7 +47,6 @@ export function PopupUploadProductPhoto({upload_product_photo_active, setUploadP
                                     <RegularButton lable={'Choise photo'}/>
                                 </label>
                             </div>
-                            
                             <div className="upload_product_photo_submit_btn"  onClick={newFile}>
                                 <RegularButton lable={'Change photo'}/>
                             </div>

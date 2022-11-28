@@ -202,7 +202,7 @@ export class NetworkManager{
 		return this.axiosInstance
 			.post(`counter/place/create/`,form)
 			.then(response => {
-				return response
+				return response.data
 			})
 	}
 	

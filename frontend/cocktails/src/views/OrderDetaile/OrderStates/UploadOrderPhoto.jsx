@@ -7,7 +7,7 @@ import { useState } from "react";
 export function UploadOrderPhotoPopup({upload_photo_active, setUploadPhotoActive}){
     let network_manager = new NetworkManager()
     let orderItemContext = useOrderItemListContext()
-    let orderId = orderItemContext.getOrderIdContext
+    let orderId = orderItemContext.getOrderContext.id
     let file = ''
     let [uploadData,setUploadData] = useState(new FormData());
 
@@ -28,7 +28,7 @@ export function UploadOrderPhotoPopup({upload_photo_active, setUploadPhotoActive
     }
 
     return(
-        <div className={upload_photo_active ? 'popup_wrapper active' : 'popup_wrapper'} onClick={()=>setUploadPhotoActive(false)}>
+        <div className={upload_photo_active  ? 'popup_wrapper active' : 'popup_wrapper'} onClick={()=>setUploadPhotoActive(false)}>
             <div className="popup_add_product_content" onClick={e => e.stopPropagation()}>
                 <div className="popup_title">
                     You must add photo

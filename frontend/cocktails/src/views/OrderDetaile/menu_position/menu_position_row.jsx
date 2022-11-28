@@ -1,4 +1,4 @@
-import React, { useEffect, useSyncExternalStore } from "react";
+import React from "react";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid'; 
 import { InputNumber } from "../../../components/input_number";
@@ -10,18 +10,19 @@ import { SelectVolume } from "../../../components/select_volume";
 export function MenuPositionRow({position}){
 
     let menu_position = position;
-    let main_context = useManeContext()
-    let volumes = main_context.getVolumesFromMainContext()
-    let order_detile_context = useOrderItemListContext()
+    let main_context = useManeContext();
+    let volumes = main_context.getVolumesFromMainContext();
+    let order_detile_context = useOrderItemListContext();
+    let orderId = order_detile_context.getOrderIdContext
     let defaultForm = {
         uuid:uuidv4(),
-        order:order_detile_context.getOrderIdContext,
+        order:orderId,
         name:menu_position.name,
         quantity:1,    
         volume:main_context.getDefaultVolume().id,
         position:position.id,
         new_item:true,
-    }
+    };
     let [form, setForm] = useState(defaultForm);
 
 

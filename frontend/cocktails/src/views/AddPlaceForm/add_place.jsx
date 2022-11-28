@@ -16,13 +16,14 @@ export function AddPlace() {
     let network_manager = new NetworkManager()
 	let changeHandler = e => {
 		setForm({...form, [e.target.name]:e.target.value})
+        console.log('form',form)
 	}
 	let submitHandler = e => {
 		e.preventDefault()
         network_manager.create_place(form)
 			.then(response => {
 				console.log(response);
-				setForm(defaultForm);
+				// setForm(defaultForm);
 			})
 			.catch(error => {
 				console.log(error);

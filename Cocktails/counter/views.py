@@ -42,6 +42,7 @@ from .models import (
 from .serializers import(
     PlaceSerializer,
     PlaceDetailSerializer,
+    PlaceCreateSerializer,
     ManagerOfPlaceSerializer,
     ProductSerializer,
     ProductDetailSerializer,
@@ -116,14 +117,19 @@ class PlaceUpdateView(viewsets.ModelViewSet):
 
 class PlaceCreateView(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAdminUser]
-    # permission_classes = [CraftShakeCustomerPermissions, CraftShakeCounterPermissions]
-    serializer_class = PlaceDetailSerializer
+    permission_classes = [CraftShakeCounterPermissions]
+    serializer_class = PlaceCreateSerializer
 
     @action(detail=True, method=['post'])
-    def add_place(self, request, pk=None):
-        place = PlaceDetailSerializer(data=request.data)
+    def create(self, request, pk=None):
+        place = PlaceCreateSerializer(data=request.data)
+        print(place)
+        print(request.data)
         if place.is_valid():
-            return Response(status=201)
+            new_place=Place.objects.create(**request.data)
+            data = PlaceDetailSerializer(new_place)
+            return Response(status=201, data=data.data)
+        return Response(status=403)
 
 
 class PlaceDeleteView(viewsets.ModelViewSet):
@@ -546,6 +552,7 @@ class OrderCreateView(viewsets.ModelViewSet):
     @action(detail=True, methods=['post', 'create_new'])
     def create_new(self, request, pk=None):
         request_data = OrderAndItemCreateSerializer(data=request.data)
+        print(request.data)
         if request_data.is_valid():
             item_order_list = request.data["order_item_list"]
             place = Place.objects.get(id=request.data['order'].pop('place'))
@@ -569,6 +576,7 @@ class OrderCreateView(viewsets.ModelViewSet):
                     Order.objects.get(id=order.id).delete()
                     return Response(status=403)
             data = OrderViewSerializer(order)
+            telegram_send_massege_new_order(order,item_order_list)
             return  Response(status=201, data=data.data) 
         else:
             print('not valid')

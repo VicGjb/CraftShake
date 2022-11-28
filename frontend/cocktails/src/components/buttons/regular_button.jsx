@@ -1,9 +1,9 @@
 import React from "react";
 
-export const RegularButton = ({lable}) => {
+export const RegularButton = ({lable, backround}) => {
     return(
-        <button className="button">
-            <div className="button_label">{lable}</div>
+        <button className={`button ${backround}`}>
+            <div className={`button_label ${backround}`}>{lable}</div>
         </button>
     )
 }

@@ -31,7 +31,18 @@ class PlaceSerializer(serializers.ModelSerializer):
             'is_current_place',
             'users'
         )
+class PlaceCreateSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Place
+        fields = (
+            'id',
+            'name',
+            'address',
+            'phone',
+            'is_current_place',
+            
+        )
 
 class PlaceDetailSerializer (serializers.ModelSerializer):
     

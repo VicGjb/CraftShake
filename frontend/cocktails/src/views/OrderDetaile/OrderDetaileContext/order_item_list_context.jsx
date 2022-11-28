@@ -10,6 +10,7 @@ export function useOrderItemListContext(){
 
 export function OrderItemListContextProvider({children}){
     let [orderId, setOrderId] = useState();
+    let [order, setOrder] = useState();
     let [item_list, setItemList] = useState([]);
     let [delete_item_list, setDeleteItemList] =useState([]);
 
@@ -45,6 +46,8 @@ export function OrderItemListContextProvider({children}){
 
     return(
         <OrderItemListContext.Provider value={{
+            setOrderContext:setOrder,
+            getOrderContext:order,
             setOrderIdContext:setOrderIdContext,
             getOrderIdContext:orderId,
             addItem:addItemInList,
