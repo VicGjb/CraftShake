@@ -516,8 +516,14 @@ export class NetworkManager{
 		}
 
 
-	get_invoice_pdf(invoiceId){
-		return baseURL+`counter/invoice/create_pdf/${invoiceId}/`
+	async get_invoice_pdf(invoiceId){
+		return this.axiosInstance
+			.get(`counter/invoice/create_pdf/${invoiceId}/`,{
+				responseType: 'blob',
+			})
+			.then (response=>{	
+				return response
+			})
 	}
 
 

@@ -328,6 +328,7 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
     def create_pdf(self, request, pk=None):
         invoice = Invoice.objects.get(id=pk)
         users = invoice.place.users.filter(place=invoice.place)
+        print(request.user)
         if request.user in users:
             print('HAKUNA MATATA')
             print(f'USERS create pdf {invoice.place.users.filter(place=invoice.place)}')
@@ -458,6 +459,7 @@ class CustomerStatementView(viewsets.ReadOnlyModelViewSet):
     def create_pdf(self, request, pk=None):
         statement = CustomerStatement.objects.get(id=pk)
         users = statement.place.users.filter(place=statement.place)
+        print(request.user)
         if request.user in users or request.user.is_staff:
             # print(f'HAKUNA MATATA {statement.date_from}') 
             orders = Order.objects.filter(customer_statement = pk).order_by('date')
@@ -592,6 +594,7 @@ class OrderUpdateView(viewsets.ModelViewSet):
     def update(self, request, pk=None, *args, **kwargs):
         print('i am here')
         order = Order.objects.get(id=pk)
+        print(request.user)
         if order.open_to_customer or request.user.is_staff:
             order_update_data = OrderUpdateSerializer(data=request.data)
             if order_update_data.is_valid():

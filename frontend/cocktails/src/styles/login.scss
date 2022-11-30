@@ -1,0 +1,196 @@
+*{padding: 0;margin: 0;border: 0;}
+*,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+nav,footer,header,aside{display: block;}
+html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner {padding:0;border:0;}
+a,a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
+
+
+.quantity_num::-webkit-inner-spin-button,
+.quantity_num::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+.quantity_num{
+  -moz-appearance: textfield;
+} 
+
+$maxWidth: 1280;
+@mixin adaptiv($maxSize, $minSize, $Param) {
+    @media(min-width:1280px){
+        $addSize: $maxSize - $minSize * 0.7;
+        $maxWidth: $maxWidth - 760;
+        #{$Param}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+    } 
+    @media(max-width:1280px){
+        $addSize: $maxSize - $minSize * 0.7;
+        $maxWidth: $maxWidth - 760;
+        #{$Param}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+    } }
+
+
+
+
+
+
+.wrapper_login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 640px;
+}
+.logo_wrapper{
+    margin-top: 20px
+}
+.logo{
+    @include adaptiv(290,290,max-width);
+    @include adaptiv(175,175,max-height);
+}
+
+.login_form{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.from_row{
+    margin-top: 30px;
+    width: 290px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+.input_lable{
+    color: #909090;
+    font-size: 16px;
+    
+}
+input{
+    background-color: #222;
+    border-bottom: 1px solid #909090;
+    color: #909090;
+}
+
+.submit_button_wraper_login{
+    margin-top: 60px;
+    width: 290px;
+    display: flex;
+    justify-content: end;
+    
+    button{
+        width: 290px;
+        height: 32px;
+    }
+}
+.google_btn{
+    margin-top: 20px;
+    background-color: #222;;
+    width: 290px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 4px rgba(254, 250, 240, 0.25);
+    border-radius: 20px;
+    
+}
+.google_btn:hover, .google_btn:focus{
+    box-shadow: 0px 0px 4px rgba(255, 191, 28, 0.25);
+    .google_label{
+        color: #FFBF1C;
+    }
+}
+.google_logo_wrapper{
+    background-color: #ffff;
+    width: 45px;
+    height: 25px;
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px 0px 0px 20px;
+}
+.google_logo{
+    margin-top: 3px;  
+}
+.google_labal_wrapper{
+    display: flex;
+    width: 255px;
+    justify-content: center;
+    align-items: center;
+}
+.google_label{
+    font-size: 16px;
+    color: #909090;
+}
+
+
+
+@media(min-width:1280px ) {
+    .wrapper_login{
+        height: 900px;
+    }
+    .logo_wrapper{
+        margin-top: 40px
+    }
+    .login_form{
+        margin-top: 60px;
+        width: 320px;   
+    }
+    .from_row{
+        margin-top: 30px;
+        // input{
+        //     margin-left: 50px;
+        // }
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        // align-items: center;
+        input{
+            font-size: 24px;
+            max-width: 180px;
+        }
+    }
+    .input_lable{
+        font-family: 'Fira Mono';
+        color: #909090;
+        font-size: 24px;   
+    }
+    .submit_button_wraper_login{
+        margin-top: 60px;
+        width: 320px;
+        display: flex;
+        justify-content: end;
+        button{
+            width: 320px;
+            height: 42px;
+        }
+    }
+    .google_btn{
+        margin-top: 20px;
+        width: 320px;
+        height: 30px;
+        border-radius: 20px;
+    }
+    .google_label{
+        font-size: 20px;
+        color: #909090;
+    }
+    .google_logo_wrapper{
+        width: 50px;
+        height: 30px;
+    }
+
+}

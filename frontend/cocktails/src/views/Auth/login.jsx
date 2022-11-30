@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import {ReactComponent as Logo} from "../../svg/main_page_logo.svg"
+import {ReactComponent as GoogleLogo} from "../../svg/google_logo.svg"
 import { useEffect } from 'react';
 import { NetworkManager } from '../../components/network_manager';
 import { useNavigate } from 'react-router-dom';
 import { AuthServise } from './auth_service';
 import { useManeContext } from '../../components/main_context';
-
+import { RegularButton } from '../../components/buttons/regular_button';
+import '../../styles/login.scss'
 
 export function SignIn() {
 	let navigate = useNavigate();
@@ -79,8 +82,6 @@ export function SignIn() {
       },
       [externalPopup,user]
     )
- 
-
 
 	let handleSubmit = (e) => {
 		e.preventDefault();
@@ -95,21 +96,77 @@ export function SignIn() {
         });		
 	};
 
-    function getTokens(){
-        console.log('access_token',localStorage.getItem('access_token'))
-        console.log('refresh_token',localStorage.getItem('refresh_token'))
-        let access_token_data = auth_service.GetAccessTokenData()
-        console.log('access token data', access_token_data)
-        console.log('USER',main_context.getUserFromMainContext())
-        network_manager.GetConfig(1)
-        .then(response=>{
-            console.log('HGEEEEE',response)
-        })
-    }
-
 	return (
         <div>
-            <form className='add_product_form' noValidate>
+            <div className='wrapper_login'>
+                <div className='logo_wrapper'>
+                <Logo className='logo'/> 
+                </div>
+                <form className='login_form'>
+                    <div className='from_row'>
+                        <div className='input_lable'>Username</div>
+                        <input
+                        required    
+                        id="username"
+                        name="username"
+                        autoComplete="username"
+                        autoFocus
+                        onChange={handleChange}
+                        />
+                    </div>
+                    <div className='from_row'>
+                        <div className='input_lable' >Password</div>
+                        <input
+                            className='input_form'
+                            required
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div
+                        className='submit_button_wraper_login'
+                        onClick={handleSubmit}
+                        type="submit"
+                    >
+                        <RegularButton lable={'Sing in'}/>
+                    </div>
+                    <div className='google_login_row'>
+                        
+                            <button className="google_btn" onClick={onClickGoogle}>
+                                <div className="google_logo_wrapper">
+                                    <div className="google_logo">
+                                        <GoogleLogo/>
+                                    </div>
+                                </div>
+                                <div className="google_labal_wrapper">
+                                    <div className="google_label">Login With Gooogle</div>  
+                                </div>
+                            </button>
+                    </div>    
+                </form>
+        
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            {/* <form className='add_product_form' noValidate>
                 <input
                     className='add_product_input_wrapper'
                     required
@@ -146,7 +203,7 @@ export function SignIn() {
             <button onClick={onClickGoogle}>Login With Gooogle</button>
             <div> </div>
             <div> </div>
-            <button onClick={getTokens}> get tokens</button>
+            <button onClick={getTokens}> get tokens</button> */}
         </div>
 );
 }

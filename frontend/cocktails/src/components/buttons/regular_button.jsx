@@ -1,4 +1,5 @@
 import React from "react";
+import '../../styles/regular_btn.scss'
 
 export const RegularButton = ({lable, backround}) => {
     return(

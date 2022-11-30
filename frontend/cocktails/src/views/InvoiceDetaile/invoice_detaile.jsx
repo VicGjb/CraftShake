@@ -105,6 +105,16 @@ export function InvoiceDetaile(){
             }
     }
 
+    function getPDF(){
+        let fileDownload = require('js-file-download');
+        network_manager.get_invoice_pdf(invoiceId)
+        .then(response=>{
+            fileDownload(response.data, `Invoice ${invoice.place_name} on ${invoice.date}.pdf`);
+            console.log('RESPONCE PFD', response)
+        }
+        )
+    }
+
     function invoiceView(){
         return(
             <div>
@@ -196,10 +206,10 @@ export function InvoiceDetaile(){
                             <div className="invoice_detaile_content_body_button_set_button" onClick={main_context.goBack}>
                                 <RegularButton lable={'Back'}/>
                             </div>
-                            <div className="invoice_detaile_content_body_button_set_button">
-                                <a href={network_manager.get_invoice_pdf(invoiceId)}>
+                            <div className="invoice_detaile_content_body_button_set_button" onClick={getPDF}>
+                                {/* <a href={network_manager.get_invoice_pdf(invoiceId)}> */}
                                     <RegularButton lable={'PDF'} />
-                                </a>
+                                {/* </a> */}
                             </div>
                             <div className="invoice_detaile_content_body_button_set_button" onClick={()=>setDelete_active(true)}>
                                     <RegularButton lable={'Delete'}/>

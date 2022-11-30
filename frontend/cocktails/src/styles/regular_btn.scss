@@ -1,0 +1,37 @@
+.button{
+    width: 290px;
+    height: 30px; 
+    background: #222222;
+    box-shadow: 0px 0px 4px rgba(254, 250, 240, 0.25);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_label{
+    font-family: 'Fira Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: #909090;
+}
+.button:hover, button:focus{
+    box-shadow: 0px 0px 4px rgba(255, 191, 28, 0.25);
+    .button_label{
+      color: rgb(255, 191, 28);
+    }
+    .add_button_cross path{
+      fill:inherit
+    }
+    .add_button_cross{
+      fill:rgb(255, 191, 28)
+    }
+  }
+
+  @media(min-width:1280px ) {
+    .button_label{
+        font-size: 20px;
+    }
+  }
