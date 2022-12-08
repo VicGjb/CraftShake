@@ -16,6 +16,7 @@ import { PopupChangePlace } from "../../components/popup/popup_change_place";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { useLocation } from "react-router-dom";
+import '../../styles/place_detaile.scss'
 
 export function PlaceDetaile(){
     let [place, setPlace] = useState({});
@@ -56,8 +57,11 @@ export function PlaceDetaile(){
 
     function PlaceDetileView(){
         return(
-            <div>
-                <div className="service_button_row">
+            <div className="place_detile_main_page_wrapper">
+                <div className="mobile_back_btn">
+                    <RegularButton lable={'Back'}/>
+                </div>
+                {/* <div className="service_button_row">
                         <div className="service_row_button_wrapper" onClick={main_context.goBack}>
                             <RegularButton lable={'Back'}/>
                         </div>
@@ -68,29 +72,50 @@ export function PlaceDetaile(){
                         <div className="service_row_button_wrapper" onClick={()=>setAdd_Change_place_active(true)}>
                             <RegularButton lable={'Change place'} />
                         </div>      
-                </div>
-                <div className="palce_detaile_content">
+                </div> */}
+                
                     <div className="place_detaile_main_buttons_wrapper">
-                        <OrdersMainBtn place={place}/>
-                        <MenusMainBtn place={place}/>
-                        <ManagersMainBtn place={place}/>
-                        <InvoicesMainBtn place={place}/>
-                    </div>
-                    <div className="place_detaile_add_buttons_wrapper">
-                        <div className="place_detaile_button_wrapper" onClick={()=>setAdd_order_active(true)}>
-                            <AddButton lable={'Add order'} />   
+                        <div className="main_btn_container">
+                            <OrdersMainBtn place={place}/>
+                            <div className="place_detaile_button_wrapper" onClick={()=>setAdd_order_active(true)}>
+                                <AddButton lable={'Add order'} />   
+                            </div>
                         </div>
-                        <div className="place_detaile_button_wrapper" onClick={()=>setAdd_invoce_active(true)}>
-                            <AddButton lable={'Add invoice'} />
-                        </div>
-                        <div className="place_detaile_button_wrapper" onClick={()=>setAdd_menu_active(true)}>
-                            <AddButton lable={'Add menu'} />
-                        </div>
-                        <div className="place_detaile_button_wrapper" onClick={()=>setAdd_manager_active(true)}>
-                            <AddButton lable={'Add manager'} />
+                        <div className="main_btn_container">
+                            <MenusMainBtn place={place}/>
+                            <div className="place_detaile_button_wrapper" onClick={()=>setAdd_menu_active(true)}>
+                                <AddButton lable={'Add menu'} />
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <div className="place_detaile_main_buttons_wrapper">
+                        <div className="main_btn_container">
+                            <ManagersMainBtn place={place}/>
+                            <div className="place_detaile_button_wrapper" onClick={()=>setAdd_manager_active(true)}>
+                                <AddButton lable={'Add manager'} />
+                            </div>
+                        </div>
+                        <div className="main_btn_container">
+                            <InvoicesMainBtn place={place}/>
+                            <div className="place_detaile_button_wrapper" onClick={()=>setAdd_invoce_active(true)}>
+                                <AddButton lable={'Add invoice'} />
+                            </div>
+                        </div>  
+                    </div>
+
+                    <div className="mobile_service_btn_row">
+                        <div className="service_row_button_wrapper" onClick={()=>setDelete_active(true)}>
+                            <RegularButton lable={'Delete place'} />
+                        </div>
+
+                        <div className="service_row_button_wrapper" onClick={()=>setAdd_Change_place_active(true)}>
+                            <RegularButton lable={'Change place'} />
+                        </div>   
+
+                    </div>
+
+
                 <PopupAddOrder add_order_active={add_order_active} setAdd_order_active={setAdd_order_active}/>
                 <PopupAddInvoice place={place} add_invoice_active={add_invoice_active} setAdd_invoice_active={setAdd_invoce_active}/>
                 <PopupAddMenu  add_menu_active={add_menu_active} setAdd_menu_active={setAdd_menu_active}/>
@@ -113,8 +138,6 @@ export function PlaceDetaile(){
     }
 
     return(
-        <div>
-            {Render(loaded)}                  
-        </div>
+            Render(loaded)                  
     )
 }
