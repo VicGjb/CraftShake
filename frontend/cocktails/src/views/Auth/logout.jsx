@@ -10,10 +10,10 @@ export function Logout() {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         window.location.href = '/login/'
-        // navigate('/login/',{replace:false})
+
     }
 	
     return (
-        <button onClick={Logout_1}>Logot</button>
+        <button onClick={Logout_1}>Logout</button>
     )
 }

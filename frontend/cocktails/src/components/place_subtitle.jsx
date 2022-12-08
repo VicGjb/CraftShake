@@ -1,4 +1,5 @@
 import React from "react";
+import '../styles/place_subtitle.scss'
 
 export const PlaceSubtitle=({place})=>{
 
@@ -11,13 +12,13 @@ export const PlaceSubtitle=({place})=>{
             </div>
                 
             <div className="place_detaile_subtitle_requisites">
-                <div className="place_detaile__address">
+                <div className="place_detaile_subtitle__requisites___slot">
                     <p>{place.address}</p>
                 </div>
-                <div className="place_detaile__phone">
-                    <p>Phone: {place.phone}</p>
+                <div className="place_detaile_subtitle__requisites___slot">
+                    <p>{place.phone}</p>
                 </div>
-                <div className="place_detail__email" >
+                <div className="place_detaile_subtitle__requisites___slot" >
                     <p>{place.email}</p>
                 </div>
             </div>

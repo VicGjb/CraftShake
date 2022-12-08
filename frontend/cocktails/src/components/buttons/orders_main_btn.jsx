@@ -1,5 +1,5 @@
 import React from "react";
-import {ReactComponent as Btn} from "../../svg/orders_main_btn.svg"
+import {ReactComponent as Btn} from "../../svg/order_icon.svg"
 import { Link, useParams } from "react-router-dom";
 
 export const OrdersMainBtn = () => {
@@ -7,9 +7,12 @@ export const OrdersMainBtn = () => {
     let {placeName} = useParams();
     
     return(
-        <button className="place_main_btn">
+        <button className="main_btn order">
             <Link to={`/${placeName}/${placeId}/orders`}>
                 <Btn className='icon_main_btn'></Btn>
+                <div className="main_button_label">
+                    Orders
+                </div>
             </Link>
         </button>
     )

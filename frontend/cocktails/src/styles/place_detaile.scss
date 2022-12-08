@@ -1,0 +1,36 @@
+
+.place_detile_main_page_wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+.place_detaile_main_buttons_wrapper{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.main_btn_container{
+
+    .button{
+        width: 100%;
+    }
+}
+
+.mobile_service_btn_row{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    .button{
+        width: 150px;
+    }
+}
+
+@media (max-width:769px){
+    .place_detile_main_page_wrapper{
+        width: 100%;
+    }
+}

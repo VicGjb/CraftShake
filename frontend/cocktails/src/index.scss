@@ -44,32 +44,20 @@ $maxWidth: 1280;
 
 // Main
 
-.TEST{
-  background-color: #F30505;
-  font-size: 60px;
-  color: #F30505;
-}
 
 body{
   height: 100%;
   background-color: #222222;
 }
+.main_wrapper{
+  width: 100%;
+  // display: flex;
+  // justify-content: center;
+}
 .wrapper{
   display: flex; 
-}
-.main_title{
-  display: flex;
-  @include adaptiv(750, 190, width);
-  border-bottom: 1px solid #909090;
-  .svg_title{
-    // width: 100%;
-    @include adaptiv(75, 30, width);
-    @include adaptiv(75, 30 , height);
-    margin: 0px auto;
-    margin-top: 0px;
-    @include adaptiv(14, 5, margin-bottom);
-   
-  }
+  justify-content: space-between;
+  // max-width: 1680px;
 }
 .regular_text{
   color: #909090;
@@ -134,126 +122,57 @@ body{
 
 
 
-// Place card
+// // Side bar
 
-.place_card_btn{
-    margin-left: 20px;
-    @include adaptiv(280, 180, width);
-    @include adaptiv(120, 50, height);
-    background: #222;
-    box-shadow: 0px 0px 6px rgba(237, 228, 228, 0.25);
-    border-radius: 10px;
-}
-.place_card_btn_wrapper{
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.place_card_btn:hover{
-    div{
-      color: #FFBF1C;
-    }
-    .place_card_btn_subtitle{
-      color: rgba(255, 191, 28, 0.7)
-    }
-    border-radius: 10px;
-}
-
-.place_card_dtn_title{
-  margin: 0px auto;
-  font-family: 'Girassol';
-  font-style: normal;
-  font-weight: 400;
-  @include adaptiv(26, 12, font-size);
-  color: #F5F5F5;
-}
-
-.place_card_btn_subtitle{
-  margin: 0px auto;
-  font-family: 'Fira Mono';
-  font-style: normal;
-  font-weight: 400;
-  @include adaptiv(16, 8, font-size);  
-  color: #605F5E;
-}
-
-// Side bar
-
-.side_bar_content{
-  @include adaptiv(93,27,margin-top);
-  display: flex;
-  flex-direction: column;
-  @include adaptiv (145, 15, margin-left);
-  @include adaptiv (58, 20, width);
-  height: 1200px;
-  align-items: center;
-  box-shadow: 0px 0px 6px 0px #FEFAF0;
-  @include adaptiv (10, 5, border-radius);
-}
+// .side_bar_content{
+//   @include adaptiv(93,27,margin-top);
+//   display: flex;
+//   flex-direction: column;
+//   @include adaptiv (20, 15, margin-left);
+//   @include adaptiv (58, 20, width);
+//   height: 1200px;
+//   align-items: center;
+//   box-shadow: 0px 0px 6px 0px #FEFAF0;
+//   @include adaptiv (10, 5, border-radius);
+// }
 
 
-.side_bar_btn{
-  background-color: #222222;
-  margin: 0px auto;
-  margin-top: 7px;
-}
+// .side_bar_btn{
+//   background-color: #222222;
+//   margin: 0px auto;
+//   margin-top: 7px;
+// }
 
-.side_bar_icon{
-  @include adaptiv(50,20,width);
-  @include adaptiv(60,30,height);
-}
+// .side_bar_icon{
+//   @include adaptiv(50,20,width);
+//   @include adaptiv(60,30,height);
+// }
 
-.side_bar_btn:hover{
-  .side_bar_icon path{
-    fill: inherit;
-  }
-  .side_bar_icon{
-    fill: #FFBF1C;
-  }
+// .side_bar_btn:hover{
+//   .side_bar_icon path{
+//     fill: inherit;
+//   }
+//   .side_bar_icon{
+//     fill: #FFBF1C;
+//   }
  
-}
+// }
 
-.content{
-  @include adaptiv(10, 5, margin-top);
-  @include adaptiv(10, 5, margin-left);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-.work_space{
-  @include adaptiv(750, 190, max-width)
-}
+// .content{
+//   @include adaptiv(10, 5, margin-top);
+//   margin-left: 20px;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 100%;
+// }
 
-// Place list
-.place_list_wrapper{
-  margin-top: 7px;
-  @include adaptiv(750, 190, width);
+// .work_space{
+//   // @include adaptiv(750, 190, max-width)
+//   width: 90%;
+// }
 
-}
-.place_list__content{
-  display: flex;
-  flex-direction: column;
-}
-.place_list_button_row{
-  @include adaptiv(10, 5, margin-top);
-  display: flex;
-  justify-content:space-between;
-  width: 100%;
-}
-.place_list_cards_buttons{
-  margin: 0px auto;
-  @include adaptiv(10, 5, margin-top);
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-.place_card_btn{
-  margin-top: 20px;
-}
 
 
 // popup delete
@@ -278,38 +197,36 @@ body{
 
 // Place detaile
 
-.place_detaile_subtitle_wrap{
-  @include adaptiv(15, 5, margin-top);
-  @include adaptiv(750, 190, width);
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid #909090;
-}
+// .place_detaile_subtitle_wrap{
+//   @include adaptiv(15, 5, margin-top);
+//   @include adaptiv(750, 190, width);
+//   display: flex;
+//   flex-direction: column;
+//   border-bottom: 1px solid #909090;
+// }
+// .place_detaile_subtitle_name{
+//   margin: 0px auto;
+//   font-family: 'Girassol';
+//   font-style: normal;
+//   font-weight: 400;
+//   font-size: 36px;
+//   line-height: 22px;
+//   color: #909090;
+// }
 
-.place_detaile_subtitle_name{
-  margin: 0px auto;
-  font-family: 'Girassol';
-  font-style: normal;
-  font-weight: 400;
-  @include adaptiv(40, 22, font-size);
-  @include adaptiv(48, 20, line-height);
-  // line-height: 48px;
-  color: #909090;
 
-}
-
-.place_detaile_subtitle_requisites{
-  @include adaptiv(20, 5, margin-top);
-  @include adaptiv(10, 5,margin-bottom);
-  display: flex;
-  justify-content: space-between;
-  font-family: 'Fira Mono';
-  font-style: normal;
-  font-weight: 400;
-  @include adaptiv(16, 8, font-size); 
-  line-height: 19px;
-  color: #909090;
-}
+// .place_detaile_subtitle_requisites{
+//   @include adaptiv(20, 5, margin-top);
+//   @include adaptiv(10, 5,margin-bottom);
+//   display: flex;
+//   justify-content: space-between;
+//   font-family: 'Fira Mono';
+//   font-style: normal;
+//   font-weight: 400;
+//   @include adaptiv(16, 8, font-size); 
+//   line-height: 19px;
+//   color: #909090;
+// }
 
 .service_button_row{
   @include adaptiv(750, 190, width);

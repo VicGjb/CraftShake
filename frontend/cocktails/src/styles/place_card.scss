@@ -1,0 +1,101 @@
+.place_card_btn{
+    overflow:scroll;
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 280px;
+    height: 120px;
+    background: #323131;
+    box-shadow: 0px 0px 6px rgba(237, 228, 228, 0.25);
+    border-radius: 10px;
+    border: 1px solid white;
+  }
+
+.place_card_btn:hover{
+    border: 1px solid #FFBF1C;
+div{
+    color: #FFBF1C;
+}
+.place_card_btn_subtitle{
+    color: rgba(255, 191, 28, 0.7)
+}
+border-radius: 10px;
+}
+
+
+.place_card_dtn_title{
+    margin: 0px auto;
+    font-family: 'Girassol';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    color: #F5F5F5;
+  }
+  
+  .place_card_btn_subtitle{
+    margin: 0px auto;
+    font-family: 'Fira Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16;
+    color: #909090;
+  }
+
+.place_card_btn_wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+
+
+@media (min-width:1280px)  {
+    .place_card_btn{
+        width: 45%;
+        height: 140px;
+    }
+    .place_card_dtn_title{
+        font-size: 36px;
+    }
+    .place_card_btn_subtitle{
+        font-size: 26px;
+    }
+}
+
+@media (max-width:1280px)  {
+    .place_card_btn{
+        width: 45%;;
+        height: 80px;
+    }
+    .place_card_dtn_title{
+        font-size: 24px;
+    }
+    .place_card_btn_subtitle{
+        font-size: 18px;
+    }
+    
+}
+
+@media (max-width:769px)  {
+    .place_card_btn{
+        justify-self: center;
+        align-self: center;
+        width: 300px;
+        height: 80px;
+        
+    }
+    .place_card_dtn_title{
+        font-size: 20px;
+    }
+    .place_card_btn_subtitle{
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width:388px){
+   .place_card_btn{
+       width: 235px;
+       margin-left: 0px;
+   } 
+}

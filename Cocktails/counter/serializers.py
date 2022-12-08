@@ -40,6 +40,7 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             'name',
             'address',
             'phone',
+            'email',
             'is_current_place',
             
         )
@@ -52,9 +53,10 @@ class PlaceDetailSerializer (serializers.ModelSerializer):
             'id',
             'name',
             'address',
+            'email',
             'phone',
             'is_current_place',
-            'users'
+            # 'users'
         )
 
 

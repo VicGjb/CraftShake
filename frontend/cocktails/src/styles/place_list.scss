@@ -1,0 +1,169 @@
+.place_list_wrapper{
+    // height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    align-items: center;
+  }
+
+.place_list_cards_buttons{
+    display: flex;
+    flex-wrap: wrap;  
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.greetings{
+    background-color: #323131;
+    font-size: 16px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 38px;
+    width: 80%;
+}
+
+.monitor_content{
+display: flex;
+width: 80%;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.search_wrapper{
+    margin-top: 20px;
+    width: 90%;
+    border-bottom: 1px solid #909090;
+    display: flex;
+}
+.search_input{
+    width: 100%;
+    background-color: #222;
+    font-size: 18px;
+    border-bottom: #323131;
+}
+.search_icon{
+    width: 40px;
+    height: 40px;   
+    right: 0px;
+    fill: inherit;
+    fill: #909090;
+}
+
+.add_place_button{
+    width: 45px;
+    height: 45px;
+    border-radius: 45px;
+    background-color: #7D62EA;
+    position: fixed;
+    right: 20px;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.add_place_button:after,
+    .add_place_button:before{
+        content: '';
+        background-color:#222222;
+        position: absolute;
+        width: 80%;
+        height: 3px;
+
+    }
+
+.add_place_button:after{
+    transform: rotate(90deg)
+    }
+
+.add_place_button:hover{
+            background-color: #583ec2;;
+            width: 50px;;
+            height: 50px;
+    }
+
+
+@media (min-width:1280px)  {
+    .greetings{
+        font-size: 34px;
+    }
+   
+}
+
+@media (max-width:1280px)  {
+    
+    .greetings{
+        width: 90%;
+        font-size: 24px;
+    }
+}
+
+@media (min-width:769px){
+    .mobile_content{
+        display: none;
+    }
+    .add_place_button{
+        right: 5%;
+        bottom: 20px;
+    }
+}
+@media (max-width:769px)  {
+    .place_list_wrapper{
+        // height: 110vh;
+    }
+    .monitor_content{
+        display: none;
+    }
+    .mobile_nav_btn_wrapper{
+        background-color: #222;
+    }
+    .mobile_content{
+        margin-top: 20px;
+        align-self: flex-start;
+        height: 100%;
+        width: 100%;
+        background-color: #323131;
+    }
+
+      .greetings{
+        width: 100%;
+        height: 38px;
+        margin-top: 40px;
+        background-color: #323131;
+        font-size: 20px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        
+    }
+    .side_bar_icon{
+        fill: inherit;
+        fill:blueviolet;
+    }
+    .mobile_nav_btn{
+        height: 50px;
+        width: 60px;
+    }
+    .mobile_nav_btn.active{
+        
+        .side_bar_btn{
+           background-color: #323131; 
+           .side_bar_icon path{
+                fill: inherit;
+                // fill:#FFBF1C;
+                // border-bottom: 100px solid #222;
+        }
+        }
+        
+        
+    }
+    
+}

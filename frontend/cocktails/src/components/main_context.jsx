@@ -9,14 +9,17 @@ export function useManeContext(){
 }
 
 export function MainContextProvider({children}){
+    let [sideMenuBurgerActiv, setSideMenuBurgerActiv] = useState(false)
     let navigate = useNavigate();
     let [user, setUser] = useState();
+    let [places, setPlaces] = useState([]);
     let [volumes, setVolumes] = useState([]);
     let placeHolderPhoto = 'https://craftshake.s3.eu-central-1.amazonaws.com/Product_photo/cocktailDefault.jpeg'
     
     function goBack(){
         navigate(-1)
     }
+    // User info
     function setUserInContext(param){
        setUser(param)
        return
@@ -24,7 +27,6 @@ export function MainContextProvider({children}){
     function getUserFromContext(){
         return user
     }
-
     // Volumes for order item and menu position
     function setVolumesInContext(param){
         setVolumes(param)
@@ -54,6 +56,10 @@ export function MainContextProvider({children}){
 
     return(
         <MainContext.Provider value={{
+            setSideMenuBurgerActiv:setSideMenuBurgerActiv,
+            getSideMenuBurgerActiv:sideMenuBurgerActiv,
+            setPlaces:setPlaces,
+            getPlaces:places,
             goBack:goBack,
             setUserInMainContext:setUserInContext,
             getUserFromMainContext:getUserFromContext,

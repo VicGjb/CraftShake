@@ -6,9 +6,9 @@ export const SideBarProductBtn =()=>{
 
     return(
         <button className="side_bar_btn">
-            <Link to={'products/'}>
+            {/* <Link to={'products/'}> */}
                 <Btn className='side_bar_icon'></Btn>
-            </Link>
+            {/* </Link> */}
         </button>
     )
 }

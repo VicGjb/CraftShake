@@ -1,5 +1,6 @@
 import React, {Component, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
+import '../../styles/place_card.scss'
 
 export const PlaceCardBtn=({p})=>{
 

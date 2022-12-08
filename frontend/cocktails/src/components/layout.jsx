@@ -3,11 +3,11 @@ import { Navigate, Outlet } from "react-router-dom";
 import { SideBar } from "./side_bar/side_bar";
 import { MainTitle } from "./main_title";
 import { useManeContext } from "./main_context";
-import { useEffect } from "react";
 import { NetworkManager } from "./network_manager";
 import { AuthServise } from "../views/Auth/auth_service";
 import { useNavigate } from "react-router-dom";
-
+import { SideBarBurger } from "./side_bar/side_bar_burrger";
+import '../styles/layout.scss'
 export const Layout = () =>{
     let main_context = useManeContext()
     let navigate = useNavigate()
@@ -19,15 +19,33 @@ export const Layout = () =>{
 
     function renderCounterView(){
         return(
-            <div className='wrapper'>
-                    <SideBar/> 
-                <div className='content'>
-                    <MainTitle/>
-                    <div className='work_space'>
-                        <Outlet></Outlet>
+            <div className="main_wrapper">
+                <div className="wrapper">
+                    <div className="title">
+                        <MainTitle/>
+                    </div>
+
+                    <div className="content">
+                        <div className="side_bar_wrap">
+                            <SideBarBurger/>
+                            <SideBar/> 
+                        </div>
+                        <div className="work_space">
+                            <Outlet></Outlet> 
+                        </div>
                     </div>
                 </div>
-            </div>  
+                {/* <div className='wrapper'>
+                        
+                    <div className='content'>
+                        
+                        <div className='work_space'>
+                            
+                        </div>
+                    </div>
+                </div>     */}
+            </div>
+            
         )
     }
 

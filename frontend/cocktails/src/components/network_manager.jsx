@@ -247,6 +247,13 @@ export class NetworkManager{
 		})
 	}
 
+	async getPlaceByName(prop){
+		return this.axiosInstance
+			.get(`counter/place/by-name/${prop}`)
+			.then(response=>{
+				return response.data.results
+			})
+	}
 
 	//Orders
 	async create_order(form){

@@ -1,0 +1,108 @@
+.main_btn{
+    // width: 135px;
+    // height: 135px;
+    background-color: #323131;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+.main_btn:hover{
+    background-color: #222;
+}
+
+.main_button_label{
+    margin-top: 20px;
+    font-family: 'Fira Mono';
+    font-size: 26px;
+    font-weight: 600    ;
+    color: #6846F0;
+}
+
+@media (min-width:1280px)  {
+    .main_btn{
+        width: 250px;
+        height: 260px;
+        .icon_main_btn{
+            width: 200px;
+            height: 160px;
+
+          }
+    }
+}
+
+
+@media (max-width:1280px){
+    .main_btn{
+        width: 170px;
+        height: 180px;
+        .icon_main_btn{
+            width: 120px;
+            height: 110px;
+          }
+    }
+}
+
+
+@media (max-width:769px){
+    .main_btn{
+        width: 135px;
+        height: 140px;
+        .main_button_label{
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .icon_main_btn{
+            width: 100px;
+            height: 90px; 
+          }
+    }
+}
+
+
+// colors
+.main_btn.invoice{
+    .icon_main_btn path{
+        fill:#6846F0
+      }
+    .main_button_label{
+        color:#6846F0;
+    }
+}
+
+.main_btn.order{
+    .icon_main_btn path{
+        fill:#98F9D6
+      }
+    .main_button_label{
+        color:#98F9D6;
+    }
+}
+
+.main_btn.menu{
+    .icon_main_btn path{
+        fill:#C96AF6
+      }
+    .main_button_label{
+        color:#C96AF6;
+    }
+}
+
+.main_btn.manager{
+    .icon_main_btn path{
+        fill:#E59442
+      }
+    .main_button_label{
+        color:#E59442;
+    }
+}
+.invoice:hover,.order:hover,.menu:hover,.manager:hover{
+    .icon_main_btn path{
+        fill:#FFBF1C;
+    }
+    .main_button_label{
+        color:#FFBF1C;
+    }
+
+}

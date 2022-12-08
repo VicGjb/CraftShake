@@ -6,6 +6,7 @@ from .views import(
     PlaceDeleteView,
     PlaceCreateView,
     PlaceUpdateView,
+    PlaceByNameView,
 
     ManagerOfPlaceView,
     ManagerOfPlaceCreateView,
@@ -56,6 +57,7 @@ urlpatterns = format_suffix_patterns(
 
         path('places/', PlaceAPIListView.as_view()),
         path('place/<int:pk>', PlaceAPIDetaileView.as_view()),
+        path('place/by-name/<str:name>', PlaceByNameView.as_view()),
 
         path('place/update/<int:pk>', PlaceUpdateView.as_view({'post':'update'})),
         path('place/delete/<int:pk>', PlaceDeleteView.as_view({'post':'destroy'})),

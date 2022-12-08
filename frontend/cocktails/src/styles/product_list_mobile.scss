@@ -1,0 +1,42 @@
+.mobile_wrapper{
+    background-color: #222;
+}
+
+.mobile_search_wrapper{
+    margin-top: 20px;
+    width: 80%;
+    border-bottom: 1px solid #909090;
+    display: flex;
+}
+.mobile_search_input{
+    width: 100%;
+    background-color: #222;
+    font-size: 18px;
+    border-bottom: #222;
+}
+.mobile_search_icon{
+    width: 40px;
+    height: 40px;   
+    right: 0px;
+    fill: inherit;
+    fill: #909090;
+}
+.product_table{
+    margin-top: 20px;
+    width: 80%;
+    margin-bottom: 20px;
+        
+}
+
+.add_product_btn{
+    margin-top: 30px;
+    .button{
+      background-color: #6846F0; 
+      width: 300px;
+      
+    }
+    .button_label{
+        color: white; 
+    }
+    
+}

@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { SideBarPlaceBtn } from "./side_bar_place_btn";
 import { SideBarProductBtn } from "./side_bar_product_btn";
+import '../../styles/side_bar.scss';
 
 export function SideBar(){
 
@@ -8,10 +10,14 @@ export function SideBar(){
         <div className="side_bar_content">
             
             <div>
-                <SideBarPlaceBtn />
+                <Link to={`placeList`}> 
+                    <SideBarPlaceBtn />
+                </Link>
             </div>
-            <div>
-                <SideBarProductBtn />
+                <div>
+                <Link to={`products`}>
+                    <SideBarProductBtn />
+                </Link>
             </div>
         </div>
             

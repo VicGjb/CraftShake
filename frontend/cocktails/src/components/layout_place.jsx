@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { PlaceSubtitle } from "./place_subtitle";
 import { NetworkManager } from "./network_manager";
-
+import '../styles/layout_place.scss'
 export function LayoutPlace(){
     let {placeId} = useParams()
     let [place, setPlace] = useState()
@@ -20,7 +20,7 @@ export function LayoutPlace(){
 
     function LayoutPlaceView(){
         return(
-            <div>
+            <div className="place_detaile_wrapper">
                 <PlaceSubtitle place={place}/>
                 <Outlet></Outlet>
             </div>

@@ -138,6 +138,14 @@ class PlaceDeleteView(viewsets.ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceDetailSerializer
 
+
+class PlaceByNameView(generics.ListAPIView):
+    serializer_class = PlaceSerializer
+    def get_queryset(self):
+        name = self.kwargs["name"]
+        return Place.objects.filter(name__contains=name)
+
+
 """Manager of place views"""
 class ManagerOfPlaceView(viewsets.ModelViewSet):
     permission_classes = [CraftShakeCustomerPermissions]
