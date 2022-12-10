@@ -6,6 +6,9 @@
     overflow: scroll;
     align-items: center;
   }
+.place_list_wrapper::-webkit-scrollbar {
+    height: 0px; 
+  }       
 
 .place_list_cards_buttons{
     display: flex;
