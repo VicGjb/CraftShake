@@ -99,9 +99,8 @@ export const Layout = () =>{
 
 
     return(
-        <div>
-            {renderLayout()}
-        </div>
+            renderLayout()
+    
     )
 
 }

@@ -38,8 +38,6 @@ export function LayoutPlace(){
     }
 
     return(
-        <div>
-            {Render(loaded)}
-        </div>
+            Render(loaded)
     )
 }

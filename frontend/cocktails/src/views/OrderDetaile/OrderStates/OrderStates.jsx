@@ -4,8 +4,10 @@ import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_
 import { UploadOrderPhotoPopup } from "./UploadOrderPhoto"
 import { RegularButton } from "../../../components/buttons/regular_button"
 import { NetworkManager } from "../../../components/network_manager"
+import {ReactComponent as CameraIcon} from "../../../svg/camera_icon.svg"
+import '../../../styles/order_states.scss'
 
-export function OrderStats(){
+export function OrderStates(){
     let orderItemContext = useOrderItemListContext()
     let [upload_photo_active, setUploadPhotoActive] = useState(false);
     let network_manager = new NetworkManager()
@@ -26,32 +28,38 @@ export function OrderStats(){
 
     function renderStateButton(){
         if (order){
-            console.log('order_state',upload_photo_active)
             switch (order.state){
                 case 'Created':
                     return(
                         <div onClick={setStateApproved} className='appruve_btn'>
-                            <RegularButton className='appruve_btn' lable={'Approve'} backround={'green'}/>
+                            <RegularButton lable={'Approve'}/>
                         </div>
                     )
                 case 'Approved':
                     return(
                         <div>
-                            <div onClick={()=>{setUploadPhotoActive(true)}}>
-                                <RegularButton lable={'set Delivered'} backround={'yellow'}/>
+                            <div className='delivered_btn' onClick={()=>{setUploadPhotoActive(true)}}>
+                                <RegularButton lable={'set Delivered'}/>
                             </div>
                             <UploadOrderPhotoPopup upload_photo_active={upload_photo_active} setUploadPhotoActive={setUploadPhotoActive} />
                         </div>
                     )
                 case 'Delivered':
                     return(
-                        <div onClick={setStatePaid}>
-                            <RegularButton lable={'Set Paid'}/>
+                        <div className="state_conteiner">
+                            <div className='paid_btn' onClick={setStatePaid}>
+                                <RegularButton lable={'Set Paid'}/>
+                            </div>
+                            {/* <div className="camera_icon_conteiner">
+                                <CameraIcon className='camera_icon'/> 
+                            </div> */}
+                            
                         </div>
+                        
                     )
                 case 'Paid':
                     return(
-                        <div className="regular_text">
+                        <div className="paid_state">
                             Paid
                         </div>
                     )
@@ -60,9 +68,7 @@ export function OrderStats(){
     }
 
     return(
-        <div>
-            {renderStateButton(order)}
-        </div>
+            renderStateButton(order)
     )
 
 

@@ -5,9 +5,12 @@ import { NavLink} from "react-router-dom";
 import { OrderPositions } from "./order_positions/order_positions";
 import { useOrderItemListContext } from "./OrderDetaileContext/order_item_list_context";
 import { OrderDetaileMenuRoute } from "./order_detaile_router";
-import { OrderStats } from "./OrderStates/OrderStates";
+import { MobileButtonLineTop } from "./OrderTopButtonLine/OrderTopButtonLine";
+import { MobileButtonLineBottom } from "./OrderTopButtonLine/OrderTopButtonLine";
 import { OrderTopButtonLine } from "./OrderTopButtonLine/OrderTopButtonLine";
 import { DeliveredPhotoPopup } from "./DeliveredPhoto";
+import {ReactComponent as CameraIcon} from "../../svg/camera_icon.svg"
+import '../../styles/order_detile.scss'
 
 export function OrderDetaileContent({orderId, menus}){
     let [loaded, setLoaded] = useState(false);
@@ -21,7 +24,7 @@ export function OrderDetaileContent({orderId, menus}){
 
     useEffect(()=>{
         if (orderId){
-            // order_detaile_context.setOrderIdContext(orderId)
+            order_detaile_context.setOrderIdContext(orderId)
             network_manager.get_order_detaile(orderId)
             .then(order =>{
                 setLoaded(true)
@@ -55,66 +58,60 @@ export function OrderDetaileContent({orderId, menus}){
         if (!order){
             console.log(dateNow)
             return(
-            <div className="add_order_popup_date">
-                <div className="date_lable">
-                    Date
+            <div className="add_order_date">
+                <div className="add_order_date_container">
+                    <div className="date_lable">
+                        Date
+                    </div>
+                    <div>
+                        <input
+                            className="date_input"
+                            type='date'
+                            name='date'
+                            defaultValue={`${dateNow}`}
+                            onChange={dateChangeHendler}
+                        />
+                    </div>  
                 </div>
-                <div>
-                    <input
-                        className="date_input"
-                        type='date'
-                        name='date'
-                        defaultValue={`${dateNow}`}
-                        onChange={dateChangeHendler}
-                    />
-                </div>
+                
             </div>
         )
         }
     }
 
-
-    function renderStateButton(order){
-        if (order){
-            return(
-                <OrderStats/>
-            )
-        }
-        
-    }
     function renderOrderPhoto(order){
         if(order && order.photo){
             return(
-                <div className="popup_title">
-                    <div className="regular_text_small" onClick={()=>setDeliveredPhotoActiv(true)}>
-                        Show delivered photo
+                <div>
+                    <div className="camera_icon_conteiner" onClick={()=>setDeliveredPhotoActiv(true)}>
+                        <CameraIcon className='camera_icon' /> 
                     </div>
                     <DeliveredPhotoPopup deliveredPhotoActive={deliveredPhotoActive} setDeliveredPhotoActiv={setDeliveredPhotoActiv} />
                 </div>
            )
+        }else{
+            return(
+                <div className="indent"></div>
+            )
         }
     }
     
     function OrderDetaileContentView(){
         return(
-            <div className="order_detaile_content">
-                 <OrderTopButtonLine order={order} date={dateOrder}/>
-                <div className="order_detaile_content_title regular_text">
+            <div className="order_detaile_wrapper">
+                <OrderTopButtonLine order={order} date={dateOrder}/>
+                <MobileButtonLineTop />
+                <div className="order_detaile_content_title">
+                    <div className="indent"></div>
                     <div className="order_title">
                         {orderId 
-                        ? `Order №: ${order.id} on ${order.date}`
-                        : `New Order`
-                    }
+                            ? `Order №: ${order.id} on ${order.date}`
+                            : `New Order`
+                        }
                     </div>
-                    
-                    <div className="state_button_set">
-                        {renderStateButton(orderId)}
-                        {renderOrderPhoto(order)}
-                    </div>
-                    
-                    
-                    {renderNewOrderDate(orderId, dateNow)}
-                </div>              
+                    {renderOrderPhoto(order)}
+                </div>  
+                {renderNewOrderDate(orderId, dateNow)}
                 <div className="order_detaile_tables_wrapper">
                     <div className="menu_positions_table">
                         <div className="order_detaile_menu_name">
@@ -122,15 +119,14 @@ export function OrderDetaileContent({orderId, menus}){
                                 renderMenu(menu)
                             ))}
                         </div> 
-                        <OrderDetaileMenuRoute/> 
-                        
-                    </div>
-                    
-                    <div>        
+                        <OrderDetaileMenuRoute/>    
+                    </div>      
                         <OrderPositions/>
-                    </div>
-                               
                 </div>
+                <div className="order_detaile_footer">
+                    <MobileButtonLineBottom />
+                </div>
+                
             </div>
         )
     }
@@ -149,8 +145,6 @@ export function OrderDetaileContent({orderId, menus}){
         }
     }
     return(
-       <div>
-           {renderPage({loaded,orderId})}
-       </div>
+           renderPage({loaded,orderId})
     )
 }

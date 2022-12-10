@@ -70,7 +70,7 @@ body{
   color: #909090;
 }
 .cross_del_btn{
-  background-color: #222;
+  background-color: #323131;
   // @include adaptiv(15, 7, width);
   // @include adaptiv(15, 7, height);
   .icon_cross_del_btn{
@@ -509,14 +509,11 @@ body{
 
 
 //Order detaile
-.green{
-  background-color: rgb(94, 165, 96);
-  color: #222;
-}
-.yellow{
-  background-color: rgb(166, 166, 96);
-  color: #222;
-}
+// .green{
+//   background-color: rgb(94, 165, 96);
+//   color: #222;
+// }
+
 .order_title{
   // margin: 0,300px;
   // padding-left: 300px;
@@ -549,23 +546,23 @@ body{
   @include adaptiv(300, 120, width);
 }
 
-.order_total_info{
-  @include adaptiv(20,5 , margin-top);
-  align-self: end;
-  display: flex;
-  flex-direction: column;
-  color: #909090;
-}
+// .order_total_info{
+//   @include adaptiv(20,5 , margin-top);
+//   align-self: end;
+//   display: flex;
+//   flex-direction: column;
+//   color: #909090;
+// }
 
-.order_detaile_buttons_line{
-  @include adaptiv(20,5 , margin-top);
-  display: flex;
-  justify-content: space-between;
-  .button{
-    @include adaptiv(20,10 , height);
-    @include adaptiv(110, 60, width);
-  }
-}
+// .order_detaile_buttons_line{
+//   @include adaptiv(20,5 , margin-top);
+//   display: flex;
+//   justify-content: space-between;
+//   .button{
+//     @include adaptiv(20,10 , height);
+//     @include adaptiv(110, 60, width);
+//   }
+// }
 
 // OrderDetaile Order Item table
 .order_positions_table_wrapper{
@@ -573,59 +570,59 @@ body{
   flex-direction: column;
 }
 
-.order_positions_table{
-  @include adaptiv(20,5,margin-top);
-  @include adaptiv(275, 170, width);
-  @include adaptiv(275, 170, min-height);
-  overflow: scroll;
-  max-height: 275px;
-  box-shadow: 0px 0px 2px 1px, inset 0px 0px 2px 1px #302f2f;
-  background-color: #2c2b2b;
-  .cross_del_btn{
-    background-color: #2c2b2b;
-  } 
-}
-.order_positions_table::-webkit-scrollbar {
-  @include adaptiv(4, 2, width);
-  height: 2px; 
-}       
-.order_positions_table::-webkit-scrollbar-track {
-  background:#2c2b2b;
-}        
+// .order_positions_table{
+//   @include adaptiv(20,5,margin-top);
+//   @include adaptiv(275, 170, width);
+//   @include adaptiv(275, 170, min-height);
+//   overflow: scroll;
+//   max-height: 275px;
+//   // box-shadow: 0px 0px 2px 1px, inset 0px 0px 2px 1px #302f2f;
+//   background-color: #2c2b2b;
+//   .cross_del_btn{
+//     background-color: #2c2b2b;
+//   } 
+// }
+// .order_positions_table::-webkit-scrollbar {
+//   @include adaptiv(4, 2, width);
+//   height: 2px; 
+// }       
+// .order_positions_table::-webkit-scrollbar-track {
+//   background:#2c2b2b;
+// }        
 
-.order_positions_table::-webkit-scrollbar-thumb {
-  background:#222222;
-  border-radius: 8px;
-  border: 1px solid #424040;
-}
-.order_positions_table::-webkit-scrollbar-corner{
-    background: #2c2b2b;;
-}
-.order_positions_table_row{
-  color: #909090;
-  padding-right: 5px;
-  padding-left: 5px;
-  @include adaptiv(15, 5, margin-bottom);
-  @include adaptiv(5, 3, margin-top);
-  display: flex;
-  justify-content: space-between;
-  @include adaptiv(275, 170, width);
-  .name{
-    @include adaptiv(80, 70, width);
-  }
-  .qnt{
-    @include adaptiv(40, 10, width);
-  }
-  .price{
-    @include adaptiv(70, 40, width);
-  }
-  .delete{
-    @include adaptiv(40, 40, width);
-  }
-}
-.order_positions_table_row_slot{
-  align-self: center;
-}
+// .order_positions_table::-webkit-scrollbar-thumb {
+//   background:#222222;
+//   border-radius: 8px;
+//   border: 1px solid #222;
+// }
+// .order_positions_table::-webkit-scrollbar-corner{
+//     background: #222;;
+// }
+// .order_positions_table_row{
+//   color: #909090;
+//   padding-right: 5px;
+//   padding-left: 5px;
+//   @include adaptiv(15, 5, margin-bottom);
+//   @include adaptiv(5, 3, margin-top);
+//   display: flex;
+//   justify-content: space-between;
+//   @include adaptiv(275, 170, width);
+//   .name{
+//     @include adaptiv(80, 70, width);
+//   }
+//   .qnt{
+//     @include adaptiv(40, 10, width);
+//   }
+//   .price{
+//     @include adaptiv(70, 40, width);
+//   }
+//   .delete{
+//     @include adaptiv(40, 40, width);
+//   }
+// }
+// .order_positions_table_row_slot{
+//   align-self: center;
+// }
 
 
 //OrderDetaile Menu Positions table

@@ -5,7 +5,7 @@ export const AddButton = ({lable}) => {
     return(
         <button className="button">
             <div className="button_label">{lable}</div>
-            <Cross className='add_button_cross'></Cross>
+            {/* <Cross className='add_button_cross'></Cross> */}
         </button>
     )
 }

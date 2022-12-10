@@ -1,0 +1,132 @@
+.order_position_card_wrapper{
+    width: 90%;
+    margin-top: 20px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 20px;
+    border: 1px solid whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #323131;
+    color: #909090;
+}
+.order_position_card_slot{
+    text-align: center;
+}
+.order_position_card_slot.name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    box-orient: vertical;
+    width: 120px;
+}
+.order_position_card_slot.volome{
+    width: 30px;
+}
+.order_position_card_slot.qnt{
+    width: 30px;
+
+}
+.order_position_card_slot.total{
+    width: 100px;
+}
+
+
+.order_position_card_slot:first-child{
+    margin-left: 10px;
+}
+.order_position_card_slot:last-child{
+    margin-right: 10px;
+}
+
+.cross_del_btn{
+    width: 20px;
+    height: 20px;
+    background-color: #323131;
+    .icon_cross_del_btn{
+        background-color: #323131;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
+@media (min-width:1280px){
+
+}
+
+@media (max-width:1280px){
+    .order_position_card_wrapper{
+        font-size: 16px;
+        height: 40px;
+    }
+    .order_position_card_slot{
+        // height: 15px
+    }
+    .order_position_card_slot.name{
+        width: 85px;
+    
+    }
+    .order_position_card_slot.volome{
+        width: 30px;
+        
+    }
+    .order_position_card_slot.qnt{
+        width: 20px;
+    }
+    .order_position_card_slot.total{
+        width: 55px;
+        
+    }
+    .order_position_card_slot.remove{
+        width: 20px;
+    }
+    
+}
+
+@media (max-width:769px){
+    .order_position_card_wrapper{
+        font-size: 14px;
+        height: 25px;
+        margin-top: 15px;
+    }
+    .order_position_card_slot{
+        // height: 15px
+    }
+    .order_position_card_slot.name{
+        width: 85px;
+        -webkit-line-clamp: 1;
+    
+    }
+    .order_position_card_slot.volome{
+        width: 30px;
+        
+    }
+    .order_position_card_slot.qnt{
+        width: 20px;
+    }
+    .order_position_card_slot.total{
+        width: 55px;
+        
+    }
+    .order_position_card_slot.remove{
+        width: 20px;
+    }
+    .cross_del_btn{
+        width: 13px;
+        height: 13px;
+        background-color: #323131;
+        .icon_cross_del_btn{
+            background-color: #323131;
+            width: 13px;
+            height: 13px;
+        }
+    }
+
+}

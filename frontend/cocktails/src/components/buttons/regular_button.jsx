@@ -1,10 +1,10 @@
 import React from "react";
 import '../../styles/regular_btn.scss'
 
-export const RegularButton = ({lable, backround}) => {
+export const RegularButton = ({lable}) => {
     return(
-        <button className={`button ${backround}`}>
-            <div className={`button_label ${backround}`}>{lable}</div>
+        <button className={`button`}>
+            <div className={`button_label`}>{lable}</div>
         </button>
     )
 }

@@ -24,16 +24,12 @@ export function OrderDetaile(){
     function orderView(){
         if(loaded){
             return(
-            <div>
                 <OrderDetaileContent place={placeId} menus={menus} orderId={orderId}/>
-            </div>
             )   
         }else{
             return(
                 <div>
-                    <div>
-                        Loading
-                    </div>
+                    Loading
                 </div>
             )
         }        
@@ -49,10 +45,8 @@ export function OrderDetaile(){
         }
 
     }return(
-        <div>
-            <OrderItemListContextProvider>
-                {Render(loaded)}
-            </OrderItemListContextProvider> 
-        </div>
+        <OrderItemListContextProvider>
+            {Render(loaded)}
+        </OrderItemListContextProvider> 
     )
 }

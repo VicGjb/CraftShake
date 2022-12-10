@@ -1,0 +1,68 @@
+.order_card_wrapper{
+    margin-top: 20px;
+    height: 50px;    
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #323131;
+    border-radius: 50px;
+    border:1px solid white;
+    font-size: 24px;
+    color: #909090;
+}
+.order_card_wrapper:hover{
+    border:1px solid #F5DB51;
+    color: #F5DB51;
+}
+
+.order_card_slot.regular{
+    color: #909090;
+}
+.order_card_slot.yellow{
+    color: #F5DB51;
+}
+.order_card_slot.red{
+    color: #F15A5A;
+}
+.order_card_slot.green{
+    color: #86F584;
+}
+
+.order_card_slot.id{
+    margin-left: 10px;
+    width: 50px;
+    text-align: center;
+}
+.order_card_slot.date{
+    width: 120px;
+    text-align: center;
+}
+.order_card_slot.state{
+    width: 100px;
+    text-align: center;
+}
+.order_card_slot.total_price{
+    width: 150px;
+    text-align: center;
+}
+
+
+@media (min-width:1280px){
+
+}
+
+@media (max-width:1280px){
+    .order_card_wrapper{
+        height: 40px; 
+        font-size: 18px;
+    }
+}
+
+@media (max-width:769px){
+    .order_card_wrapper{
+        height: 30px; 
+        margin-top: 15px;
+        font-size: 16px;
+    }
+}

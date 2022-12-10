@@ -1,0 +1,222 @@
+.order_list_wrpper{
+    // height: 100%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;  
+    // background-color: aliceblue;
+}
+.service_button_row{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.service_row_button_wrapper{
+    .button{
+        height: 40px;
+        width: 300px;
+    }
+}
+
+.orders_table{
+    margin-bottom: 20px;
+}
+.order_list_search_wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #323131;
+    border-radius: 10px;
+    height: 120px;
+}
+.order_list_search_inputs_wrapper{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.order_list_search_button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+    .button{
+        width: 80%;
+        height: 40px;
+        background-color: #7D62EA;
+        transition: 0.3s;
+        .button_label{
+            color: black;
+        }
+    }
+    .button:hover{
+        background-color: #694be2;
+        .button_label{
+            color:#FFBF1C;
+        }
+    }
+}
+
+.service_row_button_wrapper{
+    .button{
+        height: 40px;
+    }
+}
+.service_row_button_wrapper.add{
+    .button{
+        transition: 0.3s;
+        background-color: #7D62EA;
+        .button_label{
+            color: black;
+        }
+    }
+}
+.service_row_button_wrapper.add:hover{
+    .button{
+        background-color: #694be2;
+        .button_label{
+            color: #FFBF1C;;
+        }
+    }
+}
+.date_wrapper{
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    color: #909090; ;
+    .date_input{
+        background-color: #323131;
+        font-size: 24px;
+        margin-left: 20px;
+    }
+}
+
+.date_wrapper:first-child{
+    margin-left: 10px;
+    justify-content: start;
+}
+.date_wrapper:last-child{
+    margin-right: 10px;
+    justify-content: end;
+}
+
+
+@media (min-width:1280px)  {
+
+}
+
+@media (max-width:1280px)  {
+    .service_row_button_wrapper{
+        margin-top: 20px;
+        .button{
+            height: 30px;
+            width: 170px;
+        }
+    }
+    .order_list_search_wrapper{
+        height: 100px;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .order_list_search_button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        
+        .button{
+            width: 80%;
+            height: 30px;
+            background-color: #7D62EA;
+            transition: 0.3s;
+            .button_label{
+                color: black;
+            }
+        }
+    }
+    .date_wrapper{
+        width: 230px;
+        // display: flex;
+        font-size: 20px;
+        // color: #909090; 
+        // border-bottom: 1px solid #909090;
+        .date_input{
+            margin-left: 20px;
+            // background-color: #323131;
+            font-size: 20px;
+            // border-bottom: 0px;
+        }
+    }
+
+}
+
+@media (max-width:769px) {
+    .order_list_wrpper{
+        width: 100%;
+        align-items: center;
+    }
+    .service_row_button_wrapper{
+        margin-top: 20px;
+        .button{
+            height: 20px;
+            width: 135px;
+        }
+    }
+
+    .order_list_search_wrapper{
+        height: 70px;
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .order_list_search_inputs_wrapper{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .order_list_search_button{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        
+        .button{
+            width: 80%;
+            height: 20px;
+            background-color: #7D62EA;
+            transition: 0.3s;
+            .button_label{
+                color: black;
+            }
+        }
+    }
+
+    .date_wrapper{
+        width: 100px;
+        display: flex;
+        font-size: 14px;
+        color: #909090; 
+        border-bottom: 1px solid #909090;
+        .date_input{
+            margin-left: 10px;
+            background-color: #323131;
+            font-size: 14px;
+            border-bottom: 0px;
+        }
+    }
+    .date_wrapper:first-child{
+        margin-left: 10px;
+        justify-content: start;
+    }
+    .date_wrapper:last-child{
+        margin-right: 10px;
+        justify-content: end;
+    }
+    .orders_table{
+        width: 90%;
+    }
+}

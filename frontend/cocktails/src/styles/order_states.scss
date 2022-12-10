@@ -1,0 +1,47 @@
+.appruve_btn{
+    .button{
+        background-color: #86F584;
+        .button_label{
+            color: black;
+        }
+    } 
+}
+.delivered_btn{
+    .button{
+        background-color: #F5DB51;
+        .button_label{
+            color: black;
+        }
+    } 
+}
+.paid_btn{
+    .button{
+        background-color: #86F584;
+        .button_label{
+            color: black;
+        }}
+}
+.paid_state{
+    color: #86F584;
+    font-size: 40px;
+}   
+
+.state_conteiner{
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+@media (max-width:1280px){
+    .paid_state{
+        font-size: 30px;
+    }
+}
+@media (max-width:769px){
+    .paid_state{
+        font-size: 25px;
+        width: 150px;
+        text-align: end;
+    }
+}
+

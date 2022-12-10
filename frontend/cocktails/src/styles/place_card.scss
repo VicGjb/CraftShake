@@ -9,6 +9,9 @@
     border-radius: 10px;
     border: 1px solid white;
   }
+  .place_card_btn::-webkit-scrollbar {
+    height: 0px; 
+  } 
 
 .place_card_btn:hover{
     border: 1px solid #FFBF1C;

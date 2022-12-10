@@ -13,7 +13,9 @@ export function MenuPositionRow({position}){
     let main_context = useManeContext();
     let volumes = main_context.getVolumesFromMainContext();
     let order_detile_context = useOrderItemListContext();
+    
     let orderId = order_detile_context.getOrderIdContext
+
     let defaultForm = {
         uuid:uuidv4(),
         order:orderId,
@@ -31,6 +33,7 @@ export function MenuPositionRow({position}){
             let item_price = amount_volume/Number(menu_position.volume) * Number(menu_position.sale_price)
             form.item_price = item_price.toFixed(2)
             if(form.quantity>0){
+                console.log('Hey',form)
                 order_detile_context.addItem(form)
                 setForm({...form, ['uuid']:uuidv4()})
             }

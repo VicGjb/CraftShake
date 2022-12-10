@@ -61,7 +61,7 @@ export function PlaceDetaile(){
                 <div className="mobile_back_btn">
                     <RegularButton lable={'Back'}/>
                 </div>
-                {/* <div className="service_button_row">
+                <div className="monitor_service_button_row">
                         <div className="service_row_button_wrapper" onClick={main_context.goBack}>
                             <RegularButton lable={'Back'}/>
                         </div>
@@ -72,7 +72,9 @@ export function PlaceDetaile(){
                         <div className="service_row_button_wrapper" onClick={()=>setAdd_Change_place_active(true)}>
                             <RegularButton lable={'Change place'} />
                         </div>      
-                </div> */}
+                </div>
+                <div className="main_buttons_wrapper">
+
                 
                     <div className="place_detaile_main_buttons_wrapper">
                         <div className="main_btn_container">
@@ -103,18 +105,17 @@ export function PlaceDetaile(){
                             </div>
                         </div>  
                     </div>
-
-                    <div className="mobile_service_btn_row">
-                        <div className="service_row_button_wrapper" onClick={()=>setDelete_active(true)}>
-                            <RegularButton lable={'Delete place'} />
-                        </div>
-
-                        <div className="service_row_button_wrapper" onClick={()=>setAdd_Change_place_active(true)}>
-                            <RegularButton lable={'Change place'} />
-                        </div>   
-
+                </div>
+                <div className="plce_detile_footer"></div>
+                <div className="mobile_service_btn_row">
+                    <div className="service_row_button_wrapper delete" onClick={()=>setDelete_active(true)}>
+                        <RegularButton lable={'Delete place'} />
                     </div>
 
+                    <div className="service_row_button_wrapper change" onClick={()=>setAdd_Change_place_active(true)}>
+                        <RegularButton lable={'Change place'} />
+                    </div>   
+                </div>
 
                 <PopupAddOrder add_order_active={add_order_active} setAdd_order_active={setAdd_order_active}/>
                 <PopupAddInvoice place={place} add_invoice_active={add_invoice_active} setAdd_invoice_active={setAdd_invoce_active}/>
