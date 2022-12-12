@@ -20,20 +20,16 @@ export function MenuPositions(){
             })
     },[menuId])
 
-
     function MenuPositionView(){
         return(
-            <div>
-                {menu_positions.map(position =>(
-                    <MenuPositionRow 
-                        key={position.id} 
-                        position={position}  
-                        />
-                ))}
-            </div>
+            menu_positions.map(position =>(
+                <MenuPositionRow 
+                    key={position.id} 
+                    position={position}  
+                    />
+            ))
         )
     }
-
     function Render(loaded){
         if(loaded){
             return MenuPositionView()
@@ -43,10 +39,7 @@ export function MenuPositions(){
             )
         }
     }
-
     return(
-        <div>
-            {Render(loaded)}             
-        </div>
+            Render(loaded)            
     )
 }

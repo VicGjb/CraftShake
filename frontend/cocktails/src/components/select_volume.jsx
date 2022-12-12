@@ -20,17 +20,16 @@ export function SelectVolume({onChange}){
     }
 
     return(
-        <div>
-            <select 
-                name="volome" 
-                value={volume}
-                onChange={changeHandler}
-                required               
-                >
-                {volumes.map(volume=>(
-                    <option key={volume.id} value={volume.id}>{volume.name}</option>
-                ))}
-            </select>
-        </div>
+        <select
+            className="select-css" 
+            name="volome" 
+            value={volume}
+            onChange={changeHandler}
+            required               
+            >
+            {volumes.map(volume=>(
+                <option key={volume.id} value={volume.id}>{volume.name}</option>
+            ))}
+        </select>
     )
 }

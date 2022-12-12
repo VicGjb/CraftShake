@@ -4,8 +4,9 @@ import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_
 import { OrderPositionCard } from "./OrderPositionCard";
 import { OrderPositionTableHead } from "./OrderPositionTableHead";
 import { RegularButton } from "../../../components/buttons/regular_button";
+import { PopupAddCocktailsMenu } from "../PopupAddCocktail";
 export function OrderPositions(){   
-
+    let [add_cocktails_active, setAdd_cocktails_active] = useState(false)
     let order_detaile_context = useOrderItemListContext()
 
     function ChangeHendler(){
@@ -24,7 +25,7 @@ export function OrderPositions(){
     return(
         <div className="order_positions_table_wrapper">
             <div className="order_info">   
-                <div className="add_cocktails_btn" onClick={()=>{console.log('OK')}}>
+                <div className="add_cocktails_btn" onClick={()=>{setAdd_cocktails_active(true)}}>
                     <RegularButton lable={'Add cocktails'}/>
                 </div>
                 <div className="order_detaile_total_monitor">  
@@ -46,7 +47,7 @@ export function OrderPositions(){
                     Total: {calculateTotal()} ILS
                 </div>
             </div>
-                
+        <PopupAddCocktailsMenu add_cicktails_active={add_cocktails_active} setAdd_cocktails_active={setAdd_cocktails_active}/>  
         </div>
         )
 }

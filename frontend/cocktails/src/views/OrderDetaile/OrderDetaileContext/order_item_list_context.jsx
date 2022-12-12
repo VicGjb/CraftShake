@@ -11,8 +11,11 @@ export function useOrderItemListContext(){
 export function OrderItemListContextProvider({children}){
     let [orderId, setOrderId] = useState();
     let [order, setOrder] = useState();
+    let [menus, setMenus] = useState([]);
     let [item_list, setItemList] = useState([]);
     let [delete_item_list, setDeleteItemList] =useState([]);
+    let mobileMenuPositions = {};
+
 
     function setOrderIdContext(id){
         setOrderId(id)
@@ -44,18 +47,55 @@ export function OrderItemListContextProvider({children}){
 
 
 
+    function initMenuPositionMobile(menus){
+        menus.map(menu=>{
+            menu.position_in_menu.map(position =>{
+                mobileMenuPositions[`${position.id}`] = ''
+            })
+        })
+        console.log('INIT MOBILE',mobileMenuPositions)
+    }
+
+    function addItemMobile(orderItem){
+        mobileMenuPositions[`${orderItem.position}`] = orderItem
+        console.log('orderInemMobile', mobileMenuPositions)
+        getItemListMobile()
+    }
+    function getItemListMobile(){
+        let mobileItemList = []
+        for(let [positionId, item] of Object.entries(mobileMenuPositions)){
+            if(item){
+                if(item.quantity>0){
+                    mobileItemList.push(item)
+                    console.log("OKEY",item)
+                }  
+            }
+        }
+        console.log('MObileItemList',mobileItemList)
+        return mobileItemList
+    }
+
+
     return(
         <OrderItemListContext.Provider value={{
             setOrderContext:setOrder,
             getOrderContext:order,
             setOrderIdContext:setOrderIdContext,
             getOrderIdContext:orderId,
+            setMenusContext:setMenus,
+            getMenusContext:menus,
             addItem:addItemInList,
             removeItem:removeItemContext,
             setItemList:setItemListContext,
             setUUIDForListFromBase:setUUIDForListFromBase,
             item_list:item_list,
-            delete_item_list:delete_item_list
+            delete_item_list:delete_item_list,
+
+            
+            initMobileMenuPositions:initMenuPositionMobile,
+            addItemMobile:addItemMobile,
+            getItemListMobile:getItemListMobile,
+
             }}>
             {children}
         </OrderItemListContext.Provider>

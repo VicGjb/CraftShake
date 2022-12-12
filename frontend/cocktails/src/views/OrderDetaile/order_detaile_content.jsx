@@ -10,6 +10,7 @@ import { MobileButtonLineBottom } from "./OrderTopButtonLine/OrderTopButtonLine"
 import { OrderTopButtonLine } from "./OrderTopButtonLine/OrderTopButtonLine";
 import { DeliveredPhotoPopup } from "./DeliveredPhoto";
 import {ReactComponent as CameraIcon} from "../../svg/camera_icon.svg"
+import { MenuPositionRow } from "./menu_position/menu_position_row";
 import '../../styles/order_detile.scss'
 
 export function OrderDetaileContent({orderId, menus}){
@@ -21,9 +22,11 @@ export function OrderDetaileContent({orderId, menus}){
     let dateNow = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}` 
     let [dateOrder, setDateOrder] = useState(dateNow);
     let [deliveredPhotoActive, setDeliveredPhotoActiv] = useState();
-
+    
     useEffect(()=>{
         if (orderId){
+            order_detaile_context.setMenusContext(menus)
+            order_detaile_context.initMobileMenuPositions(menus)
             order_detaile_context.setOrderIdContext(orderId)
             network_manager.get_order_detaile(orderId)
             .then(order =>{
@@ -32,6 +35,8 @@ export function OrderDetaileContent({orderId, menus}){
                 order_detaile_context.setItemList(order.order_item) 
                 order_detaile_context.setOrderContext(order)
             })
+        }else{
+            order_detaile_context.setMenusContext(menus)
         }
     },[])
 
@@ -39,7 +44,7 @@ export function OrderDetaileContent({orderId, menus}){
     function renderMenu(menu){
         if(menu.is_current_menu){
             return(
-                <div key={menu.id}>
+                <div  key={menu.id}>
                     <NavLink className='regular_text_small menu_name_link' to={`menu/${menu.id}`}>
                         {menu.name}
                     </NavLink>  
@@ -95,6 +100,23 @@ export function OrderDetaileContent({orderId, menus}){
             )
         }
     }
+    function renderAllMenus(){
+        console.log('menus', menus)
+        return(
+            menus.map(menu=>(
+                <div className="order_detaile_menu_wrapper" key={menu.id}>
+                    <div className="order_detaile_menu_title">
+                        {menu.name}{console.log('Menu',menu)}
+                    </div>
+                    <div className="order_detaile_menu_positions">
+                        {menu.position_in_menu.map(position=>(
+                            <MenuPositionRow position={position} key={position.id}/>
+                        ))}
+                    </div>
+                </div>
+            ))
+        )
+    }
     
     function OrderDetaileContentView(){
         return(
@@ -114,12 +136,13 @@ export function OrderDetaileContent({orderId, menus}){
                 {renderNewOrderDate(orderId, dateNow)}
                 <div className="order_detaile_tables_wrapper">
                     <div className="menu_positions_table">
-                        <div className="order_detaile_menu_name">
+                        {renderAllMenus()}
+                        {/* <div className="order_detaile_menu_name">
                             {menus.map(menu=>(
                                 renderMenu(menu)
                             ))}
                         </div> 
-                        <OrderDetaileMenuRoute/>    
+                        <OrderDetaileMenuRoute/>     */}
                     </div>      
                         <OrderPositions/>
                 </div>

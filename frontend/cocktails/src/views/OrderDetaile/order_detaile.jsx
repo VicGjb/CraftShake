@@ -3,6 +3,7 @@ import { NetworkManager } from "../../components/network_manager";
 import {useParams} from 'react-router-dom';
 import { OrderItemListContextProvider } from "./OrderDetaileContext/order_item_list_context";
 import {OrderDetaileContent} from "./order_detaile_content"; 
+import { useOrderItemListContext } from "./OrderDetaileContext/order_item_list_context";
 
 export function OrderDetaile(){
     let {placeId} = useParams();
@@ -14,8 +15,9 @@ export function OrderDetaile(){
 
     useEffect(() => {
         network_manager.get_menus_list(placeId)
-            .then(menus => { 
-                    setMenus(menus);
+            .then(response => {
+                    console.log(response)
+                    setMenus(response);
                     setLoaded(true);
             })
     }, [placeId])

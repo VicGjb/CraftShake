@@ -1,0 +1,226 @@
+.popup_mobile_wrapper{
+    
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.863);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0);
+    z-index: 10;
+}
+
+.popup_mobile_wrapper.active{
+    transform: scale(1);
+  }
+
+.popup_mobile_content{
+    width: 80%;
+    height: 80%;
+    background-color: #222;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+
+    .order_detaile_menu_name{
+      display: none;
+    }
+    .order_detaile_menu_name.active{
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      height: 100%;
+    }
+}
+
+
+.popup_add_cocktails_menus{
+  margin-top: 20px;
+  width: 100%;
+  height: 100%;
+  .button{
+    width: 100%;
+    height: 80%;
+    border-radius: 10px;
+    border: 1px solid #909090;
+    .button_label{
+      font-size: 20px;
+    }
+  }
+  .button:hover{
+    border-color: #FFBF1C;
+  }
+
+}
+.popup_add_cocktails_menus:focus{
+  display: none;
+}
+
+.popup_title{
+  position:sticky;
+  top:6px;
+    margin-top: 20px;
+    font-family: 'Girassol';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    text-align: center;
+    line-height: 18px;
+    flex-wrap: wrap;
+    color: #909090;
+    z-index: 6;
+  }
+
+.popup_content_container{
+    overflow: hidden;
+    width: 80%;
+    height: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.order_detaile_popup_menu_name{
+    display: flex;
+}
+
+
+
+// Add cocktal
+// .order_detaile_menu_name::-webkit-scrollbar {
+//     width: 0px;
+//     height: 5px; 
+//   }       
+// .order_detaile_menu_name::-webkit-scrollbar-track {
+//       background:#2c2b2b;
+//     }        
+// .order_detaile_menu_name::-webkit-scrollbar-thumb {
+//       background:#8b8686;
+//       border-radius: 8px;
+//       border: 1px solid #424040;
+//     }
+// .order_detaile_menu_name::-webkit-scrollbar-button{
+//       width: 0px;
+//       background-color: #F5F5F5
+//     }
+
+.service_button_line{
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  position: fixed;
+  background-color: rgba(34, 34, 34, 0.96);
+  padding-bottom: 5px;
+  z-index: 5;
+
+}
+.popup_button_wrapper{
+  margin-top: 10px;
+  padding-top: 10px;
+  height: 15px;
+  width: 15px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .back_button_icon, .close_button_icon{
+    padding-bottom: 10px;
+  }
+  .back_button_icon path, .close_button_icon path{
+    fill: #909090;
+  }
+  .back_button_icon path:hover, .close_button_icon path:hover{
+    fill: #FFBF1C;
+  }
+  .back_button_icon{
+    // padding-bottom: 10px;
+    opacity: 0;
+  }
+  .back_button_icon.active{
+    opacity: 1;
+  }
+}
+
+.add_coctails_button{
+  display: none;
+  // margin-bottom: 20px;
+  .button{
+    background-color: #86F584;
+    .button_label{
+      color:black
+    }
+  }
+}
+.add_coctails_button.active{
+  display: inline;
+}
+
+.menu_position_block{
+  display: none;
+  width: 80%;
+  // padding-top: 60px;
+  height: 100%;
+  overflow: scroll;
+  // margin-bottom: 100%;
+  // position: relative;
+  align-self: center;
+}
+.menu_position_block::-webkit-scrollbar {
+  width: 0px; 
+}       
+.menu_position_block.active{
+  display: inline;
+}
+
+.popup_menus_title{
+  display: none;
+}
+.popup_menus_title.active{
+  display: inline;
+}
+.popup_positions_title{
+  display: none;
+}
+.popup_positions_title.active{
+  display: inline;
+}
+
+
+.popup_footer{
+  position: sticky;
+  // height: 20%;
+  bottom:0px;
+  background-color: rgba(34, 34, 34, 0.96);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  .add_coctails_button{
+    width: 50%;
+    padding: 10px 0px;
+  }
+  .button{
+    width:100%;
+  }
+}
+
+@media (max-width:769px){
+  .popup_content_container{
+    width: 100%;
+  }
+  .menu_position_block{
+    width: 90%;
+  }
+  .popup_mobile_content{
+    width: 90%;
+  }
+  .service_button_line{
+    width: 85%;
+  }
+
+}
+

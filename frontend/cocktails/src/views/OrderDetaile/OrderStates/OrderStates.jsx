@@ -49,13 +49,8 @@ export function OrderStates(){
                         <div className="state_conteiner">
                             <div className='paid_btn' onClick={setStatePaid}>
                                 <RegularButton lable={'Set Paid'}/>
-                            </div>
-                            {/* <div className="camera_icon_conteiner">
-                                <CameraIcon className='camera_icon'/> 
-                            </div> */}
-                            
-                        </div>
-                        
+                            </div>    
+                        </div>  
                     )
                 case 'Paid':
                     return(

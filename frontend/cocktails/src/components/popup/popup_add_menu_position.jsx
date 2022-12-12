@@ -106,9 +106,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                                 />
                                 {on_focus === true ?(
                                     <div>
-                                        {/* <div></div> */}
-                                        <ul
-                                        >
+                                        <ul>
                                             {products.map(product=>(
                                                 <li 
                                                     key={product.id} 
