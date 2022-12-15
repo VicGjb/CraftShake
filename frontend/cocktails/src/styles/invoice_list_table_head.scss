@@ -1,0 +1,88 @@
+.invoice_list_table_head_wrapper{
+    margin-top: 20px;
+    height: 50px;    
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    font-size: 28px;
+    color: whitesmoke;
+
+}
+.invoice_list_table_head_slot{
+    text-align: center;
+
+}
+.invoice_list_table_head_slot.id{
+    margin-left: 0px;
+    width: 80px;
+}
+.invoice_list_table_head_slot.date{
+    width: 120px;
+    
+}
+.invoice_list_table_head_slot.amount{
+    width: 120px;
+    
+}
+.invoice_list_table_head_slot.total_amount{
+    width: 120px;
+}
+.invoice_list_table_head_slot.state{
+    width: 100px;
+    margin-right: 35px;
+}
+
+
+@media (min-width:1280px){
+
+}
+
+@media (max-width:1280px){
+    .invoice_list_table_head_wrapper{
+        font-size: 20px;
+    }
+}
+
+@media (max-width:769px){
+    .invoice_list_table_head_wrapper{
+        font-size: 18px;
+        height: 30px;  
+    }
+    .invoice_list_table_head_slot{
+        text-align: center;
+    }
+    .invoice_list_table_head_slot.id{
+        margin-left: 10px;
+        width: 50px;
+    }
+    .invoice_list_table_head_slot.date{
+        width: 120px;
+        
+    }
+    .invoice_list_table_head_slot.amount{
+        width: 120px;
+        
+    }
+    .invoice_list_table_head_slot.total_amount{
+        width: 120px;
+    }
+
+    .invoice_list_table_head_slot.state{
+        width: 100px;
+        margin-right: 35px;
+    }
+    
+}
+
+@media (max-width:450px){
+    .invoice_list_table_head_slot.amount{
+        display: none;
+    }
+    .invoice_list_table_head_slot.state{
+        width: 80px;
+        margin-right: 15px;
+    }
+    
+}

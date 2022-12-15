@@ -74,11 +74,27 @@
     }
 }
 .service_row_button_wrapper.delete{
+    display: flex;
+    height: 100%;
+    align-self: center;
+    justify-content: center;
     .button{
         background-color: #F15A5A;
         .button_label{
         color: black;
         }      
+    }  
+}
+.service_row_button_wrapper.change{
+    display: flex;
+    height: 100%;
+    align-self: center;
+    justify-content: center;
+    .button{
+        background-color: #F5DB51;   
+        .button_label{
+            color: black;
+            }       
     }  
 }
 
@@ -94,14 +110,7 @@
 
 
 
-.service_row_button_wrapper.change{
-    .button{
-        background-color: #F5DB51;   
-        .button_label{
-            color: black;
-            }       
-    }  
-}
+
 @media (min-width:1280px){
     .main_btn_container{
         margin-bottom: 30px;
@@ -126,7 +135,7 @@
         display: none;
     }
     .mobile_service_btn_row{
-        display: flex;
+        
         visibility: visible;
     }
     .place_detile_main_page_wrapper{

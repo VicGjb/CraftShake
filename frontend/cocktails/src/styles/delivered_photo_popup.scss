@@ -1,0 +1,36 @@
+.popup_delivered_photo_content{
+    width: 650px;
+    position: relative;
+
+}
+.popup_delivered_photo_sevice_button_wrapper{
+    position: absolute;
+    right: 20px;
+    top:-30px;
+}
+.popup_delivered_photo_wrapper{
+    margin: 0px 40px;
+}
+.popup_delivered_photo_close_button{
+    width: 20px;
+    height: 20px;
+    .close_button_icon path{
+        fill: #909090;
+    }
+
+    .close_button_icon{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width:450px){
+    .popup_delivered_photo_sevice_button_wrapper{
+        right: 25px;
+        top:-25px;
+    }
+    .popup_delivered_photo_close_button{
+        width: 15px;
+        height: 15px;
+    }
+}

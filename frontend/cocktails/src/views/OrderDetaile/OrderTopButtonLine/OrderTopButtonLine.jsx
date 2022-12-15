@@ -164,7 +164,7 @@ export function OrderTopButtonLine({date}){
                     <DeleteOrderButton/>
                     <UpdateOrderButton/>
                     <div className='order_state_btn'>
-                            <OrderStates/> 
+                        <OrderStates/> 
                     </div>
                 </div>
             )    
@@ -176,7 +176,9 @@ export function OrderTopButtonLine({date}){
                             <RegularButton lable={'Back'}/>
                         </Link> 
                     </div>
-                    <CreateOrderButton date={date}/>
+                    <div className="order_create_btn">
+                        <CreateOrderButton date={date}/>
+                    </div>
                 </div>
             )
         }
@@ -215,7 +217,9 @@ export function MobileButtonLineTop({date}){
                         <RegularButton lable={'Back'}/>
                     </Link> 
                 </div>
-                <CreateOrderButton date={date}/>
+                <div className="order_create_btn">
+                    <CreateOrderButton date={date}/>
+                </div>   
             </div>
         )
     }

@@ -382,6 +382,52 @@ class InvoiceUpdateView(viewsets.ModelViewSet):
             invoice.save()
         return Response(status=201)
 
+    @action(detail=True, methods=['post','invoiced'])
+    def invoiced(self, request, pk=None):
+        invoice = Invoice.objects.get(id=pk)
+        invoice.invoiced()
+        invoice.save()
+        data = InvoiceSerializer(invoice)
+        return Response(status=201, data=data.data)
+
+    @action(detail=True, methods=['post','paid'])
+    def paid(self, request, pk=None):
+        invoice = Invoice.objects.get(id=pk)
+        invoice.paid()
+        invoice.save()
+        data = InvoiceSerializer(invoice)
+        return Response(status=201, data=data.data)
+
+    @action(detail=True, methods=['post','add_vat'])
+    def add_vat(self, request, pk=None):
+        invoice = Invoice.objects.get(id=pk)
+        if invoice.is_vat:
+            data = InvoiceSerializer(invoice)
+            return Response(status=201,data=data.data)
+        else:
+            amount = invoice.amount
+            total_amount = amount * Rate.VAT_RATE
+            invoice.total_amount = total_amount
+            invoice.is_vat = True
+            invoice.save()
+            data = InvoiceSerializer(invoice)
+            return Response(status=201, data=data.data)
+
+    @action(detail=True, methods=['post','remove_vat'])
+    def remove_vat(self, request, pk=None):
+        invoice = Invoice.objects.get(id=pk)
+        if invoice.is_vat:
+            invoice.total_amount = invoice.amount
+            invoice.is_vat = False
+            invoice.save()
+            data = InvoiceSerializer(invoice)
+            return Response(status=201, data=data.data)
+        else:
+            data = InvoiceSerializer(invoice)
+            return Response(status=201, data=data.data)
+
+
+
 
 
 class InvoiceCreateView(viewsets.ModelViewSet):

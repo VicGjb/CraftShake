@@ -7,6 +7,11 @@ import { AddButton } from "../../components/buttons/add_button";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupAddInvoice } from "../../components/popup/popup_add_invoice";
 import { InvoiceListState } from "./invoice_list_state";
+import { InvoiceCard } from "./InvoiceCard";
+import { InvoiceListTableHead } from "./InvoiceListTableHead";
+import { PopupFilters } from "../../components/PopupFilters";
+import '../../styles/invoice_list.scss'
+
 
 export function InvoiceList(){
     let [invoices, setInvoices] = useState([]);
@@ -22,6 +27,7 @@ export function InvoiceList(){
     }
     let [form, setForm] = useState(defaultForm);
     let[add_invoice_active, setAdd_invoice_active] = useState(false)
+    let [filterActive, setFilterActive] = useState(false)
 
 
     useEffect(()=>{
@@ -33,110 +39,36 @@ export function InvoiceList(){
                 })
     },[placeId])
 
-
-    let changeHandler = e =>{
-        setForm({...form, [e.target.name]:e.target.value, ['place']:placeId});
-    }
-    function SearchInvoice(e){
-        e.preventDefault()
-        network_manager.search_invoice(placeId, form.date_from, form.date_to)
-            .then(invoices =>{
-                setInvoices(invoices);
-                console.log('res',invoices)
-            })
-    }
-
     function InvouceListView(){
         return(
-            <div>
-                <div className="invoice_list_content">
-                    <div className="invoice_list_content_title regular_text">
-                        Invoice                        
-                    </div>
-                    <div className="invoice_list_content_conteiner">
-                        <div className="managers_list_content__conteiner___button_set">
-                            <div className="invoise_list_button_set" onClick={main_context.goBack}>
+                <div className="invoice_list_wrapper">  
+                    <div className="service_button_row">
+                        <div className="service_row_button_wrapper back" >
+                            <Link to={`/${placeName}/${placeId}/detaile`}>
                                 <RegularButton lable={'Back'}/>
-                            </div>
-                            <div className="invoise_list_button_set" onClick={()=>setAdd_invoice_active(true)}>
-                                <AddButton lable={'Add invoice'}/>
-                            </div>
+                            </Link>
                         </div>
-                        <div className="invoice_list_table_search">
-                            <div className="invoice_list_table regular_text_small">
-                                <div className="invoice_list_table_head">
-                                    <div className="invoice_list_table_head_tr tr">
-                                        <div className="th">
-                                            ID
-                                        </div>
-                                        <div className="th">
-                                            Date
-                                        </div>
-                                        <div className="th">
-                                            Amount
-                                        </div>
-                                        <div className="th">
-                                            Total
-                                        </div>
-                                        <div className="th">
-                                            State
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="invoice_list_table_body">
-                                    {invoices.map(invoice => (
-                                        <Link to={`/${placeName}/${placeId}/invoices/${invoice.id}`} key={invoice.id}>
-                                            <div className="invoice_list_table_body_tr tr">
-                                                <div className="td">{invoice.id}</div>
-                                                <div className="td">{invoice.date}</div>
-                                                <div className="td">{invoice.amount}</div>
-                                                <div className="td">{invoice.total_amount}</div>
-                                                <div className="td"><InvoiceListState invoice={invoice}/></div>
-                                            </div>
-                                        </Link>                                      
-                                    ))}
-                                  </div>
-                            </div>
-                            <div className="order_list_button_set">
-                                <div className="title regular_text_small">Search</div>
-                                <form onSubmit={SearchInvoice} className='add_order_form'>
-                                    <div className="add_order_popup_date">
-                                        <div className="date_lable regular_text_small">
-                                            From
-                                        </div>
-                                        <div>
-                                            <input
-                                                className="date_input"
-                                                type='date'
-                                                name='date_from'
-                                                onChange={changeHandler}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="add_order_popup_date">   
-                                        <div className="date_lable">
-                                            To
-                                        </div>
-                                        <div>
-                                            <input
-                                                className="date_input"
-                                                type='date'
-                                                name='date_to'
-                                                onChange={changeHandler}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div type="submit">
-                                        <RegularButton lable={'Search'}></RegularButton>
-                                    </div>               
-                                </form>           
-                            </div>        
+                        <div className="service_row_button_wrapper filter" onClick={()=>{setFilterActive(true)}}>
+                                <AddButton  lable={'Filters'} />   
                         </div>
-
+                        <div className="service_row_button_wrapper add" onClick={()=>{setAdd_invoice_active(true)}}>
+                            <AddButton  lable={'Add invoice'} />  
+                        </div>
                     </div>
+
+
+                    <div className="invoices_table">
+                        <InvoiceListTableHead/> 
+                        {invoices.map(invoice => (
+                            <Link to={`/${placeName}/${placeId}/invoices/${invoice.id}`} key={invoice.id}>
+                                <InvoiceCard invoice={invoice}/>
+                            </Link>                                      
+                        ))}
+                    </div> 
+                    <PopupAddInvoice add_invoice_active={add_invoice_active} setAdd_invoice_active={setAdd_invoice_active}/>
+                    <PopupFilters filterActive={filterActive} setFilterActive={setFilterActive} subject={'invoices'} setSubject={setInvoices}/>
                 </div>
-                <PopupAddInvoice add_invoice_active={add_invoice_active} setAdd_invoice_active={setAdd_invoice_active}/>
-            </div>
+               
         )
     }
 
@@ -150,9 +82,6 @@ export function InvoiceList(){
         }
     }
     return(
-        <div>
-            {Render(is_loaded)}   
-        </div>
-        
+        Render(is_loaded)  
     )
 }

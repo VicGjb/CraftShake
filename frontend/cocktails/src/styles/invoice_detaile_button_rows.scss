@@ -1,0 +1,76 @@
+.invoice_detaile_batton_row{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+    .button{
+        width: 150px;
+    }
+}
+.delete_invoice_button{
+    .button{
+        background-color: #F15A5A;
+        transition: 0.3s;
+        .button_label{
+            color: black;
+        }
+    }
+    .button:hover{
+        background-color: #cd4a4a;
+        .button_label{
+            color:#FFBF1C;
+        }
+    }
+}
+.update_invoice_button{
+  
+    .button{
+        background-color: #7D62EA;
+        transition: 0.3s;
+        .button_label{
+            color: black;
+        }
+    }
+    .button:hover{
+        background-color: #694be2;
+        .button_label{
+            color:#FFBF1C;
+        }
+    }
+}
+
+
+
+@media (max-width:1280px){
+
+}
+
+@media (min-width:990px){
+
+}
+
+@media (max-width:990px){
+
+}
+
+@media (min-width:769px){
+
+}
+@media (max-width:769px){
+    .delete_invoice_button_wrapper{
+        display: none;
+    }
+}
+
+@media (max-width:450px){
+    .invoice_detaile_batton_row{
+        // width: 90%;
+        justify-content: space-around;
+        .button{
+            width: 150px;
+            height: 25px;
+            // margin: 0px,5px;
+        }
+    }
+
+}

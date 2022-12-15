@@ -41,17 +41,17 @@ export function OrderDetaileContent({orderId, menus}){
     },[])
 
 
-    function renderMenu(menu){
-        if(menu.is_current_menu){
-            return(
-                <div  key={menu.id}>
-                    <NavLink className='regular_text_small menu_name_link' to={`menu/${menu.id}`}>
-                        {menu.name}
-                    </NavLink>  
-                </div>
-            )
-        }
-    }
+    // function renderMenu(menu){
+    //     if(menu.is_current_menu){
+    //         return(
+    //             <div  key={menu.id}>
+    //                 <NavLink className='regular_text_small menu_name_link' to={`menu/${menu.id}`}>
+    //                     {menu.name}
+    //                 </NavLink>  
+    //             </div>
+    //         )
+    //     }
+    // }
 
 
     function dateChangeHendler(e){
@@ -137,12 +137,6 @@ export function OrderDetaileContent({orderId, menus}){
                 <div className="order_detaile_tables_wrapper">
                     <div className="menu_positions_table">
                         {renderAllMenus()}
-                        {/* <div className="order_detaile_menu_name">
-                            {menus.map(menu=>(
-                                renderMenu(menu)
-                            ))}
-                        </div> 
-                        <OrderDetaileMenuRoute/>     */}
                     </div>      
                         <OrderPositions/>
                 </div>

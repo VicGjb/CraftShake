@@ -28,7 +28,7 @@ export function UploadOrderPhotoPopup({upload_photo_active, setUploadPhotoActive
     }
 
     return(
-        <div className={upload_photo_active  ? 'popup_wrapper active' : 'popup_wrapper'} onClick={()=>setUploadPhotoActive(false)}>
+        <div className={upload_photo_active  ? 'popup_mobile_wrapper active' : 'popup_wrapper'} onClick={()=>setUploadPhotoActive(false)}>
             <div className="popup_add_product_content" onClick={e => e.stopPropagation()}>
                 <div className="popup_title">
                     You must add photo

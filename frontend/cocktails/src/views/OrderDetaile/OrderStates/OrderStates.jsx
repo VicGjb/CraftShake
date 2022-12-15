@@ -4,7 +4,6 @@ import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_
 import { UploadOrderPhotoPopup } from "./UploadOrderPhoto"
 import { RegularButton } from "../../../components/buttons/regular_button"
 import { NetworkManager } from "../../../components/network_manager"
-import {ReactComponent as CameraIcon} from "../../../svg/camera_icon.svg"
 import '../../../styles/order_states.scss'
 
 export function OrderStates(){
@@ -46,11 +45,9 @@ export function OrderStates(){
                     )
                 case 'Delivered':
                     return(
-                        <div className="state_conteiner">
-                            <div className='paid_btn' onClick={setStatePaid}>
-                                <RegularButton lable={'Set Paid'}/>
-                            </div>    
-                        </div>  
+                        <div className='paid_btn' onClick={setStatePaid}>
+                            <RegularButton lable={'Set Paid'}/>
+                        </div>      
                     )
                 case 'Paid':
                     return(

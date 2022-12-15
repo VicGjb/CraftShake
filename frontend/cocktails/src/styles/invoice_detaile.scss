@@ -1,0 +1,296 @@
+.invoice_detaile_wrapper{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+.invoice_detaile_title{
+    position: relative;
+    width: 100%;
+    margin-top: 15px;
+    height: 50px;
+    font-size: 25px;
+    color: #909090;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #323131;
+    border-radius: 10px;
+    z-index: 0;
+    
+    .invoice_detaile_title_id{
+        margin-right: 40px;
+    }
+}
+.pdf_icon_container{
+    position: absolute;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: #86F584;
+    .pdf_icon{
+        width: 80%;
+        height: 80%;
+    }
+}
+
+.mobile_invoice_mnagers_buttons{
+    
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #909090;
+    font-size: 30px;
+    border-bottom: 1px solid #909090;
+
+    .select_state{
+        display: flex;
+        justify-content: space-between;
+        width: 150px;
+        .select-css{
+            width: 150px;
+            font-size: 20px;
+        }
+    }
+    .button{
+        width: 150px;
+    }
+}
+
+.remove_vat_button_wrapper{
+    .button{
+        background-color: #F15A5A;
+        transition: 0.3s;
+        .button_label{
+            color: black;
+        }
+    }
+    .button:hover{
+        background-color: #cd4a4a;
+        .button_label{
+            color:#FFBF1C;
+        }
+    }
+}
+.add_vat_button_wrapper{
+    .button{
+        background-color: #86F584;
+        transition: 0.3s;
+        .button_label{
+            color: black;
+        }
+    }
+    .button:hover{
+        background-color: #4d9b4c;
+        .button_label{
+            color: #FFBF1C;;
+        }
+    }
+}
+
+.invoice_detaile_tables_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.invoice_orders_table{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    background-color: #323131;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.invoice_detaile_table_info{
+    position: sticky;
+    top:10px;
+    right: 5px;
+    align-self: baseline;
+    width: 28%;
+    margin-top: 20px;
+    color: #909090;
+    font-size: 24px;
+    background-color: #323131;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    align-items: center;
+    .button{
+        position: absolute;
+        bottom: -50px;
+        right: 0px;
+        margin-top: 10px;
+        width: 100%;
+        border-radius: 20px;
+    }
+}
+.invoice_detaile_table_info_row{
+    overflow: hidden;
+    font-size: 18px;
+    color: whitesmoke;
+    background-color: #323131;
+    height: 30px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+    border-radius: 50px;
+}
+.invoice_detaile_table_info_row:first-child{
+    margin-top: 10px;
+}
+.invoice_detaile_table_info_row:last-child{
+    margin-bottom: 0px;
+    color: #FFBF1C;
+}
+
+.invoice_detaile_footer{
+    width: 100%;
+    background-color: #222;
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+}
+.invoice_detaile_footer_content{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.invoice_detaile_footer_buttons{
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 50%;
+    align-items: flex-start;
+    justify-content: space-between;
+    // justify-content: end;
+    .button{
+        width: 135px;
+    }
+    .delete_invoice_button_wrapper{
+        margin-top: 10px;
+    }
+}
+.invoice_detaile_footer_info{
+    height: 90%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+@media (min-width:1280px){
+    .invoice_detaile_table_info_row{
+        width: 250px   ;
+    }
+}
+
+@media (max-width:1280px){
+ .invoice_detaile_table_info{
+     font-size: 19px;
+ }
+
+}
+
+@media (min-width:990px){
+
+}
+
+@media (max-width:990px){
+
+}
+
+@media (min-width:769px){
+   
+    .invoice_detaile_footer{
+        display: none;
+    }
+
+}
+@media (max-width:769px){
+    .invoice_detaile_table_info{
+        display:none;
+    }
+    .invoice_orders_table{
+        width: 100%;
+    }
+    .invoice_detaile_wrapper{
+        width: 90%;
+    }
+    .invoice_detaile_title{
+        font-size: 22px;
+    }
+    .mobile_invoice_mnagers_buttons{
+        font-size: 24px;
+        .select_state{
+            width: 150px;
+            .select-css{
+                width: 150px;
+                font-size: 20px;
+            }
+        }
+    }
+    .invoice_orders_table{
+        margin-bottom: 150px;
+    }
+
+    .invoice_detaile_footer{
+        .delete_invoice_button_wrapper{
+            display: inline;
+        }
+    }
+    .invoice_detaile_table_info_row{
+        font-size: 20px;
+        width: 175px;
+    }
+}
+
+@media (max-width:450px){
+    .invoice_detaile_wrapper{
+        width: 100%;
+    }
+    .invoice_detaile_title{
+        font-size: 20px;
+        width: 100%;
+    }
+    .pdf_icon_container{
+        width: 45px;
+        height: 45px;
+    }
+    .mobile_invoice_mnagers_buttons{
+        justify-content: space-around;
+        font-size: 24px;
+        .select_state{
+            display: flex;
+            justify-content: space-between;
+            width: 150px;
+            .select-css{
+                width: 150px;
+                font-size: 16px;
+            }
+        }
+        .button{
+            height: 25px;
+            width: 150px;
+        }
+    }
+    .invoice_detaile_table_info_row{
+        font-size: 16px;
+        width: 150px;
+    }
+
+
+
+}

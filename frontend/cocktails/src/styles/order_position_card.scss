@@ -1,8 +1,8 @@
 .order_position_card_wrapper{
     width: 90%;
     margin-top: 20px;
-    height: 40px;
-    font-size: 20px;
+    height: 60px;
+    font-size: 22px;
     border-radius: 20px;
     border: 1px solid whitesmoke;
     display: flex;
@@ -92,8 +92,8 @@
 
 @media (max-width:769px){
     .order_position_card_wrapper{
-        font-size: 14px;
-        height: 25px;
+        font-size: 15px;
+        height: 40px;
         margin-top: 15px;
     }
     .order_position_card_slot{

@@ -3,14 +3,12 @@ import { NavLink, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { OrderDetaileMenuRoute } from "./order_detaile_router";
 import { useOrderItemListContext } from "./OrderDetaileContext/order_item_list_context";
-import { useManeContext } from "../../components/main_context";
 import { RegularButton } from "../../components/buttons/regular_button";
 import {ReactComponent as BackIcon} from "../../svg/back_icon.svg"
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import '../../styles/popup_mobile.scss'
 
 export function PopupAddCocktailsMenu({add_cicktails_active, setAdd_cocktails_active}){
-    // BG%20Lounge/1/orders/98
     let {placeName} = useParams()
     let {placeId} = useParams()
     let {orderId} = useParams()
@@ -86,8 +84,6 @@ export function PopupAddCocktailsMenu({add_cicktails_active, setAdd_cocktails_ac
                         <CloseIcon className='close_button_icon'/>
                     </div>   
                 </div>
-                
-                
                 
                 <div className="popup_title">
                     {console.log('MENUS MOBILE', menus)}

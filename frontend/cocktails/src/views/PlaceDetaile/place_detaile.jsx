@@ -1,6 +1,7 @@
 import React, {useEffect,useState} from "react";
 import {useParams} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { NetworkManager } from "../../components/network_manager";
 import { useManeContext } from "../../components/main_context";
 import { InvoicesMainBtn } from "../../components/buttons/invoices_main_btn";
@@ -21,6 +22,7 @@ import '../../styles/place_detaile.scss'
 export function PlaceDetaile(){
     let [place, setPlace] = useState({});
     let {placeId} = useParams();
+    let {placeName} = useParams();
     let [loaded, setLoaded] = useState(false);
     let network_manager = new NetworkManager()
 
@@ -62,8 +64,10 @@ export function PlaceDetaile(){
                     <RegularButton lable={'Back'}/>
                 </div>
                 <div className="monitor_service_button_row">
-                        <div className="service_row_button_wrapper" onClick={main_context.goBack}>
-                            <RegularButton lable={'Back'}/>
+                        <div className="service_row_button_wrapper">
+                            <Link to={`/placeList`}>
+                                <RegularButton lable={'Back'}/>
+                            </Link>
                         </div>
                         <div className="service_row_button_wrapper" onClick={()=>setDelete_active(true)}>
                             <RegularButton lable={'Delete place'} />
@@ -79,8 +83,11 @@ export function PlaceDetaile(){
                     <div className="place_detaile_main_buttons_wrapper">
                         <div className="main_btn_container">
                             <OrdersMainBtn place={place}/>
-                            <div className="place_detaile_button_wrapper" onClick={()=>setAdd_order_active(true)}>
-                                <AddButton lable={'Add order'} />   
+                            <div className="place_detaile_button_wrapper">
+                                <Link to={`/${placeName}/${placeId}/orders/new_order`}>
+                                    <AddButton lable={'Add order'} />  
+                                </Link>
+                                   
                             </div>
                         </div>
                         <div className="main_btn_container">
@@ -117,7 +124,7 @@ export function PlaceDetaile(){
                     </div>   
                 </div>
 
-                <PopupAddOrder add_order_active={add_order_active} setAdd_order_active={setAdd_order_active}/>
+                {/* <PopupAddOrder add_order_active={add_order_active} setAdd_order_active={setAdd_order_active}/> */}
                 <PopupAddInvoice place={place} add_invoice_active={add_invoice_active} setAdd_invoice_active={setAdd_invoce_active}/>
                 <PopupAddMenu  add_menu_active={add_menu_active} setAdd_menu_active={setAdd_menu_active}/>
                 <PopupAddManager place={place} add_manager_active={add_manager_active} setAdd_manager_active={setAdd_manager_active}/>

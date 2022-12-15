@@ -1,0 +1,151 @@
+.popup_mobile_content_create_invoice{
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    flex-direction: column;
+    width:30%;
+    background-color: #222;
+    border-radius: 10px;
+}
+.add_invoice_title{
+    width: 90%;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    align-self: center;
+    color: #909090;
+    font-size: 30px;
+}
+.add_invoice_form{
+ 
+    display: flex;
+    flex-direction: column;
+
+    // justify-content: space-between;
+    align-self: center;
+    // background-color: #909090;
+    width: 80%;
+    // height: 70%;
+}
+.add_invoice_form_date{
+    align-self: center;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    font-size: 20px;
+    font-weight: 600;
+    color: whitesmoke;
+    margin-top: 20px;
+    border-bottom: 1px solid #909090;
+    .date_input{
+        font-size: 18px;
+        border-bottom: 0px;
+    }
+
+}
+.add_invoice_form_submit_btn{
+    align-self: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 60%;
+    .button{
+        height: 40px;
+        width: 100%;
+        background-color: #86F584;
+        transition: 0.3s;
+        .button_label{
+            color: black;
+        }
+    }
+    .button:hover{
+        background-color: #4d9b4c;
+        .button_label{
+            color: #FFBF1C;
+        }
+    }
+}
+
+@media (max-width:1280px){
+    .popup_mobile_content_create_invoice{
+        width: 40%;
+    }
+    .add_invoice_form_date{
+        width: 70%;
+    }
+    .add_invoice_form_submit_btn{
+        width: 70%;
+
+    }
+}
+
+@media (max-width:990px){
+    .popup_mobile_content_create_invoice{
+        width: 60%;
+    }
+    .add_invoice_form_date{
+        width: 85%;
+        font-size: 18px;
+        .date_input{
+            font-size: 16px;
+        }
+    }
+    .add_invoice_form_submit_btn{
+        width: 85%;
+        margin-top: 20px;
+        
+    }
+}
+
+
+
+@media (max-width:769px){
+    .popup_mobile_content_create_invoice{
+        width: 60%;
+    }
+    .add_invoice_title{
+        width: 90%;
+        font-size: 26px;
+    }
+    .add_invoice_form_date{
+        width: 100%;
+        font-size: 18px;
+        .date_input{
+            font-size: 16px;
+        }
+    }
+    .add_invoice_form_submit_btn{
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        
+    }
+}
+
+   
+
+@media (max-width:550px){
+    .popup_mobile_content_create_invoice{
+        width: 80%;
+    }
+    .add_invoice_title{
+        width: 90%;
+        font-size: 20px;
+    }
+    .add_invoice_form{
+        width: 80%;
+    }
+    .add_invoice_form_date{
+        width: 100%;
+        font-size: 16px;
+        .date_input{
+            font-size: 14px;
+        }
+    }
+    .add_invoice_form_submit_btn{
+        width: 100%;
+        margin-top: 50px;
+        
+    }
+
+}

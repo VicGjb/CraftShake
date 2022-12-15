@@ -206,6 +206,15 @@ class Invoice(models.Model):
         verbose_name = 'Invoice'
         verbose_name_plural = 'Invoices'
     
+    STATUS_CREATED = 'Created'
+    STATUS_INVOICED = 'Invoiced'
+    STATUS_PAID = 'Paid'
+    STATUS_CHOICES = (
+        (STATUS_CREATED, 'CREATED'),
+        (STATUS_INVOICED, 'INVOICED'),
+        (STATUS_PAID, 'PAID'),
+    )
+
 
     place = models.ForeignKey(
         Place,
@@ -230,10 +239,13 @@ class Invoice(models.Model):
         decimal_places=2,
         verbose_name='Total amount'
     )
-    state = models.CharField(
-        max_length=10,
-        verbose_name='State',
-        default='No state'
+    state = FSMField(
+        choices=STATUS_CHOICES,
+        default=STATUS_CREATED,
+        protected=True,
+        blank=True,
+        null = True,
+        verbose_name='State' 
     )
 
     def __str__(self) -> str:
@@ -242,6 +254,13 @@ class Invoice(models.Model):
     def get_place_name(self):
         return self.place.name
 
+    @transition(field=state, source=STATUS_CREATED, target=STATUS_INVOICED)
+    def invoiced(self):
+        print(f'invoiced')
+    
+    @transition(field=state, source=STATUS_INVOICED, target=STATUS_PAID)
+    def paid(self):
+        print(f'paid')
 
 class CustomerStatement(models.Model):
     """Comment"""
@@ -345,7 +364,8 @@ class Order(models.Model):
         default=STATUS_CREATED,
         protected=True,
         blank=True,
-        null = True 
+        null = True,
+        verbose_name='State',
     )
     open_to_customer = models.BooleanField(
         default=True,

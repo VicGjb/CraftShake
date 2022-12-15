@@ -2,6 +2,11 @@
     width: 80%;
     height: 100%;
 }
+.order_title{
+    // margin: 0,300px;
+    // padding-left: 300px;
+    justify-self: center;
+  }
 .order_detaile_buttons_line_monitor{
     // position: sticky;
     // top: 0px;
@@ -27,16 +32,45 @@
 .order_detaile_delete_btn{
     .button{
         background-color: #F15A5A;
+        transition: 0.3s;
         .button_label{
             color: black;
         }
     }
+    .button:hover{
+        background-color: #cd4a4a;
+        .button_label{
+            color:#FFBF1C;
+        }
+    }
 }
 .order_update_btn{
+  
     .button{
         background-color: #7D62EA;
+        transition: 0.3s;
         .button_label{
             color: black;
+        }
+    }
+    .button:hover{
+        background-color: #694be2;
+        .button_label{
+            color:#FFBF1C;
+        }
+    }
+}
+.order_create_btn{
+    .button{
+        background-color: #86F584;
+        .button{
+            color: black;
+        }
+    }
+    .button:hover{
+        background-color: #4d9b4c;
+        .button_label{
+            color: #FFBF1C;;
         }
     }
 }
@@ -82,6 +116,7 @@
 }
 
 .add_order_date_container{
+    overflow: hidden;
     display: flex;
     height: 50px;
     width: 300px;
@@ -99,6 +134,7 @@
     }
 }
 .order_detaile_tables_wrapper{
+    display: flex;
     width: 100%;
 }
 .menu_positions_table{
@@ -158,6 +194,7 @@
     border-radius: 10px;
 }
 .order_detaile_total_monitor{
+    overflow: hidden;
     background-color: #323131;
     height: 100%;
     width: 50%;
@@ -285,7 +322,26 @@
         width: 100%;
         .button{
             width: 100%;
-            height: 25px;
+            height: 30px;
+        }
+    }
+
+    .add_order_date_container{
+        display: flex;
+        height: 30px;
+        width: 100%;
+        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+        font-size: 26px;
+        color: #909090;
+        background-color: #323131;
+        .date_input{
+            background-color: #323131;
+            font-size: 22px;
+            margin-left: 20px;
+            color: whitesmoke;
+    
         }
     }
 }

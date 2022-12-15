@@ -28,7 +28,7 @@ export function InvoiceListState({invoice}){
         if(invoice.state=='No state'){
             return(
                 <select  
-                    className="invoice_detaile_content_body_status_select regular_text_small"
+                    className="invoice_detaile_content_body_status_select"
                     value={form.state}
                     onChange={changeHendler}
                     name='state'

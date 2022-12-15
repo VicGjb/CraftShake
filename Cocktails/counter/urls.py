@@ -95,6 +95,10 @@ urlpatterns = format_suffix_patterns(
         path('invoice/delete/<int:pk>/', InvoiceDeleteView.as_view({'post':'destroy'})),
         path('invoice/create_pdf/<int:pk>/', InvoiceView.as_view({'get':'create_pdf'})),
         path('invoice/update/<int:pk>/', InvoiceUpdateView.as_view({'post':'update'})),
+        path('invoice/<int:pk>/set-invoiced/',InvoiceUpdateView.as_view({'post':'invoiced'})),
+        path('invoice/<int:pk>/set-paid/',InvoiceUpdateView.as_view({'post':'paid'})),
+        path('invoice/<int:pk>/add_vat/',InvoiceUpdateView.as_view({'post':'add_vat'})),
+        path('invoice/<int:pk>/remove_vat/',InvoiceUpdateView.as_view({'post':'remove_vat'})),
         path('invoice/html/<int:pk>/', InvoiceView.as_view({'get':'html_view'})),
 
         path('order/', OrderView.as_view({'get':'list'})),

@@ -54,7 +54,7 @@ border-radius: 10px;
 
 @media (min-width:1280px)  {
     .place_card_btn{
-        width: 45%;
+        width:500px;
         height: 140px;
     }
     .place_card_dtn_title{
@@ -93,12 +93,10 @@ border-radius: 10px;
     .place_card_btn_subtitle{
         font-size: 14px;
     }
-
 }
-
 @media (max-width:388px){
    .place_card_btn{
        width: 235px;
-       margin-left: 0px;
+
    } 
 }

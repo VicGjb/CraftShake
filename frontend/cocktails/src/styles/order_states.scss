@@ -1,25 +1,48 @@
 .appruve_btn{
     .button{
         background-color: #86F584;
+        transition: 0.3s;
         .button_label{
             color: black;
         }
-    } 
+    }
+    .button:hover{
+        background-color: #4d9b4c;
+        .button_label{
+            color: #FFBF1C;;
+        }
+    }
 }
 .delivered_btn{
     .button{
-        background-color: #F5DB51;
+        background-color: #C96AF6;
+        transition: 0.3s;
         .button_label{
             color: black;
         }
     } 
+    .button:hover{
+        background-color: #953bbf;
+        .button_label{
+            color: #FFBF1C;;
+        }
+    }
+    
 }
 .paid_btn{
     .button{
         background-color: #86F584;
+        transition: 0.3s;
         .button_label{
             color: black;
-        }}
+        }
+    }
+    .button:hover{
+        background-color: #4d9b4c;
+        .button_label{
+            color: #FFBF1C;;
+        }
+    }
 }
 .paid_state{
     color: #86F584;

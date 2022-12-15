@@ -515,34 +515,34 @@ body{
 //   color: #222;
 // }
 
-.order_title{
-  // margin: 0,300px;
-  // padding-left: 300px;
-  justify-self: center;
-}
-.state_button_set{
-  justify-self: right; 
-}
+// .order_title{
+//   // margin: 0,300px;
+//   // padding-left: 300px;
+//   justify-self: center;
+// }
+// .state_button_set{
+//   justify-self: right; 
+// }
 
-.order_detaile_content{
-  @include adaptiv(750, 190, width);
-  display: flex;
-  flex-direction: column;
-}
-.order_detaile_content_title{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  // margin: 0 auto;
-  @include adaptiv(20,5,margin-top )
-}
+// .order_detaile_content{
+//   @include adaptiv(750, 190, width);
+//   display: flex;
+//   flex-direction: column;
+// }
+// .order_detaile_content_title{
+//   display: flex;
+//   justify-content: space-between;
+//   flex-wrap: wrap;
+//   // margin: 0 auto;
+//   @include adaptiv(20,5,margin-top )
+// }
 
-.order_detaile_tables_wrapper{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  @include adaptiv(750, 190, width);
-}
+// .order_detaile_tables_wrapper{
+//   display: flex;
+//   justify-content: space-between;
+//   flex-wrap: wrap;
+//   @include adaptiv(750, 190, width);
+// }
 
 // .order_total_info{
 //   @include adaptiv(20,5 , margin-top);
@@ -1051,155 +1051,155 @@ body{
 
 
 // Invoice Detaile
-.invoice_detaile_content_body{
-  @include adaptiv(750, 190, width);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
+// .invoice_detaile_content_body{
+//   @include adaptiv(750, 190, width);
+//   display: flex;
+//   justify-content: space-between;
+//   flex-wrap: wrap;
+// }
 
-.invoice_detaile_content_body_orders_table{
-  @include adaptiv(400,100 ,width )
-}
-.invoice_detaile_content_body_orders_table_order{
-  @include adaptiv(15,10 ,margin-top );
-}
+// .invoice_detaile_content_body_orders_table{
+//   @include adaptiv(400,100 ,width )
+// }
+// .invoice_detaile_content_body_orders_table_order{
+//   @include adaptiv(15,10 ,margin-top );
+// }
 
-.invoice_detaile_contetnt_title{
-  @include adaptiv(15,10 ,margin-top );
-  display: flex;
-  justify-content: space-between;
-}
+// .invoice_detaile_contetnt_title{
+//   @include adaptiv(15,10 ,margin-top );
+//   display: flex;
+//   justify-content: space-between;
+// }
 
-.invoice_detaile_content_body_orders_table_title{
-  display: flex;
-  justify-content: space-between;
-  border-bottom: solid 1px #909090;
-}
-.invoice_detaile_content_body_orders_table_body_row_total_price{
-  display: flex;
-  justify-content: end;
-  color: #FFBF1C;
-  div{
-    border-bottom: solid 1px #909090;
-  } 
-}
+// .invoice_detaile_content_body_orders_table_title{
+//   display: flex;
+//   justify-content: space-between;
+//   border-bottom: solid 1px #909090;
+// }
+// .invoice_detaile_content_body_orders_table_body_row_total_price{
+//   display: flex;
+//   justify-content: end;
+//   color: #FFBF1C;
+//   div{
+//     border-bottom: solid 1px #909090;
+//   } 
+// }
 
-.invoice_detaile_content_body_orders_table_list{
-  padding: 30px;
-  overflow: scroll;
-  max-height: 500px;
-}
-.invoice_detaile_content_body_orders_table_list::-webkit-scrollbar {
-  width: 3px;
-  height: 0px; 
-}       
-.invoice_detaile_content_body_orders_table_list::-webkit-scrollbar-track {
-  background:#2c2b2b;
-}        
-.invoice_detaile_content_body_orders_table_list::-webkit-scrollbar-thumb {
-  background:#222222;
-  border-radius: 8px;
-  border: 1px solid #424040;
-}
+// .invoice_detaile_content_body_orders_table_list{
+//   padding: 30px;
+//   overflow: scroll;
+//   max-height: 500px;
+// }
+// .invoice_detaile_content_body_orders_table_list::-webkit-scrollbar {
+//   width: 3px;
+//   height: 0px; 
+// }       
+// .invoice_detaile_content_body_orders_table_list::-webkit-scrollbar-track {
+//   background:#2c2b2b;
+// }        
+// .invoice_detaile_content_body_orders_table_list::-webkit-scrollbar-thumb {
+//   background:#222222;
+//   border-radius: 8px;
+//   border: 1px solid #424040;
+// }
 
-.invoice_detaile_content_body_status{
-  @include adaptiv(15,10 ,margin-top );
-}
-.invoice_detaile_content_body_orders_table_head{
-  @include adaptiv(15,10 ,margin-top );
-}
+// .invoice_detaile_content_body_status{
+//   @include adaptiv(15,10 ,margin-top );
+// }
+// .invoice_detaile_content_body_orders_table_head{
+//   @include adaptiv(15,10 ,margin-top );
+// }
 
-.invoice_detaile_content_body_orders_table_info_row{
-  @include adaptiv(15,10 ,margin-top);
-}
+// .invoice_detaile_content_body_orders_table_info_row{
+//   @include adaptiv(15,10 ,margin-top);
+// }
 
-.invoice_detaile_content_body_button_set{
-  @include adaptiv(15,10 ,margin-top);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  height: 200px;
-  .invoice_detaile_content_body_button_set_button{
-    @include adaptiv(20,10 ,margin-top)
-  }
-}
-.invoice_detaile_content_body_orders_table_info{
-  @include adaptiv(15,10 ,margin-top );
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  .invoice_detaile_content_body_orders_table_info_total_amount{
-    color: #FFBF1C;
-  }
-}
-.invoice_detaile_content_body_status_select{
-  background-color: #222222;
-  border-bottom:solid 1px #909090;
-}
+// .invoice_detaile_content_body_button_set{
+//   @include adaptiv(15,10 ,margin-top);
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   height: 200px;
+//   .invoice_detaile_content_body_button_set_button{
+//     @include adaptiv(20,10 ,margin-top)
+//   }
+// }
+// .invoice_detaile_content_body_orders_table_info{
+//   @include adaptiv(15,10 ,margin-top );
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-end;
+//   .invoice_detaile_content_body_orders_table_info_total_amount{
+//     color: #FFBF1C;
+//   }
+// }
+// .invoice_detaile_content_body_status_select{
+//   background-color: #323131;
+//   border-bottom:solid 1px #909090;
+// }
 
 
 // Add invoice Popup
 
-.add_invoice{
-  @include adaptiv(300 ,200 ,width);
-  @include adaptiv(300,180 ,height);
-  background-color: #222;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-}
+// .add_invoice{
+//   @include adaptiv(300 ,200 ,width);
+//   @include adaptiv(300,180 ,height);
+//   background-color: #222;
+//   border-radius: 10px;
+//   display: flex;
+//   flex-direction: column;
+//   flex-wrap: nowrap;
+//   align-items: center;
+// }
 
-.add_invoice_title{
-  text-align: center;
-  width: 180px;
-  @include adaptiv(15,10 ,margin-top );
-  white-space: wrap;
-}
-.add_invoice_content{
-  @include adaptiv(15,10 ,margin-top );
-  @include adaptiv(200,120 ,width);
-}
-.add_invoice_form{
-  display: flex;
-  flex-direction: column;
-}
-.add_invoice_form_date{
-  display: flex;
-  justify-content: space-between;
-  @include adaptiv(15,10 ,margin-top );
-  input[type=date]{
-    font-family: 'Fira Mono';
-    font-style: normal;
-    font-weight: 400;
-    @include adaptiv(14, 10, font-size);
-    background-color: #222;
-    color: #909090;
-    border-bottom: solid 1px #605F5E; 
-    }
+// .add_invoice_title{
+//   text-align: center;
+//   width: 180px;
+//   @include adaptiv(15,10 ,margin-top );
+//   white-space: wrap;
+// }
+// .add_invoice_content{
+//   @include adaptiv(15,10 ,margin-top );
+//   @include adaptiv(200,120 ,width);
+// }
+// .add_invoice_form{
+//   display: flex;
+//   flex-direction: column;
+// }
+// .add_invoice_form_date{
+//   display: flex;
+//   justify-content: space-between;
+//   @include adaptiv(15,10 ,margin-top );
+//   input[type=date]{
+//     font-family: 'Fira Mono';
+//     font-style: normal;
+//     font-weight: 400;
+//     @include adaptiv(14, 10, font-size);
+//     background-color: #222;
+//     color: #909090;
+//     border-bottom: solid 1px #605F5E; 
+//     }
   
-    input[type=date]:hover{
-      border-bottom: solid 1px #FFBF1C; 
+//     input[type=date]:hover{
+//       border-bottom: solid 1px #FFBF1C; 
       
-  }
+//   }
 
-  input[type=date]::-webkit-calendar-picker-indicator {
-    color: #999;
-    height: 15px;
-    width: 15px;
-  } 
+//   input[type=date]::-webkit-calendar-picker-indicator {
+//     color: #999;
+//     height: 15px;
+//     width: 15px;
+//   } 
 
-}
-.add_invoice_form_submit_btn{
-  margin: 0 auto;
-  @include adaptiv(15,10 ,margin-top );
-  justify-self: center;
-}
-.add_invoice_form_date_lable{
-  align-self: center;
-}
+// }
+// .add_invoice_form_submit_btn{
+//   margin: 0 auto;
+//   @include adaptiv(15,10 ,margin-top );
+//   justify-self: center;
+// }
+// .add_invoice_form_date_lable{
+//   align-self: center;
+// }
 
 
 // Menus List

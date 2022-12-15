@@ -534,6 +534,39 @@ export class NetworkManager{
 	}
 
 
+	async set_invoice_invoiced(invoiceId){
+		return this.axiosInstance
+			.post(`counter/invoice/${invoiceId}/set-invoiced/`)
+			.then(response=>{
+				return response.data
+			})
+		}
+
+	async set_invoice_paid(invoiceId){
+		return this.axiosInstance
+			.post(`counter/invoice/${invoiceId}/set-paid/`)
+			.then(response=>{
+				return response.data
+			})
+		}
+
+	async add_vat(invoiceId){
+		return this.axiosInstance
+			.post(`counter/invoice/${invoiceId}/add_vat/`)
+			.then(response=>{
+				return response.data
+			})
+		}
+
+	async remove_vat(invoiceId){
+		return this.axiosInstance
+			.post(`counter/invoice/${invoiceId}/remove_vat/`)
+			.then(response=>{
+				return response.data
+			})
+		}
+
+
 // Auth
 	async SingIn(from){
 		return this.axiosInstance

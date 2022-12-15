@@ -1,0 +1,86 @@
+.invoice_order_table_wrapper{
+    width: 70%;
+    margin-top: 20px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    
+}
+.invoice_order_taible_date{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #909090;
+    border-bottom: 1px solid #909090;
+    font-size: 20px;
+}
+
+// Table head
+.invoice_order_table_head_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: whitesmoke;
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.invoice_order_table_head_slot{
+    text-align: center;
+}
+.invoice_order_table_head_slot.name{
+    text-align: start;
+    width: 150px;
+}
+.invoice_order_table_head_slot.qnt{
+    width: 80px;
+}
+.invoice_order_table_head_slot.price{
+    width: 100px;
+    text-align: end;
+}
+
+// OrrderItemCard
+.invoice_order_item_card_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #909090;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.invoice_order_item_slot{
+    text-align: center;
+}
+.invoice_order_item_slot.name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    box-orient: vertical;
+    text-align: start;
+    width: 150px;
+}
+.invoice_order_item_slot.qnt{
+    width: 80px;
+}
+.invoice_order_item_slot.price{
+    width: 100px;
+    text-align: end;
+}
+
+
+.invoice_order_table_total{
+    align-self: flex-end;
+    border-bottom: 1px solid #FFBF1C;
+    color: #FFBF1C;
+    margin-top: 13px;
+    font-size: 18px;
+    text-align: start;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import '../../styles/order_list_table_head.scss'
+
 export function OrderListTableHead(){
 
     return(
