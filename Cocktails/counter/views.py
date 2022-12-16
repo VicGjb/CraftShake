@@ -321,7 +321,7 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
     filterset_class = InvoiceFilter
 
     def get_queryset(self):
-        invoice = Invoice.objects.all() 
+        invoice = Invoice.objects.all().order_by('-date')
         return invoice  
 
     
@@ -385,18 +385,29 @@ class InvoiceUpdateView(viewsets.ModelViewSet):
     @action(detail=True, methods=['post','invoiced'])
     def invoiced(self, request, pk=None):
         invoice = Invoice.objects.get(id=pk)
+        orders = Order.objects.filter(invoice=pk)
+        for order in orders:
+            if order.state != 'Delivered' and order.state != 'Paid':
+                return Response(status=400, data='OrderStateError')
         invoice.invoiced()
         invoice.save()
         data = InvoiceSerializer(invoice)
         return Response(status=201, data=data.data)
 
+
     @action(detail=True, methods=['post','paid'])
     def paid(self, request, pk=None):
         invoice = Invoice.objects.get(id=pk)
+        orders = Order.objects.filter(invoice=pk)
+        for order in orders:
+            if order.state == 'Delivered':
+                order.paid()
+                order.save()
         invoice.paid()
         invoice.save()
         data = InvoiceSerializer(invoice)
         return Response(status=201, data=data.data)
+
 
     @action(detail=True, methods=['post','add_vat'])
     def add_vat(self, request, pk=None):

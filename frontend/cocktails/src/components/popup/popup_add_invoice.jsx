@@ -29,7 +29,7 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active}){
                 console.log(response);
             })
             .catch(error => {
-                console.log(error);
+                console.log('Iam ERROR',error);
                 throw error;
             });
             navigate(`/${placeName}/${placeId}/invoices`,)

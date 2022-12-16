@@ -15,21 +15,10 @@ import '../../styles/invoice_detaile.scss'
 
 export function InvoiceDetaileContent(){
     let invoiceDetaileContext = useInvoiceDetaileContext()
-    let {placeId} = useParams();
-    let {placeName} = useParams();
-    let navigate = useNavigate();
     let network_manager = new NetworkManager()
     let invoice = invoiceDetaileContext.getInvoice
     let [loaded, setLoaded] = useState(false);
     let {invoiceId} = useParams();
-    let main_context= useManeContext();
-
-    let defaultForm = {
-        state:'',
-        is_vat:false,
-    }
-    let [form, setForm] = useState(defaultForm);
-
     
     let [regular_message_active, setRegular_message_active] = useState(false)
     let [delete_active,setDelete_active] = useState(false)
@@ -37,12 +26,9 @@ export function InvoiceDetaileContent(){
     useEffect(() => {
         network_manager.get_invoice_detaile(invoiceId)
             .then(invoice => { 
-                // setInvoice(invoice);
                 invoiceDetaileContext.setInvoice(invoice)
                 invoiceDetaileContext.setIsVat(invoice.is_vat)
                 setLoaded(true);
-                setForm({...form, ['state']:invoice.state, ['is_vat']:invoice.is_vat})
-                invoiceDetaileContext.setForm({...form, ['state']:invoice.state, ['is_vat']:invoice.is_vat})
             })
     }, [invoiceId])
     

@@ -127,7 +127,7 @@ export function OrderDetaileContent({orderId, menus}){
                     <div className="indent"></div>
                     <div className="order_title">
                         {orderId 
-                            ? `Order №: ${order.id} on ${order.date}`
+                            ? `Order №: ${order.id} on ${order.date.split('-').reverse().join('.')}`
                             : `New Order`
                         }
                     </div>
@@ -142,8 +142,7 @@ export function OrderDetaileContent({orderId, menus}){
                 </div>
                 <div className="order_detaile_footer">
                     <MobileButtonLineBottom />
-                </div>
-                
+                </div> 
             </div>
         )
     }

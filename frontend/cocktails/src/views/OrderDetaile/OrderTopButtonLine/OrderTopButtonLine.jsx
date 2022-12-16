@@ -22,7 +22,9 @@ export function UpdateOrderButton(){
         let total = {
             total_price: calculateTotal() 
         } 
-        orderItemContext.item_list.map(order_item =>{
+
+
+        for (let order_item  of orderItemContext.item_list){
             if(order_item.new_item){
                 console.log('new_order_item_update',order_item)
                 network_manager.create_order_item(order_item)
@@ -34,7 +36,20 @@ export function UpdateOrderButton(){
                         throw error;
                     });
                 }
-        });
+        }
+        // orderItemContext.item_list.map(order_item =>{
+        //     if(order_item.new_item){
+        //         console.log('new_order_item_update',order_item)
+        //         network_manager.create_order_item(order_item)
+        //             .then(response => {
+        //                 console.log(response);
+        //             })
+        //             .catch(error => {
+        //                 console.log(error);
+        //                 throw error;
+        //             });
+        //         }
+        // });
         orderItemContext.delete_item_list.map((order_item) =>{
             console.log('deleted',orderItemContext.delete_item_list)
 
@@ -57,7 +72,7 @@ export function UpdateOrderButton(){
                 console.log(error);
                 throw error;
             });
-            navigate(`/${placeName}/${placeId}/orders`)
+        navigate(`/${placeName}/${placeId}/orders`)
     }
 
 

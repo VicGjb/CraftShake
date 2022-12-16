@@ -1,18 +1,44 @@
 import React from "react";
 import { NetworkManager } from "../../components/network_manager";
 import { useState } from "react";
+import { RegularButton } from "../../components/buttons/regular_button";
 
-export function CurrentMenuChackBox({menu}){
+export function CurrentMenuChackBox({menu, form}){
     let network_manager = new NetworkManager()
-    let [form, setForm] = useState(
-        {
-        is_current_menu: menu.is_current_menu,
+    let [current, setCurrent] = useState(menu.is_current_menu)
+
+    function renderMenuCurrentState(){
+        if (current){
+            console.log(menu)
+            return(
+                <div className="menu_card_slot current green" onClick={setNotCurent}>
+                     <RegularButton lable={'Current'}/>
+                </div>
+            )
+        }else{
+            return(
+                <div className="menu_card_slot current red" onClick={setCurent}>
+                    <RegularButton lable={'Not current'}/>
+                </div>
+            )
         }
-    )
+    }
     
-    async function updateMenu(e){
-        setForm({...form, ["is_current_menu"]:e.target.checked})
-        network_manager.update_menu(menu.id,{["is_current_menu"]:e.target.checked})
+    function setNotCurent(){
+        setCurrent(false)
+        network_manager.update_menu(menu.id,{["is_current_menu"]:false})
+            .then(response=>{
+                console.log(response);
+                console.log('result',form);
+                })
+                .catch(error => {
+                    console.log(error);
+                    throw error;
+                });     
+    }
+    function setCurent(){
+        setCurrent(true)
+        network_manager.update_menu(menu.id,{["is_current_menu"]:true})
             .then(response=>{
                 console.log(response);
                 console.log('result',form);
@@ -24,14 +50,7 @@ export function CurrentMenuChackBox({menu}){
     }
 
     return(
-        <div>
-            <input 
-                type="checkbox"
-                name="is_current_menu"
-                checked={form.is_current_menu}
-                onChange={updateMenu}
-                />
-        </div>
+        renderMenuCurrentState()
         
     )
 }

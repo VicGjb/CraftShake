@@ -17,6 +17,7 @@ export function MenuPositionRow({position}){
     let order_detile_context = useOrderItemListContext();
     
     let orderId = order_detile_context.getOrderIdContext
+    
     let [windowWidth, setWindowWidth] = useState(window.innerWidth)
     let defaultForm = {
         uuid:uuidv4(),

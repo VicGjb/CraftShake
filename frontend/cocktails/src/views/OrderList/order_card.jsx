@@ -21,7 +21,7 @@ export function OrderCard({order}){
                 # {order.id}
             </div>
             <div className="order_card_slot date">
-                {order.date}
+                {order.date.split('-').reverse().join('.')}
             </div>
             <div className={`order_card_slot state ${renderOrderStateColor()}`}>
                 {order.state}
