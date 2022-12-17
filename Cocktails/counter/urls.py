@@ -115,6 +115,7 @@ urlpatterns = format_suffix_patterns(
         path('order-item/<int:pk>/', OrderItemView.as_view({'get':'retrieve'})),
         path('order-item/create/', OrderItemCreateView.as_view({'post':'create'})),
         path('order-item/<int:pk>/delete/', OrderItemDeleteView.as_view({'post':'destroy'})),
+        
         path('order-item-volume/', OrderItemVolumeView.as_view({'get':'list'})),
         path('order-item-volume/<int:pk>/', OrderItemVolumeView.as_view({'get':'retrieve'})),
 
