@@ -17,7 +17,7 @@ import { LayoutPlace } from "./layout_place";
 import { InvoiceList } from "../views/InvoiceList/invoice_list";
 import { InvoiceDetaile } from "../views/InvoiceDetaile/InvoiceDetaile";
 import { MenuList } from "../views/MenuList/menu_list";
-import { MenuDetaile } from "../views/MenuDetaile/menu_detaile";
+import { MenuDetaile } from "../views/MenuDetaile/MenuDetaile";
 import { ManagersList } from "../views/ManagersList/managers_list";
 import { AuthLayout } from "./auth_layout";
 import { GetCodeGoogleLogin } from "../views/Auth/get_code_google_login";

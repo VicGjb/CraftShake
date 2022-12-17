@@ -1,7 +1,12 @@
 import React from "react";
 import { RegularButton } from "../buttons/regular_button";
 
-export function PopupDelete({subject, delete_active, setDelete_active, func }){
+export function PopupDelete({
+    subject, 
+    delete_active, 
+    setDelete_active, 
+    func 
+    }){
 
     return(
         <div className={delete_active ? 'popup_wrapper active' : 'popup_wrapper'} onClick={()=>setDelete_active(false)}>

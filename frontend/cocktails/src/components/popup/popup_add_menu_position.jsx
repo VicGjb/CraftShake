@@ -5,8 +5,11 @@ import { useEffect } from "react";
 import { RegularButton } from "../buttons/regular_button";
 import { useNavigate, useParams } from "react-router-dom";
 import Autocomplete from '@mui/material/Autocomplete';
+import { useMenuDetaileContext } from "../../views/MenuDetaile/MenuDetaileContext";
 
-export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_position_active, menu}){
+export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_position_active}){
+    let menuDetaileContext = useMenuDetaileContext()
+    let menu = menuDetaileContext.getMenu
     let {placeId}=useParams()
     let defaultForm = {
         name:'',
@@ -21,6 +24,8 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
     let[products, setProducts] = useState([]);
     let navigate = useNavigate();
     let network_manager = new NetworkManager()
+
+    
     
     useEffect(() => {
         network_manager.get_product_list()
@@ -41,14 +46,14 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
         e.preventDefault()
         network_manager.create_menu_position(form)
 			.then(response => {
-				console.log(response);
+				console.log('responce',response);
+                menuDetaileContext.addMenuPosition(response.data)
 			})
 			.catch(error => {
 				console.log(error);
 				throw error;
 			});	
-            navigate(`${placeId}/menus/${menu.id}`, {state:{from:menu},replace:false})
-            window.location.reload();	
+            setAdd_menu_position_active(false)	
     }
     function changeHandler(e){
         setForm({...form, [e.target.name]:e.target.value});

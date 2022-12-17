@@ -1225,19 +1225,7 @@ body{
   .td{
     display: flex;
     justify-content: center;
-    .position_photo{
-      margin: 0 auto;
-      overflow: visible;
-      @include adaptiv(45, 30, width);
-      @include adaptiv(45, 30, height);
-  
-      img {
-        align-self: center;
-        width: 100%;
-        height: 100%;
-        border-radius: 10%;
-      } 
-    }
+    
   }
 }
 

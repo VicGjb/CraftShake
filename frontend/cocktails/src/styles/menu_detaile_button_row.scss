@@ -1,0 +1,42 @@
+.menu_detaile_button_row{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+    .button{
+        width: 150px;
+    }
+}
+
+.delete_menu_button{
+    .button{
+        background-color: #F15A5A;
+        transition: 0.3s;
+        .button_label{
+            color: black;
+        }
+    }
+    .button:hover{
+        background-color: #cd4a4a;
+        .button_label{
+            color:#FFBF1C;
+        }
+    }
+}
+
+.menu_detaile_add_position_button{
+  
+    .button{
+        background-color: #7D62EA;
+        transition: 0.3s;
+        .button_label{
+            color: black;
+        }
+    }
+    .button:hover{
+        background-color: #694be2;
+        .button_label{
+            color:#FFBF1C;
+        }
+    }
+}
