@@ -81,7 +81,7 @@ from .telegram_alarm import (
 """Place views"""
 class PlaceAPIListView(generics.ListAPIView):
     permission_classes = [permissions.IsAdminUser]
-    queryset = Place.objects.all()
+    queryset = Place.objects.all().order_by('name')
     serializer_class = PlaceSerializer
 
 class PlaceAPIDetaileView(generics.RetrieveAPIView):

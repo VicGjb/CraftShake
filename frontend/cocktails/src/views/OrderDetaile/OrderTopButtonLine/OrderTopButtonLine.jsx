@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { RegularButton } from "../../../components/buttons/regular_button";
 import { PopupDelete } from "../../../components/popup/popup_delete";
 import { OrderStates } from "../OrderStates/OrderStates";
+import { PopupRegularMessage } from "../../../components/popup/popup_regular_message";
 
 
 export function UpdateOrderButton(){
@@ -17,88 +18,32 @@ export function UpdateOrderButton(){
     let {placeId} = useParams();
     let network_manager = new NetworkManager()
     let navigate = useNavigate()
+    let [regular_message_active, setRegular_message_active] = useState(false)
 
     function updateOrder(){
-        // let total = {
-        //     total_price: calculateTotal() 
-        // } 
-
         network_manager.update_order(order.id,orderItemContext.item_list)
-        
-        // for (let order_item  of orderItemContext.item_list){
-        //     let notCurrentMenu = false
-        //     if(order_item.new_item){
-        //         console.log('new_order_item_update',order_item)
-        //         network_manager.create_order_item(order_item)
-        //             .then(response => {
-        //                 console.log(response);
-        //             })
-        //             .catch(error => {
-        //                 if(error.response.data=='ErorrNotCurrentMenu'){
-        //                     notCurrentMenu = true
-        //                     console.log('error',error.response.data);
-        //                     // throw error;
-        //                     console.log('OK')
-        //                     console.log('error',error.response.data);
-        //                 }
-                        
-        //             });
-        //         }
-        //     if(notCurrentMenu){
-        //         console.log('not current menu')
-        //         break
-        //     }
-        // }
-        // orderItemContext.item_list.map(order_item =>{
-        //     if(order_item.new_item){
-        //         console.log('new_order_item_update',order_item)
-        //         network_manager.create_order_item(order_item)
-        //             .then(response => {
-        //                 console.log(response);
-        //             })
-        //             .catch(error => {
-        //                 console.log(error);
-        //                 throw error;
-        //             });
-        //         }
-        // });
-        // orderItemContext.delete_item_list.map((order_item) =>{
-        //     console.log('deleted',orderItemContext.delete_item_list)
-
-        //     network_manager.delete_order_item(order_item.id)
-        //         .then(response =>{
-        //             console.log('item deleted', response);
-        //         })
-        //         .catch(error=>{
-        //             console.log(error);  
-        //             throw error;
-        //         });
-        //     console.log('deleted',orderItemContext.delete_item_list)
-        // });
-        
-        // network_manager.update_order_total(order.id, total)
-        //     .then(response => {
-        //         console.log('UPDATE',response);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         throw error;
-        //     });
-        navigate(`/${placeName}/${placeId}/orders`)
+        .then(response=>{
+            navigate(`/${placeName}/${placeId}/orders`)
+        })
+        .catch(error=>{
+            if (error.response.data == "ErrorNotCurrentMenu"){
+                setRegular_message_active(true)
+            }
+            console.log(error);
+            throw error;
+        });
     }
 
-
-    // function calculateTotal(){
-    //     let result = 0
-    //     orderItemContext.item_list.map(item =>(
-    //         result = Number(result) + Number(item.item_price)
-    //     ))
-    //     return (result.toFixed(2))
-    // }
 
     return(
         <div className='order_update_btn' onClick={updateOrder}>
             <RegularButton lable={'Update'}/> 
+            <PopupRegularMessage 
+            message={'You try to ordering cocktails from not current menu. Sorry...'}
+            regular_message_active={regular_message_active}
+            setRegular_message_active ={setRegular_message_active}
+            customFunction = {()=>{window.location.reload()}}
+            />
         </div>
 
     )
@@ -108,9 +53,10 @@ export function CreateOrderButton({date}){
     let orderItemContext = useOrderItemListContext()
     let {placeName} = useParams();
     let {placeId} = useParams();
-    let network_manager = new NetworkManager()
-    let navigate = useNavigate()
-    
+    let network_manager = new NetworkManager();
+    let navigate = useNavigate();
+    let [regular_message_active, setRegular_message_active] = useState(false)
+
     function createOrder(){
         let form ={
             order:{
@@ -121,7 +67,16 @@ export function CreateOrderButton({date}){
                 order_item_list:orderItemContext.item_list
         }
         network_manager.create_order(form)
-        navigate(`/${placeName}/${placeId}/orders`)
+        .then(response=>{
+            navigate(`/${placeName}/${placeId}/orders`)
+        })
+        .catch(error=>{
+            if (error.response.data == "ErrorNotCurrentMenu"){
+                setRegular_message_active(true)
+            }
+            console.log(error);
+            throw error;
+        });
     }
 
     function calculateTotal(){
@@ -134,7 +89,13 @@ export function CreateOrderButton({date}){
 
     return(
         <div className='order_update_btn' onClick={createOrder}>
-            <RegularButton lable={'Create'}/>                       
+            <RegularButton lable={'Create'}/>    
+            <PopupRegularMessage 
+            message={'You try to ordering cocktails from not current menu. Sorry...'}
+            regular_message_active={regular_message_active}
+            setRegular_message_active ={setRegular_message_active}
+            customFunction = {()=>{window.location.reload()}}
+            />                   
         </div>
     )
 }

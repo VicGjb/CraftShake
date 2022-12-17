@@ -329,35 +329,6 @@ export class NetworkManager{
 			})
 		}
 
-	
-
-	
-
-	//Order_item 
-	async create_order_item(order_item){
-		return this.axiosInstance
-			.post(`counter/order-item/create/`,order_item)
-			.then(response=>{
-				return response
-			})
-	}
-
-	async delete_order_item(itemId){
-		return this.axiosInstance
-			.post(`counter/order-item/${itemId}/delete/`)
-			.then(response => {
-				return response
-			})
-	}
-
-	async get_order_item_volume_list(){
-		return this.axiosInstance
-			.post(`counter/order-item-volume/`)
-			.then(response =>{
-				return response.data.results
-			})
-	}
-
 
 	// Menu
 	async create_menu(form){

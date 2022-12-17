@@ -1,0 +1,42 @@
+.menu_list_wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+}
+
+
+.service_button_row.menu_list{
+    margin-bottom: 20px;
+
+}
+
+
+
+@media (min-width:1280px){
+
+}
+@media (max-width:1280px){
+    .menu_card_wrapper{
+        height: 50px; 
+        font-size: 18px;
+    }
+}
+@media (max-width:769px){
+    .menu_list_wrapper{
+        width: 90%;
+    }
+}
+@media (max-width:550px){
+    .menu_list_wrapper{
+        width: 99%;
+    }
+
+    .service_button_row.menu_list{
+        margin-top: 20px;
+        .button{
+            height: 25px;
+            width: 140px;
+        }
+    }
+}

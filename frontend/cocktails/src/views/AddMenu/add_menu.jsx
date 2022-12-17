@@ -39,37 +39,36 @@ export function AddMenu({ setAdd_menu_active}) {
     }
 
     return(
-        <div>
-            <form onSubmit={submitHandler} className='add_menu_form'>
-				<div className='add_menu_popup_input regular_text_small'>
-					<div className='add_menu_popup_input_label'>
-                        Name:
-                    </div>     
-                        <input
-                        className='name'
-                            type="text"
-                            name="name"
-                            value={form.name}
-                            onChange={changeHandler}
-                        />
-                </div>
-                <div className='add_menu_popup_input'>
-                    <div className='add_menu_popup_input_label regular_text_small'>
-                        Current:
-                    </div> 
-                        <input
-                            className='is_current'
-                            type="checkbox"
-                            name="is_current_menu"
-                            value={form.is_current_menu}
-                            checked={form.is_cuis_current_menu}
-                            onChange={() => setForm(prev=> ({...prev, is_current_menu: !prev.is_current_menu}))}
-                        />
-                </div>
-                <div type="submit" className='add_menu_popup_add_btn' onClick={ToGo}>
-                    <RegularButton lable={'Add'}/>
-                </div>
-            </form>
-          </div>
+        <form onSubmit={submitHandler} className='add_menu_form'>
+            <div className='popup_text_input_wrapper add_menu'>
+                <div className='popup_text_input_label'>
+                    Name:
+                </div>     
+                    <input
+                        className='popup_text_input'
+                        type="text"
+                        name="name"
+                        value={form.name}
+                        onChange={changeHandler}
+                    />
+            </div>
+            <div className='popup_chekbox_input_wrapper add_menu'>
+                <div className='popup_text_input_label add_menu'>
+                    Current:
+                </div> 
+                    <input
+                        className='is_current'
+                        type="checkbox"
+                        name="is_current_menu"
+                        value={form.is_current_menu}
+                        checked={form.is_cuis_current_menu}
+                        onChange={() => setForm(prev=> ({...prev, is_current_menu: !prev.is_current_menu}))}
+                    />
+            </div>
+            <div type="submit" className='submit_form_button' onClick={ToGo}>
+                <RegularButton lable={'Add'}/>
+            </div>
+        </form>
+        
     )
 }

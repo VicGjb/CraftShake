@@ -1202,40 +1202,6 @@ body{
 // }
 
 
-// Menus List
-.menu_list_content{
-  @include adaptiv(15,10 ,margin-top );
-  @include adaptiv(750, 190, width);
-  display: flex;
-  flex-direction: column;
-}
-.menu_list_content_title{
-  margin: 0 auto;
-}
-.menu_list_content_container{
-  @include adaptiv(750, 190, width);
-  display: flex;
-  flex-direction: column;
-}
-.menu_list_button_set{
-  display: flex;
-  justify-content: space-between;
-  // align-self: flex-end;
-}
-.menu_list_table{
-  @include adaptiv(15,10 ,margin-top );
-  .td{
-    color: #909090;
-  }
-  .td:hover{
-    color: #FFBF1C;
-  }
-}
-// .menu_list_table_body_tr:hover{
-//   color: #FFBF1C;
-// }
-
-
 
 
 
@@ -1309,37 +1275,6 @@ body{
   justify-self: end;
 }
 
-
-// Popup Add menu
-
-.add_menu_form{
-  display: flex;
-  flex-direction: column;
-  @include adaptiv(210,210 ,width )
-}
-
-.add_menu_popup_input{
-  @include adaptiv(20,10 ,margin-top);
-  display: flex;
-  justify-content: space-between;
-  .name{
-    background-color:#424040;
-    @include adaptiv(150,120 ,width );
-    color: #ecdede;
-    @include adaptiv(14,10 ,font-size );
-    padding-left: 5px;
-  }
-  // .is_current{
-    
-  // }
-}
-
-.add_menu_popup_add_btn{
-  @include adaptiv(20,10 ,margin-top);
-  display: flex;
-  justify-content: center;
-  background-color: #222;
-}
 
 
 // Managers list
