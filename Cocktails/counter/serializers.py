@@ -162,7 +162,7 @@ class OrderItemVolumeSerializer(serializers.ModelSerializer):
 
 """OrderItem serializers"""
 class OrderItemSerializer(serializers.ModelSerializer):
-    
+    # is_current = serializers.BooleanField(source='get_is_current_menu')
     class Meta:
         model = OrderItem
         fields = '__all__'

@@ -100,10 +100,9 @@ export function OrderDetaileContent({orderId, menus}){
             )
         }
     }
-    function renderAllMenus(){
-        console.log('menus', menus)
-        return(
-            menus.map(menu=>(
+    function renderMenu(menu){
+        if(menu.is_current_menu) {  
+            return(
                 <div className="order_detaile_menu_wrapper" key={menu.id}>
                     <div className="order_detaile_menu_title">
                         {menu.name}{console.log('Menu',menu)}
@@ -114,8 +113,8 @@ export function OrderDetaileContent({orderId, menus}){
                         ))}
                     </div>
                 </div>
-            ))
-        )
+            )
+        }
     }
     
     function OrderDetaileContentView(){
@@ -136,7 +135,9 @@ export function OrderDetaileContent({orderId, menus}){
                 {renderNewOrderDate(orderId, dateNow)}
                 <div className="order_detaile_tables_wrapper">
                     <div className="menu_positions_table">
-                        {renderAllMenus()}
+                        {menus.map(menu=>(
+                            renderMenu(menu)
+                        ))}
                     </div>      
                         <OrderPositions/>
                 </div>

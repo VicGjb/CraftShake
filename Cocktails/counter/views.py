@@ -1,4 +1,4 @@
-from decimal import ROUND_05UP, Decimal, ROUND_HALF_UP
+from decimal import  Decimal, ROUND_HALF_UP
 from django.shortcuts import render
 from django.db.models import Sum
 
@@ -526,7 +526,7 @@ class CustomerStatementView(viewsets.ReadOnlyModelViewSet):
         users = statement.place.users.filter(place=statement.place)
         print(request.user)
         if request.user in users or request.user.is_staff:
-            # print(f'HAKUNA MATATA {statement.date_from}') 
+
             orders = Order.objects.filter(customer_statement = pk).order_by('date')
             context = {'statement': statement, 'orders':orders}
             place_name = statement.get_place_name()
@@ -620,34 +620,34 @@ class OrderCreateView(viewsets.ModelViewSet):
     def create_new(self, request, pk=None):
         request_data = OrderAndItemCreateSerializer(data=request.data)
         print(request.data)
-        if request_data.is_valid():
-            item_order_list = request.data["order_item_list"]
+        
+        if request_data.is_valid() and request.data["order_item_list"]:
+            order_item_list = request.data["order_item_list"]
+            for item in order_item_list:
+                item_serializer = OrderItemCreateSerializer(data=item)
+                if item_serializer.is_valid() :
+                    item['position'] = MenuPosition.objects.get(id=item['position'])
+                    if not item['position'].get_is_current_menu():
+                        return Response(status=400, data='ErrorNotCurrentMenu')
+                else:
+                    return Response(status=400,data='ErrorOrderItemNotValid')
             place = Place.objects.get(id=request.data['order'].pop('place'))
             order = Order.objects.create(place=place, **request.data['order'])
-            print(f'create order {item_order_list}')
-            for item_data in item_order_list:
-                order_item = OrderItemCreateSerializer(data=item_data)
-                if order_item.is_valid():
-                    print('order_item is valid')
-                    volume = OrderItemVolume.objects.get(id=item_data['volume'])
-                    position = MenuPosition.objects.get(id=item_data['position'])
-                    OrderItem.objects.create(
-                        order=order,
-                        name=item_data['name'],
-                        position=position,
-                        quantity=item_data['quantity'],
-                        volume=volume,
-                        item_price=item_data['item_price']
-                    )
-                else:
-                    Order.objects.get(id=order.id).delete()
-                    return Response(status=403)
+            for item in order_item_list:
+                volume = OrderItemVolume.objects.get(id=item['volume'])
+                OrderItem.objects.create(
+                    order=order,
+                    name=item['name'],
+                    position=item['position'],
+                    quantity=item['quantity'],
+                    volume=volume,
+                    item_price=item['item_price']
+                )
             data = OrderViewSerializer(order)
-            telegram_send_massege_new_order(order,item_order_list)
+            telegram_send_massege_new_order(order,order_item_list)
             return  Response(status=201, data=data.data) 
         else:
-            print('not valid')
-            return Response(status=403)
+            return Response(status=400, data='ErrorOrderFormNotValid')
 
 
 class OrderUpdateView(viewsets.ModelViewSet):
@@ -657,20 +657,68 @@ class OrderUpdateView(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['post','update'])
     def update(self, request, pk=None, *args, **kwargs):
-        print('i am here')
         order = Order.objects.get(id=pk)
-        print(request.user)
         if order.open_to_customer or request.user.is_staff:
-            order_update_data = OrderUpdateSerializer(data=request.data)
-            if order_update_data.is_valid():
-                print('AIM HERE')
-                order.total_price = order_update_data.data['total_price']
-                order.save()
-                telegram_send_massege_update_order(order)
-                return Response(status=201)
+            order_items_in_order = list(OrderItem.objects.filter(order=order.id).values_list('id', flat=True))
+            old_order_items_in_request = []
+            new_order_items_in_request =[]
+            delete_items = []
+            for item in request.data:
+                item_serialaizer = OrderItemCreateSerializer(data=item)
+                if item_serialaizer.is_valid():
+                    key = 'id'
+                    if key in item:
+                        old_order_items_in_request.append(item['id'])
+                    else:
+                        new_order_items_in_request.append(item)         
+                else:
+                    return Response(status=400)
+
+            for item in new_order_items_in_request:
+                item['position'] = MenuPosition.objects.get(id=item['position'])
+                if not item['position'].get_is_current_menu():
+                    return Response(status=400, data='ErrorNotCurrentMenu')      
+
+            delete_items = list(set(order_items_in_order)-set(old_order_items_in_request))
+            message_delete = []
+            for item in delete_items:
+                item = OrderItem.objects.get(id=item)
+                message_delete.append(item)
+                item.delete()
+
+            for item in new_order_items_in_request:
+                volume = OrderItemVolume.objects.get(id=item['volume'])
+                OrderItem.objects.create(
+                        order=order,
+                        name=item['name'],
+                        position=item['position'],
+                        quantity=item['quantity'],
+                        volume=volume,
+                        item_price=item['item_price']
+                    )
+            
+            new_order_items = OrderItem.objects.filter(order=order.id)
+            if new_order_items.exists():
+                total_price = Decimal(f'{new_order_items.aggregate(Sum("item_price"))["item_price__sum"]}')
+                
+                order.total_price = total_price.quantize(Decimal('0.01'),ROUND_HALF_UP)
+            else:
+                order.total_price = Decimal('0.00')
+            
+            order.save()
+            telegram_send_massege_update_order(order,new_order_items_in_request,message_delete)
+
+            print(f'total_praice {total_price}')
+            print(f'order total price {order.total_price}')
+            print(f'delete items {message_delete}')
+            print(f'old order items: {old_order_items_in_request}')
+            print(f'order_items_in_order {order_items_in_order}')
+            print(f'new_orderItems {new_order_items_in_request}')
+            return Response(status=201)
+
         else:
-            return Response(status=403)        
-    
+
+            return Response(status=403) 
     def get_queryset(self):
         order = Order.objects.all() 
         return order
@@ -730,6 +778,10 @@ class OrderItemCreateView(viewsets.ModelViewSet):
                 menu_position = MenuPosition.objects.get(
                     id = order_item.data['position']
                 )
+                print(f'Hei you {menu_position.get_is_current_menu()}')
+                if menu_position.get_is_current_menu() == False:
+                    return Response(status=400, data='ErorrNotCurrentMenu')
+
                 # print(f'Hey {menu_position.name}')
                 volume = OrderItemVolume.objects.get(
                     id=order_item.data['volume']

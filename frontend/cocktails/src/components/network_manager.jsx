@@ -272,9 +272,9 @@ export class NetworkManager{
 			})
 	}
 
-	async update_order_total(orderId, total_sum){
+	async update_order(orderId, itemList){
 		return this.axiosInstance
-			.post(`counter/order/update/${orderId}/`, total_sum)
+			.post(`counter/order/update/${orderId}/`, itemList)
 			.then(response=>{
 				return response
 			})

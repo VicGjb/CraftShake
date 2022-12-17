@@ -19,24 +19,36 @@ export function UpdateOrderButton(){
     let navigate = useNavigate()
 
     function updateOrder(){
-        let total = {
-            total_price: calculateTotal() 
-        } 
+        // let total = {
+        //     total_price: calculateTotal() 
+        // } 
 
-
-        for (let order_item  of orderItemContext.item_list){
-            if(order_item.new_item){
-                console.log('new_order_item_update',order_item)
-                network_manager.create_order_item(order_item)
-                    .then(response => {
-                        console.log(response);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                        throw error;
-                    });
-                }
-        }
+        network_manager.update_order(order.id,orderItemContext.item_list)
+        
+        // for (let order_item  of orderItemContext.item_list){
+        //     let notCurrentMenu = false
+        //     if(order_item.new_item){
+        //         console.log('new_order_item_update',order_item)
+        //         network_manager.create_order_item(order_item)
+        //             .then(response => {
+        //                 console.log(response);
+        //             })
+        //             .catch(error => {
+        //                 if(error.response.data=='ErorrNotCurrentMenu'){
+        //                     notCurrentMenu = true
+        //                     console.log('error',error.response.data);
+        //                     // throw error;
+        //                     console.log('OK')
+        //                     console.log('error',error.response.data);
+        //                 }
+                        
+        //             });
+        //         }
+        //     if(notCurrentMenu){
+        //         console.log('not current menu')
+        //         break
+        //     }
+        // }
         // orderItemContext.item_list.map(order_item =>{
         //     if(order_item.new_item){
         //         console.log('new_order_item_update',order_item)
@@ -50,39 +62,39 @@ export function UpdateOrderButton(){
         //             });
         //         }
         // });
-        orderItemContext.delete_item_list.map((order_item) =>{
-            console.log('deleted',orderItemContext.delete_item_list)
+        // orderItemContext.delete_item_list.map((order_item) =>{
+        //     console.log('deleted',orderItemContext.delete_item_list)
 
-            network_manager.delete_order_item(order_item.id)
-                .then(response =>{
-                    console.log('item deleted', response);
-                })
-                .catch(error=>{
-                    console.log(error);  
-                    throw error;
-                });
-            console.log('deleted',orderItemContext.delete_item_list)
-        });
+        //     network_manager.delete_order_item(order_item.id)
+        //         .then(response =>{
+        //             console.log('item deleted', response);
+        //         })
+        //         .catch(error=>{
+        //             console.log(error);  
+        //             throw error;
+        //         });
+        //     console.log('deleted',orderItemContext.delete_item_list)
+        // });
         
-        network_manager.update_order_total(order.id, total)
-            .then(response => {
-                console.log('UPDATE',response);
-            })
-            .catch(error => {
-                console.log(error);
-                throw error;
-            });
+        // network_manager.update_order_total(order.id, total)
+        //     .then(response => {
+        //         console.log('UPDATE',response);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         throw error;
+        //     });
         navigate(`/${placeName}/${placeId}/orders`)
     }
 
 
-    function calculateTotal(){
-        let result = 0
-        orderItemContext.item_list.map(item =>(
-            result = Number(result) + Number(item.item_price)
-        ))
-        return (result.toFixed(2))
-    }
+    // function calculateTotal(){
+    //     let result = 0
+    //     orderItemContext.item_list.map(item =>(
+    //         result = Number(result) + Number(item.item_price)
+    //     ))
+    //     return (result.toFixed(2))
+    // }
 
     return(
         <div className='order_update_btn' onClick={updateOrder}>

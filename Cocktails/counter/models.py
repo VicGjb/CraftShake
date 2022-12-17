@@ -199,6 +199,9 @@ class MenuPosition(models.Model):
     def get_discription(self) -> str:
         return self.product.discription
 
+    def get_is_current_menu(self)->bool:
+        return self.menu.is_current_menu
+
 
 class Invoice(models.Model):
     """Comment"""
@@ -470,7 +473,6 @@ class OrderItem(models.Model):
         blank=True,
     )
     
-
     def __str__(self) ->str:
         return f'{self.position} in {self.order}'
 
