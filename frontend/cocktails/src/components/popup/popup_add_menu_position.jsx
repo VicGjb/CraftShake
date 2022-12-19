@@ -4,8 +4,9 @@ import { NetworkManager } from "../network_manager";
 import { useEffect } from "react";
 import { RegularButton } from "../buttons/regular_button";
 import { useNavigate, useParams } from "react-router-dom";
-import Autocomplete from '@mui/material/Autocomplete';
+import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import { useMenuDetaileContext } from "../../views/MenuDetaile/MenuDetaileContext";
+import '../../styles/popup_add_menu_position.scss'
 
 export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_position_active}){
     let menuDetaileContext = useMenuDetaileContext()
@@ -21,8 +22,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
     let product_name = useRef()
     let [form, setForm] =  useState(defaultForm);
     let [on_focus, setOnFocus] = useState(false);
-    let[products, setProducts] = useState([]);
-    let navigate = useNavigate();
+    let [products, setProducts] = useState([]);
     let network_manager = new NetworkManager()
 
     
@@ -53,16 +53,12 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
 				console.log(error);
 				throw error;
 			});	
+            setForm(defaultForm)
+            product_name.current.value = defaultForm['product']
             setAdd_menu_position_active(false)	
     }
     function changeHandler(e){
         setForm({...form, [e.target.name]:e.target.value});
-        console.log(form)
-    }
-
-
-    function changeProductHandler(e){
-        setForm({...form, [e.target.name]:e.target.value, ['name']:products.filter(product=>product.id === e.target.value)[0].name});
         console.log(form)
     }
 
@@ -80,38 +76,43 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
             })
     }
     function onChoiseProduct(e){
-        console.log('IamHere')
         setForm({...form,['product']:e.target.value, ['name']:products.filter(product=>product.id === e.target.value)[0].name});
         product_name.current.value = products.filter(product=>product.id === e.target.value)[0].name
-        console.log('FORm',form)
         onBlurChange()
     }
 
     return(
-        <div className={add_menu_position_active ? 'popup_wrapper active' : 'popup_wrapper'} onClick={()=>setAdd_menu_position_active(false)}>
-            <div className="popup_content" onClick={e => e.stopPropagation()}>
-                <div className="popup_title">
-                    Add product to <br/>{menu.name}
+        <div className={add_menu_position_active ? 'popup_mobile_wrapper active' : 'popup_wrapper'} onClick={()=>setAdd_menu_position_active(false)}>
+            <div className="popup_mobile_content_add_menu_position" onClick={e => e.stopPropagation()}>
+                <div className="popup_filter_sevice_button_wrapper">
+                    <div className="popup_filter_close_button" onClick={()=>{setAdd_menu_position_active(false)}}>
+                        <CloseIcon className='close_button_icon'/>
+                    </div> 
                 </div>
-                <form onSubmit={submitHandler} className='add_menu_position_form regular_text_small'>
+                <div className="popup_title add_menu_position">
+                    Add product to {menu.name}
+                </div>
+                <form onSubmit={submitHandler} className='add_menu_position_form'>
                     <div className="add_menu_position_wrapper">
-                        <div></div>
-                        <div className="sale_price_lable">
+                        <div className="label">
                             Product: 
                         </div>
-                        <div>
+                        <div className="input_menu_position_wrapper">
                             <input
                                 type="text"
                                 name="product"
-                                className="form-control"
+                                className="add_menu_position_input_feild"
                                 onFocus={onFocusChange}
-                                // onBlur = {onBlurChange}
                                 onChange={getProductListByName}
+                                autoComplete='off'
                                 ref={product_name}
+                                default = {form.product}
                                 />
-                                {on_focus === true ?(
-                                    <div>
-                                        <ul>
+                                {on_focus === true ?(  
+                                    <div className="div">
+                                        <div className="on_blur" onClick={onBlurChange}></div>
+                                        <ul className="product_list">
+                                            
                                             {products.map(product=>(
                                                 <li 
                                                     key={product.id} 
@@ -129,23 +130,29 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                     </div>
 
                     <div className='add_menu_position_wrapper'>
-                        <div className='add_menu_position_name_labele regular_text_small'>
+                        <div className='label'>
                             Name:
                         </div>
-                        <input
-                            type="text"
-                            name="name"
-                            value={form.name}
-                            onChange={changeHandler}
-                        />
+                        <div className="input_menu_position_wrapper">
+                            <input
+                                className="add_menu_position_input_feild"
+                                type="text"
+                                name="name"
+                                value={form.name}
+                                onChange={changeHandler}
+                                autoComplete='off'
+                            />
+                        </div>
+                            
                     </div>
+                    
                     <div className="add_menu_position_wrapper">
-                        <div className="sale_price_lable">
+                        <div className="label">
                             Volume: 
                         </div>
-                        <div>
+                        <div className="input_menu_position_wrapper">
                             <input
-                                className='volume'
+                                className='add_menu_position_input_feild volume'
                                 type="number"
                                 step={10.00}
                                 min='0'
@@ -153,23 +160,25 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                                 value={form.volume}
                                 onChange={changeHandler}
                             />
+                            <span>ml.</span>
                         </div>
                     </div>
                     
                     <div className="add_menu_position_wrapper">
-                        <div className="sale_price_lable">
+                        <div className="label">
                             Sale price: 
                         </div>
-                        <div>
+                        <div className="input_menu_position_wrapper">
                             <input
-                                className='price'
+                                className='add_menu_position_input_feild price'
                                 type="number"
-                                step={0.01}
-                                min='0'
+                                step={0.50}
+                                min='0.00'
                                 name="sale_price"
                                 value={form.sale_price}
                                 onChange={changeHandler}
                             />
+                             <span>ILS</span>
                         </div>
                     </div>
                     <div type="submit"  className='add_menu_position_submit_btn'>

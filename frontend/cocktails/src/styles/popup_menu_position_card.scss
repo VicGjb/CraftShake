@@ -1,0 +1,116 @@
+.popup_mobsile_content.menu_position_card{
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    min-height: 300px;
+    background-color: #222;
+    justify-content: space-between;
+    border-radius: 10px;
+    align-items: center;
+    border: 1px solid #909090;
+    position: relative;
+}
+
+
+.menu_position_card_title{
+    margin-top: 10px;
+    align-self: center;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    .menu_position_photo{
+        img{
+            border-radius: 10px;
+            width: 100px;
+            height: 100px;
+        }
+    }
+    .name_volume_price_conteiner{
+        color: #909090;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 250px;
+        margin-left: 15px;
+        height: 60%;
+        overflow: hidden;
+        .menu_position_name{
+            font-family: 'Fira-mono';
+            font-size: 24px;
+            color:whitesmoke;
+            word-wrap: break-word;
+        }
+        .menu_position_volume{
+            display: flex;
+            width: 80%;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        .menu_position_price{
+            margin-top: 5px;
+            display: flex;
+            width: 80%;
+            justify-content: space-between;
+            font-size: 18px;
+        }
+    }
+}
+.menu_position_description{
+    width: 250px;
+    color: #909090;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 22px;
+
+}
+
+
+@media (min-width:1280px){
+    .popup_mobsile_content.menu_position_card{
+        min-width: 500px;
+        min-height: 450px;
+    }
+    .menu_position_card_title{
+        margin-top: 30px;
+        .menu_position_photo{
+                img{
+                    border-radius: 10px;
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+
+            .name_volume_price_conteiner{
+                .menu_position_name{
+                    font-size: 30px;
+                }
+                .menu_position_volume{
+                    display: flex;
+                    width: 80%;
+                    justify-content: space-between;
+                    margin-top: 10px;
+                    font-size: 22px;
+                }
+                .menu_position_price{
+                    margin-top: 5px;
+                    display: flex;
+                    width: 80%;
+                    justify-content: space-between;
+                    font-size: 22px;
+                }
+            }
+        }
+
+    .menu_position_description{
+
+        width: 450px;
+        font-size: 22px;
+        line-height: 25px;
+    
+    }
+}
+    
+    

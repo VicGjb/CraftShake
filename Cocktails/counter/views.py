@@ -123,8 +123,6 @@ class PlaceCreateView(viewsets.ModelViewSet):
     @action(detail=True, method=['post'])
     def create(self, request, pk=None):
         place = PlaceCreateSerializer(data=request.data)
-        print(place)
-        print(request.data)
         if place.is_valid():
             new_place=Place.objects.create(**request.data)
             data = PlaceDetailSerializer(new_place)
@@ -306,10 +304,21 @@ class MenuPositionCreateView(viewsets.ModelViewSet):
     serializer_class = MenuPositionCreateSerializer
 
     @action(detail=True, methods=['post'])
-    def add_menu_position(self,request,pk=None):
+    def create(self,request,pk=None):
         menu_position = MenuPositionCreateSerializer(data=request.data)
         if menu_position.is_valid():
-            return Response(status=201)
+            new_menu_position = MenuPosition.objects.create(
+                                                name = menu_position.data['name'],
+                                                volume = menu_position.data['volume'],
+                                                sale_price = menu_position.data['sale_price'],
+                                                menu = Menu.objects.get(id=menu_position.data['menu']),
+                                                product = Product.objects.get(id=menu_position.data['product']),
+                                                )
+            print(new_menu_position)
+            data = MenuPositionSerializer(new_menu_position)
+            return Response(status=201, data=data.data)
+        else:
+            return Response(status=400, data='ErrorNotValid')
 
 
 

@@ -4,8 +4,28 @@
     flex-direction: column;
 }
 .menu_detaile_menu_positions{
+    align-self: center;
     margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+    grid-column-gap: 20px;
+    width: 100%;
+}
+
+@media (min-width:1280px){
+
+}
+@media (max-width:1280px){
+    
+}
+@media (max-width:770px){
+    .menu_detaile_wrapper{
+        width: 100%;
+    }
+    .menu_detaile_menu_positions{
+        width: 95%;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+@media (max-width:550px){
 }

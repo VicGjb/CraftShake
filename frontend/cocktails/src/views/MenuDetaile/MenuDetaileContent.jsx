@@ -53,21 +53,24 @@ export function MenuDetaileContent(){
 
     function MenuView(){
         return(
-            <div className="menu_detaile_wrapper">
-                <div className="invoice_detaile_title">
-                    <div className="invoice_detaile_content_date">
-                        {menu.name}
+           
+                <div className="menu_detaile_wrapper">
+                    <div className="invoice_detaile_title">
+                        <div className="invoice_detaile_content_date">
+                            {menu.name}
+                        </div>
                     </div>
+                    <MenuDetaileButtonRow/>      
+                    <div className="menu_detaile_menu_positions">
+                        {menuDetaileContext.getMenuPositions.map(position=>(
+                            <MenuPositionCard menuPosition={position} key={position.id}/>
+                        ))}
+                    </div>
+                    <PopupAddMenuPosition add_menu_position_active={add_menu_position_active} setAdd_menu_position_active={setAdd_menu_position_active} menu={menu}/>
+                    <PopupDelete subject={`menu ${menu.name}`} delete_active={delete_active} setDelete_active={setDelete_active} func={DeleteMenu}/>
                 </div>
-                <MenuDetaileButtonRow/>      
-                <div className="menu_detaile_menu_positions">
-                    {menuDetaileContext.getMenuPositions.map(position=>(
-                        <MenuPositionCard menuPosition={position} key={position.id}/>
-                    ))}
-                </div>
-                <PopupAddMenuPosition add_menu_position_active={add_menu_position_active} setAdd_menu_position_active={setAdd_menu_position_active} menu={menu}/>
-                <PopupDelete subject={`menu ${menu.name}`} delete_active={delete_active} setDelete_active={setDelete_active} func={DeleteMenu}/>
-            </div>
+                
+          
         )
     }
     

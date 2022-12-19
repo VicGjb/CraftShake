@@ -4,16 +4,17 @@ import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { NetworkManager } from "../../components/network_manager";
 import { useMenuDetaileContext } from "./MenuDetaileContext";
+import { PopupMenuPositionCard } from "./PopupMenuPositionCard";
 import '../../styles/menu_position_card.scss'
-import { useNavigate } from "react-router-dom";
 
 export function MenuPositionCard({menuPosition}){
     let mainContext = useManeContext()
     let [subMenu, setSubMenu] = useState(false)
     let [delete_active, setDelete_active] = useState(false)
+    let [menuPositionCardPopupActive,setMenuPositionCardPopupActiv] = useState(false)
     let networkManager = new NetworkManager()
-    let navigate = useNavigate()
     let menuDetaileContext = useMenuDetaileContext()
+
     function DeletePosition(){
         networkManager.delete_menu_position(menuPosition.id)
             .then(responce =>{
@@ -23,15 +24,14 @@ export function MenuPositionCard({menuPosition}){
                 console.log(error);
                 throw error;
             })
-            menuDetaileContext.removeMenuPosition(menuPosition)
-            // navigate()
-            // window.location.reload();
+            menuDetaileContext.removeMenuPosition(menuPosition);
             setDelete_active(false)
     }
 
     return(
         <div>
             <div className="menu_position_card_wrapper">
+                <div className="open_menu_position_card_popup" onClick={()=>{setMenuPositionCardPopupActiv(true)}}></div>
                 <div className="menu_position_card_service_menu"  onClick={()=>{setSubMenu(true)}}>
                     <div className="service_menu_dot"></div>
                     <div className="service_menu_dot"></div>
@@ -64,6 +64,11 @@ export function MenuPositionCard({menuPosition}){
                 setDelete_active={setDelete_active}
                 func={DeletePosition}
             /> 
+            <PopupMenuPositionCard
+                menuPositionCardPopupActive = {menuPositionCardPopupActive}
+                setMenuPositionCardPopupActiv = {setMenuPositionCardPopupActiv}
+                menuPosition = {menuPosition}
+            />
         </div>
     )
 }

@@ -20,10 +20,9 @@ export function PopupAddMenu({add_menu_active, setAdd_menu_active}){
                     Add menu for {placeName}
                 </div>
                 <AddMenu setAdd_menu_active={setAdd_menu_active}/>         
-            <div className="popup_footer">
+                <div className="popup_footer">
+                </div>
             </div>
-            </div>
-            
         </div>
     )
 

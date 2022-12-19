@@ -1,26 +1,42 @@
 .menu_position_card_wrapper{
-    width:300px ;
-    height: 140px;
+    height: 160px;
     position: relative;
     border-radius: 10px;
     border:1px solid whitesmoke;
     margin-bottom: 20px;
+    align-self: stretch;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #323131;
     overflow: hidden;
+}
 
+.menu_position_card_wrapper:hover{
+    border:1px solid #FFBF1C;
 
+    .menu_position_card_slot.name{
+        // color:#FFBF1C
+        } 
+}
+.open_menu_position_card_popup{
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .menu_position_card_service_menu{
     position: absolute;
     display: flex;
     justify-content: space-between;
-    width: 25px;
-    top:10px;
-    right: 10px;
+    align-items: center;
+    padding-right: 10px;
+    width: 35px;
+    height: 25px;
+    // border:1px solid red;
+    top:0px;
+    right: 0px;
+    cursor: context-menu;
     .service_menu_dot{
         height: 5px;
         width: 5px;
@@ -29,13 +45,10 @@
     }
 }
 .sub_menu_wrapper{
-    
     position: absolute;
     width: 100%;
     height: 0px;
     visibility: hidden;
-    // background-color: #cd4a4a;
-   
 }
 
 .sub_menu_wrapper.active{
@@ -101,25 +114,9 @@
 
 
 .menu_position_card_slot.name{
-    // width: 120px;
+    max-width:80%;
     color: whitesmoke;
     text-align: left;
-}
-.menu_position_card_slot.photo{
-    width: 65px;
-    height: 65px;
-    // margin: 0 auto;
-    overflow: visible;    
-        img {
-          align-self: center;
-          width: 100%;
-          height: 100%;
-          border-radius: 10%;
-        } 
-}
-.menu_position_card_slot.description{
-    width: 210px;
-    margin-top: 10px;
     overflow: hidden;
     text-align: left;
     overflow: hidden;
@@ -131,7 +128,34 @@
     -webkit-box-orient: vertical;
     line-clamp: 2;
     box-orient: vertical;
-    line-height: 25px; 
+    line-height: 20px; 
+}
+.menu_position_card_slot.photo{
+    width: 65px;
+    height: 65px;
+    overflow: visible;    
+        img {
+          align-self: center;
+          width: 65px;
+            height: 65px;
+          border-radius: 10%;
+        } 
+}
+.menu_position_card_slot.description{
+    width: 70%;
+    margin-top: 10px;
+    overflow: hidden;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    box-orient: vertical;
+    line-height: 20px; 
 }
 .menu_position_card_slot.volume{
     text-align: left;
@@ -161,4 +185,30 @@
             color: black;
         }
     }
+}
+
+@media (min-width:1280px){
+
+}
+@media (max-width:1280px){
+    
+}
+@media (max-width:770px){
+    .menu_position_card_wrapper{
+        height: 120px;
+    }
+    .menu_position_card_slot{
+        font-size: 16px;
+    }
+    .menu_position_card_slot.description{
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .menu_position_card_slot.name{
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+    }
+
+}
+@media (max-width:550px){
 }

@@ -16,5 +16,4 @@ export function MenuCard({menu}){
             <CurrentMenuChackBox menu={menu}/>
         </div>
     )
-
 }
