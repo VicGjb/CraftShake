@@ -1,0 +1,94 @@
+.manager_card_wrapper{
+    min-height: 100px;
+    position: relative;
+    border-radius: 10px;
+    border:1px solid whitesmoke;
+    margin-bottom: 20px;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+    background-color: #323131;
+    overflow: hidden;
+}
+.manager_card_title{
+    display: flex;
+    margin-top: 35px;
+    width: 80%;
+    justify-content: space-between;
+    align-self: center;
+    color: whitesmoke;
+   
+}
+.manager_card_name{
+    font-weight: 600;
+    font-size: 30px;
+}
+.manager_card_phone{
+    display: flex;
+    justify-content: space-between;
+    font-size: 28px;
+    // width: 200px;
+    span{
+        text-align: end;
+        // display: block;
+    }
+}
+.manager_card_description{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    align-self: center;
+    text-align: center;
+    display: none;
+    color: #909090;
+    font-size: 25px;
+    max-width: 90%;
+}
+.manager_card_description.active{
+    display: inline;
+}
+
+
+
+
+@media (min-width:1280px){
+
+}
+@media (max-width:1280px){
+    .manager_card_name{
+        font-size: 26px;
+    }
+    .manager_card_phone{
+        font-size: 22px;
+    }
+    .manager_card_description{
+        font-size: 22px ;
+    }
+}
+@media (max-width:990px){
+    .manager_card_name{
+        font-size: 22px;
+    }
+    .manager_card_phone{
+        font-size: 20px;
+    }
+    .manager_card_description{
+        font-size: 20px ;
+    }
+
+}
+@media (max-width:770px){
+
+
+}
+@media (max-width:550px){
+    .manager_card_name{
+        font-size: 18px;
+    }
+    .manager_card_phone{
+        font-size: 16px;
+    }
+    .manager_card_description{
+        font-size: 16px ;
+    }
+}

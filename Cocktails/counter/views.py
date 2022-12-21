@@ -146,7 +146,7 @@ class PlaceByNameView(generics.ListAPIView):
 
 """Manager of place views"""
 class ManagerOfPlaceView(viewsets.ModelViewSet):
-    permission_classes = [CraftShakeCustomerPermissions]
+    # permission_classes = [CraftShakeCustomerPermissions]
     filter_backends = (DjangoFilterBackend,)
     filterset_class = ManagerFilter
 
@@ -157,15 +157,47 @@ class ManagerOfPlaceView(viewsets.ModelViewSet):
     def get_serializer_class(self):                                                                                                                       
         return ManagerOfPlaceSerializer
 
+    @action(detail=True, methods=['post'])
+    def destroy(self, request, pk=None, *args, **kwargs):
+        manager = ManagerOfPlace.objects.get(id=pk)
+        place = manager.place.id
+        manager.delete()
+        managers = ManagerOfPlace.objects.filter(place=place)
+        serializer = ManagerOfPlaceSerializer(managers, many=True)
+        return Response(status=201, data=serializer.data)
 
 class ManagerOfPlaceCreateView(viewsets.ModelViewSet):
     permission_classes = [CraftShakeCustomerPermissions]
     serializer_class = ManagerOfPlaceSerializer
+    
     @action(detail=True, method=['post'])
     def add_manager(self, request, pk=None):
         manager_of_place = ManagerOfPlaceSerializer(data=request.data)
         if manager_of_place.is_valid():
-            return Response(status=201)
+            new_manager = ManagerOfPlace.objects.create(
+                                                        name=manager_of_place.data['name'],
+                                                        phone=manager_of_place.data['phone'],
+                                                        description=manager_of_place.data['description'],
+                                                        place=Place.objects.get(id=manager_of_place.data['place']),
+                                                        )
+            managers = ManagerOfPlace.objects.filter(place=new_manager.place)
+            serializer = ManagerOfPlaceSerializer(managers, many=True)
+            return Response(status=201, data=serializer.data)
+
+
+    @action (detail=True, method=['post','update'])
+    def update(self, request, pk=None):
+        print('hello')
+        manager_of_place_update = ManagerOfPlaceSerializer(data=request.data)
+        if manager_of_place_update.is_valid():
+            manager_of_place = ManagerOfPlace.objects.get(id=pk)
+            manager_of_place.name = manager_of_place_update.data['name']
+            manager_of_place.phone = manager_of_place_update.data['phone']
+            manager_of_place.description = manager_of_place_update.data['description']
+            manager_of_place.save()
+            managers = ManagerOfPlace.objects.filter(place=manager_of_place.place)
+            serializer = ManagerOfPlaceSerializer(managers,many=True)
+            return Response(status=201, data=serializer.data)
 
 
 """Product views"""
@@ -308,12 +340,12 @@ class MenuPositionCreateView(viewsets.ModelViewSet):
         menu_position = MenuPositionCreateSerializer(data=request.data)
         if menu_position.is_valid():
             new_menu_position = MenuPosition.objects.create(
-                                                name = menu_position.data['name'],
-                                                volume = menu_position.data['volume'],
-                                                sale_price = menu_position.data['sale_price'],
-                                                menu = Menu.objects.get(id=menu_position.data['menu']),
-                                                product = Product.objects.get(id=menu_position.data['product']),
-                                                )
+                                    name = menu_position.data['name'],
+                                    volume = menu_position.data['volume'],
+                                    sale_price = menu_position.data['sale_price'],
+                                    menu = Menu.objects.get(id=menu_position.data['menu']),
+                                    product = Product.objects.get(id=menu_position.data['product']),
+                                    )
             print(new_menu_position)
             data = MenuPositionSerializer(new_menu_position)
             return Response(status=201, data=data.data)

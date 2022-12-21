@@ -2,11 +2,13 @@ import React, { Component, useEffect, useState } from 'react';
 import { NetworkManager } from '../../components/network_manager';
 import { RegularButton } from '../../components/buttons/regular_button';
 import { useParams } from 'react-router-dom';
+import { useManagersContext } from '../ManagersList/ManagersContext';
 
 export function AddManagerOfPlace({place, setAdd_manager_active}) {
     let {placeId} = useParams();
     let {placeName} = useParams();
     let network_manager = new NetworkManager()
+    let managersContext = useManagersContext()
 	let defaultForm = {
         name:'',
         phone:'',
@@ -23,15 +25,15 @@ export function AddManagerOfPlace({place, setAdd_manager_active}) {
 		e.preventDefault()
         network_manager.create_manager(form)
 			.then(response => {
+                managersContext.setManagersList(response)
 				console.log(response);
-                console.log(form)
 			})
 			.catch(error => {
 				console.log(error);
 				throw error;
 			});		
-            window.location.reload();
-	}
+            setAdd_manager_active(false)
+        }
       return(
           <div>
             <form className='add_manager_form' onSubmit={submitHandler}>
@@ -76,6 +78,6 @@ export function AddManagerOfPlace({place, setAdd_manager_active}) {
                 </div>
             </form>
 
-          </div>
+        </div>
       )
 }

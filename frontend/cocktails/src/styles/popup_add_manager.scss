@@ -1,0 +1,84 @@
+.popup_mobile_content.add_manager{
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    flex-direction: column;
+    width:30%;
+    background-color: #222;
+    border-radius: 10px;
+    height: auto;
+    border: 1px solid #909090;
+}
+
+.popup_title.add_manager{
+    line-height: 28px;
+    color: whitesmoke;
+    position: relative;
+}
+
+.add_manager_form{
+    align-self: center;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    input{
+        background-color: #222;
+        width: 50%;
+    }
+}
+.add_manager_input_wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    .phone,.name{
+        font-size: 18px;
+    }
+}
+.add_manager_input_labele{
+    color: whitesmoke;
+    font-size: 20px;
+}
+.description_input{
+    width: 50%;
+    background-color: #323131;
+    height: 100px;
+    color: #909090; 
+    font-size: 19px;
+    word-break: break-all;
+    white-space: wrap;
+    resize: none;
+    padding: 5px;
+}
+
+.submit_button.add_manager{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .button{
+        width: 60%;
+    }
+}
+
+@media (min-width:1280px){
+
+}
+@media (max-width:1280px){
+    .popup_mobile_content.add_manager{
+        width: 50%;
+    }
+}
+@media (max-width:770px){
+    .popup_mobile_content.add_manager{
+        width: 60%;
+    }
+    .add_manager_form{
+        width: 80%;
+    }
+}
+@media (max-width:550px){
+    .popup_mobile_content.add_manager{
+        width: 90%;
+    }
+}

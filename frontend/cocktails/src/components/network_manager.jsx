@@ -404,7 +404,7 @@ export class NetworkManager{
 		return this.axiosInstance
 			.post(`counter/manager/create/`,form)
 			.then(response => {
-				return response
+				return response.data
 			})
 	}
 
@@ -412,7 +412,7 @@ export class NetworkManager{
 		return this.axiosInstance
 			.post(`counter/manager/delete/${managerId}`)
 			.then(response => {
-				return response
+				return response.data
 			})
 	}
 
@@ -422,6 +422,14 @@ export class NetworkManager{
 			.get(`counter/manager/?place=${placeId}`)
 			.then(response=>{
 				return response.data.results
+			})
+	}
+
+	async update_manager(managerId,form){
+		return this.axiosInstance
+			.post(`counter/manager/update/${managerId}/`,form)
+			.then(response=>{
+				return response.data
 			})
 	}
 

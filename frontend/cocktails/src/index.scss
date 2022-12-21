@@ -372,16 +372,16 @@ body{
   transform: scale(1);
 }
 
-.popup_title{
-  font-family: 'Girassol';
-  font-style: normal;
-  font-weight: 400;
-  @include adaptiv(30, 18, font-size);
-  text-align: center;
-  @include adaptiv(30,18 ,line-height);
-  flex-wrap: wrap;
-  color: #909090;
-}
+// .popup_title{
+//   font-family: 'Girassol';
+//   font-style: normal;
+//   font-weight: 400;
+//   @include adaptiv(30, 18, font-size);
+//   text-align: center;
+//   @include adaptiv(30,18 ,line-height);
+//   flex-wrap: wrap;
+//   color: #909090;
+// }
 
 
 .add_order_form{
@@ -837,9 +837,9 @@ body{
   flex-wrap: nowrap;
   align-items: center;
 
-  .popup_title{
-    @include adaptiv(10,5 ,margin-top )
-  }
+  // .popup_title{
+  //   @include adaptiv(10,5 ,margin-top )
+  // }
 }
 .popup_add_product_form_wrapper{
   margin: auto 0;
@@ -1011,42 +1011,42 @@ body{
 
 // Invoice list
 
-.invoice_list_content{
-  @include adaptiv(15,10 ,margin-top );
-  @include adaptiv(750, 190, width);
-  display: flex;
-  flex-direction: column;
-}
-.invoice_list_content_title{
-  margin: 0 auto;
-}
-.invoice_list_content_conteiner{
-  @include adaptiv(750, 190, width);
-  display: flex;
-  flex-direction: column;
-}
-.invoice_list_table_head{
-@include adaptiv(500, 190, width);
-}
-.invoice_list_table_body{
-  @include adaptiv(500, 190, width);
-}
-.invoice_list_table_search{
-  display: flex;
-  // background-color: #ecdede;
-  @include adaptiv(750, 190, max-width);
-  justify-content: space-between;
-  flex-wrap: wrap-reverse;
-}
-.invoise_list_button_set{
-  align-self: flex-end;
-}
-.invoice_list_table{
-  @include adaptiv(15,10 ,margin-top );
-}
-.invoice_list_table_body_tr:hover{
-  color: #FFBF1C;
-}
+// .invoice_list_content{
+//   @include adaptiv(15,10 ,margin-top );
+//   @include adaptiv(750, 190, width);
+//   display: flex;
+//   flex-direction: column;
+// }
+// .invoice_list_content_title{
+//   margin: 0 auto;
+// }
+// .invoice_list_content_conteiner{
+//   @include adaptiv(750, 190, width);
+//   display: flex;
+//   flex-direction: column;
+// }
+// .invoice_list_table_head{
+// @include adaptiv(500, 190, width);
+// }
+// .invoice_list_table_body{
+//   @include adaptiv(500, 190, width);
+// }
+// .invoice_list_table_search{
+//   display: flex;
+//   // background-color: #ecdede;
+//   @include adaptiv(750, 190, max-width);
+//   justify-content: space-between;
+//   flex-wrap: wrap-reverse;
+// }
+// .invoise_list_button_set{
+//   align-self: flex-end;
+// }
+// .invoice_list_table{
+//   @include adaptiv(15,10 ,margin-top );
+// }
+// .invoice_list_table_body_tr:hover{
+//   color: #FFBF1C;
+// }
 
 
 
@@ -1207,27 +1207,27 @@ body{
 
 // Menu detaile
 
-.menu_detaile_content_title{
-  @include adaptiv(15,10 ,margin-top);
-  display: flex;
-  justify-content: space-between;
-}
-.menu_detaile_content_button_set{
-  @include adaptiv(15,10 ,margin-top);
-  display: flex;
-  justify-content: space-between;
-}
-.menu_detaile_content_body{
-  @include adaptiv(20,15 ,margin-top);
-}
+// .menu_detaile_content_title{
+//   @include adaptiv(15,10 ,margin-top);
+//   display: flex;
+//   justify-content: space-between;
+// }
+// .menu_detaile_content_button_set{
+//   @include adaptiv(15,10 ,margin-top);
+//   display: flex;
+//   justify-content: space-between;
+// }
+// .menu_detaile_content_body{
+//   @include adaptiv(20,15 ,margin-top);
+// }
 
-.menu_detaile_content_body_table_body_tr{
-  .td{
-    display: flex;
-    justify-content: center;
+// .menu_detaile_content_body_table_body_tr{
+//   .td{
+//     display: flex;
+//     justify-content: center;
     
-  }
-}
+//   }
+// }
 
 
 
@@ -1267,100 +1267,100 @@ body{
 
 // Managers list
 
-.managers_list_content{
-  display: flex;
-  flex-direction: column;
-}
-.managers_list_cintetn__title{
-  @include adaptiv(20,10 ,margin-top);
-  margin: 0 auto;
-}
-.managers_list_content__conteiner{
-  display: flex;
-  flex-direction: column;
-}
-.managers_list_content__conteiner___button_set{
-  @include adaptiv(20,10 ,margin-top);
-  display: flex;
-  justify-content: space-between;
-}
-.managers_list_content__conteiner___table{
-  @include adaptiv(20,10 ,margin-top);
-  // @include adaptiv(750, 190, width);
-  .tr{
-    @include adaptiv(750, 190, width);
-  }  
-  .td{
+// .managers_list_content{
+//   display: flex;
+//   flex-direction: column;
+// }
+// .managers_list_cintetn__title{
+//   @include adaptiv(20,10 ,margin-top);
+//   margin: 0 auto;
+// }
+// .managers_list_content__conteiner{
+//   display: flex;
+//   flex-direction: column;
+// }
+// .managers_list_content__conteiner___button_set{
+//   @include adaptiv(20,10 ,margin-top);
+//   display: flex;
+//   justify-content: space-between;
+// }
+// .managers_list_content__conteiner___table{
+//   @include adaptiv(20,10 ,margin-top);
+//   // @include adaptiv(750, 190, width);
+//   .tr{
+//     @include adaptiv(750, 190, width);
+//   }  
+//   .td{
 
-    white-space: pre-line;
-  }
-}
+//     white-space: pre-line;
+//   }
+// }
 
-.del_button{
-  display: flex;
-  justify-content: end;
-}
+// .del_button{
+//   display: flex;
+//   justify-content: end;
+// }
 
 
 // Add manager popup
-.manager_popup{
-  @include adaptiv(320,250 ,width);
-  @include adaptiv(320,280 ,height);
+// .manager_popup{
+//   @include adaptiv(320,250 ,width);
+//   @include adaptiv(320,280 ,height);
 
-}
-.add_manager_form{
-  @include adaptiv(230,230 ,width);
-  display: flex;
-  flex-direction: column;
-  .submit_button{
-    @include adaptiv(20,10 ,margin-top);
-    display: flex;
-    justify-content: end;
-  }
-  input{
-    background-color:#424040;
-    @include adaptiv(150,150 ,width );
-    color: #ecdede;
-    @include adaptiv(14,10 ,font-size );
-    padding-left: 5px;
-  }
-}
-.add_manager_input_wrapper{
-  @include adaptiv(20,10 ,margin-top);
-  display: flex;
-  justify-content: space-between;
-}
+// }
+// .add_manager_form{
+//   @include adaptiv(230,230 ,width);
+//   display: flex;
+//   flex-direction: column;
+//   .submit_button{
+//     @include adaptiv(20,10 ,margin-top);
+//     display: flex;
+//     justify-content: end;
+//   }
+//   input{
+//     background-color:#424040;
+//     @include adaptiv(150,150 ,width );
+//     color: #ecdede;
+//     @include adaptiv(14,10 ,font-size );
+//     padding-left: 5px;
+//   }
+// }
+// .add_manager_input_wrapper{
+//   @include adaptiv(20,10 ,margin-top);
+//   display: flex;
+//   justify-content: space-between;
+// }
 
 
 // Popup add place 
-.place_popup{
-  @include adaptiv(320,250 ,width);
-  @include adaptiv(320,280 ,height);
+// .place_popup{
+//   @include adaptiv(320,250 ,width);
+//   @include adaptiv(320,280 ,height);
 
-}
+// }
 
-.add_place_form{
-  @include adaptiv(230,230 ,width);
-  display: flex;
-  flex-direction: column;
-  .submit_button{
-    @include adaptiv(20,10 ,margin-top);
-    display: flex;
-    justify-content: end;
-  }
-  .name .address .email .phone{
-    @include adaptiv(150,150 ,width );
-    justify-self: end;
-    @include adaptiv(14,10 ,font-size );
-  }
-  input{
-    background-color:#424040;
-    padding-left: 5px;
-    color: #ecdede;
-  }
-}
-.add_place_input_wrapper{
-  @include adaptiv(20,10 ,margin-top);
-  display: flex;
-  justify-content: space-between;
-}
+// .add_place_form{
+//   @include adaptiv(230,230 ,width);
+//   display: flex;
+//   flex-direction: column;
+//   .submit_button{
+//     @include adaptiv(20,10 ,margin-top);
+//     display: flex;
+//     justify-content: end;
+//   }
+//   .name .address .email .phone{
+//     @include adaptiv(150,150 ,width );
+//     justify-self: end;
+//     @include adaptiv(14,10 ,font-size );
+//   }
+//   input{
+//     background-color:#424040;
+//     padding-left: 5px;
+//     color: #ecdede;
+//   }
+// }
+// .add_place_input_wrapper{
+//   @include adaptiv(20,10 ,margin-top);
+//   display: flex;
+//   justify-content: space-between;
+// }

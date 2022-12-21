@@ -65,7 +65,8 @@ urlpatterns = format_suffix_patterns(
 
         path('manager/', ManagerOfPlaceView.as_view({'get':'list'})),
         path('manager/<int:pk>', ManagerOfPlaceView.as_view({'get':'retrieve'})),
-        path('manager/create/', ManagerOfPlaceCreateView.as_view({'post':'create'})),
+        path('manager/create/', ManagerOfPlaceCreateView.as_view({'post':'add_manager'})),
+        path('manager/update/<int:pk>/', ManagerOfPlaceCreateView.as_view({'post':'update'})),
         path('manager/delete/<int:pk>', ManagerOfPlaceView.as_view({'post':'destroy'})),
 
         path('product/', ProductView.as_view({'get':'list'})),
