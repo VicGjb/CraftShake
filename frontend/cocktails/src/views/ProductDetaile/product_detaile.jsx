@@ -1,5 +1,6 @@
 import React, {useEffect,useState} from "react";
 import { NetworkManager } from "../../components/network_manager";
+import { Link } from "react-router-dom";
 import {useParams} from 'react-router-dom';
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupUploadProductPhoto } from "../../components/popup/popup_change_photo";
@@ -8,6 +9,8 @@ import { PopupDelete } from "../../components/popup/popup_delete";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useManeContext } from "../../components/main_context";
+import '../../styles/product_detaile.scss'
+import {ReactComponent as CameraIcon} from "../../svg/camera_icon.svg"
 
 export function ProductDetaile(){
     let [product, setProduct] = useState({});
@@ -47,23 +50,36 @@ export function ProductDetaile(){
 
     function ProductDetaileView(){
         return(
-            <div>
                 <div className="product_detaile_wrap">
                     <div className="product_detaile_suptitle_wrapper">
                         <div className="product_detaile_subtitle">
                             {product.name}
                         </div>
                     </div>
-                        
+                    <div className="product_detaile_button_set">
+                        <div className="order_detaile_back_btn">
+                            <Link to={{pathname: `/products`,}} replace>
+                                <RegularButton lable={'Back'}/>
+                            </Link> 
+                        </div>
+                        <div className="product_detaile_delete_btn top" onClick={()=> setDelete_active(true)}>
+                            <RegularButton lable={'Delete product'}/>
+                        </div>
+                        <div className="product_detaile_change_btn top" onClick={()=>setChangeProductActive(true)}>
+                            <RegularButton lable={'Change product'} />   
+                        </div>
+                    </div>    
                     <div className="product_detaile__content">
+                        
+                        
                         <div className="product_detaile_conteiner">
                             <div className="product_detaile_photo">
+                                <div className="add_product_photo" onClick={()=>setUploadProductPhotoActive(true)}>
+                                    <CameraIcon className='camera_icon'/> 
+                                </div>
                                 <img src={mainContext.getPhoto(product.photo)} alt="" />
                             </div>
                             <div className="product_detaile_info">
-                                <div className="product_detaile_discription ">
-                                    {product.discription}
-                                </div>
                                 <div className="product_detaile_price_line">
                                     <div className="product_detaile_cost_price">
                                         Cost price: {product.cost_price}
@@ -72,27 +88,25 @@ export function ProductDetaile(){
                                         Sale price: {product.sale_price}
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="product_detaile_button_set">
-                            <div className="product_detailt_change_photo_btn" onClick={()=>setUploadProductPhotoActive(true)} >
-                                <RegularButton lable={'Change photo'}/>
-                            </div>
-                            <div className="product_detaile_change_product_btn">
-                                <div className="change_btn" onClick={()=>setChangeProductActive(true)}>
-                                    <RegularButton lable={'Change product'} />   
-                                </div>
-                                <div className="product_detaile_delete_btn" onClick={()=> setDelete_active(true)}>
-                                    <RegularButton lable={'Delete product'}/>
+                                <div className="product_detaile_discription">
+                                    {product.discription}
                                 </div>
                             </div>
-                        </div>                     
+                        </div>                 
                     </div>
+                    <div className="product_detaile_footer">
+                        <div className="product_detaile_delete_btn" onClick={()=> setDelete_active(true)}>
+                            <RegularButton lable={'Delete product'}/>
+                        </div>
+                        <div className="product_detaile_change_btn" onClick={()=>setChangeProductActive(true)}>
+                            <RegularButton lable={'Change product'} />   
+                        </div>
+                    </div>
+                    <PopupUploadProductPhoto upload_product_photo_active={upload_product_photo_active} setUploadProductPhotoActive={setUploadProductPhotoActive}/>
+                    <PopupChangeProduct product={product} change_product_active={change_product_active} setChangeProductActive={setChangeProductActive}/>
+                    <PopupDelete subject={`product ${product.name}`} delete_active={delete_active} setDelete_active={setDelete_active} func={deleteProduct}/>  
                 </div>
-                <PopupUploadProductPhoto upload_product_photo_active={upload_product_photo_active} setUploadProductPhotoActive={setUploadProductPhotoActive}/>
-                <PopupChangeProduct product={product} change_product_active={change_product_active} setChangeProductActive={setChangeProductActive}/>
-                <PopupDelete subject={`product ${product.name}`} delete_active={delete_active} setDelete_active={setDelete_active} func={deleteProduct}/>            
-            </div>
+                          
         )
         
     }
@@ -109,9 +123,6 @@ export function ProductDetaile(){
     }
 
     return(
-        <div>
-            {/* {ProductDetaileView()} */}
-          {Render(is_loaded)}  
-        </div>
+          Render(is_loaded) 
     )
 }
