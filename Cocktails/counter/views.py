@@ -122,6 +122,7 @@ class PlaceCreateView(viewsets.ModelViewSet):
 
     @action(detail=True, method=['post'])
     def create(self, request, pk=None):
+        print(request.data)
         place = PlaceCreateSerializer(data=request.data)
         if place.is_valid():
             new_place=Place.objects.create(**request.data)

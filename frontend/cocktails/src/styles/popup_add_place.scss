@@ -1,3 +1,18 @@
+.field-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.field-error{
+    margin-top: 5px;
+    color: #F15A5A;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 300
+}
+
+
 .popup_mobile_content.add_place{
     display: flex;
     position: relative;
@@ -12,7 +27,7 @@
 }
 
 .popup_title.add_place{
-    line-height: 29px;
+    line-height: 35px;
     color: whitesmoke;
     position: relative;
 }
@@ -67,6 +82,9 @@
     .popup_mobile_content.add_place{
         width: 40%;
     }
+    .add_place_form{
+        width: 85%;
+    }
 }
 
 @media (max-width:990px){
@@ -76,8 +94,11 @@
     .add_invoice_form_submit_btn{
         width: 85%;
         margin-top: 20px;
-        
     }
+    .add_place_form{
+        width: 75%;
+    }
+
 }
 
 
@@ -96,6 +117,9 @@
         input{
             font-size: 16px;
         }
+    }
+    .add_place_form{
+        width: 85%;
     }
 
 }

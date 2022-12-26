@@ -4,6 +4,7 @@ import { useManeContext } from "../main_context";
 import { RegularButton } from "../buttons/regular_button";
 import { NetworkManager } from '../../components/network_manager';
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
+import { Formik, Form, Field } from 'formik';
 import '../../styles/popup_add_place.scss'
 
 export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces, newPlace}){
@@ -23,7 +24,6 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
     
     function setDefaultForm(){
         if(newPlace){
-            console.log('EBANNAI PLACE',placeContext )
             return(
                     emptyForm
                 )
@@ -38,17 +38,68 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
             )
         }
     }
-    
+    function validateName(value){
+        let error;
+        if(value.length>40){
+            error = 'Too long'
+        }
+        return error;
+    }
+    function validateEmail(value){
+        let error;
+        if(!value){
+            error = 'Required'
+        }else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)){
+            error = 'Invalid email address'
+        }
+        return error;
+    }
+    function validateAddress(value){
+        let error;
+        if(!value){
+            error = 'Required'
+        }else if (value.length>50){
+            error = 'Too long'
+        }
+        return error;
+    }
+    function validatePhone(value){
+        let error;
+        if(!value){
+            error = 'Required'
+        }else if (!isFinite(value)){
+            error = 'invalid phone number'
+        }else if (value.length>11){
+            error = 'invalid phone number'
+        }
+        return error;
+    }
+
+
+
+
+
+
+
     let changeHandler = e => {
 		setForm({...form, [e.target.name]:e.target.value})
         console.log('form',form)
 	}
 
-	let submitHandler = e => {
-		e.preventDefault()
+	function submitHandler(form){
+        if(newPlace){
+            networkManager.create_place(form)
+			.then(response => {
+                setPlaces(response)
+				// setForm(emptyForm);
+			})
+			.catch(error => {
+				console.log(error);
+				throw error;
+			});		
+            setAdd_place_active(false)
 
-
-        if(placeContext){
+        }else{
             networkManager.change_place(placeContext.id, form)
             .then(response => {
                 mainContext.setPlace(response.data)
@@ -58,18 +109,6 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
                 console.log(error);
                 throw error;
             });		
-            setAdd_place_active(false)
-
-        }else{
-            networkManager.create_place(form)
-			.then(response => {
-                setPlaces(response)
-				setForm(emptyForm);
-			})
-			.catch(error => {
-				console.log(error);
-				throw error;
-			});		
             setAdd_place_active(false)
         }        
 	}
@@ -85,10 +124,99 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
                 
                 
                 <div className="popup_title add_place">
-                    {placeContext? `Change place ${placeContext.name}`:'Add new place'}
+                    {newPlace? `Add new place`: `Change place " ${placeContext.name} "`}
                 </div>
 
-                <form onSubmit={submitHandler} className='add_place_form'>
+                <Formik
+                        initialValues={form}
+                        onSubmit={values=>{
+                            console.log('hey hey',values)
+                            submitHandler(values)
+                        }}
+                    >
+                        {({errors, touched, validateForm})=> (
+                            <Form className="add_place_form">
+                                <div className='add_place_input_wrapper'>
+                                    <div className='add_place_input_labele'>
+                                        Name:
+                                    </div>
+                                    <div className="field-container">
+                                        <Field 
+                                            name='name' 
+                                            validate={validateName}
+                                            className='name'
+                                            // defaultValue = {form.name}
+                                            // value={initialValues.name}
+                                            // onChange={changeHandler}
+                                            />
+                                        {errors.name && touched.name && <div className="field-error">{errors.name}</div>}
+                                    </div>  
+                                </div>
+                                
+
+                                <div className='add_place_input_wrapper'>
+                                    <div className='add_place_input_labele'>
+                                        Email:
+                                    </div>
+                                    <div className="field-container">
+                                        <Field name='email' validate={validateEmail}/>
+                                        {errors.email && touched.email && <div className="field-error">{errors.email}</div>}
+                                    </div>
+                                    
+                                </div>
+                                
+
+                                <div className='add_place_input_wrapper'>
+                                    <div className='add_place_input_labele'>
+                                        Address:
+                                    </div>
+                                    <div className="field-container">
+                                        <Field name='address' validate={validateAddress}/>
+                                        {errors.address && touched.address && <div className="field-error">{errors.address}</div>}
+                                    </div>
+                                </div>
+                                
+
+                                <div className='add_place_input_wrapper'>
+                                    <div className='add_place_input_labele'>
+                                        Phone:
+                                    </div>
+                                    <div className="field-container">
+                                        <Field name='phone' validate={validatePhone}/>
+                                        {errors.phone && touched.phone && <div className="field-error">{errors.phone}</div>}
+                                    </div>
+                                </div>
+                                
+                                <div className='add_place_input_wrapper'>
+                                    <div className='add_place_input_labele'>
+                                        Current:
+                                    </div>
+                                    <div className="field-container">
+                                        <Field name='is_current_place' type='checkbox'/>
+                                    </div>
+                                </div>
+                                <div className='submit_button add_place' onClick={()=>{validateForm().then(()=>console.log('hey'))}}>
+                                    <RegularButton lable={'Accept'} type='submit'/>
+                                </div>
+                            </Form>
+                        )}
+                </Formik>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                {/* <form onSubmit={submitHandler} className='add_place_form'>
 
                     <div className='add_place_input_wrapper'>
                         <div className='add_place_input_labele'>
@@ -154,7 +282,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
                     <div className='submit_button add_place' type="submit">
                         <RegularButton lable={'Accept'}/>
                     </div>
-                </form>        
+                </form>         */}
             </div>
         </div>
     )
