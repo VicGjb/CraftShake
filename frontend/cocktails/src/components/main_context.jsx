@@ -13,6 +13,7 @@ export function MainContextProvider({children}){
     let navigate = useNavigate();
     let [user, setUser] = useState();
     let [places, setPlaces] = useState([]);
+    let [place,setPlace] = useState({})
     let [volumes, setVolumes] = useState([]);
     let placeHolderPhoto = 'https://craftshake.s3.eu-central-1.amazonaws.com/Product_photo/cocktailDefault.jpeg'
     
@@ -50,8 +51,9 @@ export function MainContextProvider({children}){
         }else{
             return placeHolderPhoto
         }
-
     }
+
+    // Place for place detaile
 
 
     return(
@@ -60,6 +62,8 @@ export function MainContextProvider({children}){
             getSideMenuBurgerActiv:sideMenuBurgerActiv,
             setPlaces:setPlaces,
             getPlaces:places,
+            setPlace:setPlace,
+            getPlace:place,
             goBack:goBack,
             setUserInMainContext:setUserInContext,
             getUserFromMainContext:getUserFromContext,

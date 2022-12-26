@@ -125,8 +125,25 @@ class PlaceCreateView(viewsets.ModelViewSet):
         place = PlaceCreateSerializer(data=request.data)
         if place.is_valid():
             new_place=Place.objects.create(**request.data)
-            data = PlaceDetailSerializer(new_place)
-            return Response(status=201, data=data.data)
+            place_list = Place.objects.all().order_by('name')
+            serializer = PlaceSerializer(place_list, many=True)
+            return Response(status=201, data=serializer.data)
+        return Response(status=403)
+
+
+    @action(detail=True, method=['post'])
+    def update(self, request, pk=None):
+        place = Place.objects.get(id=pk)
+        update_data = PlaceDetailSerializer(data=request.data)
+        if update_data.is_valid():
+            place.name = update_data.data['name']
+            place.address = update_data.data['address']
+            place.phone = update_data.data['phone']
+            place.email = update_data.data['email']
+            place.is_current_place = update_data.data['is_current_place']
+            place.save()
+            serializer = PlaceDetailSerializer(place)
+            return Response(status=201, data=serializer.data)
         return Response(status=403)
 
 

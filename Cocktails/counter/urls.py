@@ -58,7 +58,7 @@ urlpatterns = format_suffix_patterns(
         path('place/<int:pk>', PlaceAPIDetaileView.as_view()),
         path('place/by-name/<str:name>', PlaceByNameView.as_view()),
 
-        path('place/update/<int:pk>', PlaceUpdateView.as_view({'post':'update'})),
+        path('place/update/<int:pk>', PlaceCreateView.as_view({'post':'update'})),
         path('place/delete/<int:pk>', PlaceDeleteView.as_view({'post':'destroy'})),
         path('place/create/', PlaceCreateView.as_view({'post':'create'})),
 
