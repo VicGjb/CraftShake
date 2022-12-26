@@ -177,23 +177,23 @@ body{
 
 // popup delete
 
-.popup_delete_content{
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  @include adaptiv(180,150 ,height);
-  @include adaptiv(180,150 ,width);
-  .popup_delete_masssege{
-    margin: 0px auto;
-  }
-  .popup_delete_button_line{
-    display: flex;
-    justify-content: space-between;
-    .button{
-      @include adaptiv(80, 40, width);
-    }
-  }
-}
+// .popup_delete_content{
+//   display: flex;
+//   justify-content: space-between;
+//   flex-direction: column;
+//   @include adaptiv(180,150 ,height);
+//   @include adaptiv(180,150 ,width);
+//   .popup_delete_masssege{
+//     margin: 0px auto;
+//   }
+//   .popup_delete_button_line{
+//     display: flex;
+//     justify-content: space-between;
+//     .button{
+//       @include adaptiv(80, 40, width);
+//     }
+//   }
+// }
 
 // Place detaile
 

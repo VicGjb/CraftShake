@@ -4,6 +4,7 @@
     flex-direction: column;
 }
 .service_button_row{
+    margin-top: 20px;
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -72,7 +73,9 @@
             width: 170px;
         }
     }
-
+    .service_button_row{
+        margin-top: 0px;
+    }
 }
 
 @media (max-width:769px) {
@@ -81,6 +84,7 @@
         align-items: center;
     }
     .service_button_row{
+        margin-top: 0px;
         width: 95%;
     }
     .service_row_button_wrapper{
