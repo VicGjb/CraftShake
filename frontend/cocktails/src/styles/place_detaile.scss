@@ -11,9 +11,6 @@
     display: flex;
     width: 80%;
     justify-content: center;
-    // flex-wrap: wrap;
-    // flex-direction: column;
-    // align-items: center;
 }
 .place_detaile_main_buttons_wrapper{
     margin-top: 20px;
@@ -25,8 +22,6 @@
 
 .main_btn_container{
     margin:0px 20px ;
-    // margin-bottom: 20px;
-
     .button{
         width: 100%;
     }
@@ -34,12 +29,12 @@
 
 .monitor_service_button_row{
     margin-top: 20px;
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    .button{
-        width: 130px;
-    }
+    // .button{
+    //     width: 130px;
+    // }
 }
 
 .mobile_service_btn_row{
@@ -64,7 +59,7 @@
 }
 .mobile_back_btn{
     display: none;
-    margin-top: 10px;
+    margin-top: 20px;
     width: 80%;
     .button{
         height: 20px;
@@ -118,7 +113,11 @@
 }
 
 @media (max-width:1280px){
-    
+    .monitor_service_button_row{
+        .button{
+            width: 10px;
+        }
+    }
 }
 @media (min-width:769px){
     .main_btn_container{
@@ -149,6 +148,7 @@
         }
     }
     .place_detaile_main_buttons_wrapper{
+        margin-top: 0px;
         width: 100%;
     }
     .main_buttons_wrapper{

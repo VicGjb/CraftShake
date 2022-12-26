@@ -1,0 +1,99 @@
+.photo-uploader_wrapper{
+    width: 90%;
+    color:#909090;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photo-uploader_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #909090;
+    min-height: 200px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    img{
+        height: 200px;
+        width: 200px;
+    }
+}
+
+.upload-photo_content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    transition: 0.3s;
+    .upload_icon{
+        width:80px;
+        height:40px;
+        margin-bottom: 20px;
+    }
+    .upload_icon path{
+        fill: #909090;
+        transition: 0.3s;
+    }
+}
+.photo-uploader_form:hover{
+    background-color: #323131;
+    .upload-photo_content{
+        color: #FFBF1C;
+    }
+    .upload_icon path{
+        fill: #FFBF1C;
+    }
+}
+.upload-photo_state-bar{
+    margin-top: 20px;
+    height: 50px;
+    margin-bottom: 20px;
+    padding: 0px 15px;
+    background-color: #323131;
+    border-radius: 10px;
+    width: 100%;    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .image-file-icon{
+        width: 20px;
+        height: 20px;
+    }
+    .image-file-icon path{
+       fill: #909090;
+    }
+    .delete-file-icon{
+        margin-left: 20px;
+        height: 20px;
+        width: 20px;
+        cursor: pointer;
+    }
+    .delete-file-icon path{
+        fill: #909090;
+        transition: 0.3s;
+    }
+    .delete-file-icon:hover path{
+        fill: #FFBF1C;
+    }
+}
+
+@media (max-width:769px){
+    .upload-photo_state-bar{
+
+        font-size: 18px;
+    }
+}
+
+@media (max-width:450px){
+    .upload-photo_state-bar{
+
+        font-size: 16px;
+        word-wrap: break-word;
+    }
+}

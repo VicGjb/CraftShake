@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { NetworkManager } from '../../components/network_manager';
-
 import { RegularButton } from '../../components/buttons/regular_button';
 
 export function AddProduct({setAddProductActive}) {
@@ -39,7 +38,6 @@ export function AddProduct({setAddProductActive}) {
     }
 
       return (
-		<div>
 			<form onSubmit={submitHandler} className='add_product_form'>
 				<div>
 					<div className='add_product_input_wrapper'>
@@ -47,6 +45,7 @@ export function AddProduct({setAddProductActive}) {
                             Name:
                         </div>
                         <input
+                            className='name'
                             type="text"
                             name="name"
                             value={form.name}
@@ -98,6 +97,5 @@ export function AddProduct({setAddProductActive}) {
                         <RegularButton lable={'Add'}></RegularButton>
                 </div>  
 			</form>
-		</div>
 	)
 }

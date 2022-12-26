@@ -38,7 +38,7 @@ export function PopupMenuPositionCard({
                     </div>
                 </div>
                 <div className="menu_position_description">
-                    {menuPosition.discription}    
+                    {menuPosition.description}    
                 </div>        
                 <div className="popup_footer">
                 </div>

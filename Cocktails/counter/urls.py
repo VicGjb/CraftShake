@@ -14,7 +14,6 @@ from .views import(
     ProductView,
     ProductDeleteView,
     ProductCreateView,
-    ProductUpdateView,
     ProductUploadPhotoView,
     ProductByNameView,
 
@@ -72,10 +71,10 @@ urlpatterns = format_suffix_patterns(
         path('product/', ProductView.as_view({'get':'list'})),
         path('product/by-name/<str:name>', ProductByNameView.as_view()),
         path('product/<int:pk>', ProductView.as_view({'get':'retrieve'})),
-        path('product/update/<int:pk>',ProductUpdateView.as_view({'post':'update'})),
+        path('product/update/<int:pk>',ProductCreateView.as_view({'post':'update'})),
         path('product/<int:pk>/delete', ProductDeleteView.as_view({'post':'destroy'})),
         path('product/upload-photo/<int:pk>', ProductUploadPhotoView.as_view({'post':'update'})),
-        path('product/create/', ProductCreateView.as_view({'post':'create'})),
+        path('product/create/', ProductCreateView.as_view({'post':'add_product'})),
 
         path('menu/', MenuView.as_view({'get':'list'})),
         path('menu/?place=<int:pk>/',MenuView.as_view({'get':'list'})),

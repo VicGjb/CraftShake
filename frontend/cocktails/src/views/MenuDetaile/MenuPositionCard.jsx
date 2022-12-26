@@ -43,7 +43,7 @@ export function MenuPositionCard({menuPosition}){
                     </div>
                     <div className="menu_position_card_title_description_conteiner">
                         <div className="menu_position_card_slot name">{menuPosition.name} </div>
-                        <div className="menu_position_card_slot description">{menuPosition.discription} </div>
+                        <div className="menu_position_card_slot description">{menuPosition.description} </div>
                     </div>   
                 </div>
                 <div className="menu_position_card_volume_price">

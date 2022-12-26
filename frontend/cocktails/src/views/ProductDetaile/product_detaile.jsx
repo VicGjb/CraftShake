@@ -5,6 +5,7 @@ import {useParams} from 'react-router-dom';
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupUploadProductPhoto } from "../../components/popup/popup_change_photo";
 import { PopupChangeProduct } from "../../components/popup/popup_change_product";
+import { PopupAddProduct } from "../../components/popup/popup_add_product";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -19,10 +20,9 @@ export function ProductDetaile(){
     let network_manager = new NetworkManager();
     let mainContext = useManeContext()
     let navigate = useNavigate();
-    let location = useLocation();
 
     let [upload_product_photo_active, setUploadProductPhotoActive] = useState(false);
-    let [change_product_active, setChangeProductActive] = useState(false);
+    let [add_product_active, setAddProductActive] = useState(false);
     let [delete_active,setDelete_active] = useState(false)
 
     useEffect(() => {
@@ -65,7 +65,7 @@ export function ProductDetaile(){
                         <div className="product_detaile_delete_btn top" onClick={()=> setDelete_active(true)}>
                             <RegularButton lable={'Delete product'}/>
                         </div>
-                        <div className="product_detaile_change_btn top" onClick={()=>setChangeProductActive(true)}>
+                        <div className="product_detaile_change_btn top" onClick={()=>setAddProductActive(true)}>
                             <RegularButton lable={'Change product'} />   
                         </div>
                     </div>    
@@ -89,7 +89,7 @@ export function ProductDetaile(){
                                     </div>
                                 </div>
                                 <div className="product_detaile_discription">
-                                    {product.discription}
+                                    {product.description}
                                 </div>
                             </div>
                         </div>                 
@@ -98,17 +98,15 @@ export function ProductDetaile(){
                         <div className="product_detaile_delete_btn" onClick={()=> setDelete_active(true)}>
                             <RegularButton lable={'Delete product'}/>
                         </div>
-                        <div className="product_detaile_change_btn" onClick={()=>setChangeProductActive(true)}>
+                        <div className="product_detaile_change_btn" onClick={()=>setAddProductActive(true)}>
                             <RegularButton lable={'Change product'} />   
                         </div>
                     </div>
-                    <PopupUploadProductPhoto upload_product_photo_active={upload_product_photo_active} setUploadProductPhotoActive={setUploadProductPhotoActive}/>
-                    <PopupChangeProduct product={product} change_product_active={change_product_active} setChangeProductActive={setChangeProductActive}/>
+                    <PopupUploadProductPhoto upload_product_photo_active={upload_product_photo_active} setUploadProductPhotoActive={setUploadProductPhotoActive} setProduct={setProduct}/>
+                    <PopupAddProduct product={product} setProduct={setProduct} add_product_active={add_product_active} setAddProductActive={setAddProductActive}/>
                     <PopupDelete subject={`product ${product.name}`} delete_active={delete_active} setDelete_active={setDelete_active} func={deleteProduct}/>  
-                </div>
-                          
+                </div>        
         )
-        
     }
 
     function Render(props){

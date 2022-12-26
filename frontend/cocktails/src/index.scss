@@ -827,65 +827,65 @@ body{
 
 
 // Add Product Form
-.popup_add_product_content{
-  @include adaptiv(320,250 ,width);
-  @include adaptiv(320,280 ,height);
-  background-color: #222;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
+// .popup_add_product_content{
+//   @include adaptiv(320,250 ,width);
+//   @include adaptiv(320,280 ,height);
+//   background-color: #222;
+//   border-radius: 10px;
+//   display: flex;
+//   flex-direction: column;
+//   flex-wrap: nowrap;
+//   align-items: center;
 
   // .popup_title{
   //   @include adaptiv(10,5 ,margin-top )
   // }
-}
-.popup_add_product_form_wrapper{
-  margin: auto 0;
-  .add_product_input_labele{
-    @include adaptiv(18,12 ,font-size );
-  }
-}
+// }
+// .popup_add_product_form_wrapper{
+//   margin: auto 0;
+//   .add_product_input_labele{
+//     @include adaptiv(18,12 ,font-size );
+//   }
+// }
 
-.add_product_form{
-  display: flex;
-  flex-direction: column;
-  @include adaptiv(260,210 ,width )
-}
-.add_product_input_wrapper{
-  display: flex;
-  justify-content: space-between;
-  @include adaptiv(20,10 ,margin-top);
-  .discription{
-    height: 100px;
-    padding: 0 0 70px 5px;
-  }
-  .price{
-    width: 85px;
-  }
-  input{
-    background-color:#424040;
-    @include adaptiv(150,150 ,width );
-    color: #ecdede;
-    @include adaptiv(14,10 ,font-size );
-    padding-left: 5px;
-  }
-}
+// .add_product_form{
+//   display: flex;
+//   flex-direction: column;
+//   @include adaptiv(260,210 ,width )
+// }
+// .add_product_input_wrapper{
+//   display: flex;
+//   justify-content: space-between;
+//   @include adaptiv(20,10 ,margin-top);
+//   .discription{
+//     height: 100px;
+//     padding: 0 0 70px 5px;
+//   }
+//   .price{
+//     width: 85px;
+//   }
+//   input{
+//     background-color:#424040;
+//     @include adaptiv(150,150 ,width );
+//     color: #ecdede;
+//     @include adaptiv(14,10 ,font-size );
+//     padding-left: 5px;
+//   }
+// }
 // .add_product_input_labele{
 
 // }
 
-.add_product_submit_btn{
-  @include adaptiv(10,5 ,margin-top);
-  justify-self:center;
-  align-self: flex-end;
-  .button{
-    max-width: 260px;
-    // margin-bottom: 600px;
-  }
+// .add_product_submit_btn{
+//   @include adaptiv(10,5 ,margin-top);
+//   justify-self:center;
+//   align-self: flex-end;
+//   .button{
+//     max-width: 260px;
+//     // margin-bottom: 600px;
+//   }
 
-}
+// }
 
 
 // Product detaile
@@ -960,52 +960,54 @@ body{
 //   }
 // }
 // webkit-file-upload-button
-.upload_photo::-webkit-file-upload-button{
-  @include adaptiv(155, 70, width); 
-  @include adaptiv(35, 15, height); 
-  background: #222222;
-  border: 1px solid rgba(254, 250, 240, 0.25);
-  box-shadow: 0px 0px 4px rgba(254, 250, 240, 0.25);
-  @include adaptiv(10, 5, border-radius);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.upload_photo::-webkit-file-upload-button:hover{
-  box-shadow: 0px 0px 4px rgba(255, 191, 28, 0.25);
-  color: #FFBF1C;
-  .button_label{
-    color: rgb(255, 191, 28);
-  }
-}
 
-.upload_photo{
-    position: absolute;
-    opacity: 0;
+
+// .upload_photo::-webkit-file-upload-button{
+//   @include adaptiv(155, 70, width); 
+//   @include adaptiv(35, 15, height); 
+//   background: #222222;
+//   border: 1px solid rgba(254, 250, 240, 0.25);
+//   box-shadow: 0px 0px 4px rgba(254, 250, 240, 0.25);
+//   @include adaptiv(10, 5, border-radius);
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+// }
+// .upload_photo::-webkit-file-upload-button:hover{
+//   box-shadow: 0px 0px 4px rgba(255, 191, 28, 0.25);
+//   color: #FFBF1C;
+//   .button_label{
+//     color: rgb(255, 191, 28);
+//   }
+// }
+
+// .upload_photo{
+//     position: absolute;
+//     opacity: 0;
     
-}
-.file_input:hover{
-  // background-color: #F30505;
-  .button{
-    box-shadow: 0px 0px 4px rgba(255, 191, 28, 0.25);
-  }
-  .button_label{
-   color: #FFBF1C; 
-  }
+// }
+// .file_input:hover{
+//   // background-color: #F30505;
+//   .button{
+//     box-shadow: 0px 0px 4px rgba(255, 191, 28, 0.25);
+//   }
+//   .button_label{
+//    color: #FFBF1C; 
+//   }
   
-}
-.upload_product_photo_submit_btn{
-  @include adaptiv(20,10 ,margin-top );
-  width: 100%;
-}
-.popup_add_product_form_wrapper{
-  display: flex;
-}
-.upload_photo_form{
-  .button{
-   margin: 0 auto; 
-  }
-}
+// }
+// .upload_product_photo_submit_btn{
+//   @include adaptiv(20,10 ,margin-top );
+//   width: 100%;
+// }
+// .popup_add_product_form_wrapper{
+//   display: flex;
+// }
+// .upload_photo_form{
+//   .button{
+//    margin: 0 auto; 
+//   }
+// }
 
 
 

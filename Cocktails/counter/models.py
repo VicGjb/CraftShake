@@ -91,7 +91,7 @@ class Product(models.Model):
         max_digits=7,
         decimal_places=2,
     )
-    discription = models.TextField(
+    description = models.TextField(
         max_length=500,
         verbose_name='About',
         blank=True
@@ -106,7 +106,6 @@ class Product(models.Model):
         upload_to='Product_photo',
         blank=True,
         null=True,
-        # default = '/Product_photo/cocktailDefault.jpeg'
     )
 
     def __str__ (self)  -> str:
@@ -196,8 +195,8 @@ class MenuPosition(models.Model):
     def get_photo(self) -> str:
         return self.product.photo
     
-    def get_discription(self) -> str:
-        return self.product.discription
+    def get_description(self) -> str:
+        return self.product.description
 
     def get_is_current_menu(self)->bool:
         return self.menu.is_current_menu

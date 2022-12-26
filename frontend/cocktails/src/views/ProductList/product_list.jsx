@@ -74,7 +74,11 @@ export function ProductList(){
                         ))}
                     </div>
                    
-                    <PopupAddProduct add_product_active={add_product_active} setAddProductActive={setAddProductActive}/>
+                    <PopupAddProduct 
+                        add_product_active={add_product_active} 
+                        setAddProductActive={setAddProductActive}
+                        setProducts = {setProducts}
+                        />
                 </div>
             </div>
         )

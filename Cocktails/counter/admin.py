@@ -137,7 +137,7 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'discription', 'cost_price','get_image',)
+    list_display = ('name', 'description', 'cost_price','get_image',)
     list_display_links = ('name',)
     search_fields = ('name',)
     save_on_top = True

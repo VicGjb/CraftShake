@@ -207,7 +207,7 @@ class ProductView(viewsets.ReadOnlyModelViewSet):
     filterset_class = ProductFilter
 
     def get_queryset(self):
-        product = Product.objects.all()
+        product = Product.objects.all().order_by('name')
         return product
 
     def get_serializer_class(self):
@@ -224,19 +224,31 @@ class ProductCreateView(viewsets.ModelViewSet):
 
     @action(detail=True, method=['post'])
     def add_product(self, request, pk=None):
-        product = PlaceDetailSerializer(data=request.data)
+        product = ProductDetailSerializer(data=request.data)
         if product.is_valid():
-            return Response(status=201)
-
-
-class ProductUpdateView(viewsets.ModelViewSet):
-    permission_classes = [CraftShakeCounterPermissions]
-    serializer_class = ProductUpdateSerializer
+            new_product = Product.objects.create(
+                                                name=product.data['name'],
+                                                cost_price=product.data['cost_price'],
+                                                description=product.data['description'],
+                                                sale_price=product.data['sale_price'],
+                                                )
+            products = Product.objects.all().order_by('name')
+            serializer = ProductDetailSerializer(products, many=True)
+            return Response(status=201, data=serializer.data)
     
-    
-    def get_queryset(self):
-        product = Product.objects.all() 
-        return product
+    @action(detail=True, method=['post'])
+    def update(self, request, pk=None):
+        product_update = ProductDetailSerializer(data=request.data)
+        if product_update.is_valid():
+            product = Product.objects.get(id=pk)
+            product.name = product_update.data['name']
+            product.cost_price = product_update.data['cost_price']
+            product.sale_price = product_update.data['sale_price']
+            product.description = product_update.data['description']
+            product.save()
+            serializer = ProductDetailSerializer(product)
+            return Response(status=201, data=serializer.data)
+
 
 class ProductByNameView(generics.ListAPIView):
     serializer_class = ProductSerializer
@@ -268,14 +280,18 @@ class ProductUploadPhotoView(viewsets.ModelViewSet):
         product = Product.objects.get(id=pk)
         photo = ProductUploadPhotoSerializer(data=request.data)
         if photo.is_valid():
-            remove_file_from_aws_3(product.photo)
+            print(f'Heyyyy photo {request.data}')
+            if product.photo:   
+                remove_file_from_aws_3(product.photo)
             print(f'photo {request.data["photo"].name}')
             filename_parts = request.data["photo"].name.split('.')
             filename =f'{product.id}-'+ filename_parts[0]+'.'+filename_parts[1]
             request.data["photo"].name = filename
             product.photo = request.data["photo"]
             product.save()
-            return Response(status=201)
+            serializer = ProductDetailSerializer(product)
+            print('HEYY okey')
+            return Response(status=201,data=serializer.data)
 
 
 """Menu views"""

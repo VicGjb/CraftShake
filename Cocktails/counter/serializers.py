@@ -77,7 +77,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'id',
             'name', 
             'cost_price',
-            'discription', 
+            'description', 
             'photo'
             )
 
@@ -114,7 +114,7 @@ class MenuPositionCreateSerializer(serializers.ModelSerializer):
 class MenuPositionSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source='get_product_name')
     photo = serializers.ImageField(source='get_photo')
-    discription = serializers.CharField(source='get_discription')
+    description = serializers.CharField(source='get_description')
     
     class Meta:
         model = MenuPosition

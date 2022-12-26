@@ -9,7 +9,6 @@ import { OrdersMainBtn } from "../../components/buttons/orders_main_btn";
 import { MenusMainBtn } from "../../components/buttons/menus_main_btn";
 import { ManagersMainBtn } from "../../components/buttons/managers_main_btn";
 import { AddButton } from "../../components/buttons/add_button";
-import { PopupAddOrder } from "../../components/popup/popup_add_order";
 import { PopupAddMenu } from "../../components/popup/popup_add_menu";
 import { PopupAddInvoice } from "../../components/popup/popup_add_invoice";
 import { PopupAddManager } from "../../components/popup/popup_add_manager";
@@ -25,17 +24,12 @@ export function PlaceDetaile(){
     let {placeName} = useParams();
     let [loaded, setLoaded] = useState(false);
     let network_manager = new NetworkManager()
-
-    let [add_order_active, setAdd_order_active] = useState(false)
     let [add_invoice_active, setAdd_invoce_active] = useState(false)
     let [add_menu_active, setAdd_menu_active] = useState(false)
     let [add_manager_active, setAdd_manager_active] = useState(false)
     let [add_change_place_active, setAdd_Change_place_active] = useState(false)
     let [delete_active,setDelete_active] = useState(false)
     let navigate = useNavigate();
-    let location = useLocation()
-    let main_context = useManeContext();
-    let reload='b'
  
     useEffect(() => {
         network_manager.get_place_detaile(placeId)
@@ -49,7 +43,7 @@ export function PlaceDetaile(){
         network_manager.delete_place(placeId)
         .then(response=>(
             console.log('Place deleted'),
-            navigate(`/placeList` ,{replace:false, state:reload})
+            navigate(`/placeList` ,{replace:false})
         ))
         .catch(error=>{
             console.log(error);
@@ -61,7 +55,9 @@ export function PlaceDetaile(){
         return(
             <div className="place_detile_main_page_wrapper">
                 <div className="mobile_back_btn">
-                    <RegularButton lable={'Back'}/>
+                    <Link to={`/placeList`}>
+                        <RegularButton lable={'Back'}/>
+                    </Link>
                 </div>
                 <div className="monitor_service_button_row">
                         <div className="service_row_button_wrapper">

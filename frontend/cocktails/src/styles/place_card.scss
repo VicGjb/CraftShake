@@ -1,8 +1,8 @@
 .place_card_btn{
     overflow:scroll;
     margin-top: 20px;
-    margin-left: 20px;
-    width: 280px;
+    // margin-left: 20px;
+    // width: 280px;
     height: 120px;
     background: #323131;
     box-shadow: 0px 0px 6px rgba(237, 228, 228, 0.25);
@@ -54,8 +54,8 @@ border-radius: 10px;
 
 @media (min-width:1280px)  {
     .place_card_btn{
-        width:500px;
-        height: 140px;
+        // width:500px;
+        // height: 140px;
     }
     .place_card_dtn_title{
         font-size: 36px;
@@ -67,8 +67,8 @@ border-radius: 10px;
 
 @media (max-width:1280px)  {
     .place_card_btn{
-        width: 45%;;
-        height: 80px;
+        // width: 45%;;
+        // height: 80px;
     }
     .place_card_dtn_title{
         font-size: 24px;
@@ -79,12 +79,12 @@ border-radius: 10px;
     
 }
 
-@media (max-width:769px)  {
+@media (max-width:770px)  {
     .place_card_btn{
         justify-self: center;
         align-self: center;
         width: 300px;
-        height: 80px;
+        // height: 80px;
         
     }
     .place_card_dtn_title{
