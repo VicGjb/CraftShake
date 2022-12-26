@@ -228,25 +228,25 @@ body{
 //   color: #909090;
 // }
 
-.service_button_row{
-  @include adaptiv(750, 190, width);
-  @include adaptiv(30, 20, height);
-  display: flex;
-  justify-content: space-between;
-  @include adaptiv(10,5 , margin-top);
-  @include adaptiv(10,5 , margin-bottom);
-  // border-bottom: 0.5px solid #605f5e70;
+// .service_button_row{
+//   @include adaptiv(750, 190, width);
+//   @include adaptiv(30, 20, height);
+//   display: flex;
+//   justify-content: space-between;
+//   @include adaptiv(10,5 , margin-top);
+//   @include adaptiv(10,5 , margin-bottom);
+//   // border-bottom: 0.5px solid #605f5e70;
   
-  .service_row_button_wrapper{
-    align-self: center;
-  }
-  .button{
-    @include adaptiv(30,20 , height);
-    @include adaptiv(110, 60, width);
+//   .service_row_button_wrapper{
+//     align-self: center;
+//   }
+//   .button{
+//     @include adaptiv(30,20 , height);
+//     @include adaptiv(110, 60, width);
   
-  }
+//   }
 
-}
+// }
 
 .place_detaile_button_wrapper{
   @include adaptiv(20, 10, margin-top);

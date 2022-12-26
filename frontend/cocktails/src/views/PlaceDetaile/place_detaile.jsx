@@ -65,11 +65,11 @@ export function PlaceDetaile(){
                                 <RegularButton lable={'Back'}/>
                             </Link>
                         </div>
-                        <div className="service_row_button_wrapper" onClick={()=>setDelete_active(true)}>
+                        <div className="service_row_button_wrapper delete" onClick={()=>setDelete_active(true)}>
                             <RegularButton lable={'Delete place'} />
                         </div>
 
-                        <div className="service_row_button_wrapper" onClick={()=>setAdd_place_active(true)}>
+                        <div className="service_row_button_wrapper change" onClick={()=>setAdd_place_active(true)}>
                             <RegularButton lable={'Change place'} />
                         </div>      
                 </div>

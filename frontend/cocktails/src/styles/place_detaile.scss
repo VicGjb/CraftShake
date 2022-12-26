@@ -74,6 +74,7 @@
     align-self: center;
     justify-content: center;
     .button{
+        transition: 0.3s;
         background-color: #F15A5A;
         .button_label{
         color: black;
@@ -86,7 +87,8 @@
     align-self: center;
     justify-content: center;
     .button{
-        background-color: #F5DB51;   
+        transition: 0.3s;
+        background-color: #7D62EA;   
         .button_label{
             color: black;
             }       
@@ -94,9 +96,18 @@
 }
 
 
-.service_row_button_wrapper.delete:hover,.service_row_button_wrapper.change:hover{
+.service_row_button_wrapper.delete:hover{
     .button{
-        background-color: #222;
+        background-color: #cd4a4a;
+        .button_label{
+        color: #FFBF1C;
+        }      
+    }  
+}
+
+.service_row_button_wrapper.change:hover{
+    .button{
+        background-color: #694be2;
         .button_label{
         color: #FFBF1C;
         }      
