@@ -15,6 +15,7 @@ import { PopupAddManager } from "../../components/popup/popup_add_manager";
 import { PopupAddPlace } from "../../components/popup/popup_add_place";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { RegularButton } from "../../components/buttons/regular_button";
+import { useManeContext } from "../../components/main_context";
 
 import '../../styles/place_detaile.scss'
 
@@ -30,6 +31,7 @@ export function PlaceDetaile(){
     let [add_place_active, setAdd_place_active] = useState(false)
     let [delete_active,setDelete_active] = useState(false)
     let navigate = useNavigate();
+    let mainContext = useManeContext()
  
     useEffect(() => {
         network_manager.get_place_detaile(placeId)

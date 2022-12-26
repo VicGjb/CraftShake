@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { NetworkManager } from "../../components/network_manager";
 import { useState } from "react";
-import { NavLink} from "react-router-dom";
 import { OrderPositions } from "./order_positions/order_positions";
 import { useOrderItemListContext } from "./OrderDetaileContext/order_item_list_context";
-import { OrderDetaileMenuRoute } from "./order_detaile_router";
 import { MobileButtonLineTop } from "./OrderTopButtonLine/OrderTopButtonLine";
 import { MobileButtonLineBottom } from "./OrderTopButtonLine/OrderTopButtonLine";
 import { OrderTopButtonLine } from "./OrderTopButtonLine/OrderTopButtonLine";
@@ -39,19 +37,6 @@ export function OrderDetaileContent({orderId, menus}){
             order_detaile_context.setMenusContext(menus)
         }
     },[])
-
-
-    // function renderMenu(menu){
-    //     if(menu.is_current_menu){
-    //         return(
-    //             <div  key={menu.id}>
-    //                 <NavLink className='regular_text_small menu_name_link' to={`menu/${menu.id}`}>
-    //                     {menu.name}
-    //                 </NavLink>  
-    //             </div>
-    //         )
-    //     }
-    // }
 
 
     function dateChangeHendler(e){

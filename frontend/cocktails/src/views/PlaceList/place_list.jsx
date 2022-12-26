@@ -15,7 +15,7 @@ export function PlaceList(){
     let network_manager = new NetworkManager()
     let main_context =  useManeContext()
     let user = main_context.getUserFromMainContext()
-
+    let newPlace = true
 
     useEffect(()=> {
         network_manager.get_place_list()
@@ -75,6 +75,7 @@ export function PlaceList(){
                     add_place_active={add_place_active} 
                     setAdd_place_active={setAdd_place_active} 
                     setPlaces={setPlace}
+                    newPlace={newPlace}
                     />
             </div>        
         )

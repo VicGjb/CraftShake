@@ -10,7 +10,6 @@ import '../../styles/popup_add_manager.scss'
 export function PopupAddManager({add_manager_active, setAdd_manager_active, manager}){
     let {placeName} = useParams();
     let {placeId} = useParams();
-
     let networkManager = new NetworkManager()
     let managersContext = useManagersContext()
 	let defaultForm = setDefaultForm()

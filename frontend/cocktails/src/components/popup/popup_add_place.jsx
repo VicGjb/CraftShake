@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useManeContext } from "../main_context";
 import { RegularButton } from "../buttons/regular_button";
@@ -6,8 +6,14 @@ import { NetworkManager } from '../../components/network_manager';
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import '../../styles/popup_add_place.scss'
 
-export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces}){
-    
+export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces, newPlace}){
+    let emptyForm = {
+        name:'',
+        address:'',
+        phone:'',
+        email:'',
+        is_current_place:true,
+    }
     let mainContext = useManeContext();
     let placeContext = mainContext.getPlace
     let defaultForm = setDefaultForm()
@@ -16,22 +22,20 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces}
     
     
     function setDefaultForm(){
-        if(placeContext){
-            return({
-                    name:placeContext.name,
-                    address:placeContext.address,
-                    phone:placeContext.phone,
-                    email:placeContext.email,
-                    is_current_place:placeContext.is_current_place,
-                })
+        if(newPlace){
+            console.log('EBANNAI PLACE',placeContext )
+            return(
+                    emptyForm
+                )
         }else{
-            return({
-                    name:'',
-                    address:'',
-                    phone:'',
-                    email:'',
-                    is_current_place:true, 
-                })
+            return( {
+                name:placeContext.name,
+                address:placeContext.address,
+                phone:placeContext.phone,
+                email:placeContext.email,
+                is_current_place:placeContext.is_current_place,
+                }
+            )
         }
     }
     
@@ -48,6 +52,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces}
             networkManager.change_place(placeContext.id, form)
             .then(response => {
                 mainContext.setPlace(response.data)
+                setForm(emptyForm)
             })
             .catch(error => {
                 console.log(error);
@@ -59,7 +64,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces}
             networkManager.create_place(form)
 			.then(response => {
                 setPlaces(response)
-				setForm(defaultForm);
+				setForm(emptyForm);
 			})
 			.catch(error => {
 				console.log(error);
@@ -70,7 +75,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces}
 	}
 
     return(
-        <div className={add_place_active ? 'popup_mobile_wrapper active' : 'popup_mobile_wrapper'} onClick={()=>setAdd_place_active(false)}>
+        <div className={add_place_active ? 'popup_mobile_wrapper active' : 'popup_mobile_wrapper'} onClick={()=>{setAdd_place_active(false)}}>
             <div className="popup_mobile_content add_place" onClick={e => e.stopPropagation()}>
                 <div className="popup_filter_sevice_button_wrapper">
                     <div className="popup_filter_close_button" onClick={()=>{setAdd_place_active(false)}}>
