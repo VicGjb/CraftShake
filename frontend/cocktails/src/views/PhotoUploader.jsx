@@ -4,6 +4,7 @@ import '../styles/photo_uploader.scss'
 import {ReactComponent as UploadIcon} from '../svg/upload_icon.svg'
 import {ReactComponent as DeleteIcon} from '../svg/delete_icon.svg'
 import {ReactComponent as ImageFileIcon} from '../svg/image_file_icon.svg'
+
 export function PhotoUploader({uploadData}){
 
     let [photo,setPhoto] = useState(null)

@@ -121,7 +121,7 @@ export function OrderDetaileContent({orderId, menus}){
         return(
             <div className="order_detaile_wrapper">
                 <OrderTopButtonLine order={order} date={dateOrder}/>
-                <MobileButtonLineTop />
+                <MobileButtonLineTop date={dateOrder}/>
                 <div className="order_detaile_content_title">
                     <div className="indent"></div>
                     <div className="order_title">

@@ -11,7 +11,7 @@ export const MenusMainBtn = ({place}) =>{
             <Link to={`/${place.name}/${place.id}/menus`}>
                 <Btn className='icon_main_btn'></Btn>
                 <div className="main_button_label">
-                    Menus
+                    Menu 
                 </div>
             </Link>
         </button>
