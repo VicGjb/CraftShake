@@ -14,7 +14,7 @@
 .manager_card_title{
     display: flex;
     margin-top: 35px;
-    width: 80%;
+    width: 95%;
     justify-content: space-between;
     align-self: center;
     color: whitesmoke;
@@ -22,13 +22,17 @@
 }
 .manager_card_name{
     font-weight: 600;
-    font-size: 30px;
+    font-size: 24px;
+    margin-right: 10px;
 }
 .manager_card_phone{
     display: flex;
     justify-content: space-between;
-    font-size: 28px;
-    // width: 200px;
+    font-size: 20px;
+    word-wrap: break-word;
+    margin-right: 2px;
+    // overflow: hidden;
+    width: auto;
     span{
         text-align: end;
         // display: block;

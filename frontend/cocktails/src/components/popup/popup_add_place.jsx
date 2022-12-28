@@ -69,7 +69,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
             error = 'Required'
         }else if (!isFinite(value)){
             error = 'invalid phone number'
-        }else if (value.length>11){
+        }else if (value.length>12){
             error = 'invalid phone number'
         }
         return error;
@@ -145,9 +145,6 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
                                             name='name' 
                                             validate={validateName}
                                             className='name'
-                                            // defaultValue = {form.name}
-                                            // value={initialValues.name}
-                                            // onChange={changeHandler}
                                             />
                                         {errors.name && touched.name && <div className="field-error">{errors.name}</div>}
                                     </div>  
@@ -201,88 +198,6 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
                             </Form>
                         )}
                 </Formik>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                {/* <form onSubmit={submitHandler} className='add_place_form'>
-
-                    <div className='add_place_input_wrapper'>
-                        <div className='add_place_input_labele'>
-                            Name:
-                        </div>
-                        <input
-                            className='name'
-                            type="text"
-                            name="name"
-                            value={form.name}
-                            onChange={changeHandler}
-                        />
-                    </div>
-                    <div className='add_place_input_wrapper'>
-                        <div className='add_place_input_labele'>
-                            Addres:
-                        </div>
-                        <input
-                            className='addres'
-                            type="text"
-                            name="address"
-                            value={form.address}
-                            onChange={changeHandler}
-                        />
-                    </div>
-                    <div className='add_place_input_wrapper'>
-                        <div className='add_place_input_labele'>
-                            Phone:
-                        </div>
-                        <input
-                            className='phone'
-                            type="tel"
-                            name="phone"
-                            value={form.phone}
-                            onChange={changeHandler}
-                        />
-                    </div>
-                    <div className='add_place_input_wrapper'>
-                        <div className='add_place_input_labele'>
-                            Email:
-                        </div>
-                        <input
-                            className='email'
-                            type="text"
-                            name="email"
-                            value={form.email}
-                            onChange={changeHandler}
-                        />
-                    </div>
-                    <div className='add_place_input_wrapper current_checkbox'>
-                        <div className='add_place_input_labele'>
-                            Current:
-                        </div>
-                        <input
-                            className='current_checkbox'
-                            type="checkbox"
-                            name="current"
-                            value={form.is_current_place}
-                            checked={form.is_current_place}
-                            onChange={() => setForm(prev=> ({...prev, is_current_place: !prev.is_current_place}))}
-                        />
-                    </div>
-                    <div className='submit_button add_place' type="submit">
-                        <RegularButton lable={'Accept'}/>
-                    </div>
-                </form>         */}
             </div>
         </div>
     )

@@ -813,17 +813,17 @@ body{
 .products_list_button_set{
   @include adaptiv(50,20 ,margin-left )
 }
-.discription_input{
-  word-break: break-all;
-  white-space: wrap;
-  background-color:#424040;
-    @include adaptiv(150,150 ,width );
-    color: #ecdede;
-    @include adaptiv(14,10 ,font-size);
-    padding-left: 5px;
-    height: 100px;
-    resize:none;
-}
+// .discription_input{
+//   word-break: break-all;
+//   white-space: wrap;
+//   background-color:#424040;
+//     @include adaptiv(150,150 ,width );
+//     color: #ecdede;
+//     @include adaptiv(14,10 ,font-size);
+//     padding-left: 5px;
+//     height: 100px;
+//     resize:none;
+// }
 
 
 // Add Product Form

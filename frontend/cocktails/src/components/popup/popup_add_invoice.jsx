@@ -2,11 +2,14 @@ import React from "react";
 import { NetworkManager } from "../network_manager";
 import { useState } from "react";
 import { RegularButton } from "../buttons/regular_button";
-import { useNavigate, useParams } from "react-router-dom";
+import {useParams } from "react-router-dom";
+import { PopupRegularMessage } from "./popup_regular_message";
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
+import { Formik, Form, Field} from 'formik';
+import * as Yup from 'yup'
 import '../../styles/popup_add_invoice.scss'
 
-export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active}){
+export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active,setInvoices}){
     let {placeId} = useParams();
     let {placeName} = useParams();
     let defaultForm = {
@@ -18,42 +21,27 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active}){
     }
     let network_manager = new NetworkManager()
     let [form, setForm] = useState(defaultForm);
-    let [orders, setOrders] = useState([]);
-    let navigate = useNavigate();
+    let [regular_message_active, setRegular_message_active] = useState(false)
 
-    function submitHandler(e){
-        e.preventDefault()
+
+    function submitHandler(form){
         console.log('submit_form',form)
         network_manager.create_invoice(form)
             .then(response=>{
-                console.log(response);
+                console.log('sss',response);
+                setInvoices(response.data)
+                setAdd_invoice_active(false)
             })
             .catch(error => {
                 console.log('Iam ERROR',error);
+                raiseErrorMessage()
                 throw error;
             });
-            navigate(`/${placeName}/${placeId}/invoices`,)
-            window.location.reload();
-
-    }
-    function changeHandler(e){
-        setForm({...form, [e.target.name]:e.target.value})
-        console.log('Change')
-        console.log('submit',form)
-        // network_manager.change_invoice(placeId, form.from_date, form.until_date)
-        //     .then(response =>{
-        //         setOrders(response.data.results)
-        //         console.log(response.data.results)
-        //     })
+            
     }
 
-
-    function changeHandlerVat(e){
-        setForm({...form, [e.target.name]:e.target.checked})
-    }
-
-    function ToGo(){
-        setAdd_invoice_active(false)    
+    function raiseErrorMessage(){
+        setRegular_message_active(true)
     }
 
     return(
@@ -67,69 +55,100 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active}){
                 <div className="add_invoice_title">
                     Create invoice for {placeName}
                 </div>
+                <Formik
+                     initialValues={form}
+                     onSubmit={values=>{
+                         console.log('hey hey',values)
+                         submitHandler(values)
+                     }}
+                     validationSchema = {Yup.object({
+                        from_date: Yup.date()
+                            .required('Required'),
+                        until_date:Yup.date()
+                                .min(Yup.ref('from_date'), 'This date must be later than From date')
+                                .required('Requires'),
+                        date: Yup.date()
+                                .min(Yup.ref('until_date'), 'This date must be later than Until date')
+                                .required('Required'),
+                        
+                     })}
+                    >
+                    {({errors, touched, validateForm})=> (
+                        <Form className="add_invoice_form">
+                            <div className="add_invoice_form_date from">
+                                <div className="add_invoice_form_date_lable">
+                                    From
+                                </div>  
+                                <div className="field-container">
+                                    <Field 
+                                        className="date_input"
+                                        type='date'
+                                        name='from_date'
+                                    />
+                                    {errors.from_date && touched.from_date && <div className="field-error">{errors.from_date}</div>}
+                                </div>
+                            </div>
 
-                <form  className="add_invoice_form" onSubmit={submitHandler}>
-                    <div className="add_invoice_form_date from">
-                        <div className="add_invoice_form_date_lable">
-                            Date
-                        </div>
-                        <div>
-                            <input 
-                                className="date_input"
-                                type='date'
-                                name='date'
-                                onChange={changeHandler}
-                            />
-                        </div>
-                    </div>
-                    <div className="add_invoice_form_date from">
-                        <div className="add_invoice_form_date_lable">
-                            From
-                        </div>
-                        <div>
-                            <input 
-                                className="date_input"
-                                type='date'
-                                name='from_date'
-                                onChange={changeHandler}
-                            />
-                        </div>
-                    </div>
-                    <div className="add_invoice_form_date to">
-                        <div className="add_invoice_form_date_lable">
-                            Until
-                        </div>
-                        <div>
-                            <input 
-                                className="date_input"
-                                type='date'
-                                name='until_date'
-                                onChange={changeHandler}
-                            />
-                        </div>
-                    </div>
+                            <div className="add_invoice_form_date to">
+                                <div className="add_invoice_form_date_lable">
+                                    Until
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        className="date_input"
+                                        type='date'
+                                        name='until_date'
+                                    />
+                                    {errors.until_date && touched.until_date && <div className="field-error">{errors.until_date}</div>}
 
-                    <div className="add_invoice_form_date to">
-                        <div className="add_invoice_form_date_lable">
-                            Add VAT:
-                        </div>
-                        <div>
-                            <input 
-                                className="checkbox_input"
-                                type='checkbox'
-                                name='is_vat'
-                                onChange={changeHandlerVat}
-                            />
-                        </div>
-                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="add_invoice_form_date from">
+                                <div className="add_invoice_form_date_lable">
+                                    Date
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        className="date_input"
+                                        type='date'
+                                        name='date'
+                                    />
+                                    {errors.date && touched.date && <div className="field-error">{errors.date}</div>}
+                                </div>
+                            </div>
 
-                    <div type="submit" onClick={ToGo} className='add_invoice_form_submit_btn'>
-                        <RegularButton lable={"Create"}/>
-                    </div>
-                </form>
+                            
+
+                            <div className="add_invoice_form_date to">
+                                <div className="add_invoice_form_date_lable">
+                                    Add VAT:
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        className="checkbox_input"
+                                        type='checkbox'
+                                        name='is_vat'
+                                    />
+                                </div>
+                            </div>
+
+                            <div type="submit" onClick={()=>{validateForm().then(()=>console.log('hey'))}} className='add_invoice_form_submit_btn'>
+                                <RegularButton lable={"Create"} type='submit'/>
+                            </div>
+
+                        </Form>
+                )}
+
+                </Formik>
                 <div className="popup_footer">
                 </div>
             </div>
+            <PopupRegularMessage
+                message={'There are no orders for these date'}
+                regular_message_active = {regular_message_active}
+                setRegular_message_active = {setRegular_message_active}
+            />
         </div>
     )
 }

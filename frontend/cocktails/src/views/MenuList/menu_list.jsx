@@ -13,7 +13,7 @@ import '../../styles/menu_list.scss'
 
 
 export function MenuList(){
-    let [menus, setMenus] = useState([]);
+    let [menuList, setMenuList] = useState([]);
     let {placeId} = useParams();
     let {placeName} = useParams();
     let [add_menu_active, setAdd_menu_active] = useState(false);
@@ -23,7 +23,7 @@ export function MenuList(){
     useEffect(() => {
         network_manager.get_menus_list(placeId)
             .then((menus) => {
-                setMenus(menus);
+                setMenuList(menus);
                 console.log('Menus', menus);
         })},[placeId])
         
@@ -42,12 +42,17 @@ export function MenuList(){
                 </div>
     
                 <MenuListTableHead/>   
-                {menus.map(menu =>(
+                {menuList.map(menu =>(
                     <MenuCard menu={menu} key={menu.id}/>
                     
                 ))}     
                 
-            <PopupAddMenu place_id={placeId} add_menu_active={add_menu_active} setAdd_menu_active={setAdd_menu_active}/>
+            <PopupAddMenu 
+                place_id={placeId} 
+                add_menu_active={add_menu_active} 
+                setAdd_menu_active={setAdd_menu_active}
+                setMenuList={setMenuList}
+                />
             </div>
         
         )

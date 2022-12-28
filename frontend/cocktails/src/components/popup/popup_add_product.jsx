@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { NetworkManager } from '../../components/network_manager';
 import { RegularButton } from '../../components/buttons/regular_button';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup'
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import '../../styles/popup_add_product.scss'
 
@@ -34,17 +36,8 @@ export function PopupAddProduct({
                     sale_price:'0.00', 
                 })
         }
-    }
-    
-    
-    let changeHandler = e => {
-		setForm({...form, [e.target.name]:e.target.value})
-	}
-
-    
-    let submitHandler = e => {
-		e.preventDefault()
-
+    }    
+    function submitHandler(form){
         if (product){
             network_manager.change_product(product.id, form)
             .then(product => {
@@ -81,64 +74,90 @@ export function PopupAddProduct({
                     {product? `Update product ${product.name} `:'Create new product'}
                 </div>
 
-                <form onSubmit={submitHandler} className='add_product_form'>
-                        <div className='add_product_input_wrapper'>
-                            <div className='add_product_input_label'>
-                                Name:
+                
+                <Formik
+                    initialValues={form}
+                    onSubmit={values => {
+                        submitHandler(values)
+                    }}
+                    validationSchema = {Yup.object({
+                        name: Yup.string()
+                            .required('Required')
+                            .max(50,'Too long, must be 50 characters or less'),
+                        description: Yup.string()
+                            .max(500,'Too long, must be 500 characters or less'),
+                        cost_price: Yup.number()
+                            .required('Required')
+                            .min(0.01, 'Must be more than 0'),
+                        sale_price:Yup.number()
+                            .required('Requires')
+                            .min(Yup.ref('cost_price'), 'Must be more then cost price'),
+
+                    })}>
+
+
+                        {({errors, touched, validateForm})=>(
+                        <Form className='add_invoice_form'>
+                            <div className='add_place_input_wrapper'>
+                                <div className='add_place_input_labele'>
+                                    Name:
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        className="name"
+                                        type="text"
+                                        name="name"
+                                        />
+                                    {errors.name && touched.name && <div className="field-error">{errors.name}</div>}
+                                </div>  
                             </div>
-                            <input
-                                className="name"
-                                type="text"
-                                name="name"
-                                value={form.name}
-                                onChange={changeHandler}
-                            />
-                        </div>
-                        <div className='add_product_input_wrapper'>
-                            <div className="add_product_input_label">
-                                Description:
+                            <div className='add_place_input_wrapper'>
+                                <div className='add_place_input_labele'>
+                                    Description:
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        className="description_input"
+                                        component = 'textarea'
+                                        type = 'text'
+                                        name="description"
+                                        />
+                                    {errors.description && touched.description && <div className="field-error">{errors.description}</div>}
+                                </div>  
                             </div>
-                            <textarea
-                                className='description_input'
-                                type="text"
-                                name="description"
-                                value={form.description}
-                                onChange={changeHandler}
-                            />
-                        </div>
-                        <div className='add_product_input_wrapper'>
-                            <div className="add_product_input_label">
-                                Cost price: 
+                            <div className='add_place_input_wrapper'>
+                                <div className='add_place_input_labele'>
+                                    Cost price:
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        className="price"
+                                        type="number"
+                                        name="cost_price"
+                                        />
+                                    {errors.cost_price && touched.cost_price && <div className="field-error">{errors.cost_price}</div>}
+                                </div>  
                             </div>
-                            <input
-                                className='price'
-                                type="number"
-                                step={0.01}
-                                min='0'
-                                name="cost_price"
-                                value={form.cost_price}
-                                onChange={changeHandler}
-                            />
-                        </div>
-                        <div className='add_product_input_wrapper'>
-                            <div className="add_product_input_label">
-                                Sale price:    
+                            <div className='add_place_input_wrapper'>
+                                <div className='add_place_input_labele'>
+                                    Sale price:
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        className="price"
+                                        type="number"
+                                        name="sale_price"
+                                        />
+                                    {errors.sale_price && touched.sale_price && <div className="field-error">{errors.sale_price}</div>}
+                                </div>  
                             </div>
-                            <input
-                                className='price'
-                                type="number"
-                                step={0.01}
-                                min='0'
-                                name="sale_price"
-                                value={form.sale_price}
-                                onChange={changeHandler}
-                            />
-                        </div>
-                    <div type="submit" className='add_product_submit_btn'>
-                            <RegularButton lable={'Add'}></RegularButton>
-                    </div>  
-                </form>
-                             
+                            <div type="submit" onClick={()=>{validateForm().then(()=>console.log('hey'))}} className='add_invoice_form_submit_btn'>
+                                <RegularButton lable={"Create"} type='submit'/>
+                            </div>
+                        </Form>
+
+                        )}
+                </Formik>
             </div>
         </div>
     )

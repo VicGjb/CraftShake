@@ -1,7 +1,7 @@
 from decimal import  Decimal, ROUND_HALF_UP
 from django.shortcuts import render
 from django.db.models import Sum
-
+from datetime import datetime
 from .service import ProductFilter, Rate
 from Cocktails.aws_manager import remove_file_from_aws_3
 
@@ -50,7 +50,7 @@ from .serializers import(
     MenuPositionSerializer,
     MenuPositionCreateSerializer,   
     MenuSerializer,
-    MenuCreteSerializer,
+    MenuCreateSerializer,
     MenuUpdateSerializer,
     InvoiceSerializer,
     InvoiceCreateSerializer,
@@ -190,8 +190,10 @@ class ManagerOfPlaceCreateView(viewsets.ModelViewSet):
     
     @action(detail=True, method=['post'])
     def add_manager(self, request, pk=None):
+        print(request.data)
         manager_of_place = ManagerOfPlaceSerializer(data=request.data)
         if manager_of_place.is_valid():
+            
             new_manager = ManagerOfPlace.objects.create(
                                                         name=manager_of_place.data['name'],
                                                         phone=manager_of_place.data['phone'],
@@ -200,6 +202,7 @@ class ManagerOfPlaceCreateView(viewsets.ModelViewSet):
                                                         )
             managers = ManagerOfPlace.objects.filter(place=new_manager.place)
             serializer = ManagerOfPlaceSerializer(managers, many=True)
+            print(serializer.data)
             return Response(status=201, data=serializer.data)
 
 
@@ -338,14 +341,24 @@ class MenuDeleteView(viewsets.ModelViewSet):
 
 class MenuCreateView(viewsets.ModelViewSet):
     permission_classes = [CraftShakeCounterPermissions]
-    serializer_class = MenuCreteSerializer
+    serializer_class = MenuCreateSerializer
 
     @action(detail=True, methods=['post'])
-    def add_menu(self, request, pk=None):
-        menu = MenuSerializer(data=request.data)
+    def create(self, request, pk=None):
+        print(request.data)
+        menu = MenuCreateSerializer(data=request.data)
         if menu.is_valid():
-            return Response(status=201)
-
+            place = Place.objects.get(id=menu.data['place'])
+            new_menu = Menu.objects.create(
+                place = place,
+                name = menu.data['name'],
+                is_current_menu = menu.data['is_current_menu'],
+            )
+            menu_list = Menu.objects.filter(place = menu.data['place'])
+            serializer = MenuSerializer(menu_list, many=True)
+            return Response(status=201, data=serializer.data)
+        else:
+            return Response(status=403,data='NotValidError')
 
 """Menu position views""" 
 class MenuPositionView(viewsets.ReadOnlyModelViewSet):
@@ -527,6 +540,7 @@ class InvoiceCreateView(viewsets.ModelViewSet):
         if invoice_create_data.is_valid():
 
             data_for_new_invioce = invoice_create_data.data
+            print(data_for_new_invioce['place'])
             orders = Order.objects.filter(
                 date__gte = data_for_new_invioce['from_date'],
                 date__lte = data_for_new_invioce['until_date'],
@@ -534,24 +548,29 @@ class InvoiceCreateView(viewsets.ModelViewSet):
                 invoice = None 
                 ).order_by('date')
             print(orders)
-            amount = Decimal(f'{orders.aggregate(Sum("total_price"))["total_price__sum"]}')
-            
-            if data_for_new_invioce['is_vat']:
-                total_amount = amount * Rate.VAT_RATE
+
+            if orders:
+                amount = Decimal(f'{orders.aggregate(Sum("total_price"))["total_price__sum"]}')
+                
+                if data_for_new_invioce['is_vat']:
+                    total_amount = amount * Rate.VAT_RATE
+                else:
+                    total_amount = amount
+                place=Place.objects.get(id=data_for_new_invioce['place'])
+                new_invoice = Invoice.objects.create(
+                    place=place,
+                    date=data_for_new_invioce['date'],
+                    amount=amount.quantize(Decimal("0.01"), ROUND_HALF_UP),
+                    is_vat=data_for_new_invioce['is_vat'],
+                    total_amount=total_amount.quantize(Decimal('0.01'), ROUND_HALF_UP)
+                )   
+                new_invoice.save()
+                orders.update(invoice=new_invoice)
+                invoices = Invoice.objects.filter(place=place)
+                serializer = InvoiceSerializer(invoices, many=True)
+                return Response(status=201,data=serializer.data)
             else:
-                total_amount = amount
-            
-            new_invoice = Invoice.objects.create(
-                place=Place.objects.get(id=data_for_new_invioce['place']),
-                date=data_for_new_invioce['date'],
-                amount=amount.quantize(Decimal("0.01"), ROUND_HALF_UP),
-                is_vat=data_for_new_invioce['is_vat'],
-                total_amount=total_amount.quantize(Decimal('0.01'), ROUND_HALF_UP)
-            )   
-            new_invoice.save()
-            orders.update(invoice=new_invoice)
-            serializer = InvoiceSerializer(new_invoice)
-            return Response(serializer.data)
+                return Response(status=404,data='NotOrdersInRange')
     
 
 

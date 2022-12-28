@@ -19,3 +19,7 @@ RUN yarn add uuid
 RUN yarn add @mui/material @emotion/react @emotion/styled
 
 RUN yarn add js-file-download
+
+RUN yarn add formik
+
+RUN yarn add yup

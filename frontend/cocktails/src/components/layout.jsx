@@ -52,7 +52,7 @@ export const Layout = () =>{
     function renderCustomerView(){
         return(
             <div className='wrapper'>
-                    {/* <SideBar/>  */}
+                    <SideBar/> 
                 <div className='content'>
                     <MainTitle/>
                     <div className='work_space'>

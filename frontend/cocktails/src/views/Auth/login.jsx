@@ -53,7 +53,7 @@ export function SignIn() {
                 return;
             }else{
                 console.log('go to my id',user)
-                navigate(`/${user.id}/`)
+                navigate(`/customer/${user.id}/`)
                 return;
             }
         }else{
@@ -149,61 +149,7 @@ export function SignIn() {
                     </div>    
                 </form>
         
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-            {/* <form className='add_product_form' noValidate>
-                <input
-                    className='add_product_input_wrapper'
-                    required
-                    
-                    id="username"
-                    label="Email Address"
-                    name="username"
-                    autoComplete="username"
-                    autoFocus
-                    onChange={handleChange}
-                />
-                <input
-                    required
-                    
-                    className='add_product_input_wrapper'
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    onChange={handleChange}
-                />
-                <button
-                    className='add_product_submit_btn'
-                    type="submit"
-
-                    variant="contained"
-                    color="primary"
-                    onClick={handleSubmit}
-                >
-                    Sign In
-                </button>
-            </form>
-            <button onClick={onClickGoogle}>Login With Gooogle</button>
-            <div> </div>
-            <div> </div>
-            <button onClick={getTokens}> get tokens</button> */}
+            </div>  
         </div>
 );
 }

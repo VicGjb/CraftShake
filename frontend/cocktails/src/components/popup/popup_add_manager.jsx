@@ -5,7 +5,10 @@ import { RegularButton } from "../buttons/regular_button";
 import { NetworkManager } from "../network_manager";
 import { useManagersContext } from "../../views/ManagersList/ManagersContext";
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 import '../../styles/popup_add_manager.scss'
+
 
 export function PopupAddManager({add_manager_active, setAdd_manager_active, manager}){
     let {placeName} = useParams();
@@ -14,8 +17,11 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
     let managersContext = useManagersContext()
 	let defaultForm = setDefaultForm()
     let [form, setForm] =  useState(defaultForm);
+    let phoneRegularExpression = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)$/
+    
 
     function setDefaultForm(){
+        
         if(manager){
             return(
                 {
@@ -33,12 +39,8 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
                 })
         }
     }
-    let changeHandler = e => {
-		setForm({...form, [e.target.name]:e.target.value});
-        console.log(form)
-	}
-    let submitHandler = e => {
-		e.preventDefault()
+
+    function submitHandler(form) {
         if(manager){
             networkManager.update_manager(manager.id,form)
             .then(response => {
@@ -53,7 +55,7 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
             networkManager.create_manager(form)
 			.then(response => {
                 managersContext.setManagersList(response)
-				console.log(response);
+				console.log('response',managersContext.getManagersList);
 			})
 			.catch(error => {
 				console.log(error);
@@ -63,7 +65,7 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
         }
         
         }
-
+        
     return(
         <div className={add_manager_active ? 'popup_mobile_wrapper active' : 'popup_wrapper'} onClick={()=>setAdd_manager_active(false)}>
             <div className="popup_mobile_content add_manager" onClick={e => e.stopPropagation()}>
@@ -77,48 +79,79 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
                 <div className="popup_title add_manager">
                     {manager ? `Update manager  ${manager.name}`:`Add manager for ${placeName}`}
                 </div>
-                <form className='add_manager_form' onSubmit={submitHandler}>
-                    <div className='add_manager_input_wrapper'>
-                        <div className='add_manager_input_labele'>
-                            Name:
-                        </div>
-                        <input
-                            className="name"
-                            type="text"
-                            name="name"
-                            value={form.name}
-                            onChange={changeHandler}
-                        />
-                    </div>
-                
-                    <div className='add_manager_input_wrapper'>
-                        <div className="add_manager_input_labele">
-                            Phone:
-                        </div>
-                        <input
-                            className='phone'
-                            type="tel"
-                            name="phone"
-                            value={form.phone}
-                            onChange={changeHandler}
-                        />
-                    </div>
-                    <div className='add_manager_input_wrapper'>
-                        <div className="add_manager_input_labele">
-                            Description:
-                        </div>
-                        <textarea
-                            className='description_input'
-                            type="text"
-                            name="description"
-                            value={form.description}
-                            onChange={changeHandler}
-                        />
-                    </div>
-                    <div className='submit_button add_manager' type="submit">
-                        <RegularButton lable={manager?'Update':'Add'}/>
-                    </div>
-                </form>       
+
+
+                <Formik
+                    initialValues={form}
+                    onSubmit={values=>{
+                        console.log(values)
+                        submitHandler(values)
+                    }}
+                    validationSchema = {Yup.object({
+                        name: Yup.string()
+                            .required('Required')
+                            .max(50,'Too long, must be 50 characters or less'),
+                        phone: Yup.string()
+                            .matches(phoneRegularExpression,"That doesn't look like a phone number")    
+                            .max(13,'Too long for phone number')                    
+                            // .typeError("That doesn't look like a phone number")
+                            // .positive("A phone number can't start with a minus")
+                            // .integer("A phone number can't include a decimal point")
+                            .required('Required'),
+                        description: Yup.string()
+                            .max(500,'Too long, must be 500 characters or less'),
+                    })}
+                >
+                    {({errors,touched,validateForm})=>(
+                        <Form className='add_manager_form'>
+                            <div className='add_place_input_wrapper'>
+                                <div className='add_place_input_labele'>
+                                    Name:
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        name='name' 
+                                        className='name'
+                                        />
+                                    {errors.name && touched.name && <div className="field-error">{errors.name}</div>}
+                                </div>  
+                            </div>
+
+                            <div className='add_place_input_wrapper'>
+                                <div className='add_place_input_labele'>
+                                    Phone:
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        name='phone' 
+                                        className='phone'
+                                        // value={phone}
+                                        />
+                                    {errors.phone && touched.phone && <div className="field-error">{errors.phone}</div>}
+                                   
+                                </div>  
+                            </div>
+
+                            <div className='add_place_input_wrapper'>
+                                <div className='add_place_input_labele'>
+                                    Description:
+                                </div>
+                                <div className="field-container">
+                                    <Field 
+                                        name='description' 
+                                        className='description_input'
+                                        component = 'textarea'
+                                        type = 'text'
+                                        />
+                                    {errors.description && touched.description && <div className="field-error">{errors.description}</div>}
+                                </div>  
+                            </div>
+                            <div className='submit_button add_place' onClick={()=>{validateForm().then(()=>console.log('hey'))}}>
+                                    <RegularButton lable={'Accept'} type='submit'/>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
             </div>
         </div>
     )

@@ -1,12 +1,10 @@
 import React from "react";
 import { NetworkManager } from "../../components/network_manager";
 import { useState, useEffect } from "react";
-import { useManeContext} from "../../components/main_context";
 import { Link, useParams } from "react-router-dom";
 import { AddButton } from "../../components/buttons/add_button";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupAddInvoice } from "../../components/popup/popup_add_invoice";
-import { InvoiceListState } from "./invoice_list_state";
 import { InvoiceCard } from "./InvoiceCard";
 import { InvoiceListTableHead } from "./InvoiceListTableHead";
 import { PopupFilters } from "../../components/PopupFilters";
@@ -18,14 +16,7 @@ export function InvoiceList(){
     let [is_loaded, setIsLoaded] = useState(false);
     let {placeId} = useParams();
     let {placeName} = useParams();
-    let main_context = useManeContext();
     let network_manager = new NetworkManager()
-    let defaultForm = {
-        date_from: '',
-        date_to:'',
-        place: {placeId}
-    }
-    let [form, setForm] = useState(defaultForm);
     let[add_invoice_active, setAdd_invoice_active] = useState(false)
     let [filterActive, setFilterActive] = useState(false)
 
@@ -65,7 +56,11 @@ export function InvoiceList(){
                             </Link>                                      
                         ))}
                     </div> 
-                    <PopupAddInvoice add_invoice_active={add_invoice_active} setAdd_invoice_active={setAdd_invoice_active}/>
+                    <PopupAddInvoice
+                        add_invoice_active={add_invoice_active} 
+                        setAdd_invoice_active={setAdd_invoice_active}
+                        setInvoices={setInvoices}
+                        />
                     <PopupFilters filterActive={filterActive} setFilterActive={setFilterActive} subject={'invoices'} setSubject={setInvoices}/>
                 </div>
                

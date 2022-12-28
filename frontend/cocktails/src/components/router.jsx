@@ -46,6 +46,7 @@ export function Routing(){
                         <Route path='products/' element={<ProductList/>}/>
                         <Route path='products/:productId' element={<ProductDetaile/>}/>
                         <Route path=':userId/' element={<PersonalAccount/>}/>
+                    {/* <Route path='customer/:userID' element={<PlaceDetaile/>}/> */}
                     </Route>    
                 </Route> 
                 <Route path='login' element={<MainContextProvider><SignIn/></MainContextProvider>}/> 

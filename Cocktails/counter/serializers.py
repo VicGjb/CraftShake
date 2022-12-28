@@ -136,7 +136,7 @@ class MenuSerializer(serializers.ModelSerializer):
             'position_in_menu',
         )
 
-class MenuCreteSerializer(serializers.ModelSerializer):
+class MenuCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Menu
