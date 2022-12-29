@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { AuthServise } from './auth_service';
 import { useManeContext } from '../../components/main_context';
 import { RegularButton } from '../../components/buttons/regular_button';
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
 import '../../styles/login.scss'
 
 export function SignIn() {
@@ -83,10 +85,9 @@ export function SignIn() {
       [externalPopup,user]
     )
 
-	let handleSubmit = (e) => {
-		e.preventDefault();
-		console.log(formData);
-        network_manager.SingIn(formData)
+	function handleSubmit(form){
+		console.log(form);
+        network_manager.SingIn(form)
         .then(()=>{
             window.location.reload()
         })  
@@ -102,53 +103,74 @@ export function SignIn() {
                 <div className='logo_wrapper'>
                 <Logo className='logo'/> 
                 </div>
-                <form className='login_form'>
-                    <div className='from_row'>
-                        <div className='input_lable'>Username</div>
-                        <input
-                        required    
-                        id="username"
-                        name="username"
-                        autoComplete="username"
-                        autoFocus
-                        onChange={handleChange}
-                        />
-                    </div>
-                    <div className='from_row'>
-                        <div className='input_lable' >Password</div>
-                        <input
-                            className='input_form'
-                            required
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div
-                        className='submit_button_wraper_login'
-                        onClick={handleSubmit}
-                        type="submit"
-                    >
-                        <RegularButton lable={'Sing in'}/>
-                    </div>
-                    <div className='google_login_row'>
-                        
-                            <button className="google_btn" onClick={onClickGoogle}>
-                                <div className="google_logo_wrapper">
-                                    <div className="google_logo">
-                                        <GoogleLogo/>
+
+
+
+                <Formik
+                 initialValues={formData}
+                 onSubmit={values=>{
+                    handleSubmit(values) 
+                 }}
+                 validationSchema ={Yup.object({
+                    username: Yup.string()
+                        .required('Required'),
+                    password:Yup.string()
+                        .required('Required'),
+                 })}
+                >
+                {({errors, touched, validateForm})=>(
+                    <Form>
+                        <div className='from_row'>
+                            <div className='input_lable'>Username</div>
+                            <div className="field-container">
+                                <Field
+                                required    
+                                id="username"
+                                name="username"
+                                autoComplete="username"
+                                autoFocuss
+                                />
+                                {errors.username && touched.username && <div className="field-error">{errors.username}</div>}
+                            </div>
+                        </div>
+                        <div className='from_row'>
+                            <div className='input_lable' >Password</div>
+                            <div className="field-container">
+                                <Field
+                                    className='input_form'
+                                    required
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                />
+                                {errors.password && touched.password && <div className="field-error">{errors.password}</div>}
+                            </div>
+                        </div>
+                        <div className='submit_button_wraper_login'>
+                            <RegularButton lable={'Sing in'} type='submit'/>
+                        </div>
+
+                        <div className='google_login_row'>
+                            
+                                <button className="google_btn" onClick={onClickGoogle}>
+                                    <div className="google_logo_wrapper">
+                                        <div className="google_logo">
+                                            <GoogleLogo/>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="google_labal_wrapper">
-                                    <div className="google_label">Login With Gooogle</div>  
-                                </div>
-                            </button>
-                    </div>    
-                </form>
-        
+                                    <div className="google_labal_wrapper">
+                                        <div className="google_label">Login With Gooogle</div>  
+                                    </div>
+                                </button>
+                        </div>    
+                    </Form>
+                )}
+
+
+
+                </Formik> 
             </div>  
         </div>
 );
