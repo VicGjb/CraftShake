@@ -15,7 +15,6 @@ export function SideBarBurger(){
         !mainContext.getSideMenuBurgerActiv && (document.body.style.overflow = 'unset');
      }, [mainContext.getSideMenuBurgerActiv ]);
     return(
-        <div>
             <div className={mainContext.getSideMenuBurgerActiv ? 'menu_burger_wrapper active' : 'menu_burger_wrapper'} onClick={()=>{mainContext.setSideMenuBurgerActiv(false)}}>
                 <div className={mainContext.getSideMenuBurgerActiv ? 'menu_burger_conteiner active': 'menu_burger_conteiner'}>
                     <div className="close_cross" onClick={()=>{mainContext.setSideMenuBurgerActiv(false)}}>
@@ -31,6 +30,5 @@ export function SideBarBurger(){
                     </div>
                 </div>
             </div>
-        </div>
     )
 }

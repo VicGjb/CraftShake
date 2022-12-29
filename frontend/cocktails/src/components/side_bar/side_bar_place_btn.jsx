@@ -6,9 +6,7 @@ export const SideBarPlaceBtn=()=>{
 
     return(
         <button className="side_bar_btn">
-            {/* <Link to={`placeList`}> */}
                 <Btn className='side_bar_icon'></Btn>
-            {/* </Link> */}
         </button>
     )
 }

@@ -8,22 +8,33 @@ import { Logout } from "../views/Auth/logout";
 
 export function MainTitle(){
     let mainContext = useManeContext()
-
+    let user = mainContext.getUserFromMainContext()
 
 
     function openBurger(){
 
         mainContext.setSideMenuBurgerActiv(!mainContext.getSideMenuBurgerActiv)
     }
-
-    return(
-        <div className="main_title_wrapper">
-            <div className="main_title" >
+    function renderBurgerButton(){
+        if (user.role_name==='counter'){
+            return(
                 <div>
                     <div className={mainContext.getSideMenuBurgerActiv ? 'burger active': 'burger' } onClick={openBurger}>
                         <span> </span>
                     </div> 
                 </div>
+            )
+        }else{
+            return(
+                <div></div>
+            )
+        }
+
+    }
+    return(
+        <div className="main_title_wrapper">
+            <div className="main_title" >
+                {renderBurgerButton()}
 
                 <div className="svg_title_wrapper">
                     <Logo className="svg_title"/>
