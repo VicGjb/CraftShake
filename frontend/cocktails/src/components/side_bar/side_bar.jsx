@@ -8,16 +8,18 @@ export function SideBar(){
 
     return(
         <div className="side_bar_content">
-            
             <div>
                 <Link to={`placeList`}> 
                     <SideBarPlaceBtn />
                 </Link>
             </div>
-                <div>
+            <div>
                 <Link to={`products`}>
                     <SideBarProductBtn />
                 </Link>
+            </div>
+            <div>
+                
             </div>
         </div>
             

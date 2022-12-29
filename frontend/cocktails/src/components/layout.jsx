@@ -24,7 +24,6 @@ export const Layout = () =>{
                     <div className="title">
                         <MainTitle/>
                     </div>
-
                     <div className="content">
                         <div className="side_bar_wrap">
                             <SideBarBurger/>
@@ -35,31 +34,40 @@ export const Layout = () =>{
                         </div>
                     </div>
                 </div>
-                {/* <div className='wrapper'>
-                        
-                    <div className='content'>
-                        
-                        <div className='work_space'>
-                            
-                        </div>
-                    </div>
-                </div>     */}
             </div>
-            
         )
     }
 
     function renderCustomerView(){
         return(
-            <div className='wrapper'>
-                    <SideBar/> 
-                <div className='content'>
-                    <MainTitle/>
-                    <div className='work_space'>
-                        <Outlet></Outlet>
+
+            <div className="main_wrapper">
+                <div className="wrapper">
+                    <div className="title">
+                        <MainTitle/>
+                    </div>
+                    <div className="content">
+                        <div className="side_bar_wrap">
+                            <SideBarBurger/>
+                            <SideBar/> 
+                        </div>
+                        <div className="work_space">
+                            <Outlet></Outlet> 
+                        </div>
                     </div>
                 </div>
-            </div>  
+            </div>
+
+
+            // <div className='wrapper'>
+            //         <SideBar/> 
+            //     <div className='content'>
+            //         <MainTitle/>
+            //         <div className='work_space'>
+            //             <Outlet></Outlet>
+            //         </div>
+            //     </div>
+            // </div>  
         )
     }
 

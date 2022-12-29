@@ -393,6 +393,7 @@ class Order(models.Model):
     
     def get_users(self) ->object:
         return self.place.users.all()
+        
 
     @transition(field=state, source=STATUS_CREATED, target=STATUS_APPROVED)
     def approve(self):

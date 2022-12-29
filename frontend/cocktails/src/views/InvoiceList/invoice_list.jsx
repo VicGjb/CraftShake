@@ -8,6 +8,7 @@ import { PopupAddInvoice } from "../../components/popup/popup_add_invoice";
 import { InvoiceCard } from "./InvoiceCard";
 import { InvoiceListTableHead } from "./InvoiceListTableHead";
 import { PopupFilters } from "../../components/PopupFilters";
+import { useManeContext } from "../../components/main_context";
 import '../../styles/invoice_list.scss'
 
 
@@ -19,6 +20,8 @@ export function InvoiceList(){
     let network_manager = new NetworkManager()
     let[add_invoice_active, setAdd_invoice_active] = useState(false)
     let [filterActive, setFilterActive] = useState(false)
+    let mainContext = useManeContext()
+    let user = mainContext.getUserFromMainContext()
 
 
     useEffect(()=>{
@@ -29,6 +32,16 @@ export function InvoiceList(){
                     
                 })
     },[placeId])
+
+    function renderAddInvoiceButton(){
+        if (user.role_name==='counter'){
+            return(
+                <div className="service_row_button_wrapper add" onClick={()=>{setAdd_invoice_active(true)}}>
+                    <AddButton  lable={'Add invoice'} />  
+                </div>
+            )
+        }
+    }
 
     function InvouceListView(){
         return(
@@ -42,9 +55,8 @@ export function InvoiceList(){
                         <div className="service_row_button_wrapper filter" onClick={()=>{setFilterActive(true)}}>
                                 <AddButton  lable={'Filters'} />   
                         </div>
-                        <div className="service_row_button_wrapper add" onClick={()=>{setAdd_invoice_active(true)}}>
-                            <AddButton  lable={'Add invoice'} />  
-                        </div>
+                        {renderAddInvoiceButton()}
+                        
                     </div>
 
 

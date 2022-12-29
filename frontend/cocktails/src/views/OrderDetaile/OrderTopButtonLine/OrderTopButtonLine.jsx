@@ -2,6 +2,7 @@ import React from "react";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
 import { useParams } from "react-router-dom";
 import { NetworkManager } from "../../../components/network_manager";
+import { useManeContext } from "../../../components/main_context";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -18,6 +19,8 @@ export function UpdateOrderButton(){
     let {placeId} = useParams();
     let network_manager = new NetworkManager()
     let navigate = useNavigate()
+    let mainContext = useManeContext()
+    let user = mainContext.getUserFromMainContext()
     let [regular_message_active, setRegular_message_active] = useState(false)
 
     function updateOrder(){
@@ -35,17 +38,25 @@ export function UpdateOrderButton(){
     }
 
 
-    return(
-        <div className='order_update_btn' onClick={updateOrder}>
-            <RegularButton lable={'Update'}/> 
-            <PopupRegularMessage 
-            message={'You try to ordering cocktails from not current menu. Sorry...'}
-            regular_message_active={regular_message_active}
-            setRegular_message_active ={setRegular_message_active}
-            customFunction = {()=>{window.location.reload()}}
-            />
-        </div>
+    function renderButton(){
+        if (user.role_name==='counter' || order.state==='Created'){
+            return(
+                <div className='order_update_btn' onClick={updateOrder}>
+                <RegularButton lable={'Update'}/> 
+                <PopupRegularMessage 
+                message={'You try to ordering cocktails from not current menu. Sorry...'}
+                regular_message_active={regular_message_active}
+                setRegular_message_active ={setRegular_message_active}
+                customFunction = {()=>{window.location.reload()}}
+                />
+            </div>
+            )
+        }
 
+    }
+
+    return(
+        renderButton() 
     )
 }
 
@@ -106,11 +117,13 @@ export function DeleteOrderButton(){
     let {placeName} = useParams();
     let {placeId} = useParams();
     let navigate = useNavigate()
+    let mainContext = useManeContext()
+    let user = mainContext.getUserFromMainContext()
     let order = orderItemContext.getOrderContext
     let [delete_active,setDelete_active] = useState(false);
 
     function deleteOrder(){
-        console.log('Order ID', order.id)
+        console.log('Order ID', order)
         network_manager.delete_order(order.id)
             .then(response =>{
                 console.log('order was deleted', response);
@@ -122,14 +135,21 @@ export function DeleteOrderButton(){
             });
     }
 
+    function renderButton(){
+        if (user.role_name==='counter' || order.state==='Created'){
+            return(
+                <div className='order_delete_button_wrapper'>
+                    <div className="order_detaile_delete_btn" onClick={()=>setDelete_active(true)}>            
+                        <RegularButton lable={'Delete order'} />
+                    </div>
+                    <PopupDelete subject={`Order №: ${order.id} on ${order.date}`}  delete_active={delete_active} setDelete_active={setDelete_active} func={deleteOrder}/>
+                </div>
+            )
+        }
+    }
+
     return(
-        <div className='order_delete_button_wrapper'>
-            <div className="order_detaile_delete_btn" onClick={()=>setDelete_active(true)}>            
-                <RegularButton lable={'Delete order'} />
-            </div>
-            <PopupDelete subject={`Order №: ${order.id} on ${order.date}`}  delete_active={delete_active} setDelete_active={setDelete_active} func={deleteOrder}/>
-        </div>
-        
+        renderButton()    
     )
 }
 
@@ -137,11 +157,12 @@ export function DeleteOrderButton(){
 export function OrderTopButtonLine({date}){
     let orderItemContext = useOrderItemListContext()
     let order = orderItemContext.getOrderContext
+
     let {placeName} = useParams();
     let {placeId} = useParams();
 
-    function renderButtonLine(orderId){
-        if (orderId){
+    function renderButtonLine(order){
+        if (order){
             return(
                 <div className="order_detaile_buttons_line_monitor">
                     <div className="order_detaile_back_btn">

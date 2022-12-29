@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { OrderPositionRow } from "./order_position_row";
+import { useManeContext } from "../../../components/main_context";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
 import { OrderPositionCard } from "./OrderPositionCard";
 import { OrderPositionTableHead } from "./OrderPositionTableHead";
 import { RegularButton } from "../../../components/buttons/regular_button";
 import { PopupAddCocktailsMenu } from "../PopupAddCocktail";
+
 export function OrderPositions(){   
     let [add_cocktails_active, setAdd_cocktails_active] = useState(false)
     let order_detaile_context = useOrderItemListContext()
-
-    function ChangeHendler(){
-        console.log('position Change')
-    }
+    let mainContext = useManeContext()
+    let user = mainContext.getUserFromMainContext()
+    let order = order_detaile_context.getOrderContext
 
     function calculateTotal(){
         let result = 0
@@ -21,13 +21,31 @@ export function OrderPositions(){
         return (result.toFixed(2))
     }
 
+    function renderAddCoctailButton(){
+        if (order){
+            console.log('order!!',order)
+            if (order.open_to_customer || user.role_name==='counter'){
+                return(
+                    <div className="add_cocktails_btn" onClick={()=>{setAdd_cocktails_active(true)}}>
+                        <RegularButton lable={'Add cocktails'}/>
+                    </div>
+                )
+            }
+        }else{
+            return(
+                <div className="add_cocktails_btn" onClick={()=>{setAdd_cocktails_active(true)}}>
+                    <RegularButton lable={'Add cocktails'}/>
+                </div>
+            )
+            
+        }
+        
+    }
 
     return(
         <div className="order_positions_table_wrapper">
             <div className="order_info">   
-                <div className="add_cocktails_btn" onClick={()=>{setAdd_cocktails_active(true)}}>
-                    <RegularButton lable={'Add cocktails'}/>
-                </div>
+                {renderAddCoctailButton()}
                 <div className="order_detaile_total_monitor">  
                     Total: {calculateTotal()} ILS
                 </div>

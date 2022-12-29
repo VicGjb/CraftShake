@@ -55,9 +55,26 @@
     width: 200px;
 }
 
+.created_state_label{
+    font-size: 40px;
+    color:#909090
+}
+.approved_state_label{
+    font-size: 40px;
+    color:#F5DB51
+}
+.delivered_paid_label{
+    font-size: 40px;
+    color:#F15A5A
+    
+}
+
 @media (max-width:1280px){
     .paid_state{
         font-size: 30px;
+    }
+    .created_state_label,.approved_state_label,.delivered_paid_label{
+        font-size: 24px ;
     }
 }
 @media (max-width:769px){

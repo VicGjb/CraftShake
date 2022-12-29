@@ -187,7 +187,7 @@ class OrderSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ('__all__')
     
 
 
@@ -196,7 +196,24 @@ class OrderViewSerializer(OrderSerializer):
     users = UserSerialaizer(source='get_users',many=True)
     order_item = OrderItemVeiwSerializer(many=True)
     place_name = serializers.CharField(source='get_place_name')
-
+    
+    class Meta:
+        model = Order
+        fields = (
+            'id',
+            'place',
+            'invoice',
+            'date',
+            'total_price',
+            'photo',
+            'state',
+            'open_to_customer',
+            'customer_statement',
+            'users',
+            'place_name',
+            'order_item',
+            'menus'
+        )
 
 class OrderCreateSerializer(serializers.ModelSerializer):
    

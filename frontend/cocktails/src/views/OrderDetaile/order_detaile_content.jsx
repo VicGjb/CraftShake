@@ -9,11 +9,14 @@ import { OrderTopButtonLine } from "./OrderTopButtonLine/OrderTopButtonLine";
 import { DeliveredPhotoPopup } from "./DeliveredPhoto";
 import {ReactComponent as CameraIcon} from "../../svg/camera_icon.svg"
 import { MenuPositionRow } from "./menu_position/menu_position_row";
+import { useManeContext } from "../../components/main_context";
 import '../../styles/order_detile.scss'
 
 export function OrderDetaileContent({orderId, menus}){
+    let mainContext = useManeContext()
+    let user = mainContext.getUserFromMainContext()
     let [loaded, setLoaded] = useState(false);
-    let order_detaile_context = useOrderItemListContext();;
+    let order_detaile_context = useOrderItemListContext();
     let network_manager =  new NetworkManager();
     let order = order_detaile_context.getOrderContext
     let date = new Date()
@@ -85,6 +88,30 @@ export function OrderDetaileContent({orderId, menus}){
             )
         }
     }
+
+
+    function renderMenuTable(){
+        if (order){
+            if (order.open_to_customer || user.role_name==='counter'){
+                return(
+                    <div className="menu_positions_table">
+                            {menus.map(menu=>(
+                                renderMenu(menu)
+                            ))}
+                    </div>
+                )
+            }
+        }else{
+            return(
+                <div className="menu_positions_table">
+                        {menus.map(menu=>(
+                            renderMenu(menu)
+                        ))}
+                </div>
+            )
+        }
+        
+    }
     function renderMenu(menu){
         if(menu.is_current_menu) {  
             return(
@@ -119,11 +146,7 @@ export function OrderDetaileContent({orderId, menus}){
                 </div>  
                 {renderNewOrderDate(orderId, dateNow)}
                 <div className="order_detaile_tables_wrapper">
-                    <div className="menu_positions_table">
-                        {menus.map(menu=>(
-                            renderMenu(menu)
-                        ))}
-                    </div>      
+                        {renderMenuTable()}
                         <OrderPositions/>
                 </div>
                 <div className="order_detaile_footer">

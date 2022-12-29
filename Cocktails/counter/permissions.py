@@ -10,11 +10,13 @@ class CraftShakeCounterPermissions(permissions.BasePermission):
 class CraftShakeCustomerPermissions(permissions.BasePermission):
     
     def has_object_permission(self, request, view, obj):
-        permitted_methods = ('GET', 'HEAD', 'OPTIONS','POST')
+        permitted_methods = ('GET', 'HEAD', 'OPTIONS')
         if (request.method in permitted_methods):
             print(request.user)
             # print('---------------------------------------------s')
             # print(obj.users.filter(id=request.user.id))
             user = obj.users.filter(id=request.user.id)
-            if (user or request.user.is_staff):
+            if (user or request.user.is_staff and request.method in permitted_methods):
+                print(request.method )
+                print('fefefefefefpvoks')
                 return True

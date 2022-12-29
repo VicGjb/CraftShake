@@ -24,7 +24,7 @@ import { GetCodeGoogleLogin } from "../views/Auth/get_code_google_login";
 import { SignIn } from "../views/Auth/login";
 import { PersonalAccount } from "../views_customer/personal_account";
 import { MainPage } from "../views/TestProps/MainPage";
-import { PlaceListMobile } from "../views/PlaceList/place_list_mobile";
+
 export function Routing(){
     return(
         <Router>
@@ -46,7 +46,11 @@ export function Routing(){
                         <Route path='products/' element={<ProductList/>}/>
                         <Route path='products/:productId' element={<ProductDetaile/>}/>
                         <Route path=':userId/' element={<PersonalAccount/>}/>
-                    {/* <Route path='customer/:userID' element={<PlaceDetaile/>}/> */}
+
+                        <Route path='customer/:userID' element={<PersonalAccount/>}/>
+                        <Route path='customer/:userID/:placeId/' element = {<LayoutPlace/>}>
+                            <Route path='main' element={<PlaceDetaile/>}/>
+                        </Route>
                     </Route>    
                 </Route> 
                 <Route path='login' element={<MainContextProvider><SignIn/></MainContextProvider>}/> 

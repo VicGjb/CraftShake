@@ -53,6 +53,7 @@ export function PopupAddCocktailsMenu({add_cicktails_active, setAdd_cocktails_ac
         setAddButtonActive(true)
         setBackButtonActive(true)
     }
+    
     function openMenuList(){
         setMenuTitleActive(true)
         setPositionTitleActiv(false)

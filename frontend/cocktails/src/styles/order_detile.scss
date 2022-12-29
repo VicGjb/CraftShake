@@ -138,7 +138,8 @@
     width: 100%;
 }
 .menu_positions_table{
-    width: 45%;
+    width: 60%;
+    margin-right: 50px;
 }
 .order_detaile_menu_wrapper{
     width: 100%;
@@ -157,8 +158,9 @@
  
 }
 .order_positions_table_wrapper{
-    width:50%;
+    width:100%;
     margin-bottom: 50px;
+    // margin-left: 50px;
 }
 .order_positions_table{
     position: sticky;
@@ -242,6 +244,7 @@
     .order_info{
         font-size: 20px;
     }
+    
 
 }
 @media (min-width:990px){
@@ -252,6 +255,7 @@
         justify-content: end;
     }
     
+    
 }
 @media (max-width:990px){
     .menu_positions_table{
@@ -260,7 +264,9 @@
     .order_positions_table_wrapper{
         width:100%;
         margin-bottom: 50px;
+        margin-left: 0px;
     }
+    
    
       
 }

@@ -37,6 +37,7 @@ from .views import(
     OrderView,
     OrderCreateView,
     OrderUpdateView,
+    OrderStatesView,
     
     OrderItemView,
     OrderItemCreateView,
@@ -106,9 +107,9 @@ urlpatterns = format_suffix_patterns(
         path('order/update/<int:pk>/', OrderUpdateView.as_view({'post':'update'})),
         path('order/create/', OrderCreateView.as_view({'post':'create_new'})),
         path('order/<int:pk>/delete/', OrderView.as_view({'post':'destroy'})),
-        path('order/<int:pk>/set-approve/',OrderView.as_view({'post':'approve'})),
-        path('order/<int:pk>/set-delivered/',OrderView.as_view({'post':'delivered'})),
-        path('order/<int:pk>/set-paid/',OrderView.as_view({'post':'paid'})),
+        path('order/<int:pk>/set-approve/',OrderStatesView.as_view({'post':'approve'})),
+        path('order/<int:pk>/set-delivered/',OrderStatesView.as_view({'post':'delivered'})),
+        path('order/<int:pk>/set-paid/',OrderStatesView.as_view({'post':'paid'})),
         # path('order/<int:pk>/upload_photo/',OrderView.as_view({'post':'upload_photo'})),
 
         path('order-item/', OrderItemView.as_view({'get':'list'})),

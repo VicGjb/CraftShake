@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    
     width: 80%;
     height: 100%;
 }
@@ -115,7 +115,39 @@
 }
 
 
+.greetings_customer{
+    margin-top: 15px;
+    background-color: #323131;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 60px;
+    width: 100%;
+    border: 1px solid #909090;
+}
 
+.place-detaile_add-order-button_customer{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    a{
+        width: 40%;
+        .button{
+            height: 45px;
+            background-color:#86F584;
+            width: 100%;
+            .button_label{
+                color: black;
+            }
+        }
+    }
+    
+}
 
 @media (min-width:1280px){
     .main_btn_container{
@@ -139,7 +171,7 @@
 @media (max-width:769px){
     .main_buttons_wrapper{
         flex-direction: column;
-        margin-top: 5px;
+        margin-top: 20px;
     }
     .monitor_service_button_row{
         display: none;
@@ -164,5 +196,26 @@
     }
     .main_buttons_wrapper{
         width: 100%;
+    }
+    .greetings_customer{
+        height: 40px;
+        font-size: 16px;
+        
+    }
+    .place-detaile_add-order-button_customer{
+        margin-top: 0px;
+        width: 100%;
+        justify-content: center;
+        a{
+            width: 80%;
+            .button{
+                height: 45px;
+                background-color:#86F584;
+                width: 100%;
+                .button_label{
+                    color: black;
+                }
+            }
+        }
     }
 }

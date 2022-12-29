@@ -19,7 +19,8 @@ export function InvoiceDetaileContent(){
     let invoice = invoiceDetaileContext.getInvoice
     let [loaded, setLoaded] = useState(false);
     let {invoiceId} = useParams();
-    
+    let mainCintext = useManeContext();
+    let user = mainCintext.getUserFromMainContext()
     let [regular_message_active, setRegular_message_active] = useState(false)
     let [delete_active,setDelete_active] = useState(false)
 
@@ -48,20 +49,22 @@ export function InvoiceDetaileContent(){
                 })
         }
 
-        if (invoice.is_vat){
-            console.log('VAT',invoiceDetaileContext.getInvoice.is_vat)
-            return(
-                <div className="remove_vat_button_wrapper" onClick={removeVat}>
-                    <RegularButton lable={'Remove VAT'}/>
-                </div>
-            )
-        }else{
-            return(
-                <div className="add_vat_button_wrapper" onClick={addVat}>
-                    <RegularButton lable={'Add VAT'}/>
-                </div> 
-            )
-        }
+        if(user.role_name==='counter'){
+            if (invoice.is_vat){
+                console.log('VAT',invoiceDetaileContext.getInvoice.is_vat)
+                return(
+                    <div className="remove_vat_button_wrapper" onClick={removeVat}>
+                        <RegularButton lable={'Remove VAT'}/>
+                    </div>
+                )
+            }else{
+                return(
+                    <div className="add_vat_button_wrapper" onClick={addVat}>
+                        <RegularButton lable={'Add VAT'}/>
+                    </div> 
+                )
+            }
+        }  
     }
 
     function getPDF(){

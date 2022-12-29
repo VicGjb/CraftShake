@@ -9,6 +9,7 @@ import { RegularButton } from "../../components/buttons/regular_button";
 import { useNavigate } from "react-router-dom";
 import { AddButton } from "../../components/buttons/add_button";
 import { useMenuDetaileContext } from "./MenuDetaileContext";
+import { useManeContext } from "../../components/main_context";
 import '../../styles/menu_detaile_button_row.scss'
 
 export function MenuDetaileButtonRow(){
@@ -29,6 +30,8 @@ export function MenuDetaileButtonRow(){
 
 export function DeleteMenuButton(){
     let networkManager = new NetworkManager()
+    let mainContext = useManeContext()
+    let user = mainContext.getUserFromMainContext()
     let {placeName} = useParams();
     let {placeId} = useParams();
     let navigate = useNavigate()
@@ -47,31 +50,38 @@ export function DeleteMenuButton(){
                 throw error;
             });    
     }
-    return(
-        <div className="delete_menu_button_wrapper">
-            <div className="delete_menu_button" onClick={()=>{setDelete_active(true)}}>
-                <RegularButton lable={'Delete'}/>
+    if(user.role_name==='counter'){
+        return(
+            <div className="delete_menu_button_wrapper">
+                <div className="delete_menu_button" onClick={()=>{setDelete_active(true)}}>
+                    <RegularButton lable={'Delete'}/>
+                </div>
+                <PopupDelete 
+                    subject={`Menu ${menu.name}`} 
+                    delete_active={delete_active} 
+                    setDelete_active={setDelete_active} 
+                    func={deleteMenu}/>
             </div>
-            <PopupDelete 
-                subject={`Menu ${menu.name}`} 
-                delete_active={delete_active} 
-                setDelete_active={setDelete_active} 
-                func={deleteMenu}/>
-        </div>
-    )
+        )
+    }
 }
 
 
 export function AddMenuPosition(){
     let [add_menu_position_active, setAdd_menu_position_active] = useState(false)   
+    let mainContext = useManeContext()
+    let user = mainContext.getUserFromMainContext()
 
-    return(
-        <div>
-            <div className="menu_detaile_add_position_button" onClick={()=>setAdd_menu_position_active(true)}>
-            <   AddButton lable={'Add position'}/>
+    if(user.role_name==='counter'){
+        return(
+            <div>
+                <div className="menu_detaile_add_position_button" onClick={()=>setAdd_menu_position_active(true)}>
+                <   AddButton lable={'Add position'}/>
+                </div>
+                <PopupAddMenuPosition add_menu_position_active={add_menu_position_active} setAdd_menu_position_active={setAdd_menu_position_active}/>
             </div>
-            <PopupAddMenuPosition add_menu_position_active={add_menu_position_active} setAdd_menu_position_active={setAdd_menu_position_active}/>
-        </div>
-        
-    )
+            
+        )
+    }
+    
 }

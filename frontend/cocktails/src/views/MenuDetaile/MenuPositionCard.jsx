@@ -9,6 +9,7 @@ import '../../styles/menu_position_card.scss'
 
 export function MenuPositionCard({menuPosition}){
     let mainContext = useManeContext()
+    let user = mainContext.getUserFromMainContext()
     let [subMenu, setSubMenu] = useState(false)
     let [delete_active, setDelete_active] = useState(false)
     let [menuPositionCardPopupActive,setMenuPositionCardPopupActiv] = useState(false)
@@ -27,16 +28,23 @@ export function MenuPositionCard({menuPosition}){
             menuDetaileContext.removeMenuPosition(menuPosition);
             setDelete_active(false)
     }
-
-    return(
-        <div>
-            <div className="menu_position_card_wrapper">
-                <div className="open_menu_position_card_popup" onClick={()=>{setMenuPositionCardPopupActiv(true)}}></div>
+    function renderSubMenu(){
+        if(user.role_name==='counter'){
+            return(
                 <div className="menu_position_card_service_menu"  onClick={()=>{setSubMenu(true)}}>
                     <div className="service_menu_dot"></div>
                     <div className="service_menu_dot"></div>
                     <div className="service_menu_dot"></div>
                 </div>
+            )
+        }
+    }
+
+    return(
+        <div>
+            <div className="menu_position_card_wrapper">
+                <div className="open_menu_position_card_popup" onClick={()=>{setMenuPositionCardPopupActiv(true)}}></div>
+                {renderSubMenu()}
                 <div className="menu_position_card_top_conteiner">
                     <div className="menu_position_card_slot photo">
                         <img src={mainContext.getPhoto(menuPosition.photo)} alt=""/> 
