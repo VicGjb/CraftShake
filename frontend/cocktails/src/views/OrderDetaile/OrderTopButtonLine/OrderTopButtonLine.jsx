@@ -157,7 +157,7 @@ export function DeleteOrderButton(){
 export function OrderTopButtonLine({date}){
     let orderItemContext = useOrderItemListContext()
     let order = orderItemContext.getOrderContext
-
+    let navigate = useNavigate()
     let {placeName} = useParams();
     let {placeId} = useParams();
 
@@ -165,10 +165,8 @@ export function OrderTopButtonLine({date}){
         if (order){
             return(
                 <div className="order_detaile_buttons_line_monitor">
-                    <div className="order_detaile_back_btn">
-                        <Link to={{pathname: `/${placeName}/${placeId}/orders`,}} replace>
-                            <RegularButton lable={'Back'}/>
-                        </Link> 
+                    <div className="order_detaile_back_btn" onClick={()=>{navigate(-1)}}>
+                        <RegularButton lable={'Back'}/>
                     </div>
                     <DeleteOrderButton/>
                     <UpdateOrderButton/>
@@ -180,10 +178,8 @@ export function OrderTopButtonLine({date}){
         }else{
             return(
                 <div className="order_detaile_buttons_line_monitor">
-                    <div className="order_detaile_back_btn">
-                        <Link to={{pathname: `/${placeName}/${placeId}/orders`,}} replace>
-                            <RegularButton lable={'Back'}/>
-                        </Link> 
+                    <div className="order_detaile_back_btn" onClick={()=>{navigate(-1)}}>
+                            <RegularButton lable={'Back'}/> 
                     </div>
                     <div className="order_create_btn">
                         <CreateOrderButton date={date}/>
@@ -202,16 +198,17 @@ export function OrderTopButtonLine({date}){
 export function MobileButtonLineTop({date}){
     let orderItemContext = useOrderItemListContext()
     let order = orderItemContext.getOrderContext
+    let navigate = useNavigate()
     let {placeName} = useParams();
     let {placeId} = useParams();
 
     if(order){
         return(
             <div className="order_detaile_buttons_line_mobile">
-                <div className="order_detaile_back_btn">
-                    <Link to={{pathname: `/${placeName}/${placeId}/orders`,}} replace>
+                <div className="order_detaile_back_btn" onClick={()=>{navigate(-1)}}>
+                    
                         <RegularButton lable={'Back'}/>
-                    </Link> 
+                 
                 </div>
                 <div className='order_state_btn'>
                     <OrderStates/> 
@@ -221,10 +218,10 @@ export function MobileButtonLineTop({date}){
     }else{
         return(
             <div className="order_detaile_buttons_line_mobile">
-                <div className="order_detaile_back_btn">
-                    <Link to={{pathname: `/${placeName}/${placeId}/orders`,}} replace>
-                        <RegularButton lable={'Back'}/>
-                    </Link> 
+                <div className="order_detaile_back_btn" onClick={()=>{navigate(-1)}}>
+
+                    <RegularButton lable={'Back'}/>
+
                 </div>
                 <div className="order_create_btn">
                     <CreateOrderButton date={date}/>
