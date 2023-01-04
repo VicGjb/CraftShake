@@ -2,16 +2,14 @@ import React, {useEffect,useState} from "react";
 import { NetworkManager } from "../../components/network_manager";
 import {useParams} from 'react-router-dom';
 import { useManeContext } from "../../components/main_context";
-import { AddButton } from "../../components/buttons/add_button";
-import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupAddManager } from "../../components/popup/popup_add_manager";
 import { ManagerCard } from "./ManagerCard";
 import { ManagerListButtonRow } from "./ManagerListButtonRow";
 import { useManagersContext } from "./ManagersContext";
+import { PopupManagerCard } from "./PopupManagerCard";
 import '../../styles/managers_list.scss'
 
 export function ManagersListContent(){
-    // let [managers, setManagers] = useState([]);
     let [is_loaded, setLoaded] = useState(false)
     let {placeId} = useParams();
     let {placeName} = useParams();

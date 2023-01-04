@@ -18,7 +18,7 @@ export function ProductCard({product}){
             </div>
             
             <div className="product_card_value_wrapper description">
-                <div className="product_description">{product.discription}</div>
+                <div className="product_description">{product.description}</div>
             </div>
             <div className="product_card_value_wrapper price">
                 <div>{product.cost_price}</div>

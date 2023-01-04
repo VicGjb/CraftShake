@@ -1,5 +1,6 @@
 .manager_card_wrapper{
-    min-height: 100px;
+    // min-height: 100px;
+    height: 160px;
     position: relative;
     border-radius: 10px;
     border:1px solid whitesmoke;
@@ -11,9 +12,12 @@
     background-color: #323131;
     overflow: hidden;
 }
+.manager_card_wrapper:hover{
+    border:1px solid #FFBF1C;
+}
 .manager_card_title{
     display: flex;
-    margin-top: 35px;
+    margin-top: 25px;
     width: 95%;
     justify-content: space-between;
     align-self: center;
@@ -23,7 +27,6 @@
 .manager_card_name{
     font-weight: 600;
     font-size: 24px;
-    margin-right: 10px;
 }
 .manager_card_phone{
     display: flex;
@@ -39,19 +42,32 @@
     }
 }
 .manager_card_description{
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin-top:15px;
     align-self: center;
     text-align: center;
     display: none;
     color: #909090;
     font-size: 25px;
-    max-width: 90%;
+    padding-bottom: 20px;
+    width: 90%;
 }
 .manager_card_description.active{
     display: inline;
 }
-
+.manager-description-wrapper{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 22px;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    box-orient: vertical;
+    line-height: 25px; 
+    width: 100%;
+}
 
 
 
@@ -82,7 +98,13 @@
 
 }
 @media (max-width:770px){
-
+    .manager_card_wrapper{
+        height: 120px;
+    }
+    .manager-description-wrapper{
+        font-size: 16px;
+        line-height: 18px;
+    }
 
 }
 @media (max-width:550px){
@@ -95,4 +117,5 @@
     .manager_card_description{
         font-size: 16px ;
     }
+    
 }
