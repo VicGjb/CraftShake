@@ -33,12 +33,14 @@ export class NetworkManager{
 		
 		return(
 			axiosInstance.interceptors.request.use(
-				async (request)=>{	
+				async (request)=>{					
 					if(access_token){
 						let access_token_data = JSON.parse(atob(access_token.split('.')[1]));
 						let now = Math.ceil(Date.now() / 1000);
 			
-						if (access_token_data.exp<now && request.url!='/token/refresh/') {
+						if (access_token_data.exp<now && request.url!=='/token/refresh/') {
+							console.log('going to refresh',request.url)
+							// alert('hello')
 							await axiosInstance
 								.post('/token/refresh/', { refresh: refresh_token})
 								.then((response) => {
@@ -54,6 +56,7 @@ export class NetworkManager{
 									: null
 									return request
 						} else {
+							console.log('im here')
 							return request
 						} 
 					} else {
@@ -79,7 +82,7 @@ export class NetworkManager{
 						alert(
 							'A server/network error occurred. ' +
 								'Looks like CORS might be the problem. ' +
-								'Sorry about this - we will get it fixed shortly. hui'
+								'Sorry about this - we will get it fixed shortly.'
 						);
 						return Promise.reject(error);
 					}
@@ -111,10 +114,15 @@ export class NetworkManager{
 					
 									if (refresh_token_data.exp < now) {
 										console.log('Refresh token is expired', refresh_token_data.exp, now);
+										localStorage.removeItem('access_token');
+        								localStorage.removeItem('refresh_token');
 										window.location.href = '/login/';
+										
 									}
 								} else {
 									console.log('Refresh token not available.');
+									localStorage.removeItem('access_token');
+									localStorage.removeItem('refresh_token');
 									window.location.href = '/login/';
 								}
 							}				

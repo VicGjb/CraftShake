@@ -23,7 +23,8 @@ export function OrderList(){
         .then(orders => {
             setOrder(orders);
     })
-    }, [placeId])
+        main_context.setOrderBackUrl(`/${placeName}/${placeId}/orders`)    
+}, [placeId])
     
     return (
         <div className="order_list_wrpper">

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthServise } from './auth_service';
 import { useManeContext } from '../../components/main_context';
 import { RegularButton } from '../../components/buttons/regular_button';
+import { PopupRegularMessage } from '../../components/popup/popup_regular_message';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import '../../styles/login.scss'
@@ -24,15 +25,7 @@ export function SignIn() {
     let [externalPopup, setExternalPopup] = useState(null);
     let user = main_context.getUserFromMainContext()
     let access_token = localStorage.getItem('access_token')
-
-
-
-	let handleChange = (e) => {
-		setFormData({
-			...formData,
-			[e.target.name]: e.target.value.trim(),
-		});
-	};  
+    let [regular_message_active, setRegular_message_active] = useState(false)
    
 
 
@@ -92,7 +85,8 @@ export function SignIn() {
             window.location.reload()
         })  
         .catch(error => {
-            console.log(error);
+            console.log('dsdscsdcsd',error);
+            setRegular_message_active(true)
             throw error;
         });		
 	};
@@ -128,7 +122,7 @@ export function SignIn() {
                                 id="username"
                                 name="username"
                                 autoComplete="username"
-                                autoFocuss
+                                autoFocus
                                 />
                                 {errors.username && touched.username && <div className="field-error">{errors.username}</div>}
                             </div>
@@ -167,11 +161,14 @@ export function SignIn() {
                         </div>    
                     </Form>
                 )}
-
-
-
                 </Formik> 
             </div>  
+            <PopupRegularMessage
+                message='wrong login/password' 
+                regular_message_active={regular_message_active}
+                setRegular_message_active={setRegular_message_active} 
+            
+            />
         </div>
 );
 }

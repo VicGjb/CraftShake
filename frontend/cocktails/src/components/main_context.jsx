@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 
 let MainContext = React.createContext();
 
@@ -10,16 +9,19 @@ export function useManeContext(){
 
 export function MainContextProvider({children}){
     let [sideMenuBurgerActiv, setSideMenuBurgerActiv] = useState(false)
-    let navigate = useNavigate();
+    let [backFromCreateOrderUrl, setBackFromCreateOrderUrl]= useState('')
     let [user, setUser] = useState();
+    let [isLoggedIn, setIsLoggedIn] = useState();
     let [places, setPlaces] = useState([]);
     let [place,setPlace] = useState({})
     let [volumes, setVolumes] = useState([]);
     let placeHolderPhoto = 'https://craftshake.s3.eu-central-1.amazonaws.com/Product_photo/cocktailDefault.jpeg'
     
     function goBack(){
-        navigate(-1)
+        console.log('-1')
     }
+
+
     // User info
     function setUserInContext(param){
        setUser(param)
@@ -28,6 +30,10 @@ export function MainContextProvider({children}){
     function getUserFromContext(){
         return user
     }
+    function getIsLoggedIn(){
+        return isLoggedIn
+    }
+
     // Volumes for order item and menu position
     function setVolumesInContext(param){
         setVolumes(param)
@@ -65,6 +71,10 @@ export function MainContextProvider({children}){
             setPlace:setPlace,
             getPlace:place,
             goBack:goBack,
+            isLoggedIn:isLoggedIn,
+            setIsLoggedIn:setIsLoggedIn,
+            setOrderBackUrl:setBackFromCreateOrderUrl,
+            getOrderBackUrl:backFromCreateOrderUrl,
             setUserInMainContext:setUserInContext,
             getUserFromMainContext:getUserFromContext,
             setVolumesInMainContext:setVolumesInContext,

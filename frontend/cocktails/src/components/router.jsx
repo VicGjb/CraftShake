@@ -8,7 +8,6 @@ import { MainContextProvider } from "./main_context";
 import { OrderList } from "../views/OrderList/order_list";
 import { OrderDetaile } from "../views/OrderDetaile/order_detaile";
 import { PlaceDetaile } from "../views/PlaceDetaile/place_detaile";
-
 import { PlaceList } from "../views/PlaceList/place_list";
 import { ProductList } from "../views/ProductList/product_list";
 import { ProductDetaile } from "../views/ProductDetaile/product_detaile";
@@ -30,7 +29,8 @@ export function Routing(){
         <Router>
             <Routes>
                 <Route path="/" element={<MainContextProvider><Layout/></MainContextProvider>}>
-                    <Route element={<AuthLayout></AuthLayout>}>
+                    <Route element={<AuthLayout/>
+                }>
                             <Route path='placeList/*' element={<PlaceList/>}/>    
                             <Route path=':placeName/:placeId/*' element={<LayoutPlace/>}>
                                 <Route path='detaile' element={<PlaceDetaile/>}/>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { SideBar } from "./side_bar/side_bar";
 import { MainTitle } from "./main_title";
 import { useManeContext } from "./main_context";
@@ -8,13 +8,15 @@ import { AuthServise } from "../views/Auth/auth_service";
 import { useNavigate } from "react-router-dom";
 import { SideBarBurger } from "./side_bar/side_bar_burrger";
 import '../styles/layout.scss'
+
+
 export const Layout = () =>{
     let main_context = useManeContext()
     let navigate = useNavigate()
     let network_manager = new NetworkManager()
     let auth_service = new AuthServise()
     let user = main_context.getUserFromMainContext()
-    let access_token = localStorage.getItem('access_token')
+    let refresh_token = localStorage.getItem('refresh_token')
 
 
     function renderCounterView(){
@@ -73,7 +75,7 @@ export const Layout = () =>{
 
     function renderLayout(){
 
-        if(access_token){
+        if(refresh_token){
             if(user){
                 console.log('i have user in layout',user)
                 if(user.role_name =='counter'){
@@ -101,14 +103,11 @@ export const Layout = () =>{
                 )
             }
         }else{
-            navigate('/login')
+            window.location.href='/login'
         }
     }
 
-
     return(
-            renderLayout()
-    
+        renderLayout()
     )
-
 }

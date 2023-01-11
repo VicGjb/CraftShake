@@ -1,4 +1,5 @@
 import React from "react";
+import { useManeContext } from "../../components/main_context";
 
 
 export class AuthServise{
@@ -25,6 +26,7 @@ export class AuthServise{
     }
     
     CheckAuth(){
+
         if (this.refresh_token){
             console.log('I have a refresh token')
             let refresh_token_data = this.GetRefreshTokenData()
@@ -41,7 +43,8 @@ export class AuthServise{
                 return false
             }
         } else {
-            console.log('i dont have refresh token')
+            console.log('i dont have refresh token')         
+            // window.location.href = '/login'
             return false
         }
     }

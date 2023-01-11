@@ -11,7 +11,6 @@ import { AddButton } from "../../components/buttons/add_button";
 import { PopupAddMenu } from "../../components/popup/popup_add_menu";
 import { PopupAddInvoice } from "../../components/popup/popup_add_invoice";
 import { PopupAddManager } from "../../components/popup/popup_add_manager";
-// import { PopupChangePlace } from "../../components/popup/popup_change_place";
 import { PopupAddPlace } from "../../components/popup/popup_add_place";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { RegularButton } from "../../components/buttons/regular_button";
@@ -40,6 +39,7 @@ export function PlaceDetaile(){
                 setPlace(place_detaile);
                 setLoaded(true);
         })
+        mainContext.setOrderBackUrl(`/${placeName}/${placeId}/detaile`)
     }, [placeId])
 
     function DeletePlace(){
