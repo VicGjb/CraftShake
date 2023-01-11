@@ -56,7 +56,6 @@ export class NetworkManager{
 									: null
 									return request
 						} else {
-							console.log('im here')
 							return request
 						} 
 					} else {

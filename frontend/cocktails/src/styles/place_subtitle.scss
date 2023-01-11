@@ -1,39 +1,14 @@
 .place_detaile_subtitle_wrap{
-    background-color: #323131;
-    margin-top: 5px;
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    border: 1px solid #909090;
-  }
-
-.place_detaile_subtitle_name{
-  margin: 0px auto;
-  font-family: 'Girassol';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 22px;
-  color: rgb(230, 221, 221);
-}
-
-.place_detaile_subtitle_requisites{
-  width: 100%;
-  // overflow: hidden;
-  margin-top: 50px;
-  margin-bottom: 20px;
+  width: 80%;
+  min-height: 120px;
+  border: 1px solid #909090;
+  background-color: #323131 ;
+  border-radius: 10px;
+  position: relative;
   display: flex;
-  justify-content: space-between;
-  font-family: 'Fira Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 26px;
-  line-height: 19px;
-  color: #909090;
-  width: 100%;
+  margin-top: 5px;
 }
+
 .place_detaile_subtitle__requisites___slot{
   overflow: hidden;
   text-overflow: ellipsis;
@@ -45,104 +20,117 @@
   line-clamp: 2;
   box-orient: vertical;
   text-align: start; 
-  width: 20%;
   line-height: 26px;
+  vertical-align: bottom;
+  font-size: 26px;
+  font-family: 'Fira Mono';
+  font-style: normal;
+  font-weight: 400;
 }
-.place_detaile_subtitle__requisites___slot:first-child{
-  text-align: start;
-  margin-left: 5px;
+
+.place_detaile_subtitle_name{
+  color: #909090;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  position: relative;
+  .place_detaile__name{
+    margin-top: 20px;
+    font-family: 'Girassol';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 22px;
+    color: whitesmoke;
+  }
+  .place_detaile_subtitle__requisites___slot.phone{
+    position: absolute;
+    bottom: 10px;
+    font-family: 'Fira Mono';
+    font-style: normal;
+    font-weight: 400;
+  }
+  
 }
-.place_detaile_subtitle__requisites___slot:last-child{
-  margin-left: 10px;
+
+.place_detaile_subtitle__requisites___slot.address{
+  position: absolute;
+  bottom: 10px;
+  left: 5px;
+  color: #909090;
+  font-family: 'Fira Mono';
+  font-style: normal;
+  font-weight: 400;
+  max-width: 45%;
+}
+
+.place_detaile_subtitle__requisites___slot.email{
+  position: absolute;
+  bottom: 10px;
+  color: #909090;
+  right:  5px;
+  font-family: 'Fira Mono';
+  font-style: normal;
+  font-weight: 400;
   word-wrap: break-word;
-  text-align: end;
-  margin-right: 5px;
+  max-width: 30%;
+  .phone_row{
+    display: none;    
+  }
 }
 
 @media (min-width:1280px){
-  .place_detaile_subtitle_wrap{
-
-  }
-  .place_detaile_subtitle_name{
-    margin-top: 20px;
-
-  }
-  .place_detaile_subtitle__requisites___slot:first-child{
-    text-align: start;
-    margin-left: 5px;
-    width: 380px
-  }
 
 }
 
 @media (max-width:1280px){
   .place_detaile_subtitle_wrap{
-    
-  }
-  .place_detaile_subtitle_name{
-    margin-top: 15px;
-    font-size: 30px;
-
-  }
-  .place_detaile_subtitle_requisites{
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 18px;
+    min-height: 120px;
   }
   .place_detaile_subtitle__requisites___slot{
-    width: 220px;
-    text-align: center; 
+    font-size: 22px;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
-}
 
+
+}
 
 @media(max-width:769px){
   .place_detaile_subtitle_wrap{
+    min-height: 100px;
     margin-top: 35px;
     width: 100%;
     border:0px;
-    
-  }
-  .place_detaile_subtitle_name{
-
-    margin-top: 15px;
-    font-size: 26px;
-  }
-  .place_detaile_subtitle_requisites{
-
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
   }
   .place_detaile_subtitle__requisites___slot{
-    line-height: 16px;
-    
+    font-size: 18px;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
   }
-
+  .place_detaile_subtitle__requisites___slot.phone{
+    display: none;
+  }
+  .place_detaile_subtitle__requisites___slot.email{
+    .email_row{
+      display: none;
+    }
+    .phone_row{
+      display: inline;    
+    }
+  }
 }
 
-@media(max-width:450px){
-  .place_detaile_subtitle_requisites{
-    font-size: 12px;
-  }
+@media(max-width:550px){
   .place_detaile_subtitle__requisites___slot{
-    line-clamp: 1;
-    line-height: 12px;  
-    -webkit-line-clamp: 1;
-    text-align: end;
-    margin-left: 5  px;
-    margin-right: 5px;
+    font-size: 16px;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    line-height: 20px;
   }
-  .place_detaile_subtitle__requisites___slot:last-child{
-    display: none;
-    text-align: start;
-    margin-left: 0px;
-    margin-right: 0px;
+  .place_detaile_subtitle__requisites___slot.email{
+    max-width: 35%;
   }
-  .place_detaile_subtitle__requisites___slot:first-child{
-    text-align: start;
-
-  }
-
-
- }
+}
