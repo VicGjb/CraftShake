@@ -8,6 +8,7 @@ import { PopupDelete } from "../../components/popup/popup_delete";
 import { NetworkManager } from "../../components/network_manager";
 import { MenuDetaileButtonRow } from "./MenuDetaileButtonRow";
 import { useMenuDetaileContext } from "./MenuDetaileContext";
+import { Loading } from "../../components/loader";
 import { MenuPositionCard } from "./MenuPositionCard";
 import '../../styles/menu_detaile.scss'
 
@@ -78,7 +79,7 @@ export function MenuDetaileContent(){
             return MenuView()
         }else{
             return(
-                <div>Loading</div>
+                <Loading/>
             )
         }
     }

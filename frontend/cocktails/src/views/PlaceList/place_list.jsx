@@ -6,7 +6,7 @@ import { useManeContext } from "../../components/main_context";
 import { PlaceListMobile } from "./place_list_mobile";
 import '../../styles/place_list.scss';
 import {ReactComponent as SearchBtn} from "../../svg/search.svg";
-
+import { Loading } from "../../components/loader";
 
 export function PlaceList(){
     let [place, setPlace] = useState([]);
@@ -87,7 +87,7 @@ export function PlaceList(){
             return PlaceListView()
         } else {
             return(
-                <div>Loading</div>
+                <Loading/>
             )
         }
     }

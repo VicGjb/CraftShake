@@ -29,8 +29,7 @@ export function Routing(){
         <Router>
             <Routes>
                 <Route path="/" element={<MainContextProvider><Layout/></MainContextProvider>}>
-                    <Route element={<AuthLayout/>
-                }>
+                    <Route element={<AuthLayout/>}>
                             <Route path='placeList/*' element={<PlaceList/>}/>    
                             <Route path=':placeName/:placeId/*' element={<LayoutPlace/>}>
                                 <Route path='detaile' element={<PlaceDetaile/>}/>
@@ -43,12 +42,11 @@ export function Routing(){
                                 <Route path='menus/:menuId/*' element={<MenuDetaile/>}/>
                                 <Route path='managers/' element={<ManagersList/>}/>
                             </Route>
-                        <Route path='products/' element={<ProductList/>}/>
-                        <Route path='products/:productId' element={<ProductDetaile/>}/>
-                        <Route path=':userId/' element={<PersonalAccount/>}/>
-
-                        <Route path='customer/:userID' element={<PersonalAccount/>}/>
-                        <Route path='customer/:userID/:placeId/' element = {<LayoutPlace/>}>
+                            <Route path='products/' element={<ProductList/>}/>
+                            <Route path='products/:productId' element={<ProductDetaile/>}/>
+                            <Route path=':userId/' element={<PersonalAccount/>}/>
+                            <Route path='customer/:userID' element={<PersonalAccount/>}/>
+                            <Route path='customer/:userID/:placeId/' element = {<LayoutPlace/>}>
                             <Route path='main' element={<PlaceDetaile/>}/>
                         </Route>
                     </Route>    

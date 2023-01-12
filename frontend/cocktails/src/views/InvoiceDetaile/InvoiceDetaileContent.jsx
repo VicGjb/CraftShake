@@ -1,16 +1,14 @@
 import React, {useState,useEffect} from "react";
 import { NetworkManager } from "../../components/network_manager";
-import { useNavigate } from "react-router-dom";
 import {useParams} from 'react-router-dom';
 import { useManeContext } from "../../components/main_context";
 import { RegularButton } from "../../components/buttons/regular_button";
-import { PopupDelete } from "../../components/popup/popup_delete";
-import { PopupRegularMessage } from "../../components/popup/popup_regular_message";
 import { useInvoiceDetaileContext } from "./InvoiceDetileContext";
 import { InvoiceDetileButtonRow } from "./InvoiceDetaileButtonRows";
 import {ReactComponent as PdfIcon} from "../../svg/pdf_icon.svg"
 import { InvoiceOrderTable } from "./InvoiceOrderTabel";
 import { DeleteInvoiceButton } from "./InvoiceDetaileButtonRows";
+import { Loading } from "../../components/loader";
 import '../../styles/invoice_detaile.scss'
 
 export function InvoiceDetaileContent(){
@@ -21,8 +19,7 @@ export function InvoiceDetaileContent(){
     let {invoiceId} = useParams();
     let mainCintext = useManeContext();
     let user = mainCintext.getUserFromMainContext()
-    let [regular_message_active, setRegular_message_active] = useState(false)
-    let [delete_active,setDelete_active] = useState(false)
+
 
     useEffect(() => {
         network_manager.get_invoice_detaile(invoiceId)
@@ -30,6 +27,10 @@ export function InvoiceDetaileContent(){
                 invoiceDetaileContext.setInvoice(invoice)
                 invoiceDetaileContext.setIsVat(invoice.is_vat)
                 setLoaded(true);
+            })
+            .catch(error=>{
+                setLoaded(false)
+                console.log('FUCK', error)
             })
     }, [invoiceId])
     
@@ -148,7 +149,7 @@ export function InvoiceDetaileContent(){
             return invoiceView()
         }else{
             return(
-                <div>Loading</div>
+                <Loading/>
             )
         }
     }

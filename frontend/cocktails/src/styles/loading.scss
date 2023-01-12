@@ -1,0 +1,26 @@
+.loading_wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.logo_icon{
+    width: 30%;
+    height: 30%;
+    animation: rotateLogo 2.5s infinite linear;
+}
+@keyframes rotateLogo{
+    0%{
+        transform:  rotateY(0deg);
+    }
+    100%{
+        transform: rotateY(360deg);
+    }
+}
+.loading_label{
+    margin-top: 30px;
+    font-size: 26px;
+    color: #909090;
+}

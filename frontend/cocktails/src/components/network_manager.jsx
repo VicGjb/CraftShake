@@ -506,6 +506,10 @@ export class NetworkManager{
 			.then (response =>{
 				return response.data
 			})
+			.catch(error=>{
+                // setLoaded(false)
+                console.log('FUCK', error)
+            })
 		}
 
 

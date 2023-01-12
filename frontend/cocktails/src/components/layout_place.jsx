@@ -3,6 +3,7 @@ import { Outlet, useParams } from "react-router-dom";
 import { PlaceSubtitle } from "./place_subtitle";
 import { NetworkManager } from "./network_manager";
 import { useManeContext } from "./main_context";
+import { Loading } from "./loader";
 import '../styles/layout_place.scss'
 
 export function LayoutPlace(){
@@ -34,7 +35,7 @@ export function LayoutPlace(){
             return LayoutPlaceView()
         } else{
             return(
-                <div>Loading</div>
+                <Loading/>
             )
         }
     }

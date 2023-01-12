@@ -26,7 +26,7 @@ export function SignIn() {
     let user = main_context.getUserFromMainContext()
     let access_token = localStorage.getItem('access_token')
     let [regular_message_active, setRegular_message_active] = useState(false)
-   
+    let [message, setMessage] = useState('')
 
 
     function onClickGoogle(){
@@ -85,7 +85,13 @@ export function SignIn() {
             window.location.reload()
         })  
         .catch(error => {
-            console.log('dsdscsdcsd',error);
+            console.log('dsdscsdcsd',error.response.status);
+            if (error.response.status == 401){
+                setMessage('Wrong login/password') 
+                }
+            else{
+                setMessage('System problems, please try again later')
+            }
             setRegular_message_active(true)
             throw error;
         });		
@@ -97,8 +103,6 @@ export function SignIn() {
                 <div className='logo_wrapper'>
                 <Logo className='logo'/> 
                 </div>
-
-
 
                 <Formik
                  initialValues={formData}
@@ -164,7 +168,7 @@ export function SignIn() {
                 </Formik> 
             </div>  
             <PopupRegularMessage
-                message='wrong login/password' 
+                message = {message} 
                 regular_message_active={regular_message_active}
                 setRegular_message_active={setRegular_message_active} 
             

@@ -15,6 +15,7 @@ import { PopupAddPlace } from "../../components/popup/popup_add_place";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { useManeContext } from "../../components/main_context";
+import { Loading } from "../../components/loader";
 
 import '../../styles/place_detaile.scss'
 
@@ -179,7 +180,7 @@ export function PlaceDetaile(){
             return PlaceDetileView()
         } else{
             return(
-                <div>Loading</div>
+                <Loading/>
             )
         }
     }
