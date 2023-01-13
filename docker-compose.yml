@@ -4,7 +4,7 @@ services:
 
   frontend:
       user: ${UID}:${GID} #имя пользователя и группы в нутри докера, равные мимени пользователя на локальной машине
-      #image: node:16.13.0
+      image: node:16.15.1
       build: 
         context: ./frontend
       hostname: frontend  #Кастомное навание хоста
@@ -21,7 +21,8 @@ services:
 
   backend:
       user: ${UID}:${GID}
-      #image: python:latest
+      image: python:3.10.9
+      # command: python /app/manage.py runserver 127.0.0.1:8000
       build:
           context: ./Cocktails
       hostname: backend
@@ -30,6 +31,43 @@ services:
         - "8000:8000"
       tty: true
       volumes:
-        - ./Test_project:/app
-      # depends_on:
-      #   - database
+        - ./Cocktails:/app
+      depends_on:
+        - database
+
+
+
+  database:
+    image: nouchka/sqlite3:latest
+    volumes:
+      - ./Cocktails/data/db:/root/db
+    environment:
+      - SQLITE3_DB=db.sqlite3
+
+  # sqlitebrowser:
+  #   image: lscr.io/linuxserver/sqlitebrowser:latest
+  #   container_name: sqlitebrowser
+  #   security_opt:
+  #     - seccomp:unconfined #optional
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Europe/London
+  #   volumes:
+  #     - /path/to/config:/config
+  #   ports:
+  #     - 3000:3000
+  #   restart: unless-stopped
+
+  # database:
+  #   # user: ${UID?err}:${GID?err}
+  #   image: postgres:latest
+  #   hostname: database
+  #   container_name: database
+  #   ports:
+  #     - "5432:5432"
+  #   tty: true
+  #   volumes:
+  #     - ./database:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}

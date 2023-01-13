@@ -40,10 +40,9 @@ export function OrderStates(){
                 case 'Approved':
                     return(
                         <div>
-                            <div className='delivered_btn' onClick={()=>{setUploadPhotoActive(true)}}>
+                            <div className='delivered_btn' onClick={()=>{orderItemContext.setUploadPhotoActive(true)}}>
                                 <RegularButton lable={'set Delivered'}/>
                             </div>
-                            <UploadOrderPhotoPopup upload_photo_active={upload_photo_active} setUploadPhotoActive={setUploadPhotoActive} />
                         </div>
                     )
                 case 'Delivered':

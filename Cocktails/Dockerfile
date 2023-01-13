@@ -24,5 +24,10 @@ RUN pip install boto3
 # RUN pip install -U aiogram
 RUN pip install pytelegrambotapi
 
-
 RUN pip install django-fsm 
+RUN pip install django-allauth
+RUN pip install dj-rest-auth
+
+RUN pip install django-cors-headers
+
+RUN pip install psycopg2-binary

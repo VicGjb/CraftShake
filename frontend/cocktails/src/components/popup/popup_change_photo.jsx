@@ -12,7 +12,6 @@ export function PopupUploadProductPhoto({upload_product_photo_active, setUploadP
     let network_manager = new NetworkManager()
 
     function newFile(){
-        console.log('CREATE PHOTO UPLOAD DATA',uploadData)
       network_manager.upload_photo_product(productId, uploadData)
         .then(response => {
           console.log(`Success`,response);

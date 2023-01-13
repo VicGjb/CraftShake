@@ -162,8 +162,6 @@ export function OrderTopButtonLine({date}){
     let {placeId} = useParams();
     let mainContext = useManeContext()
 
-    // navigate(mainContext.getOrderBackUrl)
-
     function renderButtonLine(order){
         if (order){
             return(
@@ -202,17 +200,13 @@ export function MobileButtonLineTop({date}){
     let orderItemContext = useOrderItemListContext()
     let order = orderItemContext.getOrderContext
     let navigate = useNavigate()
-    let {placeName} = useParams();
-    let {placeId} = useParams();
     let mainContext = useManeContext()
 
     if(order){
         return(
             <div className="order_detaile_buttons_line_mobile">
                 <div className="order_detaile_back_btn" onClick={()=>{navigate(mainContext.getOrderBackUrl)}}>
-                    
                         <RegularButton lable={'Back'}/>
-                 
                 </div>
                 <div className='order_state_btn'>
                     <OrderStates/> 
@@ -222,10 +216,8 @@ export function MobileButtonLineTop({date}){
     }else{
         return(
             <div className="order_detaile_buttons_line_mobile">
-                <div className="order_detaile_back_btn" onClick={()=>{navigate(-1)}}>
-
+                <div className="order_detaile_back_btn" onClick={()=>{navigate(mainContext.getOrderBackUrl)}}>
                     <RegularButton lable={'Back'}/>
-
                 </div>
                 <div className="order_create_btn">
                     <CreateOrderButton date={date}/>

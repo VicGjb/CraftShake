@@ -11,6 +11,7 @@ import {ReactComponent as CameraIcon} from "../../svg/camera_icon.svg"
 import { MenuPositionRow } from "./menu_position/menu_position_row";
 import { useManeContext } from "../../components/main_context";
 import { Loading } from "../../components/loader";
+import { UploadOrderPhotoPopup } from "./OrderStates/UploadOrderPhoto";
 import '../../styles/order_detile.scss'
 
 export function OrderDetaileContent({orderId, menus}){
@@ -153,6 +154,8 @@ export function OrderDetaileContent({orderId, menus}){
                 <div className="order_detaile_footer">
                     <MobileButtonLineBottom />
                 </div> 
+
+                <UploadOrderPhotoPopup/>
             </div>
         )
     }

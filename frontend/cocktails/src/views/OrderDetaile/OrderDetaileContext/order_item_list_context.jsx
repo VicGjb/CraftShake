@@ -14,6 +14,7 @@ export function OrderItemListContextProvider({children}){
     let [menus, setMenus] = useState([]);
     let [item_list, setItemList] = useState([]);
     let [delete_item_list, setDeleteItemList] =useState([]);
+    let [uploadPhotoActive, setUploadPhotoActive] = useState(false)
     let mobileMenuPositions = {};
 
 
@@ -95,6 +96,10 @@ export function OrderItemListContextProvider({children}){
             initMobileMenuPositions:initMenuPositionMobile,
             addItemMobile:addItemMobile,
             getItemListMobile:getItemListMobile,
+
+            uploadPhotoActive:uploadPhotoActive,
+            setUploadPhotoActive:setUploadPhotoActive,
+
 
             }}>
             {children}

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
-from .secret_config import AWS_S3
+from .secret_config import DB,AWS_S3
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -115,6 +115,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': DB['DATABASE_NAME'],
+#         'USER': DB['USER'],
+#         'PASSWORD': DB['PASSWORD'],
+#         'HOST': DB['HOST'],
+#         'PORT': DB['PORT'],
+#   }
 }
 
 
