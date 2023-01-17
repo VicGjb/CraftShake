@@ -57,7 +57,7 @@ jobs:
           docker stop craftshake-backend
           docker rm craftshake-backend
           docker pull $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest
-          docker run docker run --detach --name craftshake-backend -p 8000:8000 --env-file .env  $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest
+          docker run docker run --detach --name craftshake-backend -p 8000:8000 --env-file ~/.env  $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest
 
     - name: Pull on EC2 frontend
       uses: appleboy/ssh-action@v0.1.7
