@@ -3,7 +3,7 @@ ame: Deploy to ECR
 on:
  
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   
@@ -35,7 +35,6 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_BACKEND_REPOSITORY:  craftshake-backend
         ECR_FRONTEND_REPOSITORY:  craftshake-frontend 
-        # IMAGE_TAG: nodejs_demo_image
       run: |
         cd Cocktails/ 
         docker build -t $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest .
