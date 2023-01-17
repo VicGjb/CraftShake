@@ -60,7 +60,7 @@ jobs:
           docker run docker run --detach --name craftshake-backend -p 8000:8000 --env-file .env  $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest
 
     - name: Pull on EC2 frontend
-      uses: appleboy/ssh-action@v1
+      uses: appleboy/ssh-action@v0.1.7
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_BACKEND_REPOSITORY:  craftshake-frontend
