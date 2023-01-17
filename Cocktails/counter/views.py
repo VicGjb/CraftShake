@@ -424,7 +424,7 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
     def create_pdf(self, request, pk=None):
         invoice = Invoice.objects.get(id=pk)
         users = invoice.place.users.filter(place=invoice.place)
-        print(request.user)
+        print(f' hello im user in create_pfd invoice {request.user}')
         if request.user in users or request.user.is_staff:
             print('HAKUNA MATATA')
             print(f'USERS create pdf {invoice.place.users.filter(place=invoice.place)}')
@@ -441,7 +441,7 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
                 date=date,
                 )
         else:
-            return Response(status=403)
+            return Response(status=403,data='NoUser')
 
 
 class InvoiceDeleteView(viewsets.ModelViewSet):
@@ -618,7 +618,7 @@ class CustomerStatementView(viewsets.ReadOnlyModelViewSet):
     def create_pdf(self, request, pk=None):
         statement = CustomerStatement.objects.get(id=pk)
         users = statement.place.users.filter(place=statement.place)
-        print(request.user)
+        print(f' hello im user in create_pdf{request.user}')
         if request.user in users or request.user.is_staff:
 
             orders = Order.objects.filter(customer_statement = pk).order_by('date')
