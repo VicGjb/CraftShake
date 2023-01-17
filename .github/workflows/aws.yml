@@ -45,7 +45,7 @@ jobs:
 
     
     - name: Pull on EC2 backend
-      uses: appleboy/ssh-action@v1
+      uses: appleboy/ssh-action@v0.1.7
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_BACKEND_REPOSITORY:  craftshake-backend
