@@ -1,4 +1,6 @@
-FROM python:latest
+FROM python:3.10.9
+
+WORKDIR /project
 
 RUN pip install django
 RUN pip install Pillow
@@ -31,3 +33,7 @@ RUN pip install dj-rest-auth
 RUN pip install django-cors-headers
 
 RUN pip install psycopg2-binary
+# RUN pip install psycopg2
+
+COPY . /project/
+ENTRYPOINT ["python", "/project/manage.py", "runserver", "0.0.0.0:8000"]

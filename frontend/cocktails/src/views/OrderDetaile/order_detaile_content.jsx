@@ -131,7 +131,7 @@ export function OrderDetaileContent({orderId, menus}){
         }
     }
     
-    function OrderDetaileContentView(){
+    function OrderDetaileContentView(isNewOrder){
         return(
             <div className="order_detaile_wrapper">
                 <OrderTopButtonLine order={order} date={dateOrder}/>
@@ -154,8 +154,10 @@ export function OrderDetaileContent({orderId, menus}){
                 <div className="order_detaile_footer">
                     <MobileButtonLineBottom />
                 </div> 
-
-                <UploadOrderPhotoPopup/>
+                {isNewOrder?<></>
+                :<UploadOrderPhotoPopup/>
+                }
+                
             </div>
         )
     }
@@ -163,14 +165,14 @@ export function OrderDetaileContent({orderId, menus}){
     function renderPage(props){
         if(props.orderId){
             if(props.loaded){
-                return OrderDetaileContentView()
+                return OrderDetaileContentView(false)
             }else{
                 return(
                     <Loading/>
                 )
             } 
         }else{
-            return OrderDetaileContentView() 
+            return OrderDetaileContentView(true) 
         }
     }
     return(

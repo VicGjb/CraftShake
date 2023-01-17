@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-let baseURL = 'http://127.0.0.1:8000/api/';
+// let baseURL = 'http://127.0.0.1:8000/api/';
+let baseURL = 'http://ec2-3-67-222-143.eu-central-1.compute.amazonaws.com:8000/api/';
 
 export class NetworkManager{
 	
@@ -9,7 +10,8 @@ export class NetworkManager{
 		this.access_token = localStorage.getItem('access_token')
 		this.refresh_token = localStorage.getItem('refresh_token')
 		this.axiosInstance = axios.create({
-			baseURL: 'http://127.0.0.1:8000/api/',
+			// baseURL: 'http://127.0.0.1:8000/api/',
+			baseURL: 'http://ec2-3-67-222-143.eu-central-1.compute.amazonaws.com:8000/api/',
 			timeout: 5000,
 			headers: {
 				Authorization: this.access_token
@@ -21,7 +23,6 @@ export class NetworkManager{
 		});
 		this.SetUpInterceptorRequest()
 		this.SetUpInterceptorsResponse()
-
 	}
 		
 
@@ -40,7 +41,6 @@ export class NetworkManager{
 			
 						if (access_token_data.exp<now && request.url!=='/token/refresh/') {
 							console.log('going to refresh',request.url)
-							// alert('hello')
 							await axiosInstance
 								.post('/token/refresh/', { refresh: refresh_token})
 								.then((response) => {
@@ -559,6 +559,7 @@ export class NetworkManager{
 
 // Auth
 	async SingIn(from){
+		console.log("im going http://ec2-3-67-222-143.eu-central-1.compute.amazonaws.com:8000/api/token")
 		return this.axiosInstance
 			.post(`token/`, {
 				username: from.username,

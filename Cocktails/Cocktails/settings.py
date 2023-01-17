@@ -22,12 +22,17 @@ SETTINGS_PATH =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY=os.environ.get("SECRET_KEY")
 SECRET_KEY = 'django-insecure-975c=$-mw0-jv#)j%erj(-^dtosa_kbf&^e@w+d+2$0^!!nn4_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ec2-18-197-17-128.eu-central-1.compute.amazonaws.com',
+    'ec2-18-195-124-113.eu-central-1.compute.amazonaws.com',
+    'ec2-3-67-222-143.eu-central-1.compute.amazonaws.com',
+]
 
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
 # Application definition
@@ -71,19 +76,19 @@ AUTH_USER_MODEL = 'craft_shake_auth.CustomUser'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'http://ec2-18-195-124-113.eu-central-1.compute.amazonaws.com',
+    'http://ec2-18-195-124-113.eu-central-1.compute.amazonaws.com:3000',
 ]
 
 ROOT_URLCONF = 'Cocktails.urls'
@@ -111,10 +116,19 @@ WSGI_APPLICATION = 'Cocktails.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('POSTGRES_DB'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': os.environ.get('POSTGRES_URL'),
+        'PORT': '5432',
+  }
 
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -122,7 +136,7 @@ DATABASES = {
 #         'USER': DB['USER'],
 #         'PASSWORD': DB['PASSWORD'],
 #         'HOST': DB['HOST'],
-#         'PORT': DB['PORT'],
+#         'PORT': '5432',
 #   }
 }
 

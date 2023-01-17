@@ -1,25 +1,41 @@
 FROM node:16.13.0
 
-RUN yarn add axios
+RUN mkdir /project
 
-RUN yarn add react-router-dom
+WORKDIR /project
 
-RUN yarn add sass
+COPY ./cocktails/package.json /cocktails/package-lock.json /project/ 
 
-RUN yarn add libphonenumber-js
+RUN yarn install
 
-RUN yarn add react-dropzone
+COPY ./cocktails/public/ /project/public/ 
+COPY ./cocktails/src/ /project/src/
 
-RUN yarn add react-hook-form
+ENTRYPOINT ["yarn", "start"]
 
-RUN yarn add react-select
 
-RUN yarn add uuid
+# RUN yarn add axios
 
-RUN yarn add @mui/material @emotion/react @emotion/styled
+# RUN yarn add react-router-dom
 
-RUN yarn add js-file-download
+# RUN yarn add sass
 
-RUN yarn add formik
+# RUN yarn add libphonenumber-js
 
-RUN yarn add yup
+# RUN yarn add react-dropzone
+
+# RUN yarn add react-hook-form
+
+# RUN yarn add react-select
+
+# RUN yarn add uuid
+
+# RUN yarn add @mui/material @emotion/react @emotion/styled
+
+# RUN yarn add js-file-download
+
+# RUN yarn add formik
+
+# RUN yarn add yup
+
+
