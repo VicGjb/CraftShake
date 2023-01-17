@@ -56,8 +56,8 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_BACKEND_PRIVATE_KEY }}
         script: |
-          docker stop craftshake-backend
-          docker rm craftshake-backend
+          docker stop craftshake-backend || true
+          docker rm craftshake-backend || true
           docker pull $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest
           docker run --detach --name craftshake-backend -p 8000:8000 --env-file=.env  $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest
 
@@ -71,7 +71,7 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_FRONTEND_PRIVATE_KEY }}
         script: |
-          docker stop craftshake-frontend
-          docker rm craftshake-frontend
+          docker stop craftshake-frontend || true
+          docker rm craftshake-frontend || true
           docker pull $ECR_REGISTRY/$ECR_FRONTEND_REPOSITORY:latest
           docker run --detach --name craftshake-frontend -p 3000:3000 $ECR_REGISTRY/$ECR_FRONTEND_REPOSITORY:latest
