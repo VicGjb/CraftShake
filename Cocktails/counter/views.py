@@ -425,7 +425,7 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
         invoice = Invoice.objects.get(id=pk)
         users = invoice.place.users.filter(place=invoice.place)
         print(request.user)
-        if request.user in users:
+        if request.user in users or request.user.is_staff:
             print('HAKUNA MATATA')
             print(f'USERS create pdf {invoice.place.users.filter(place=invoice.place)}')
 
