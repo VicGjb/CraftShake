@@ -56,10 +56,13 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_BACKEND_PRIVATE_KEY }}
         script: |
-          docker stop craftshake-backend || true
-          docker rm craftshake-backend || true
+          if docker ps -a --filter "name=craftshake-backend" --format '{{.Names}}' | grep -q "craftshake-backend"; then
+             docker stop craftshake-backend
+             docker rm craftshake-backend
+          fi
           docker pull $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest
           docker run --detach --name craftshake-backend -p 8000:8000 --env-file=.env  $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest
+          
 
     - name: Pull on EC2 frontend
       uses: appleboy/ssh-action@v0.1.7
@@ -71,7 +74,9 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_FRONTEND_PRIVATE_KEY }}
         script: |
-          docker stop craftshake-frontend || true
-          docker rm craftshake-frontend || true
+          if docker ps -a --filter "name=craftshake-frontend" --format '{{.Names}}' | grep -q "craftshake-frontend"; then
+             docker stop craftshake-frontend
+             docker rm craftshake-frontend
+          fi
           docker pull $ECR_REGISTRY/$ECR_FRONTEND_REPOSITORY:latest
           docker run --detach --name craftshake-frontend -p 3000:3000 $ECR_REGISTRY/$ECR_FRONTEND_REPOSITORY:latest
