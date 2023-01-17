@@ -1,12 +1,11 @@
+import os
 import telebot
 from .models import Place, OrderItemVolume
-from Cocktails.secret_config import (
-    bot_config,
-    counters_id_list,
-)
 
-token = bot_config['token']
+
+token = os.environ.get('TELEGRAM_BOT_KEY')
 bot = telebot.TeleBot(token)
+counters_id_list = [197634497,]
 
 def telegram_send_massege_new_order(order, order_items):
     place = Place.objects.get(id=order.place_id).name
