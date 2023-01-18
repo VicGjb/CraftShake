@@ -33,6 +33,7 @@ ALLOWED_HOSTS = [
     'ec2-18-195-124-113.eu-central-1.compute.amazonaws.com',
     'ec2-3-67-222-143.eu-central-1.compute.amazonaws.com',
     'ec2-3-125-167-18.eu-central-1.compute.amazonaws.com',
+    '3.125.167.18'
 ]
 
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
