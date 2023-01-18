@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     'ec2-18-197-17-128.eu-central-1.compute.amazonaws.com',
     'ec2-18-195-124-113.eu-central-1.compute.amazonaws.com',
     'ec2-3-67-222-143.eu-central-1.compute.amazonaws.com',
+    'ec2-3-125-167-18.eu-central-1.compute.amazonaws.com',
 ]
 
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
@@ -89,6 +90,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
     'http://ec2-18-195-124-113.eu-central-1.compute.amazonaws.com',
     'http://ec2-18-195-124-113.eu-central-1.compute.amazonaws.com:3000',
+    'http://ec2-52-57-81-8.eu-central-1.compute.amazonaws.com:3000',
+    'http://52.57.81.8:3000',
 ]
 
 ROOT_URLCONF = 'Cocktails.urls'
