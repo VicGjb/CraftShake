@@ -37,11 +37,11 @@ jobs:
         ECR_FRONTEND_REPOSITORY:  craftshake-frontend 
       run: |
         cd Cocktails/ 
-        docker build -t $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest .
-        docker push $ECR_REGISTRY/$ECR_BACKEND_REPOSITORY:latest
+        docker build -t ${{ steps.login-ecr.outputs.registry }}/craftshake-backend:latest .
+        docker push ${{ steps.login-ecr.outputs.registry }}/craftshake-backend:latest
         cd ../frontend/ 
-        docker build -t $ECR_REGISTRY/$ECR_FRONTEND_REPOSITORY:latest .
-        docker push $ECR_REGISTRY/$ECR_FRONTEND_REPOSITORY:latest
+        docker build -t ${{ steps.login-ecr.outputs.registry }}/craftshake-frontend:latest .
+        docker push ${{ steps.login-ecr.outputs.registry }}/craftshake-frontend:latest
 
     - name: Create .env file
       run: echo ${{ secrets.ENV_FILE }} > .env
