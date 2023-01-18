@@ -29,11 +29,12 @@ SECRET_KEY = 'django-insecure-975c=$-mw0-jv#)j%erj(-^dtosa_kbf&^e@w+d+2$0^!!nn4_
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'http://ec2-3-125-167-18.eu-central-1.compute.amazonaws.com/',
+    'ec2-3-125-167-18.eu-central-1.compute.amazonaws.com',
     os.environ.get('ALLOWED_HOSTS'),
     # 'ec2-3-125-167-18.eu-central-1.compute.amazonaws.com',
     '3.125.167.18',
     # '3.125.167.18:8000',
+    '127.0.0.1'
 ]
 
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
@@ -119,19 +120,19 @@ WSGI_APPLICATION = 'Cocktails.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
-
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('POSTGRES_DB'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': os.environ.get('POSTGRES_URL'),
-        'PORT': '5432',
-  }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.environ.get('POSTGRES_DB'),
+#         'USER': os.environ.get('POSTGRES_USER'),
+#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+#         'HOST': os.environ.get('POSTGRES_URL'),
+#         'PORT': '5432',
+#   }
 
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
