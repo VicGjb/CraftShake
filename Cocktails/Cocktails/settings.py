@@ -29,9 +29,10 @@ SECRET_KEY = 'django-insecure-975c=$-mw0-jv#)j%erj(-^dtosa_kbf&^e@w+d+2$0^!!nn4_
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    os.environ('ALLOWED_HOSTS'),
+    'http://ec2-3-125-167-18.eu-central-1.compute.amazonaws.com/',
+    os.environ.get('ALLOWED_HOSTS'),
     # 'ec2-3-125-167-18.eu-central-1.compute.amazonaws.com',
-    # '3.125.167.18',
+    '3.125.167.18',
     # '3.125.167.18:8000',
 ]
 
