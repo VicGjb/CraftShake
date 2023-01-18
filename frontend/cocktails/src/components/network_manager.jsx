@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // let baseURL = 'http://127.0.0.1:8000/api/';
-let baseURL = 'http://3.125.167.18:8000/api/';
+let baseURL = 'http://api.craft-shake.com:8000/api/';
 
 export class NetworkManager{
 	
@@ -11,7 +11,7 @@ export class NetworkManager{
 		this.refresh_token = localStorage.getItem('refresh_token')
 		this.axiosInstance = axios.create({
 			// baseURL: 'http://127.0.0.1:8000/api/',
-			baseURL: 'http://3.125.167.18:8000/api/',
+			baseURL: 'http://api.craft-shake.com:8000/api/',
 			timeout: 5000,
 			headers: {
 				Authorization: this.access_token
