@@ -95,7 +95,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://52.57.81.8:3000',
     'http://craft-shake.com:3000',
     'http://157.90.158.95:3000',
-    'http://static.95.158.90.157.clients.your-server.de:3000'
+    'http://static.95.158.90.157.clients.your-server.de:3000',
+    'http://craft-shake.com',
 ]
 
 ROOT_URLCONF = 'Cocktails.urls'
