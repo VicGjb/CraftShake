@@ -76,7 +76,7 @@ jobs:
           docker pull vicjgb/craftshake-frontend
           
           docker run --detach --name craftshake-frontend -p 3000:3000 vicjgb/craftshake-frontend:latest
-
+          docker run --detach --name craftshake-backend -p 8000:8000 --env-file=.env  vicjgb/craftshake-backend:latest
 
     # - name: Pull on EC2 frontend
     #   uses: appleboy/ssh-action@v0.1.7
