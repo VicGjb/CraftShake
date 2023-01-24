@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
-# from .secret_config import DB,AWS_S3
+from .secret_config import DB,AWS_S3
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,10 +29,13 @@ SECRET_KEY = 'django-insecure-975c=$-mw0-jv#)j%erj(-^dtosa_kbf&^e@w+d+2$0^!!nn4_
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
     'ec2-3-125-167-18.eu-central-1.compute.amazonaws.com',
     os.environ.get('ALLOWED_HOSTS'),
     '3.125.167.18',
-    'api.craft-shake.com'
+    'api.craft-shake.com',
+    '157.90.158.95',
+    'static.95.158.90.157.clients.your-server.de'    
 ]
 
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
@@ -90,7 +93,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
     'http://3.125.167.18:8000',
     'http://52.57.81.8:3000',
-    'http://craft-shake.com:3000'
+    'http://craft-shake.com:3000',
+    'http://157.90.158.95:3000',
+    'http://static.95.158.90.157.clients.your-server.de:3000'
 ]
 
 ROOT_URLCONF = 'Cocktails.urls'
@@ -140,6 +145,7 @@ DATABASES = {
 #         'HOST': DB['HOST'],
 #         'PORT': '5432',
 #   }
+    
 }
 
 
