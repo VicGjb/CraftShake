@@ -45,11 +45,11 @@ jobs:
         DOCKER_FRONTEND_REPOSITORY:  craftshake-frontend 
       run: |
         cd Cocktails/ 
-        docker build craftshake-backend:latest .
+        docker build craftshake-backend .
         docker tag craftshake-backend vicjgb/craftshake-backend:latest
         docker push vicjgb/craftshake-backend
         cd ../frontend/ 
-        docker build craftshake-frontend:latest .
+        docker build craftshake-frontend .
         docker tag craftshake-frontend vicjgb/craftshake-frontend:latest
         docker push vicjgb/craftshake-backend
 
