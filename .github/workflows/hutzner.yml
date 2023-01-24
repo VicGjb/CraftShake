@@ -53,29 +53,30 @@ jobs:
         docker tag craftshake-frontend vicjgb/craftshake-frontend:latest
         docker push vicjgb/craftshake-backend
 
-
-
-
-    # - name: Create .env file
-    #   run: echo ${{ secrets.ENV_FILE }} > .env
+    - name: Create .env file
+      run: echo ${{ secrets.ENV_FILE }} > .env
     
-    # - name: Pull on EC2 backend
-    #   uses: appleboy/ssh-action@v0.1.7
-    #   env:
-    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-    #     ECR_BACKEND_REPOSITORY:  craftshake-backend
-    #   with:
-    #     host: ${{ secrets.EC2_BACKEND_HOST }}
-    #     username: ${{ secrets.EC2_USERNAME }}
-    #     key: ${{ secrets.EC2_BACKEND_PRIVATE_KEY }}
-    #     script: |
-    #       if docker ps -a --filter "name=craftshake-backend" --format '{{.Names}}' | grep -q "craftshake-backend"; then
-    #          docker stop craftshake-backend
-    #          docker rm craftshake-backend
-    #       fi
-    #       docker pull ${{ steps.login-ecr.outputs.registry }}/craftshake-backend:latest
-    #       docker run --detach --name craftshake-backend -p 8000:8000 --env-file=.env  ${{ steps.login-ecr.outputs.registry }}/craftshake-backend:latest
+    - name: Pull on Hutzner backend
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HUTZNER_SERVER_IP }}
+        username: ${{ secrets.HUTZNER_SERVER_USERNAME }}
+        key: ${{ secrets.HUTZNER_SERVER_SSH_KEY }}
+        script: |
+          if docker ps -a --filter "name=craftshake-backend" --format '{{.Names}}' | grep -q "craftshake-backend"; then
+             docker stop craftshake-backend
+             docker rm craftshake-backend
+          fi
+          if docker ps -a --filter "name=craftshake-frontend" --format '{{.Names}}' | grep -q "craftshake-frontend"; then
+             docker stop craftshake-frontend
+             docker rm craftshake-frontend
+          fi
           
+          docker pull vicjgb/craftshake-backend
+          docker pull vicjgb/craftshake-frontend
+          
+          docker run --detach --name craftshake-frontend -p 3000:3000 vicjgb/craftshake-frontend:latest
+
 
     # - name: Pull on EC2 frontend
     #   uses: appleboy/ssh-action@v0.1.7
@@ -93,3 +94,4 @@ jobs:
     #       fi
     #       docker pull ${{ steps.login-ecr.outputs.registry }}/craftshake-frontend:latest
     #       docker run --detach --name craftshake-frontend -p 3000:3000 ${{ steps.login-ecr.outputs.registry }}/craftshake-frontend:latest
+    #       docker run --detach --name craftshake-backend -p 8000:8000 --env-file=.env  vicjgb/craftshake-backend:latest
