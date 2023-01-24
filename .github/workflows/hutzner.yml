@@ -45,13 +45,16 @@ jobs:
         DOCKER_FRONTEND_REPOSITORY:  craftshake-frontend 
       run: |
         cd Cocktails/ 
-        docker build craftshake-backend .
+        docker build -t craftshake-backend .
         docker tag craftshake-backend vicjgb/craftshake-backend:latest
         docker push vicjgb/craftshake-backend
         cd ../frontend/ 
-        docker build craftshake-frontend .
+        docker build -t craftshake-frontend .
         docker tag craftshake-frontend vicjgb/craftshake-frontend:latest
         docker push vicjgb/craftshake-backend
+
+
+
 
     # - name: Create .env file
     #   run: echo ${{ secrets.ENV_FILE }} > .env
