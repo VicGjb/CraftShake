@@ -39,18 +39,19 @@ jobs:
     #   uses: aws-actions/amazon-ecr-login@v1
       
 
-    # - name: Build, tag, and push image to Amazon ECR
-    #   env:
-    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-    #     ECR_BACKEND_REPOSITORY:  craftshake-backend
-    #     ECR_FRONTEND_REPOSITORY:  craftshake-frontend 
-    #   run: |
-    #     cd Cocktails/ 
-    #     docker build -t ${{ steps.login-ecr.outputs.registry }}/craftshake-backend:latest .
-    #     docker push ${{ steps.login-ecr.outputs.registry }}/craftshake-backend:latest
-    #     cd ../frontend/ 
-    #     docker build -t ${{ steps.login-ecr.outputs.registry }}/craftshake-frontend:latest .
-    #     docker push ${{ steps.login-ecr.outputs.registry }}/craftshake-frontend:latest
+    - name: Build, tag, and push image to DockerHub
+      env:
+        DOCKER_BACKEND_REPOSITORY:  craftshake-backend
+        DOCKER_FRONTEND_REPOSITORY:  craftshake-frontend 
+      run: |
+        cd Cocktails/ 
+        docker build craftshake-backend:latest .
+        docker tag craftshake-backend vicjgb/craftshake-backend:latest
+        docker push vicjgb/craftshake-backend
+        cd ../frontend/ 
+        docker build craftshake-frontend:latest .
+        docker tag craftshake-frontend vicjgb/craftshake-frontend:latest
+        docker push vicjgb/craftshake-backend
 
     # - name: Create .env file
     #   run: echo ${{ secrets.ENV_FILE }} > .env
