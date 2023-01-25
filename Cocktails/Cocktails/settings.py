@@ -15,7 +15,8 @@ from datetime import timedelta
 # from .secret_config import DB,AWS_S3
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 SETTINGS_PATH =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -195,12 +196,12 @@ AWS_QUERYSTRING_AUTH  = False
 STATICFILES_FINDERS = [
     'compressor.finders.CompressorFinder',
 ]
-STATIC_URL = 'django/static/'
-STATIC_ROOT= '/var/www/static'
-STATIC_DIR=os.path.join(BASE_DIR, 'static/files')
-STATICFILES_DIRS=['static/files',]
+STATIC_URL = '/static/'
+STATIC_ROOT=os.path.join(BASE_DIR, 'static')
+# STATIC_DIR=os.path.join(BASE_DIR, 'static/files')
+STATICFILES_DIRS=()
 
-MEDIA_URL = 'django/media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
