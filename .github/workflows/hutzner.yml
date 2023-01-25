@@ -49,7 +49,7 @@ jobs:
         path: |
           Cocktails/
           frontend/
-      key: ${{ runner.os }}
+      key: ${{ runner.os }}-{{ hashFiles('Cocktails/project/requirements.txt') }}-{{ hashFiles('frontend/project/package-lock.json') }}
       restore-keys: ${{ runner.os }}-
 
 
