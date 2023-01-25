@@ -198,7 +198,7 @@ STATICFILES_FINDERS = [
 STATIC_URL = 'django/static/'
 STATIC_ROOT= '/var/www/static'
 STATIC_DIR=os.path.join(BASE_DIR, 'static/files')
-STATICFILES_DIRS='static/files'
+STATICFILES_DIRS=['static/files',]
 
 MEDIA_URL = 'django/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
