@@ -47,7 +47,7 @@ export function PlaceList(){
         return(
             <div className="place_list_wrapper">
                 <div className="greetings">
-                    Hello dear, {user.username}!
+                    Hello, {user.username}!
                 </div>
 
                 <div className="mobile_content">
