@@ -6,6 +6,7 @@ import { PhotoUploader } from "../../PhotoUploader";
 import {ReactComponent as CloseIcon} from "../../../svg/close_icon.svg"
 
 export function UploadOrderPhotoPopup({upload_photo_active, setUploadPhotoActive}){
+    
     let network_manager = new NetworkManager()
     let orderDetaileContext = useOrderItemListContext()
     let orderId = orderDetaileContext.getOrderContext.id
