@@ -2,7 +2,6 @@ import React from "react";
 import { NetworkManager } from "../../../components/network_manager";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
 import { RegularButton } from "../../../components/buttons/regular_button";
-import { useState } from "react";
 import { PhotoUploader } from "../../PhotoUploader";
 import {ReactComponent as CloseIcon} from "../../../svg/close_icon.svg"
 
