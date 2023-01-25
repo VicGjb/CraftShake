@@ -21,17 +21,18 @@ jobs:
     - name: Cache dependencies
       id: cache-deps-backend
       uses: actions/cache@v2
-        
       with:
-        env: BACKEND_CACHE
         path: Cocktails/
+        key: ${{ runner.os }}-backend-{{ hashFiles('Cocktails/requirements.txt') }}
+        restore-keys: ${{ runner.os }}-backend-{{ hashFiles('Cocktails/requirements.txt') }}
 
     - name: Cache dependencies
       id: cache-deps-frontend
       uses: actions/cache@v2
       with:
-        env: FRONTEND_CACHE
         path: frontend/
+        key: ${{ runner.os }}-frontend-{{ hashFiles('frontend/cocktails/package-lock.json') }}
+        restore-keys: ${{ runner.os }}-frontend-{{ hashFiles('frontend/cocktails/package-lock.json') }}
 
     - name: Login to DockerHub
       env:
