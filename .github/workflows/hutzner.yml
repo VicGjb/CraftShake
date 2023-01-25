@@ -42,6 +42,17 @@ jobs:
         docker tag craftshake-frontend vicjgb/craftshake-frontend:latest
         docker push vicjgb/craftshake-frontend
 
+    - name: Cache dependencies
+      id: cache-deps
+      uses: actions/cache@v2
+      with:
+        path: |
+          Cocktails/
+          frontend/cocktails
+      key: ${{ runner.os }}-{{ hashFiles('Cocktails/requirements.txt') }}-{{ hashFiles('frontend/package-lock.json') }}
+      restore-keys: ${{ runner.os }}-
+
+
     - name: Create .env file
       run: echo ${{ secrets.ENV_FILE }} > .env
     
