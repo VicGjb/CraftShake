@@ -21,25 +21,23 @@ jobs:
     - name: Cache dependencies
       id: cache-deps-backend
       uses: actions/cache@v2
+        
       with:
+        env: BACKEND_CACHE
         path: Cocktails/
-        key: ${{ runner.os }}-backend-{{ hashFiles('Cocktails/requirements.txt') }}
-        restore-keys: ${{ runner.os }}-backend-
 
     - name: Cache dependencies
       id: cache-deps-frontend
       uses: actions/cache@v2
       with:
+        env: FRONTEND_CACHE
         path: frontend/
-        key: ${{ runner.os }}-frontend-{{ hashFiles('frontend/cocktails/package-lock.json') }}
-        restore-keys: ${{ runner.os }}-frontend-
 
     - name: Login to DockerHub
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
-
 
 
     - name: Build, tag, and push image to DockerHub
@@ -55,9 +53,6 @@ jobs:
         docker build -t craftshake-frontend .
         docker tag craftshake-frontend vicjgb/craftshake-frontend:latest
         docker push vicjgb/craftshake-frontend
-
-
-
 
     - name: Create .env file
       run: echo ${{ secrets.ENV_FILE }} > .env
