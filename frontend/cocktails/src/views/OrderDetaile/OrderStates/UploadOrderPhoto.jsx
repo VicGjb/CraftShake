@@ -17,7 +17,7 @@ export function UploadOrderPhotoPopup({upload_photo_active, setUploadPhotoActive
         network_manager.set_order_delivered(orderId, uploadData)
           .then(response => {
             console.log(`Success`,response);
-            setUploadPhotoActive(false)
+            orderDetaileContext.setUploadPhotoActive(false)
             orderDetaileContext.setOrderContext(response)
           })
           .catch((err) => {
