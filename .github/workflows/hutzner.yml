@@ -1,4 +1,4 @@
-name: Deploy to ECR
+name: Deploy to Hutzner
 
 on:
  
@@ -26,18 +26,7 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USERNAME} --password-stdin
 
-    # - name: Configure AWS credentials
-    #   uses: aws-actions/configure-aws-credentials@v1
-    #   with:
-    #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     aws-region: eu-central-1
 
-    # - name: Login to Amazon ECR
-
-    #   id: login-ecr
-    #   uses: aws-actions/amazon-ecr-login@v1
-      
 
     - name: Build, tag, and push image to DockerHub
       env:
@@ -51,7 +40,7 @@ jobs:
         cd ../frontend/ 
         docker build -t craftshake-frontend .
         docker tag craftshake-frontend vicjgb/craftshake-frontend:latest
-        docker push vicjgb/craftshake-backend
+        docker push vicjgb/craftshake-frontend
 
     - name: Create .env file
       run: echo ${{ secrets.ENV_FILE }} > .env
@@ -77,21 +66,3 @@ jobs:
           
           docker run --detach --name craftshake-frontend -p 3000:3000 vicjgb/craftshake-frontend:latest
           docker run --detach --name craftshake-backend -p 8000:8000 --env-file=.env  vicjgb/craftshake-backend:latest
-
-    # - name: Pull on EC2 frontend
-    #   uses: appleboy/ssh-action@v0.1.7
-    #   env:
-    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-    #     ECR_BACKEND_REPOSITORY:  craftshake-frontend
-    #   with:
-    #     host: ${{ secrets.EC2_FRONTEND_HOST }}
-    #     username: ${{ secrets.EC2_USERNAME }}
-    #     key: ${{ secrets.EC2_FRONTEND_PRIVATE_KEY }}
-    #     script: |
-    #       if docker ps -a --filter "name=craftshake-frontend" --format '{{.Names}}' | grep -q "craftshake-frontend"; then
-    #          docker stop craftshake-frontend
-    #          docker rm craftshake-frontend
-    #       fi
-    #       docker pull ${{ steps.login-ecr.outputs.registry }}/craftshake-frontend:latest
-    #       docker run --detach --name craftshake-frontend -p 3000:3000 ${{ steps.login-ecr.outputs.registry }}/craftshake-frontend:latest
-    #       docker run --detach --name craftshake-backend -p 8000:8000 --env-file=.env  vicjgb/craftshake-backend:latest
