@@ -47,8 +47,8 @@ jobs:
       uses: actions/cache@v2
       with:
         path: |
-          Cocktails/project
-          frontend/project
+          Cocktails/project/
+          frontend/project/
       key: ${{ runner.os }}-{{ hashFiles('Cocktails/project/requirements.txt') }}-{{ hashFiles('frontend/project/package-lock.json') }}
       restore-keys: ${{ runner.os }}-
 
