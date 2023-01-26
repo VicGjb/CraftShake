@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
-# from .secret_config import DB,AWS_S3
+# from dotenv import load_dotenv
+# load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 SETTINGS_PATH =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -140,15 +141,6 @@ DATABASES = {
         'HOST': os.environ.get('POSTGRES_URL'),
         'PORT': '5432',
   }
-
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': DB['DATABASE_NAME'],
-#         'USER': DB['USER'],
-#         'PASSWORD': DB['PASSWORD'],
-#         'HOST': DB['HOST'],
-#         'PORT': '5432',
-#   }
     
 }
 
