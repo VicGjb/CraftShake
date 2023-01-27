@@ -74,8 +74,8 @@ jobs:
              docker rm craftshake-frontend
           fi
           
-          docker pull vicjgb/craftshake-backend
-          docker pull vicjgb/craftshake-frontend
+          docker pull vicjgb/craftshake-backend:latest
+          docker pull vicjgb/craftshake-frontend:latest
           
           docker run --detach --name craftshake-frontend -p 3000:3000 vicjgb/craftshake-frontend:latest
           docker run --detach --name craftshake-backend -p 8000:8000 --env-file=.env  vicjgb/craftshake-backend:latest
