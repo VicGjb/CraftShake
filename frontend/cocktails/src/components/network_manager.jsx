@@ -3,7 +3,7 @@ import axios from 'axios';
 // let baseURL = 'http://127.0.0.1:8000/api/';
 // let baseURL = 'https://api.craft-shake.com:8000/api/';
 // let baseURL = 'https://157.90.158.95:8000/api/';
-let baseURL = '/api/';
+// let baseURL = '/api/';
 export class NetworkManager{
 	
 	constructor(
@@ -12,7 +12,7 @@ export class NetworkManager{
 		this.refresh_token = localStorage.getItem('refresh_token')
 		this.axiosInstance = axios.create({
 			// baseURL: 'http://127.0.0.1:8000/api/',
-			baseURL: '/api/',
+			baseURL: '/api',
 			// baseURL: 'http://api.craft-shake.com:8000/api/',
 			timeout: 5000,
 			headers: {
