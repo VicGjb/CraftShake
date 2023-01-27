@@ -38,5 +38,3 @@ services:
         - ./Cocktails:/app
       depends_on:
         - database
-
-  reverse
