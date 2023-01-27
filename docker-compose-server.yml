@@ -13,6 +13,7 @@ services:
       - ./nginx/conf/:/etc/nginx/conf.d/:ro
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
+      - static_volume:/backend/static
     
   certbot:
     container_name: certbot
@@ -43,4 +44,15 @@ services:
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         POSTGRES_USER: ${POSTGRES_USER}
         POSTGRES_DB:  ${POSTGRES_DB}
+      volumes:
+        - static_volume:/usr/local/lib/python3.10/site-packages/django/contrib/admin/static
 
+  debug:
+    image: praqma/network-multitool
+    container_name: debug
+    hostname: debug
+    tty: true
+
+
+volumes:
+  static_volume:

@@ -45,6 +45,8 @@ ALLOWED_HOSTS = [
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
 # Application definition
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -102,6 +104,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://157.90.158.95',
     'http://static.95.158.90.157.clients.your-server.de:3000',
     'https://craft-shake.com',
+    'https://django.craft-shake.com'
 ]
 
 ROOT_URLCONF = 'Cocktails.urls'
@@ -194,6 +197,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 STATIC_DIR=os.path.join(BASE_DIR, 'static/files')
 STATICFILES_DIRS=[STATIC_DIR]
+
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
