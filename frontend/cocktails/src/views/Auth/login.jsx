@@ -119,7 +119,7 @@ export function SignIn() {
                 {({errors, touched, validateForm})=>(
                     <Form>
                         <div className='from_row'>
-                            <div className='input_lable'>Username</div>
+                            <div className='input_lable'>Username test</div>
                             <div className="field-container">
                                 <Field
                                 required    
