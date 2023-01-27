@@ -12,7 +12,8 @@ RUN echo 'File outside conteiner'
 RUN ls
 COPY ./cocktails/public/ /project/public/ 
 RUN echo 'File inside Docker'
-RUN head /project/src/components/network_manager.jsx
+
 COPY ./cocktails/src/ /project/src/
 RUN ls
+RUN head /project/src/components/network_manager.jsx
 ENTRYPOINT ["yarn", "start"]
