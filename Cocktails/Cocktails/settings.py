@@ -45,7 +45,18 @@ ALLOWED_HOSTS = [
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
 # Application definition
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+CSRF_TRUSTED_ORIGINS = (
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://3.125.167.18:8000',
+    'http://52.57.81.8:3000',
+    'https://craft-shake.com:3000',
+    'http://157.90.158.95:3000',
+    'http://157.90.158.95',
+    'http://static.95.158.90.157.clients.your-server.de:3000',
+    'https://craft-shake.com',
+    'https://django.craft-shake.com'
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
