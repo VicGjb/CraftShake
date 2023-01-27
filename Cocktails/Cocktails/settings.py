@@ -38,7 +38,8 @@ ALLOWED_HOSTS = [
     'api.craft-shake.com',
     '157.90.158.95',
     'static.95.158.90.157.clients.your-server.de',
-    'craft-shake.com'
+    'craft-shake.com',
+    'django.craft-shake.com',
 ]
 
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
