@@ -6,11 +6,13 @@ export function Logout() {
 	let navigate = useNavigate();
     let network_manager = new NetworkManager()
     function Logout_1(){
-        let response = network_manager.LogOut()
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
-        window.location.href = '/login/'
-
+        network_manager.LogOut()
+        .then(response => {
+            console.log(response)
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('refresh_token');
+            window.location.href = '/login/' 
+        })
     }
 	
     return (
