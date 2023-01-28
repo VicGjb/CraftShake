@@ -46,6 +46,8 @@ services:
         POSTGRES_DB:  ${POSTGRES_DB}
         TELEGRAM_BOT_NAME: ${TELEGRAM_BOT_NAME}
         TELEGRAM_BOT_KEY: ${TELEGRAM_BOT_KEY}
+        GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+        GOOGLE_SECRET: ${GOOGLE_SECRET}
       volumes:
         - static_volume:/usr/local/lib/python3.10/site-packages/django/contrib/admin/static
 
