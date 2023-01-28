@@ -594,7 +594,7 @@ export class NetworkManager{
 		let url = new URL(window.location.href)
 		let host = url.host
 		// console.log('host',host)
-		let result = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://${host}/get_code&prompt=consent&response_type=code&client_id=407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline`
+		let result = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=https://${host}/get_code&prompt=consent&response_type=code&client_id=407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline`
 		return result
 	}
 
