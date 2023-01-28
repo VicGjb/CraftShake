@@ -19,17 +19,31 @@ class UserRole(models.Model):
 
 
 class CustomUser(AbstractUser):
+    COUNTER = 'counter'
+    CUSTOMER = 'customer'
+    USER_ROLES = (
+        (COUNTER, 'Counter'),
+        (CUSTOMER,'Customer'),
+        )
+
     email = models.EmailField(
         unique=True,
     )
-    role = models.ForeignKey(
-        UserRole,
-        related_name='user',
-        verbose_name='role',
+    role = models.CharField(
+        max_length=20,
+        choices=USER_ROLES,
+        default=CUSTOMER,
         blank=True,
-        null=True,
-        on_delete=SET_NULL,
+        null=True
     )
+    # role = models.ForeignKey(
+    #     UserRole,
+    #     related_name='user',
+    #     verbose_name='role',
+    #     blank=True,
+    #     null=True,
+    #     on_delete=SET_NULL,
+    # )
     place = models.ForeignKey(
         Place,
         on_delete=SET_NULL,
