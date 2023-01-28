@@ -22,7 +22,7 @@ export function Auth(){
         axios
             .post(`http://127.0.0.1:8000/auth/token/login/`,form)
             .then(response=>(
-                console.log('Hui',response)
+                console.log('login',response)
             ))
             .then(
               navigate(`/placeList`)  

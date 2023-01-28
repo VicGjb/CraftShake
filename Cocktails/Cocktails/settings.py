@@ -47,7 +47,6 @@ SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_TRUSTED_ORIGINS = (
-    # 'http://localhost:3000',
     # 'http://127.0.0.1:3000',
     # 'http://3.125.167.18:8000',
     # 'http://52.57.81.8:3000',

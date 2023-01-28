@@ -8,6 +8,7 @@ bot = telebot.TeleBot(token)
 counters_id_list = [197634497,]
 
 def telegram_send_massege_new_order(order, order_items):
+    print(f'token {token}') # remove IT!!!!!
     place = Place.objects.get(id=order.place_id).name
     text = f'You have new order #{order.id} from {place}:\n'
     for item in order_items:
