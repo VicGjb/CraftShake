@@ -47,7 +47,7 @@ export function OrderPositions(){
             <div className="order_info">   
                 {renderAddCoctailButton()}
                 <div className="order_detaile_total_monitor">  
-                    Total: {calculateTotal()} ILS
+                    Total: {calculateTotal()} ₪
                 </div>
             </div>     
             <div className="order_positions_table">
@@ -62,7 +62,7 @@ export function OrderPositions(){
             </div>
             <div className="total_mobile_wrapper">
                 <div className="order_detaile_total_mobile">  
-                    Total: {calculateTotal()} ILS
+                    Total: {calculateTotal()} ₪
                 </div>
             </div>
         <PopupAddCocktailsMenu add_cicktails_active={add_cocktails_active} setAdd_cocktails_active={setAdd_cocktails_active}/>  

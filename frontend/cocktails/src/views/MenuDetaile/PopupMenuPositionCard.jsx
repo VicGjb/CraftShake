@@ -33,7 +33,7 @@ export function PopupMenuPositionCard({
                         </div>
                         <div className="menu_position_price">
                             <span>Price: </span>
-                            <span>{menuPosition.sale_price} ILS </span>
+                            <span>{menuPosition.sale_price} ₪ </span>
                         </div>
                     </div>
                 </div>

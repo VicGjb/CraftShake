@@ -178,7 +178,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                                 value={form.sale_price}
                                 onChange={changeHandler}
                             />
-                             <span>ILS</span>
+                             <span>₪</span>
                         </div>
                     </div>
                     <div type="submit"  className='add_menu_position_submit_btn'>
