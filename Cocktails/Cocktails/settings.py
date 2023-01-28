@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-975c=$-mw0-jv#)j%erj(-^dtosa_kbf&^e@w+d+2$0^!!nn4_
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
+    # '127.0.0.1',
     # 'ec2-3-125-167-18.eu-central-1.compute.amazonaws.com',
     # os.environ.get('ALLOWED_HOSTS'),
     # '3.125.167.18',
@@ -44,19 +44,19 @@ ALLOWED_HOSTS = [
 
 SECURE_REFERRER_POLICY = "no-referrer-when-downgrade"
 # Application definition
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# CSRF_TRUSTED_ORIGINS = (
-#     # 'http://127.0.0.1:3000',
-#     # 'http://3.125.167.18:8000',
-#     # 'http://52.57.81.8:3000',
-#     # 'https://craft-shake.com:3000',
-#     # 'http://157.90.158.95:3000',
-#     # 'http://157.90.158.95',
-#     # 'http://static.95.158.90.157.clients.your-server.de:3000',
-#     'https://craft-shake.com',
-#     'https://django.craft-shake.com',
-# )
+CSRF_TRUSTED_ORIGINS = (
+    # 'http://127.0.0.1:3000',
+    # 'http://3.125.167.18:8000',
+    # 'http://52.57.81.8:3000',
+    # 'https://craft-shake.com:3000',
+    # 'http://157.90.158.95:3000',
+    # 'http://157.90.158.95',
+    # 'http://static.95.158.90.157.clients.your-server.de:3000',
+    'https://craft-shake.com',
+    'https://django.craft-shake.com',
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
