@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth import logout
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import (
@@ -41,6 +42,7 @@ class BlacklistTokenUpdateView(APIView):
             token = RefreshToken(refresh_token)
             token.blacklist()
             request.session.clear()
+            logout(request=request)
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
