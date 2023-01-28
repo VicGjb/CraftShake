@@ -57,7 +57,7 @@ CSRF_TRUSTED_ORIGINS = (
     'https://craft-shake.com',
     'https://django.craft-shake.com',
 )
-
+CSRF_COOKIE_DOMAIN='craft-shake.com'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
