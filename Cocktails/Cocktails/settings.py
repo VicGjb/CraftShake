@@ -57,7 +57,6 @@ CSRF_TRUSTED_ORIGINS = (
     # 'http://static.95.158.90.157.clients.your-server.de:3000',
     'https://craft-shake.com',
     'https://django.craft-shake.com',
-    
 )
 
 INSTALLED_APPS = [
