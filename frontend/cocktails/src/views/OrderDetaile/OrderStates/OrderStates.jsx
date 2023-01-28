@@ -93,9 +93,9 @@ export function OrderStates(){
     }
 
 
-    if (user.role_name==='counter'){
+    if (user.role==='counter'){
        return( renderStateButton(order))
-    }else if(user.role_name === 'customer'){
+    }else if(user.role === 'customer'){
        return ( renderStateLabel(order))
     }
 }

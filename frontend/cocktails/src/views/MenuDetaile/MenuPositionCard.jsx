@@ -29,7 +29,7 @@ export function MenuPositionCard({menuPosition}){
             setDelete_active(false)
     }
     function renderSubMenu(){
-        if(user.role_name==='counter'){
+        if(user.role==='counter'){
             return(
                 <div className="menu_position_card_service_menu"  onClick={()=>{setSubMenu(true)}}>
                     <div className="service_menu_dot"></div>

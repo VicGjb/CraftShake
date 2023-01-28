@@ -12,7 +12,7 @@ export function SideBar(){
     let user = mainContext.getUserFromMainContext()
 
 
-    if (user.role_name==='counter'){  
+    if (user.role==='counter'){  
 
         return(
             <div className="side_bar_content">

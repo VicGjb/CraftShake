@@ -50,7 +50,7 @@ export function InvoiceDetaileContent(){
                 })
         }
 
-        if(user.role_name==='counter'){
+        if(user.role==='counter'){
             if (invoice.is_vat){
                 console.log('VAT',invoiceDetaileContext.getInvoice.is_vat)
                 return(

@@ -42,7 +42,7 @@ export function SignIn() {
         console.log('Check user in login',main_context.getUserFromMainContext())
         if(user){
             console.log('i have user in login',user)
-            if (user.role_name == 'counter'){
+            if (user.role == 'counter'){
                 console.log('go to placeList')  
                 navigate(`/placeList/`)
                 return;

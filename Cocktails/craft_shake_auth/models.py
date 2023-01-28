@@ -54,6 +54,3 @@ class CustomUser(AbstractUser):
 
     def get_place(self) ->object:
         return
-
-    def get_role_name(self) ->str:
-        return self.role.name

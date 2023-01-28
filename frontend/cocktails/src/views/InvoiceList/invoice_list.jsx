@@ -34,7 +34,7 @@ export function InvoiceList(){
     },[placeId])
 
     function renderAddInvoiceButton(){
-        if (user.role_name==='counter'){
+        if (user.role==='counter'){
             return(
                 <div className="service_row_button_wrapper add" onClick={()=>{setAdd_invoice_active(true)}}>
                     <AddButton  lable={'Add invoice'} />  

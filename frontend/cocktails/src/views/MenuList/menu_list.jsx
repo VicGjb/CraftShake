@@ -27,7 +27,7 @@ export function MenuList(){
         })},[placeId])
 
     function renderAddMenuButton(){
-        if(user.role_name=='counter'){
+        if(user.role=='counter'){
             return(
                 <div className="service_row_button_wrapper add" onClick={()=>[setAdd_menu_active(true)]}>
                         <AddButton  lable={'Add menu'} />   

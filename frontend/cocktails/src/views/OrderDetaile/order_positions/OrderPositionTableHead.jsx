@@ -11,7 +11,7 @@ export function OrderPositionTableHead(){
 
     function renderRemoeColumn(){
         if(order){
-            if(order.open_to_customer || user.role_name=='counter'){
+            if(order.open_to_customer || user.role=='counter'){
                 return(
                     <div className="order_position_table_head_slot remove"></div>
                 )

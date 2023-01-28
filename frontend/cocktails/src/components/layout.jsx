@@ -81,7 +81,7 @@ export const Layout = () =>{
         }else if(refresh_token){
             if(user){
                 console.log('i have user in layout',user)
-                if(user.role_name =='counter'){
+                if(user.role =='counter'){
                     return(
                         renderCounterView()
                     )

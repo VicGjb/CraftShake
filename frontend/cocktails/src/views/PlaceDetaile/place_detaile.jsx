@@ -56,7 +56,7 @@ export function PlaceDetaile(){
     }
 
     function PlaceDetileView(){
-        if(user.role_name === 'counter'){
+        if(user.role === 'counter'){
             return(
                 <div className="place_detile_main_page_wrapper">
                     <div className="mobile_back_btn">
@@ -135,7 +135,7 @@ export function PlaceDetaile(){
                     <PopupDelete subject={`palce ${place.name}`}  delete_active={delete_active} setDelete_active={setDelete_active} func={DeletePlace}/>
                 </div>
             )
-        }else if(user.role_name ==='customer'){
+        }else if(user.role ==='customer'){
             return(
                 <div className="place_detile_main_page_wrapper">
                         {/* <div className="greetings_customer">

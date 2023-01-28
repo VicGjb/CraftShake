@@ -12,7 +12,7 @@ export function MenuCard({menu}){
     let user =  mainContext.getUserFromMainContext()
 
     function renderCurrentButton(){
-        if(user.role_name==='counter'){
+        if(user.role==='counter'){
             return(
                 <CurrentMenuChackBox menu={menu}/>
             )
@@ -24,7 +24,7 @@ export function MenuCard({menu}){
         }
     }
 
-    if (user.role_name==='counter'){
+    if (user.role==='counter'){
         return(
             <div className="menu_card_wrapper">
                 <Link to={`/${placeName}/${placeId}/menus/${menu.id}`} className='link_to_menu_detile'></Link>

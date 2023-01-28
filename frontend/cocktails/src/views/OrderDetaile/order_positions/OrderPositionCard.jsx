@@ -16,7 +16,7 @@ export function OrderPositionCard({order_item}){
     }
     function renderRemoveButton(){
         if (order){
-            if(order.open_to_customer || user.role_name ==='counter'){
+            if(order.open_to_customer || user.role ==='counter'){
                 return(
                     <div className="order_position_card_slot remove"> <button className="cross_del_btn" onClick={DeleteItem} ><CrossDel className='icon_cross_del_btn'/></button></div>
                 )

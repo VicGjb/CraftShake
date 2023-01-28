@@ -16,7 +16,7 @@ export function MainTitle(){
         mainContext.setSideMenuBurgerActiv(!mainContext.getSideMenuBurgerActiv)
     }
     function renderBurgerButton(){
-        if (user.role_name==='counter'){
+        if (user.role==='counter'){
             return(
                 <div>
                     <div className={mainContext.getSideMenuBurgerActiv ? 'burger active': 'burger' } onClick={openBurger}>

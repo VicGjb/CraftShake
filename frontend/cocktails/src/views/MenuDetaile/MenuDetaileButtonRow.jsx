@@ -50,7 +50,7 @@ export function DeleteMenuButton(){
                 throw error;
             });    
     }
-    if(user.role_name==='counter'){
+    if(user.role==='counter'){
         return(
             <div className="delete_menu_button_wrapper">
                 <div className="delete_menu_button" onClick={()=>{setDelete_active(true)}}>
@@ -72,7 +72,7 @@ export function AddMenuPosition(){
     let mainContext = useManeContext()
     let user = mainContext.getUserFromMainContext()
 
-    if(user.role_name==='counter'){
+    if(user.role==='counter'){
         return(
             <div>
                 <div className="menu_detaile_add_position_button" onClick={()=>setAdd_menu_position_active(true)}>

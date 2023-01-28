@@ -94,7 +94,7 @@ export function OrderDetaileContent({orderId, menus}){
 
     function renderMenuTable(){
         if (order){
-            if (order.open_to_customer || user.role_name==='counter'){
+            if (order.open_to_customer || user.role==='counter'){
                 return(
                     <div className="menu_positions_table">
                             {menus.map(menu=>(
