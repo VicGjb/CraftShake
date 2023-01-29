@@ -83,6 +83,7 @@ input{
     border-bottom: 1px solid #909090;
     color: #909090;
     padding: 0;
+    width: 135pt;
 }
 
 .submit_button_wraper_login{
@@ -161,7 +162,7 @@ input{
         // align-items: center;
         input{
             font-size: 24px;
-            max-width: 135pt;
+            width: 135pt;
         }
     }
     .input_lable{
