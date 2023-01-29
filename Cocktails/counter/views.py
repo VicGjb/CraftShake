@@ -5,6 +5,12 @@ from datetime import datetime
 from .service import ProductFilter, Rate
 from Cocktails.aws_manager import remove_file_from_aws_3
 
+from django.db import models
+from PIL import Image
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from io import BytesIO
+import sys
+
 # import pdfkit
 from rest_framework.views import APIView
 from rest_framework import (
@@ -678,9 +684,16 @@ class OrderStatesView(viewsets.ModelViewSet):
         photo = OrderUploadPhotoSerializer(data=request.data)
         if photo.is_valid and request.data['photo']:
             filename_parts = request.data["photo"].name.split('.')
-            filename =f'{order.id}-'+ f'{order.place}-'+f'{order.date}'+'.'+filename_parts[1]
+            filename = f'{order.id}-'+ f'{order.place}-'+f'{order.date}'+'.'+filename_parts[1]
             request.data["photo"].name = filename
-            order.photo = request.data["photo"]
+            print(f'requestPhoto {request.data["photo"]}')
+            temp_image = Image.open(request.data['photo'])
+            output = BytesIO()
+            temp_image.resize((200, 200))
+            temp_image.save(output, format='JPEG', quality=80)
+            print(f'TEMP IMAGE {temp_image}')
+            order.photo = InMemoryUploadedFile(output, 'ImageField', filename, 'image/jpeg',  sys.getsizeof(output), None)
+            print(f'ORDER PHOTO {order.photo}')
             order.delivered()
             order.save()
             data = OrderViewSerializer(order)

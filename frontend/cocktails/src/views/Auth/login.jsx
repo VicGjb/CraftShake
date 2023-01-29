@@ -61,7 +61,6 @@ export function SignIn() {
                         console.log('Seting user in login')
                 })
             }
-
         }
         
         if (!externalPopup) {

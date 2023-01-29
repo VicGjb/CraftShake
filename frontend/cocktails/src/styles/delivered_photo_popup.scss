@@ -14,6 +14,7 @@
 .popup_delivered_photo_close_button{
     width: 20px;
     height: 20px;
+    cursor: pointer;
     .close_button_icon path{
         fill: #909090;
     }
@@ -21,6 +22,11 @@
     .close_button_icon{
         width: 100%;
         height: 100%;
+    }
+}
+.popup_delivered_photo_close_button:hover{
+    .close_button_icon path{
+        fill: #FFBF1C;
     }
 }
 

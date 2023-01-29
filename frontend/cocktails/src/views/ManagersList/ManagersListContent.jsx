@@ -7,6 +7,7 @@ import { ManagerCard } from "./ManagerCard";
 import { ManagerListButtonRow } from "./ManagerListButtonRow";
 import { useManagersContext } from "./ManagersContext";
 import { PopupManagerCard } from "./PopupManagerCard";
+import { Loading } from "../../components/loader";
 import '../../styles/managers_list.scss'
 
 export function ManagersListContent(){
@@ -48,7 +49,7 @@ export function ManagersListContent(){
             return(ManagerListView())
         }else{
             return(
-                <div>Loaded</div>
+                <Loading/>
             )
         }
     }

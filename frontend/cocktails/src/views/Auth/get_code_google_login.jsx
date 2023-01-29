@@ -7,7 +7,6 @@ export function GetCodeGoogleLogin(){
     let search = useLocation().search;
     let code = new URLSearchParams(search).get('code');
     
-
     useEffect(()=>{
         console.log("code",code)
         network_manager.GooglePain(code)
@@ -15,7 +14,6 @@ export function GetCodeGoogleLogin(){
             console.log('RESPONSE',response)
             console.log('access_token',localStorage.getItem('access_token'))
             console.log('refresh_token',localStorage.getItem('refresh_token'))
-            // window.location.href = '/placeList/'
             window.close()
         })
     })

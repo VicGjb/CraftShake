@@ -48,6 +48,9 @@ services:
         TELEGRAM_BOT_KEY: ${TELEGRAM_BOT_KEY}
         GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
         GOOGLE_SECRET: ${GOOGLE_SECRET}
+        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+        AWS_STORAGE_BUCKET_NAME: ${AWS_STORAGE_BUCKET_NAME}
       volumes:
         - static_volume:/usr/local/lib/python3.10/site-packages/django/contrib/admin/static
 
