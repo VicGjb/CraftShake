@@ -37,7 +37,7 @@ export function MenuPositionRow({position}){
             let item_price = amount_volume/Number(menu_position.volume) * Number(menu_position.sale_price)
             form.item_price = item_price.toFixed(2)
             if(form.quantity>0){
-                console.log('Hey',form)
+                console.log('form',form)
                 order_detile_context.addItem(form)
                 setForm({...form, ['uuid']:uuidv4()})
             }

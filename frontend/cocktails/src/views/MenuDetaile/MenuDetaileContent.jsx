@@ -53,12 +53,13 @@ export function MenuDetaileContent(){
         return(
            
                 <div className="menu_detaile_wrapper">
+                    <MenuDetaileButtonRow/> 
                     <div className="invoice_detaile_title">
                         <div className="invoice_detaile_content_date">
                             {menu.name}
                         </div>
                     </div>
-                    <MenuDetaileButtonRow/>      
+                         
                     <div className="menu_detaile_menu_positions">
                         {menuDetaileContext.getMenuPositions.map(position=>(
                             <MenuPositionCard menuPosition={position} key={position.id}/>

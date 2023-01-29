@@ -230,8 +230,18 @@
     .invoice_detaile_wrapper{
         width: 90%;
     }
+
     .invoice_detaile_title{
         font-size: 22px;
+
+        flex-direction: column;
+        .invoice_detaile_title_id{
+            margin-right: 0px;
+            margin-bottom: 5px;
+        }
+        .invoice_detaile_content_date{
+            font-size: 18px;
+        }
     }
     .mobile_invoice_mnagers_buttons{
         font-size: 24px;
@@ -265,7 +275,16 @@
     .invoice_detaile_title{
         font-size: 20px;
         width: 100%;
+        flex-direction: column;
+        .invoice_detaile_title_id{
+            margin-right: 0px;
+            margin-bottom: 5px;
+        }
+        .invoice_detaile_content_date{
+            font-size: 16px;
+        }
     }
+    
     .pdf_icon_container{
         width: 45px;
         height: 45px;

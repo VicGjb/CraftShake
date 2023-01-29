@@ -26,8 +26,9 @@ export function PopupAddCocktailsMenu({add_cicktails_active, setAdd_cocktails_ac
     function renderMenu(menu){
         if(menu.is_current_menu){
             return(
-                <div key={menu.id} className='popup_add_cocktails_menus' onClick={openMenuPositions}>
-                    <NavLink className='menu_name_link' to={`menu/${menu.id}`}>
+                <div key={menu.id} className='popup_add_cocktails_menus' >
+
+                    <NavLink className='menu_name_link' to={`menu/${menu.id}`} onClick={openMenuPositions}>
                        <RegularButton lable={menu.name}/>
                     </NavLink>  
                 </div>
@@ -101,12 +102,10 @@ export function PopupAddCocktailsMenu({add_cicktails_active, setAdd_cocktails_ac
                             renderMenu(menu)
                         ))}      
                     </div> 
-                    
-                     
                 </div>
 
                 <div className="popup_footer">
-                    <div className={addBattonActive?'add_coctails_button active':'add_coctails_button'}onClick={addButton}><RegularButton lable={'Add Coctails'}/></div>
+                    <div className={addBattonActive?'add_coctails_button active':'add_coctails_button'}onClick={addButton}><RegularButton lable={'Add Cocktails'}/></div>
                 </div>
                 
                  

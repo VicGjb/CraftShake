@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { NetworkManager } from "../../../components/network_manager";
 import { MenuPositionRow } from "./menu_position_row";
-import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
+import { Loading } from "../../../components/loader";
 import { useParams } from "react-router-dom";
 
 
@@ -35,7 +35,7 @@ export function MenuPositions(){
             return MenuPositionView()
         }else{
             return(
-                <div>Lodaded</div>
+                <Loading/>
             )
         }
     }

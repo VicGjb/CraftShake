@@ -9,6 +9,7 @@ import { InvoiceCard } from "./InvoiceCard";
 import { InvoiceListTableHead } from "./InvoiceListTableHead";
 import { PopupFilters } from "../../components/PopupFilters";
 import { useManeContext } from "../../components/main_context";
+import { Loading } from "../../components/loader";
 import '../../styles/invoice_list.scss'
 
 
@@ -84,7 +85,7 @@ export function InvoiceList(){
             return(InvouceListView())
         }else{
             return(
-                <div>Loaded</div>
+                <Loading/>
             )
         }
     }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
 
 let MainContext = React.createContext();
 
@@ -8,8 +9,10 @@ export function useManeContext(){
 }
 
 export function MainContextProvider({children}){
+    let {placeName} = useParams();
+    let {placeId} = useParams();
     let [sideMenuBurgerActiv, setSideMenuBurgerActiv] = useState(false)
-    let [backFromCreateOrderUrl, setBackFromCreateOrderUrl]= useState('')
+    let [backFromCreateOrderUrl, setBackFromCreateOrderUrl]= useState(`/${placeName}/${placeId}/orders`)
     let [user, setUser] = useState();
     let [isLoggedIn, setIsLoggedIn] = useState();
     let [places, setPlaces] = useState([]);

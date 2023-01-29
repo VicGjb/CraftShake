@@ -88,7 +88,7 @@ export function InvoiceDetaileContent(){
                         Invoice: #{invoice.id}
                     </div>
                     <div className="invoice_detaile_content_date">
-                        {invoice.date} 
+                        {invoice.date.split('-').reverse().join('.')} 
                     </div>
                     <div className="pdf_icon_container" onClick={getPDF}>
                         <PdfIcon className='pdf_icon' /> 

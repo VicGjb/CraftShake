@@ -30,9 +30,7 @@ export function OrderDetaile(){
             )   
         }else{
             return(
-                <div>
-                    Loading
-                </div>
+                <Loading/>
             )
         }        
     }

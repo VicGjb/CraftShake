@@ -22,7 +22,7 @@ export function OrderDetaileContent({orderId, menus}){
     let network_manager =  new NetworkManager();
     let order = order_detaile_context.getOrderContext
     let date = new Date()
-    let dateNow = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}` 
+    let dateNow = `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}` 
     let [dateOrder, setDateOrder] = useState(dateNow);
     let [deliveredPhotoActive, setDeliveredPhotoActiv] = useState();
     
@@ -63,12 +63,11 @@ export function OrderDetaileContent({orderId, menus}){
                             className="date_input"
                             type='date'
                             name='date'
-                            defaultValue={`${dateNow}`}
+                            defaultValue={`${dateOrder}`}
                             onChange={dateChangeHendler}
                         />
                     </div>  
-                </div>
-                
+                </div>  
             </div>
         )
         }
