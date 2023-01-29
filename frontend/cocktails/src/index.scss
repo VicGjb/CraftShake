@@ -13,7 +13,9 @@ a:hover{text-decoration: none;}
 ul li{list-style: none;}
 img{vertical-align: top;}
 h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
-
+input{
+  border-radius: 0;
+}
 
 .quantity_num::-webkit-inner-spin-button,
 .quantity_num::-webkit-outer-spin-button {
