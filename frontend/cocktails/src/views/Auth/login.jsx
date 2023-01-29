@@ -69,7 +69,7 @@ export function SignIn() {
         }else{
         let timer = setInterval(() => {
             if(externalPopup.closed){
-                window.location.reload()
+                window.location.href('/')
             return;  
             }
             }, 500)

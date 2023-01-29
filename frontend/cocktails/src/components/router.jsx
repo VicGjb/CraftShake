@@ -22,13 +22,14 @@ import { AuthLayout } from "./auth_layout";
 import { GetCodeGoogleLogin } from "../views/Auth/get_code_google_login";
 import { SignIn } from "../views/Auth/login";
 import { PersonalAccount } from "../views_customer/personal_account";
+import { HomePage } from "../views/HomePage/HomePage";
 import { MainPage } from "../views/TestProps/MainPage";
 
 export function Routing(){
     return(
         <Router>
             <Routes>
-                <Route path="/" element={<MainContextProvider><Layout/></MainContextProvider>}>
+                <Route path="/" element={<MainContextProvider><Layout/><HomePage/></MainContextProvider>}>
                     <Route element={<AuthLayout/>}>
                             <Route path='placeList/*' element={<PlaceList/>}/>    
                             <Route path=':placeName/:placeId/*' element={<LayoutPlace/>}>
