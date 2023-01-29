@@ -121,6 +121,7 @@ export function SignIn() {
                             <div className='input_lable'>Username</div>
                             <div className="field-container">
                                 <Field
+                                className='input_login'
                                 required    
                                 id="username"
                                 name="username"
@@ -134,7 +135,7 @@ export function SignIn() {
                             <div className='input_lable' >Password</div>
                             <div className="field-container">
                                 <Field
-                                    className='input_form'
+                                    className='input_login'
                                     required
                                     name="password"
                                     label="Password"
