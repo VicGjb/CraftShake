@@ -29,7 +29,7 @@ export function Routing(){
     return(
         <Router>
             <Routes>
-                <Route path="/" element={<MainContextProvider><Layout/><HomePage/></MainContextProvider>}>
+                <Route path="" element={<MainContextProvider><Layout/></MainContextProvider>}>
                     <Route element={<AuthLayout/>}>
                             <Route path='placeList/*' element={<PlaceList/>}/>    
                             <Route path=':placeName/:placeId/*' element={<LayoutPlace/>}>
@@ -51,10 +51,11 @@ export function Routing(){
                             <Route path='main' element={<PlaceDetaile/>}/>
                         </Route>
                     </Route>    
+                    <Route path='/' element={<HomePage/>} />
                 </Route> 
                 <Route path='login' element={<MainContextProvider><SignIn/></MainContextProvider>}/> 
                 <Route path='test' element={<MainPage/>}/>
-
+                
                 <Route path='get_code' element={<GetCodeGoogleLogin/>}/>
             </Routes>
         </Router>

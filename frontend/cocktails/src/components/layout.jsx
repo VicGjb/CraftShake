@@ -103,6 +103,7 @@ export const Layout = () =>{
                 .catch(error=>{
                     console.log('error',error)
                     setFatalError(true)
+                    throw error;
                     // let fatalError = document.getElementById("fatal_error")
                     // fatalError.innerHTML = 'Sorry, the service is temporarily unavailable, we are already working on this problem, come back later...'
                 })
