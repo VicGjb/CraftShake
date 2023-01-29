@@ -21,7 +21,7 @@ export function ProductCard({product}){
                 <div className="product_description">{product.description}</div>
             </div>
             <div className="product_card_value_wrapper price">
-                <div>{product.cost_price}</div>
+                <div>{product.cost_price} ₪</div>
             </div>
         </div>
     )

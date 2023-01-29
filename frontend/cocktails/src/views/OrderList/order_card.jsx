@@ -27,7 +27,7 @@ export function OrderCard({order}){
                 {order.state}
             </div>
             <div className="order_card_slot total_price">
-                {order.total_price}
+                {order.total_price} ₪
             </div>
         </div>
     )

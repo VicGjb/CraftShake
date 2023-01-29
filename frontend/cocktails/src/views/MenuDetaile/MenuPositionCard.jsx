@@ -56,7 +56,7 @@ export function MenuPositionCard({menuPosition}){
                 </div>
                 <div className="menu_position_card_volume_price">
                     <div className="menu_position_card_slot volume">Volume: {Number(menuPosition.volume).toFixed(0)} ml </div>
-                    <div className="menu_position_card_slot price">Price: {menuPosition.sale_price} </div>
+                    <div className="menu_position_card_slot price">Price: {menuPosition.sale_price} ₪</div>
                 </div>
                 <div className={subMenu?'sub_menu_wrapper active':"sub_menu_wrapper"} onClick={()=>{setSubMenu(false)}}>
                     <div className="sub_menu_content">

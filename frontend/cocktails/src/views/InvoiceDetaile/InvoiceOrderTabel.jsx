@@ -15,7 +15,7 @@ export function InvoiceOrderTable({order}){
                <InvoiceOrderItemCard key={item.id} item={item}/> 
             ))}
             <div className="invoice_order_table_total">
-                <span>Total: </span><span>{order.total_price}</span>
+                <span>Total: </span><span>{order.total_price} ₪</span>
             </div>
         </div>
     )
@@ -36,7 +36,7 @@ export function InvoiceOrderItemCard({item}){
         <div className="invoice_order_item_card_wrapper">
             <div className="invoice_order_item_slot name">{item.name}</div>
             <div className="invoice_order_item_slot qnt">{item.quantity}</div>
-            <div className="invoice_order_item_slot price">{item.item_price}</div>
+            <div className="invoice_order_item_slot price">{item.item_price} ₪</div>
         </div>
     )
 }

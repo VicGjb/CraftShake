@@ -68,11 +68,11 @@ export function PopupFilters({
     return(
         <div className={filterActive ? 'popup_mobile_wrapper active' : 'popup_mobile_wrapper'} onClick={()=>{setFilterActive(false)}}>
             <div className="popup_mobile_content__filter_order" onClick={e => e.stopPropagation()}>  
-            <div className="popup_filter_sevice_button_wrapper">
-                <div className="popup_filter_close_button" onClick={()=>{setFilterActive(false)}}>
-                    <CloseIcon className='close_button_icon'/>
-                </div>  
-            </div>       
+                <div className="popup_filter_sevice_button_wrapper">
+                    <div className="popup_filter_close_button" onClick={()=>{setFilterActive(false)}}>
+                        <CloseIcon className='close_button_icon'/>
+                    </div>  
+                </div>       
                 
                 <div className="popup_title">
                     {renderTitle()}

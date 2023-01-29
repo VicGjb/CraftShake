@@ -75,7 +75,7 @@ export function SignIn() {
             }, 500)
         }    
       },
-      [externalPopup,user]
+      [externalPopup, user]
     )
 
 	function handleSubmit(form){
@@ -128,7 +128,7 @@ export function SignIn() {
                                 autoComplete="username"
                                 autoFocus
                                 />
-                                {errors.username && touched.username && <div className="field-error">{errors.username}</div>}
+                                {/* {errors.username && touched.username && <div className="field-error">{errors.username}</div>} */}
                             </div>
                         </div>
                         <div className='from_row'>
@@ -143,29 +143,29 @@ export function SignIn() {
                                     id="password"
                                     autoComplete="current-password"
                                 />
-                                {errors.password && touched.password && <div className="field-error">{errors.password}</div>}
+                                {/* {errors.password && touched.password && <div className="field-error">{errors.password}</div>} */}
                             </div>
                         </div>
                         <div className='submit_button_wraper_login'>
-                            <RegularButton lable={'Sing in'} type='submit'/>
+                            <RegularButton lable={'Login'} type='submit'/>
                         </div>
 
-                        <div className='google_login_row'>
-                            
-                                <button className="google_btn" onClick={onClickGoogle}>
-                                    <div className="google_logo_wrapper">
-                                        <div className="google_logo">
-                                            <GoogleLogo/>
-                                        </div>
-                                    </div>
-                                    <div className="google_labal_wrapper">
-                                        <div className="google_label">Login With Gooogle</div>  
-                                    </div>
-                                </button>
-                        </div>    
+                          
                     </Form>
                 )}
                 </Formik> 
+                <div className='google_login_row'>                            
+                    <button className="google_btn" onClick={onClickGoogle}>
+                        <div className="google_logo_wrapper">
+                            <div className="google_logo">
+                                <GoogleLogo/>
+                            </div>
+                        </div>
+                        <div className="google_labal_wrapper">
+                            <div className="google_label">Login With Gooogle</div>  
+                        </div>
+                    </button>
+                </div>  
             </div>  
             <PopupRegularMessage
                 message = {message} 

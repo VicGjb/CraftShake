@@ -82,10 +82,10 @@ export function ProductDetaile(){
                             <div className="product_detaile_info">
                                 <div className="product_detaile_price_line">
                                     <div className="product_detaile_cost_price">
-                                        Cost price: {product.cost_price}
+                                        Cost price: {product.cost_price} ₪
                                     </div>
                                     <div className="product_detaile_sell_price">
-                                        Sale price: {product.sale_price}
+                                        Sale price: {product.sale_price} ₪
                                     </div>
                                 </div>
                                 <div className="product_detaile_discription">

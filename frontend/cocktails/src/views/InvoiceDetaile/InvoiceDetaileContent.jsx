@@ -30,7 +30,7 @@ export function InvoiceDetaileContent(){
             })
             .catch(error=>{
                 setLoaded(false)
-                console.log('FUCK', error)
+                console.log('error', error)
             })
     }, [invoiceId])
     
@@ -104,15 +104,15 @@ export function InvoiceDetaileContent(){
                         {renderVatButton()}
                         <div className="invoice_detaile_table_info_row">
                             <span>Amount:</span>  
-                            <span>{invoice.amount}</span> 
+                            <span>{invoice.amount} ₪</span> 
                         </div>
                         <div className="invoice_detaile_table_info_row">
                             <span>VAT:</span>
-                            <span>{Number(invoice.total_amount-invoice.amount).toFixed(2)}</span> 
+                            <span>{Number(invoice.total_amount-invoice.amount).toFixed(2)} ₪</span> 
                         </div>
                         <div className="invoice_detaile_table_info_row">
                             <span>TOTAL:</span>
-                            <span>{invoice.total_amount}</span>
+                            <span>{invoice.total_amount} ₪</span>
                         </div>
                         
                     </div>
@@ -129,11 +129,11 @@ export function InvoiceDetaileContent(){
                         <div className="invoice_detaile_footer_info">
                             <div className="invoice_detaile_table_info_row">
                                 <span>VAT:</span>
-                                <span>{Number(invoice.total_amount-invoice.amount).toFixed(2)}</span> 
+                                <span>{Number(invoice.total_amount-invoice.amount).toFixed(2)} ₪</span> 
                             </div>
                             <div className="invoice_detaile_table_info_row">
                                 <span>TOTAL:</span>
-                                <span>{invoice.total_amount}</span>
+                                <span>{invoice.total_amount} ₪</span>
                             </div>
                         </div>
                     </div>

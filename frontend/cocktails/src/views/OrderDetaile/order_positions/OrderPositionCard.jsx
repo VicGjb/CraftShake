@@ -33,7 +33,7 @@ export function OrderPositionCard({order_item}){
             <div className="order_position_card_slot name">{order_item.name}</div>
             <div className="order_position_card_slot volome">{volume}</div>
             <div className="order_position_card_slot qnt">x{order_item.quantity}</div>
-            <div className="order_position_card_slot total">{Number(order_item.item_price).toFixed(2)}</div>
+            <div className="order_position_card_slot total">{Number(order_item.item_price).toFixed(2)} ₪</div>
             {renderRemoveButton()}
         </div>
     )
