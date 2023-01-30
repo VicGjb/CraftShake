@@ -39,7 +39,7 @@ export function UpdateOrderButton(){
 
 
     function renderButton(){
-        if (user.role==='counter' || order.state==='Created'){
+        if ((user.role==='counter' && order.state!=='Delivered' && order.state!=='Paid') || order.state==='Created'){
             return(
                 <div className='order_update_btn' onClick={updateOrder}>
                 <RegularButton lable={'Update'}/> 
@@ -136,7 +136,7 @@ export function DeleteOrderButton(){
     }
 
     function renderButton(){
-        if (user.role==='counter' || order.state==='Created'){
+        if (user.role==='counter' && order.state!=='Delivered' && order.state!=='Paid' || order.state==='Created'){
             return(
                 <div className='order_delete_button_wrapper'>
                     <div className="order_detaile_delete_btn" onClick={()=>setDelete_active(true)}>            

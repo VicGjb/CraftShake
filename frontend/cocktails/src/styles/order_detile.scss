@@ -186,7 +186,7 @@
     position: sticky;
     top:20px;
     width: 100%;
-    height: 40px;
+    // height: 100%;
     margin-top: 20px;
     padding: 0px 10px;
     font-size: 25px;
@@ -200,7 +200,7 @@
 .order_detaile_total_monitor{
     overflow: hidden;
     background-color: #323131;
-    height: 100%;
+    height: 35px;
     width: 50%;
     display: flex;
     justify-content: center;
@@ -258,6 +258,7 @@
     }
     
     
+    
 }
 @media (max-width:990px){
     .menu_positions_table{
@@ -269,7 +270,9 @@
         margin-left: 0px;
     }
     
-   
+    .order_detaile_total_monitor{
+        height: 30px;
+    }
       
 }
 
