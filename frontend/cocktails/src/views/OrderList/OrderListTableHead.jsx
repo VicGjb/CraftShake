@@ -12,7 +12,7 @@ export function OrderListTableHead(){
                 Date
             </div>
             <div className="order_list_table_head_slot state">
-                State
+                Status
             </div>
             <div className="order_list_table_head_slot total_price">
                 Total

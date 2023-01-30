@@ -73,7 +73,7 @@ export function OrderStates(){
                 case 'Approved':
                     return(
                         <div className='approved_state_label'>
-                            Approved
+                            Accepted
                         </div>
                     )
                 case 'Delivered':

@@ -21,7 +21,7 @@ export function PersonalAccount(){
     return(
         <div className="personal-accaunt_wrapper">
             <div className="personal-account_message">
-                It looks like you are not yet our client or you have not been granted access, please contact your manager.
+            It looks like you are not yet our client or your access was denied. Please contact with our manager.
             </div>
         </div>
     )

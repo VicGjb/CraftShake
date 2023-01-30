@@ -8,7 +8,7 @@ export function InvoiceOrderTable({order}){
         <div className="invoice_order_table_wrapper">
             <div className="invoice_order_taible_date">
                 <span>Order № {order.id}</span> 
-                <span>{order.date}</span>
+                <span>{order.date.split('-').reverse().join('.')}</span>
             </div>
             <InvoiceOrderItemsTableHead/>
             {order.order_item.map(item=>(
@@ -25,7 +25,7 @@ export function InvoiceOrderItemsTableHead(){
     return(
         <div className="invoice_order_table_head_wrapper">
             <div className="invoice_order_table_head_slot name">Name</div>
-            <div className="invoice_order_table_head_slot qnt">Qnt</div>
+            <div className="invoice_order_table_head_slot qnt">Qty</div>
             <div className="invoice_order_table_head_slot price">Price</div>
         </div>
     )

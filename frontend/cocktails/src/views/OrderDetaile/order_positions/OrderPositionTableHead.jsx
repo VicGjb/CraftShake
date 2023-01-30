@@ -26,7 +26,7 @@ export function OrderPositionTableHead(){
         <div className="order_position_table_head_wrapper">
             <div className="order_position_table_head_slot name">Name</div>
             <div className="order_position_table_head_slot volome">Vol.</div>
-            <div className="order_position_table_head_slot qnt">Qnt</div>
+            <div className="order_position_table_head_slot qnt">Qty</div>
             <div className="order_position_table_head_slot total">Total</div>
             {renderRemoeColumn()}
         </div>

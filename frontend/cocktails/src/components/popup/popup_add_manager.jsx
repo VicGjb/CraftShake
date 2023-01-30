@@ -134,7 +134,7 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
 
                             <div className='add_place_input_wrapper'>
                                 <div className='add_place_input_labele'>
-                                    Description:
+                                    Notes:
                                 </div>
                                 <div className="field-container">
                                     <Field 

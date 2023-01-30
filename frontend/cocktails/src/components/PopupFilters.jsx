@@ -54,12 +54,12 @@ export function PopupFilters({
         switch(subject){
             case 'orders':
                 return(
-                    <span>Orders filters</span>
+                    <span>Filters</span>
                 )
                 break
             case 'invoices':
                 return(
-                    <span>Invoices filters</span>
+                    <span>Applye</span>
                 )
                 break
         }
@@ -108,7 +108,7 @@ export function PopupFilters({
                             </div>
                         </div>
                         <div className="order_list_search_button" type="submit">
-                            <RegularButton lable={'Filter'}></RegularButton>
+                            <RegularButton lable={'Apply'}></RegularButton>
                         </div>               
                     </form>   
                 </div>        

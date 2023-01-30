@@ -19,7 +19,7 @@ export function InvoiceListTableHead(){
                 Total
             </div>
             <div className="invoice_list_table_head_slot state">
-                State
+                Status
             </div>
         </div>
 

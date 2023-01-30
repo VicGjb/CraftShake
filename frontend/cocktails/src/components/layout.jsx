@@ -24,7 +24,7 @@ export const Layout = () =>{
     function renderFatalErrorView(){
         return(
             <div className="fatal_error">
-              Sorry, the service is temporarily unavailable, we are already working on this problem, come back later...  
+              Sorry, the service is temporarily unavailable. We are already working on this problem. Please come back later...  
             </div>
         )
     }
