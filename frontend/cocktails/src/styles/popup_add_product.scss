@@ -3,7 +3,7 @@
     position: relative;
     justify-content: space-between;
     flex-direction: column;
-    width:40%;
+    width:500pt;
     background-color: #222;
     border-radius: 10px;
     height: auto;
@@ -47,10 +47,11 @@
     }
 }
 
-.add_invoice_form{
+.add_product_form{
+    width: 60%;
     .phone,.name,.price,.description_input{
         font-size: 18px;
-        width: 90%;
+        width: 155pt;
     } 
     .price{
         text-align: end;
@@ -76,12 +77,12 @@
 }
 @media (max-width:550px){
     .popup_mobile_content.add_product{
-        width: 90%;
+        width: 95%;
     }
-    .add_invoice_form{
-        .phone,.name,.price{
+    .add_product_form{
+        .phone,.name,.price,.description_input{
             font-size: 18px;
-            width: 80%;
+            width: 120pt;
         }  
     }
 }

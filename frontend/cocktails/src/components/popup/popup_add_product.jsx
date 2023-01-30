@@ -97,7 +97,7 @@ export function PopupAddProduct({
 
 
                         {({errors, touched, validateForm})=>(
-                        <Form className='add_invoice_form'>
+                        <Form className='add_product_form'>
                             <div className='add_place_input_wrapper'>
                                 <div className='add_place_input_labele'>
                                     Name:
