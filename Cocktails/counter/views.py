@@ -313,8 +313,13 @@ class ProductUploadPhotoView(viewsets.ModelViewSet):
             print(f'photo {request.data["photo"].name}')
             filename_parts = request.data["photo"].name.split('.')
             filename =f'{product.id}-'+ filename_parts[0]+'.'+filename_parts[1]
-            request.data["photo"].name = filename
-            product.photo = request.data["photo"]
+            # request.data["photo"].name = filename
+            temp_image = Image.open(request.data['photo'])
+            output = BytesIO()
+            temp_image.resize((300, 300))
+            temp_image.save(output, format='JPEG', quality=80)
+            print(f'TEMP IMAGE {temp_image}')
+            product.photo = InMemoryUploadedFile(output, 'ImageField', filename, 'image/jpeg',  sys.getsizeof(output), None)
             product.save()
             serializer = ProductDetailSerializer(product)
             print('HEYY okey')

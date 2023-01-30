@@ -162,7 +162,7 @@ export function SignIn() {
                             </div>
                         </div>
                         <div className="google_labal_wrapper">
-                            <div className="google_label">Login With Gooogle</div>  
+                            <div className="google_label">Login With Google</div>  
                         </div>
                     </button>
                 </div>  
