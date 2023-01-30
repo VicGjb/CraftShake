@@ -106,9 +106,7 @@ export function PopupAddCocktailsMenu({add_cicktails_active, setAdd_cocktails_ac
 
                 <div className="popup_footer">
                     <div className={addBattonActive?'add_coctails_button active':'add_coctails_button'}onClick={addButton}><RegularButton lable={'Add Cocktails'}/></div>
-                </div>
-                
-                 
+                </div>  
             </div>
         </div>
     )

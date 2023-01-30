@@ -117,6 +117,7 @@
 //     }
 
 .service_button_line{
+  margin-top: 2px;
   width: 75%;
   display: flex;
   justify-content: space-between;
@@ -124,7 +125,7 @@
   position: fixed;
   background-color: rgba(34, 34, 34, 0.96);
   padding-bottom: 5px;
-  // z-index: ;
+  // z-index: 100;
 
 }
 .popup_button_wrapper{
@@ -137,6 +138,7 @@
   align-items: center;
   .back_button_icon, .close_button_icon{
     padding-bottom: 10px;
+    z-index: 100;
   }
   .back_button_icon path, .close_button_icon path{
     fill: #909090;
