@@ -44,6 +44,30 @@ export function InvoiceList(){
         }
     }
 
+    function renderInvoiceTable(){
+        if (user.role === 'counter'){
+            return(
+                invoices.map(invoice => (
+                    <Link to={`/${placeName}/${placeId}/invoices/${invoice.id}`} key={invoice.id}>
+                        <InvoiceCard invoice={invoice}/>
+                    </Link>                                      
+                ))
+            )
+        }else if(user.role === 'customer'){
+            return(
+                invoices.map(invoice => {
+                    if (invoice.state != 'Created'){
+                        return(
+                             <Link to={`/${placeName}/${placeId}/invoices/${invoice.id}`} key={invoice.id}>
+                                <InvoiceCard invoice={invoice}/>
+                            </Link>  
+                        )
+                    }
+                })
+            )
+        }
+    }
+
     function InvouceListView(){
         return(
                 <div className="invoice_list_wrapper">  
@@ -63,11 +87,7 @@ export function InvoiceList(){
 
                     <div className="invoices_table">
                         <InvoiceListTableHead/> 
-                        {invoices.map(invoice => (
-                            <Link to={`/${placeName}/${placeId}/invoices/${invoice.id}`} key={invoice.id}>
-                                <InvoiceCard invoice={invoice}/>
-                            </Link>                                      
-                        ))}
+                        {renderInvoiceTable()}
                     </div> 
                     <PopupAddInvoice
                         add_invoice_active={add_invoice_active} 

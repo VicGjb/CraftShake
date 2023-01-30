@@ -154,7 +154,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                             <input
                                 className='add_menu_position_input_feild volume'
                                 type="number"
-                                step={10.00}
+                                step={0.01}
                                 min='0'
                                 name="volume"
                                 value={form.volume}
@@ -172,7 +172,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
                             <input
                                 className='add_menu_position_input_feild price'
                                 type="number"
-                                step={0.50}
+                                step={0.01}
                                 min='0.00'
                                 name="sale_price"
                                 value={form.sale_price}

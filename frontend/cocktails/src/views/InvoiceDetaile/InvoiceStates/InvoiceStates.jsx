@@ -5,6 +5,8 @@ import { NetworkManager } from "../../../components/network_manager"
 import { PopupRegularMessage } from "../../../components/popup/popup_regular_message"
 import { PopupYesNoQuestion } from "./PopupYesNoQuestion"
 import { useInvoiceDetaileContext } from "../InvoiceDetileContext"
+import { useManeContext } from "../../../components/main_context"
+
 import '../../../styles/order_states.scss'
 
 export function InvoiceStates(){
@@ -13,6 +15,8 @@ export function InvoiceStates(){
     let networkManager = new NetworkManager()
     let invoiceDetaileContext = useInvoiceDetaileContext()
     let invoice = invoiceDetaileContext.getInvoice
+    let mainContext = useManeContext()
+    let user = mainContext.getUserFromMainContext()
 
 
     function setInvoiceInvoiced(){
@@ -81,9 +85,37 @@ export function InvoiceStates(){
         }
     }
 
-    return(
-            renderStateButton(invoice)
-    )
+    function renderStateLablel(){
+        if (invoice){
+            switch (invoice.state){
+                case 'Created':
+                    return(
+                        <div className="created_state_label">
+                            Created
+                        </div>
+                    )
+                case 'Invoiced':
+                    return(
+                        <div className="delivered_paid_label">
+                            Invoiced
+                        </div>
+                    )
+                case 'Paid':
+                    return(
+                        <div className="paid_state">
+                            Paid
+                        </div>
+                    )
+            }
+        }
+    }
+
+    if (user.role === 'counter'){
+        return renderStateButton(invoice)
+    } else if(user.role === 'customer'){
+        return renderStateLablel(invoice)
+    }
+    
 
 
 }
