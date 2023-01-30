@@ -117,8 +117,8 @@
 //     }
 
 .service_button_line{
-  margin-top: 2px;
-  width: 75%;
+  margin-top: 5px;
+  // width: 75%;
   display: flex;
   justify-content: space-between;
   align-self: center;
@@ -138,7 +138,7 @@
   align-items: center;
   .back_button_icon, .close_button_icon{
     padding-bottom: 10px;
-    z-index: 100;
+    // z-index: 100;
   }
   .back_button_icon path, .close_button_icon path{
     fill: #909090;
