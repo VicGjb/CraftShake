@@ -40,10 +40,14 @@
     margin-top: 20px;
     border-bottom: 1px solid #909090;
     .date_input{
+        width: 100%;
         font-size: 18px;
         border-bottom: 0px;
+        text-align: end;
+    }    
+    .checkbox_input{
+        width: 20px;
     }
-
 }
 .add_invoice_form_submit_btn{
     align-self: center;

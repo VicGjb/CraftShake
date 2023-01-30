@@ -3,7 +3,7 @@
     position: relative;
     justify-content: space-between;
     flex-direction: column;
-    width:30%;
+    width:40%;
     background-color: #222;
     border-radius: 10px;
     height: auto;
@@ -29,14 +29,21 @@
     width: 100%;
     justify-content: space-between;
     margin-bottom: 20px;
-    // .phone,.name{
-    //     font-size: 18px;
-    // }
 }
 .add_manager_input_labele{
     color: whitesmoke;
     font-size: 20px;
 }
+.add_manager_form{
+    .phone{
+        width: 95%;
+    }
+    .name{
+        width: 95%;
+    }
+
+}
+
 .description_input{
     width: 100%;
     background-color: #323131;
@@ -47,6 +54,7 @@
     white-space: wrap;
     resize: none;
     padding: 5px;
+    border-radius: 5px;
 }
 .description_input::-webkit-scrollbar{
     width: 0px;
@@ -95,7 +103,10 @@
 }
 @media (max-width:550px){
     .popup_mobile_content.add_manager{
-        width: 90%;
+        width: 95%;
+    }
+    .add_manager_form{
+        width: 95%;
     }
     .description_input{
         font-size: 14px;

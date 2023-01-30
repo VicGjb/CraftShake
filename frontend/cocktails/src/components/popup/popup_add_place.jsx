@@ -188,7 +188,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
                                     <div className='add_place_input_labele'>
                                         Current:
                                     </div>
-                                    <div className="field-container">
+                                    <div className="field-container curretn-place">
                                         <Field name='is_current_place' type='checkbox'/>
                                     </div>
                                 </div>
