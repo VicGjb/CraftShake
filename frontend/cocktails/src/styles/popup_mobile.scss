@@ -125,7 +125,7 @@
   position: fixed;
   background-color: rgba(34, 34, 34, 0.96);
   padding-bottom: 5px;
-  z-index: 100;
+  z-index: 5;
 
 }
 .popup_button_wrapper{
@@ -136,26 +136,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+}
+.back_button_icon path, .close_button_icon path{
+  fill: #909090;
 }
 .back_button_icon, .close_button_icon{
   padding-bottom: 10px;
-  // z-index: 100;
+  width: 20px;
+  z-index: 500;
 }
 
 .back_button_icon path:hover, .close_button_icon path:hover{
   fill: #FFBF1C;
 }
 .back_button_icon{
-  // padding-bottom: 10px;
   opacity: 0;
 }
 .back_button_icon.active{
   opacity: 1;
 }
-.back_button_icon path, .close_button_icon path{
-  fill: #909090;
-}
+
 
 .add_coctails_button{
   display: none;
