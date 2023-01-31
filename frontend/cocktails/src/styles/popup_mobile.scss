@@ -127,34 +127,36 @@
   padding-bottom: 5px;
   z-index: 5;
 
-}
-.popup_button_wrapper{
-  margin-top: 10px;
-  padding-top: 10px;
-  height: 15px;
-  width: 15px; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.back_button_icon path, .close_button_icon path{
-  fill: #909090;
-}
-.back_button_icon, .close_button_icon{
-  padding-bottom: 10px;
-  width: 20px;
-  z-index: 500;
+  .popup_button_wrapper{
+    margin-top: 10px;
+    padding-top: 10px;
+    height: 15px;
+    width: 15px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .back_button_icon path, .close_button_icon path{
+    fill: #909090;
+  }
+  .back_button_icon, .close_button_icon{
+    padding-bottom: 10px;
+    width: 20px;
+    z-index: 500;
+  }
+  
+  .back_button_icon path:hover, .close_button_icon path:hover{
+    fill: #FFBF1C;
+  }
+  .back_button_icon{
+    opacity: 0;
+  }
+  .back_button_icon.active{
+    opacity: 1;
+  }
+
 }
 
-.back_button_icon path:hover, .close_button_icon path:hover{
-  fill: #FFBF1C;
-}
-.back_button_icon{
-  opacity: 0;
-}
-.back_button_icon.active{
-  opacity: 1;
-}
 
 
 .add_coctails_button{
