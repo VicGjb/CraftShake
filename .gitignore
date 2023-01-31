@@ -23,7 +23,7 @@ venv.bak/
 .history
 
 .Python build/ 
-settings_development.py
+# settings_development.py
 secret_config.py
 develop-eggs/
 static/ 
