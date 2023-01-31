@@ -21,7 +21,7 @@ export class NetworkManager{
 		this.SetUpInterceptorsResponse()
 	}
 		
-	
+
 
 	// Set Up AXIOS
 	SetUpInterceptorRequest(){
@@ -48,10 +48,17 @@ export class NetworkManager{
 									refresh_token = localStorage.getItem('refresh_token')
 									return response
 								})
+								.catch(error => {
+									console.log('Token error', error)
+									localStorage.removeItem('access_token');
+            						localStorage.removeItem('refresh_token');
+									window.location.href = '/login/' 
+								})
 								request.headers.Authorization = localStorage.getItem('access_token')
 									? 'JWT ' + localStorage.getItem('access_token')
 									: null
 									return request
+								
 						} else {
 							return request
 						} 
