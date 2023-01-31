@@ -34,6 +34,6 @@ RUN pip install django-cors-headers
 
 RUN pip install psycopg2-binary
 # RUN pip install psycopg2
-
+RUN pip install python-dotenv
 COPY . /project/
 ENTRYPOINT ["python", "/project/manage.py", "runserver", "0.0.0.0:8000"]
