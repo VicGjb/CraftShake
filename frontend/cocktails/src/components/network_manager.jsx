@@ -21,6 +21,7 @@ export class NetworkManager{
 		this.SetUpInterceptorsResponse()
 	}
 		
+	
 
 	// Set Up AXIOS
 	SetUpInterceptorRequest(){
