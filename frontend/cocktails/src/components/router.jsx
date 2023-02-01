@@ -4,6 +4,8 @@ import {
     Route,
     Routes,
   } from 'react-router-dom';
+import { useEffect } from "react";
+import ReactGA from 'react-ga';
 import { MainContextProvider } from "./main_context";
 import { OrderList } from "../views/OrderList/order_list";
 import { OrderDetaile } from "../views/OrderDetaile/order_detaile";
@@ -24,15 +26,11 @@ import { SignIn } from "../views/Auth/login";
 import { PersonalAccount } from "../views_customer/personal_account";
 import { HomePage } from "../views/HomePage/HomePage";
 import { MainPage } from "../views/TestProps/MainPage";
-import './analytic.js'
 
 export function Routing(){
-    useEffect(() => {
-        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-        ga('create', process.env.GOOGLE_ANALYTICS_ID, 'auto');
-        ga('send', 'pageview', window.location.pathname);
-        console.log('HEY FROM GOOGLE ANALYTIC I SEE THE TRACK ID',process.env.GOOGLE_ANALYTICS_ID)
-      }, []);
+    useEffect(() =>{
+        ReactGA.pageview(window.location.pathname)
+    },[])
 
     return(
         <Router>
