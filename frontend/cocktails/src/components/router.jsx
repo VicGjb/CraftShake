@@ -24,7 +24,7 @@ import { SignIn } from "../views/Auth/login";
 import { PersonalAccount } from "../views_customer/personal_account";
 import { HomePage } from "../views/HomePage/HomePage";
 import { MainPage } from "../views/TestProps/MainPage";
-
+import './analytic.js'
 
 export function Routing(){
     return(
