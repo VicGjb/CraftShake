@@ -5,6 +5,7 @@ const Analytics = () => {
     window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
     ga('create', process.env.GOOGLE_ANALYTICS_ID, 'auto');
     ga('send', 'pageview');
+    console.log('HEY FROM GOOGLE ANALYTIC I SEE THE TRACK ID',process.env.GOOGLE_ANALYTICS_ID)
   }, []);
 
   return null;
