@@ -19,9 +19,8 @@ export function PageTracking() {
 
   useEffect(() => {
     if (initialized) {
-      console.log("ANALYTIC",location.pathname + location.search)
+      console.log("ANALYTIC",location.pathname + location.search);
       ReactGA.pageview(location.pathname + location.search);
-      
     }
   }, [initialized, location.pathname]);
 }

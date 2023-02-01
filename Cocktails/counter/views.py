@@ -437,10 +437,27 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
         users = invoice.place.users.filter(place=invoice.place)
         print(f' hello im user in create_pfd invoice {request.user}')
         if request.user in users or request.user.is_staff:
-            print('HAKUNA MATATA')
-            print(f'USERS create pdf {invoice.place.users.filter(place=invoice.place)}')
-
+            
             orders = Order.objects.filter(invoice = pk).order_by('date')
+            # orders_context=[]
+            # for order in orders:
+            #     items_context = []
+            #     for item in order.order_item.all():
+            #         items_context.append({
+            #             'name':item.name,
+            #             'quantity':item.quantity,
+            #             'item_price':item.item_price,
+            #             'volume':f'{round(item.volume.value/1000, 2)}L'
+            #         })
+            #     orders_context.append(
+            #         {
+            #             'id': order.id,
+            #             'total_price': order.total_price,
+            #             'date':order.date,
+            #             'order_item': items_context
+            #         }
+            #     )
+            # print(orders_context)
             context = {'invoice': invoice, 'orders':orders}
             place_name = invoice.get_place_name()
             date = invoice.date

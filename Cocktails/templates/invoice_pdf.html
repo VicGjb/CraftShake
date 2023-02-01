@@ -146,7 +146,7 @@
                     </tr>
                     {%for item in order.order_item.all%}
                     <tr class="order_body_{% cycle 'row1' 'row2' %}">
-                        <td class="cocktail_name">{{item.name}}</td>
+                        <td class="cocktail_name">{{item.name}} - {{item.volume.get_name}}</td>
                         <td class="cocktail_qty">{{item.quantity}}</td>
                         <td class="cocktail_price">{{item.item_price}}</td>
                     </tr>

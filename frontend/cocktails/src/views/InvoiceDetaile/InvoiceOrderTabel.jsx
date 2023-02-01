@@ -1,8 +1,9 @@
 import React1 from "react";
 import '../../styles/invoice_order_table.scss'
+import { useManeContext } from "../../components/main_context";
 
 export function InvoiceOrderTable({order}){
-
+    
 
     return(
         <div className="invoice_order_table_wrapper">
@@ -32,10 +33,12 @@ export function InvoiceOrderItemsTableHead(){
 }
 
 export function InvoiceOrderItemCard({item}){
+    let mainContext = useManeContext()
+    let volume = mainContext.getVolomeNameFromMainContext(item.volume)
     return(
         <div className="invoice_order_item_card_wrapper">
-            <div className="invoice_order_item_slot name">{item.name}</div>
-            <div className="invoice_order_item_slot qnt">{item.quantity}</div>
+            <div className="invoice_order_item_slot name">{item.name}  </div>
+            <div className="invoice_order_item_slot qnt">{volume} x {item.quantity}</div>
             <div className="invoice_order_item_slot price">{item.item_price} ₪</div>
         </div>
     )
