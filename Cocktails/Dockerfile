@@ -36,4 +36,4 @@ RUN pip install psycopg2-binary
 # RUN pip install psycopg2
 RUN pip install python-dotenv
 COPY . /project/
-ENTRYPOINT ["python", "/project/manage.py","--settings=Cocktails.settings_production", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["python", "/project/manage.py", "runserver", "0.0.0.0:8000","--settings=Cocktails.settings_production"]
