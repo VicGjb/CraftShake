@@ -26,16 +26,14 @@ import { SignIn } from "../views/Auth/login";
 import { PersonalAccount } from "../views_customer/personal_account";
 import { HomePage } from "../views/HomePage/HomePage";
 import { MainPage } from "../views/TestProps/MainPage";
-
+import { PageTracking } from "./analytic";
 export function Routing(){
-    useEffect(() =>{
-        ReactGA.pageview(window.location.pathname)
-    },[])
-
     return(
+        
         <Router>
             <Routes>
-                <Route path="" element={<MainContextProvider><Layout/></MainContextProvider>}>
+            
+                <Route path="" element={<MainContextProvider><PageTracking/><Layout/></MainContextProvider>}>
                     <Route element={<AuthLayout/>}>
                             <Route path='placeList/*' element={<PlaceList/>}/>    
                             <Route path=':placeName/:placeId/*' element={<LayoutPlace/>}>
@@ -61,7 +59,6 @@ export function Routing(){
                 </Route> 
                 <Route path='login' element={<MainContextProvider><SignIn/></MainContextProvider>}/> 
                 <Route path='test' element={<MainPage/>}/>
-                
                 <Route path='get_code' element={<GetCodeGoogleLogin/>}/>
             </Routes>
         </Router>

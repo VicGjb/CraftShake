@@ -1,18 +1,14 @@
 import React from 'react';
 import { Routing } from './components/router';
 import ReactGA from 'react-ga';
+// import { usePageTracking } from './components/analytic';
 
 
-let TRACKING_ID = process.env.GOOGLE_ANALYTICS_ID; 
-ReactGA.initialize(TRACKING_ID);
 
 function App() {
+  // usePageTracking()
   return (
-    <>
       <Routing/>
-      {/* <RouteMiddleware/> */}
-    </>
-      
   );
 }
 
