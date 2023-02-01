@@ -27,7 +27,13 @@ import { MainPage } from "../views/TestProps/MainPage";
 import './analytic.js'
 
 export function Routing(){
-    
+    useEffect(() => {
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', process.env.GOOGLE_ANALYTICS_ID, 'auto');
+        ga('send', 'pageview', window.location.pathname);
+        console.log('HEY FROM GOOGLE ANALYTIC I SEE THE TRACK ID',process.env.GOOGLE_ANALYTICS_ID)
+      }, []);
+
     return(
         <Router>
             <Routes>
