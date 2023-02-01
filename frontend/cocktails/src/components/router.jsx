@@ -27,6 +27,7 @@ import { MainPage } from "../views/TestProps/MainPage";
 import './analytic.js'
 
 export function Routing(){
+    
     return(
         <Router>
             <Routes>
