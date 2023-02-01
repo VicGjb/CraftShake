@@ -25,6 +25,7 @@ import { PersonalAccount } from "../views_customer/personal_account";
 import { HomePage } from "../views/HomePage/HomePage";
 import { MainPage } from "../views/TestProps/MainPage";
 
+
 export function Routing(){
     return(
         <Router>
