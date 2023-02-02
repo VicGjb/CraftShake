@@ -57,6 +57,7 @@
     .product_card_value_wrapper.photo{
         width: 80px;
         justify-self: flex-start;
+        align-items: center;
         
     }
     .product_card_value_wrapper.name{
@@ -68,7 +69,7 @@
         width: 500px;
     }
     .product_photo{
-        height: 79px;
+        height: 78px;
         width: 100%;
         img{
             border-radius: 10px;
