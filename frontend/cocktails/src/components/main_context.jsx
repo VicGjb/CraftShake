@@ -49,8 +49,8 @@ export function MainContextProvider({children}){
        return volumes.filter(volume=>(volume.id == id))[0].name
     }
     function getDefaultVolume(){
-        console.log('Default', volumes[0].id)
-        return volumes[0]
+        console.log('Default', volumes[1].id)
+        return volumes[1]
     }
     
     // Photo for product

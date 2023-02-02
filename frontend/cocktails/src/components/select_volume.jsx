@@ -8,7 +8,7 @@ export function SelectVolume({onChange}){
 
     let main_context = useManeContext()
     let volumes = main_context.getVolumesFromMainContext()
-    let [volume, setVolome] = useState(1)
+    let [volume, setVolome] = useState(2)
 
     function changeHandler(e){
         setVolome(e.target.value)
@@ -27,7 +27,7 @@ export function SelectVolume({onChange}){
             onChange={changeHandler}
             required               
             >
-            {volumes.map(volume=>(
+            {volumes.reverse().map(volume=>(
                 <option key={volume.id} value={volume.id}>{volume.name}</option>
             ))}
         </select>
