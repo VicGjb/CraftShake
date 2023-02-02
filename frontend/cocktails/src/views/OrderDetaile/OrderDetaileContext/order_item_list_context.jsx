@@ -26,12 +26,12 @@ export function OrderItemListContextProvider({children}){
         list.map(item=>{
             item.uuid = uuidv4()
         })
-        console.log(list)
+        //console.log(list)
     }
 
     function setItemListContext(list){
         setItemList(list)
-        console.log('ItemList in context',item_list)
+        //console.log('ItemList in context',item_list)
     }
 
     function addItemInList(item){
@@ -54,12 +54,12 @@ export function OrderItemListContextProvider({children}){
                 mobileMenuPositions[`${position.id}`] = ''
             })
         })
-        console.log('INIT MOBILE',mobileMenuPositions)
+        //console.log('INIT MOBILE',mobileMenuPositions)
     }
 
     function addItemMobile(orderItem){
         mobileMenuPositions[`${orderItem.position}`] = orderItem
-        console.log('orderInemMobile', mobileMenuPositions)
+        //console.log('orderInemMobile', mobileMenuPositions)
         getItemListMobile()
     }
     function getItemListMobile(){
@@ -68,11 +68,11 @@ export function OrderItemListContextProvider({children}){
             if(item){
                 if(item.quantity>0){
                     mobileItemList.push(item)
-                    console.log("OKEY",item)
+                    //console.log("OKEY",item)
                 }  
             }
         }
-        console.log('MObileItemList',mobileItemList)
+        //console.log('MObileItemList',mobileItemList)
         return mobileItemList
     }
 

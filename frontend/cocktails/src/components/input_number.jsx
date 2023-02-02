@@ -23,7 +23,7 @@ export function InputNumber({onChange}){
         }
     })
     useEffect(()=>{
-        console.log('RESIZE')
+        //console.log('RESIZE')
         if(window.innerWidth < 990){
             setQnty(0)
             }

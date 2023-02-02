@@ -9,10 +9,10 @@ export function ManagersListRow({manager}){
     function DeleteManager(){
         network_manager.delete_manager(manager.id)
             .then(response =>{
-                console.log('manager deleted',response);
+                //console.log('manager deleted',response);
             })
             .catch(error=>{
-                console.log(error);
+                //console.log(error);
                 throw error;
             });
         window.location.reload()

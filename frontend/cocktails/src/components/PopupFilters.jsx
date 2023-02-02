@@ -28,7 +28,7 @@ export function PopupFilters({
                 networkManager.search_order(placeId, form.date_from, form.date_to)
                 .then(orders =>{
                         setSubject(orders);
-                        console.log('Orders',orders)
+                        //console.log('Orders',orders)
                     })
                 setFilterActive(false)
                 break
@@ -38,7 +38,7 @@ export function PopupFilters({
                 networkManager.search_invoice(placeId, form.date_from, form.date_to)
                     .then(invoices =>{
                         setSubject(invoices);
-                        console.log('res',invoices)
+                        //console.log('res',invoices)
                     })
                 setFilterActive(false)
                 break

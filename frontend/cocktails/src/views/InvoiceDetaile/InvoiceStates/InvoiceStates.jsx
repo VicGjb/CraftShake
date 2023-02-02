@@ -26,10 +26,10 @@ export function InvoiceStates(){
             })
             .catch(error => {
                 if (error.response.data == 'OrderStateError'){
-                    console.log('OK')
+                    //console.log('OK')
                     setRegular_message_active(true)
                 }
-                console.log('Iam ERROR',error.response.data);
+                //console.log('Iam ERROR',error.response.data);
                 throw error;
             });
     }

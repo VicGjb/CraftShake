@@ -20,7 +20,7 @@ export function PopupUpdateManager({manager, updateManagerActive, setUpdateManag
 
     function changeHandler(e){
         setForm({...form, [e.target.name]:e.target.value});
-        console.log(form)
+        //console.log(form)
     }
 
     function submitHandler(e){
@@ -30,7 +30,7 @@ export function PopupUpdateManager({manager, updateManagerActive, setUpdateManag
                 managersContext.setManagersList(response);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 throw error;
             })
         setUpdateManagerActive(false)

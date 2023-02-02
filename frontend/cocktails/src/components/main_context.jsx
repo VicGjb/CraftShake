@@ -21,7 +21,7 @@ export function MainContextProvider({children}){
     let placeHolderPhoto = 'https://craftshake.s3.eu-central-1.amazonaws.com/Product_photo/cocktailDefault.jpeg'
     
     function goBack(){
-        console.log('-1')
+        //console.log('-1')
     }
 
 
@@ -49,7 +49,7 @@ export function MainContextProvider({children}){
        return volumes.filter(volume=>(volume.id == id))[0].name
     }
     function getDefaultVolume(){
-        console.log('Default', volumes[1].id)
+        //console.log('Default', volumes[1].id)
         return volumes[1]
     }
     

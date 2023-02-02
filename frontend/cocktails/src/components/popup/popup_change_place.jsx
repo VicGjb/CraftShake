@@ -17,17 +17,17 @@ export function PopupChangePlace({place, add_change_place_active, setAdd_Change_
 	let [form, setForm] =  useState(defaultForm);
     let changeHandler = e => {
 		setForm({...form, [e.target.name]:e.target.value})
-        // console.log(form)
+        // //console.log(form)
 	}
     let submitHandler = e => {
 		e.preventDefault()
         network_manager.change_place(place.id, form)
         .then(response => {
-            // console.log(response);
+            // //console.log(response);
             setForm(defaultForm);
         })
         .catch(error => {
-            console.log(error);
+            //console.log(error);
             throw error;
         });		
         window.location.reload()

@@ -46,11 +46,11 @@ export function PlaceDetaile(){
     function DeletePlace(){
         network_manager.delete_place(placeId)
         .then(response=>(
-            console.log('Place deleted'),
+            //console.log('Place deleted'),
             navigate(`/placeList` ,{replace:false})
         ))
         .catch(error=>{
-            console.log(error);
+            //console.log(error);
             throw error;
         });
     }

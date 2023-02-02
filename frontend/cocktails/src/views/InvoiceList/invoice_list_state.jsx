@@ -13,13 +13,13 @@ export function InvoiceListState({invoice}){
 
     function changeHendler(e){
         setForm({...form, [e.target.name]:e.target.value})
-        console.log('Form',form)
+        //console.log('Form',form)
         network_manager.change_invoice_state(invoice.id,{'state':e.target.value, 'is_vat':invoice.is_vat} )
             .then(response => {
-				console.log('UPDATE INVOICE',response);
+				//console.log('UPDATE INVOICE',response);
             })
             .catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});
     }

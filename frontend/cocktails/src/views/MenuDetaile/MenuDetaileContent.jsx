@@ -39,11 +39,11 @@ export function MenuDetaileContent(){
     function DeleteMenu(){
         network_manager.delete_menu(menu.id)
             .then(response =>{
-                console.log('Menu was deleted', response);
+                //console.log('Menu was deleted', response);
                 navigate(`/${placeName}/${placeId}/menus`, {replace:false})
             })
             .catch(error=>{
-                console.log(error);
+                //console.log(error);
                 throw error;
             });
             

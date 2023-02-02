@@ -32,7 +32,7 @@ export function UpdateOrderButton(){
             if (error.response.data == "ErrorNotCurrentMenu"){
                 setRegular_message_active(true)
             }
-            console.log(error);
+            //console.log(error);
             throw error;
         });
     }
@@ -85,7 +85,7 @@ export function CreateOrderButton({date}){
             if (error.response.data == "ErrorNotCurrentMenu"){
                 setRegular_message_active(true)
             }
-            console.log(error);
+            //console.log(error);
             throw error;
         });
     }
@@ -123,14 +123,14 @@ export function DeleteOrderButton(){
     let [delete_active,setDelete_active] = useState(false);
 
     function deleteOrder(){
-        console.log('Order ID', order)
+        //console.log('Order ID', order)
         network_manager.delete_order(order.id)
             .then(response =>{
-                console.log('order was deleted', response);
+                //console.log('order was deleted', response);
                 navigate(`/${placeName}/${placeId}/orders`)
             })
             .catch(error=>{
-                console.log(error);
+                //console.log(error);
                 throw error;
             });
     }

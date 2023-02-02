@@ -28,7 +28,7 @@ export function PopupAddProduct({
                     sale_price:product.sale_price,   
                 })
         }else{
-            console.log('product', product)
+            //console.log('product', product)
             return({
                     name:'',
                     cost_price:'0.00',
@@ -44,7 +44,7 @@ export function PopupAddProduct({
                 setProduct(product.data);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 throw error;
             });		
         }else{
@@ -53,7 +53,7 @@ export function PopupAddProduct({
                 setProducts(response.data)
 			})
 			.catch(error => {
-				console.log(error); 
+				//console.log(error); 
 				throw error;
 			});		
         } 

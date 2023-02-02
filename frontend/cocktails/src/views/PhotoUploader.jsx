@@ -24,7 +24,7 @@ export function PhotoUploader({uploadData}){
                         if(files){
                             setPhoto(URL.createObjectURL(files[0]))
                             uploadData.append('photo', files[0])
-                            console.log('uplodDAta', uploadData.values())
+                            //console.log('uplodDAta', uploadData.values())
                         }
                     }}
                 />
@@ -48,7 +48,7 @@ export function PhotoUploader({uploadData}){
                         setPhoto(null)
                         document.getElementById('file').value=''
                         uploadData.delete('photo')
-                        console.log('UploadData remove',uploadData.values())
+                        //console.log('UploadData remove',uploadData.values())
                         }}> 
                         <DeleteIcon className='delete-file-icon'/>
                     </span> 

@@ -47,7 +47,7 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
                 managersContext.setManagersList(response);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 throw error;
             })
             setAdd_manager_active(false)
@@ -55,10 +55,10 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
             networkManager.create_manager(form)
 			.then(response => {
                 managersContext.setManagersList(response)
-				console.log('response',managersContext.getManagersList);
+				//console.log('response',managersContext.getManagersList);
 			})
 			.catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});		
             setAdd_manager_active(false)
@@ -84,7 +84,7 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
                 <Formik
                     initialValues={form}
                     onSubmit={values=>{
-                        console.log(values)
+                        //console.log(values)
                         submitHandler(values)
                     }}
                     validationSchema = {Yup.object({

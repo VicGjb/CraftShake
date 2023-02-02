@@ -83,7 +83,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
 
     let changeHandler = e => {
 		setForm({...form, [e.target.name]:e.target.value})
-        console.log('form',form)
+        //console.log('form',form)
 	}
 
 	function submitHandler(form){
@@ -94,7 +94,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
 				// setForm(emptyForm);
 			})
 			.catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});		
             setAdd_place_active(false)
@@ -106,7 +106,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
                 setForm(emptyForm)
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 throw error;
             });		
             setAdd_place_active(false)
@@ -130,7 +130,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
                 <Formik
                         initialValues={form}
                         onSubmit={values=>{
-                            console.log('hey hey',values)
+                            //console.log('hey hey',values)
                             submitHandler(values)
                         }}
                     >

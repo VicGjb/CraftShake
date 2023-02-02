@@ -88,7 +88,6 @@ export function PopupAddCocktailsMenu({add_cicktails_active, setAdd_cocktails_ac
                 </div>
                 
                 <div className="popup_title">
-                    {console.log('MENUS MOBILE', menus)}
                     <span className={menuTitleActive?'popup_menus_title active':'popup_menus_title'}>Choose menu</span> 
                     <span className={positionTitleActive?'popup_positions_title active':'popup_positions_title'} >Add cocktails</span> 
                 </div>

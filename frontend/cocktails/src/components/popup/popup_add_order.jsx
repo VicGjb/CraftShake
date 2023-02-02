@@ -20,18 +20,18 @@ export const PopupAddOrder =({add_order_active, setAdd_order_active})=>{
 
     let changeHandler = e =>{
         setForm({...form, ['order']:{['date']:e.target.value, ['place']:placeId}})
-        console.log('ayyyy', form)
+        //console.log('ayyyy', form)
     }
 
     let submitHandler = e =>{
         e.preventDefault()
-        console.log('FOrm',form)
+        //console.log('FOrm',form)
         network_manager.create_order(form)
 			.then(response => {
-				console.log(response);
+				//console.log(response);
 			})
 			.catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});
         navigate(`/${placeName}/${placeId}/orders`,);   

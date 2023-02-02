@@ -19,10 +19,10 @@ export function MenuPositionCard({menuPosition}){
     function DeletePosition(){
         networkManager.delete_menu_position(menuPosition.id)
             .then(responce =>{
-                console.log(responce);
+                //console.log(responce);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 throw error;
             })
             menuDetaileContext.removeMenuPosition(menuPosition);

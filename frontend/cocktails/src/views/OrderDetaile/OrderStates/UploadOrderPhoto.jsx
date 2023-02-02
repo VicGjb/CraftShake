@@ -16,12 +16,12 @@ export function UploadOrderPhotoPopup({upload_photo_active, setUploadPhotoActive
     function newFile(){ 
         network_manager.set_order_delivered(orderId, uploadData)
           .then(response => {
-            console.log(`Success`,response);
+            //console.log(`Success`,response);
             orderDetaileContext.setUploadPhotoActive(false)
             orderDetaileContext.setOrderContext(response)
           })
           .catch((err) => {
-            console.log(err);
+            //console.log(err);
           });
       }
 

@@ -37,11 +37,11 @@ export class NetworkManager{
 						let now = Math.ceil(Date.now() / 1000);
 			
 						if (access_token_data.exp<now && request.url!=='/token/refresh/') {
-							console.log('going to refresh',request.url)
+							//console.log('going to refresh',request.url)
 							await axiosInstance
 								.post('/token/refresh/', { refresh: refresh_token})
 								.then((response) => {
-									console.log(response)
+									//console.log(response)
 									localStorage.setItem('access_token', response.data.access);
 									localStorage.setItem('refresh_token', response.data.refresh);
 									access_token = localStorage.getItem('access_token')
@@ -49,7 +49,7 @@ export class NetworkManager{
 									return response
 								})
 								.catch(error => {
-									console.log('Token error', error)
+									//console.log('Token error', error)
 									localStorage.removeItem('access_token');
             						localStorage.removeItem('refresh_token');
 									window.location.href = '/login/' 
@@ -113,17 +113,17 @@ export class NetworkManager{
 					
 									// exp date in token is expressed in seconds, while now() returns milliseconds:
 									const now = Math.ceil(Date.now() / 1000);
-									console.log(refresh_token_data.exp);
+									//console.log(refresh_token_data.exp);
 					
 									if (refresh_token_data.exp < now) {
-										console.log('Refresh token is expired', refresh_token_data.exp, now);
+										//console.log('Refresh token is expired', refresh_token_data.exp, now);
 										localStorage.removeItem('access_token');
         								localStorage.removeItem('refresh_token');
 										window.location.href = '/login/';
 										
 									}
 								} else {
-									console.log('Refresh token not available.');
+									//console.log('Refresh token not available.');
 									localStorage.removeItem('access_token');
 									localStorage.removeItem('refresh_token');
 									window.location.href = '/login/';
@@ -234,7 +234,7 @@ export class NetworkManager{
 	}
 
 	async get_place_by_user_id(userId){
-		console.log('Axios ',userId)
+		//console.log('Axios ',userId)
 		return this.axiosInstance
 			.get(`counter/places/?users=${userId}`)
 			.then(response =>{
@@ -359,11 +359,11 @@ export class NetworkManager{
 	}
 
 	async update_menu(menuId, form){
-		// console.log('network_manager curren menu', {'data':form})
+		// //console.log('network_manager curren menu', {'data':form})
 		return this.axiosInstance
 			.post(`counter/menu/update/${menuId}`,form)
 			.then(response => {
-				// console.log('network',response)
+				// //console.log('network',response)
 				return response
 			})
 	}
@@ -463,7 +463,7 @@ export class NetworkManager{
 	}
 
 	async update_invoice(invoiceId, form){
-		console.log('form',form)
+		//console.log('form',form)
 		return this.axiosInstance
 			.post(`counter/invoice/update/${invoiceId}/`, form)
 			.then(response => {
@@ -512,7 +512,7 @@ export class NetworkManager{
 			})
 			.catch(error=>{
                 // setLoaded(false)
-                console.log('FUCK', error)
+                //console.log('FUCK', error)
             })
 		}
 
@@ -592,10 +592,10 @@ export class NetworkManager{
 	}
 
 	GoogleLogIn(){
-		// console.log('URL',window.location.href)
+		// //console.log('URL',window.location.href)
 		let url = new URL(window.location.href)
 		let host = url.host
-		// console.log('host',host)																													 407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com
+		// //console.log('host',host)																													 407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com
 		let result = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=https://${host}/get_code&prompt=consent&response_type=code&client_id=407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline`
 		return result
 	}
@@ -618,7 +618,7 @@ export class NetworkManager{
 	}
 
 	async GetUserData(id){
-		console.log('Try to get user by ID', id)
+		//console.log('Try to get user by ID', id)
 		return this.axiosInstance
 			.get(`craft_shake_auth/user/${id}/`)
 			.then(response=>{
@@ -627,7 +627,7 @@ export class NetworkManager{
 	}
 
 	async GetConfig(id){
-		console.log('Try to get user by ID', id)
+		//console.log('Try to get user by ID', id)
 		return this.axiosInstance
 			.get(`craft_shake_auth/config/${id}/`)
 			.then(response=>{

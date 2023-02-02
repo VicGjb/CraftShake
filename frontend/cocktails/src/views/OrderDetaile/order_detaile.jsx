@@ -16,7 +16,7 @@ export function OrderDetaile(){
     useEffect(() => {
         network_manager.get_menus_list(placeId)
             .then(response => {
-                    console.log(response)
+                    //console.log(response)
                     setMenus(response);
                     setLoaded(true);
             })

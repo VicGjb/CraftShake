@@ -20,13 +20,13 @@ export function AddProduct({setAddProductActive}) {
 		e.preventDefault()
         network_manager.create_product(form)
 			.then(response => {
-				console.log(response);
+				//console.log(response);
 				setProduct([...product, response.data]);
 				setForm(defaultForm);
-                console.log(form)
+                //console.log(form)
 			})
 			.catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});		
         window.location.reload();

@@ -20,10 +20,10 @@ export function ManagerCard({manager}){
         networkManager.delete_manager(manager.id)
             .then(response =>{
                 managersContext.setManagersList(response)
-                console.log('manager deleted',response);
+                //console.log('manager deleted',response);
             })
             .catch(error=>{
-                console.log(error);
+                //console.log(error);
                 throw error;
             });
             setDelete_active(false)

@@ -11,12 +11,12 @@ export function AuthLayout(){
     let mainContext = useManeContext()
    
     useEffect(()=>{
-        console.log('HEYYY')
+        //console.log('HEYYY')
     })
 
     if (isLoggedIn){
         return <Outlet/>
     }else{
-        console.log('hey')
+        //console.log('hey')
     }
 }

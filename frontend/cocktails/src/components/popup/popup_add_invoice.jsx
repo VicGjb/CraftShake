@@ -25,15 +25,15 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active,setIn
 
 
     function submitHandler(form){
-        console.log('submit_form',form)
+        //console.log('submit_form',form)
         network_manager.create_invoice(form)
             .then(response=>{
-                console.log('sss',response);
+                //console.log('sss',response);
                 setInvoices(response.data)
                 setAdd_invoice_active(false)
             })
             .catch(error => {
-                console.log('Iam ERROR',error);
+                //console.log('Iam ERROR',error);
                 raiseErrorMessage()
                 throw error;
             });
@@ -58,7 +58,6 @@ export function PopupAddInvoice({add_invoice_active, setAdd_invoice_active,setIn
                 <Formik
                      initialValues={form}
                      onSubmit={values=>{
-                         console.log('hey hey',values)
                          submitHandler(values)
                      }}
                      validationSchema = {Yup.object({

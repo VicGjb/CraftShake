@@ -14,12 +14,12 @@ export function PopupUploadProductPhoto({upload_product_photo_active, setUploadP
     function newFile(){
       network_manager.upload_photo_product(productId, uploadData)
         .then(response => {
-          console.log(`Success`,response);
+          //console.log(`Success`,response);
           setProduct(response.data)
           setUploadProductPhotoActive(false)
         })
         .catch(error => {
-          console.log(error);
+          //console.log(error);
           throw error
         });
     }

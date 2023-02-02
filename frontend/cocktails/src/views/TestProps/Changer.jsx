@@ -7,7 +7,7 @@ export function Changer({rows, setRows}){
 
     function onClick(){
         setRows(rows =>[...rows, 'test'])
-        console.log('Add row', rows)
+        //console.log('Add row', rows)
     }
 
     return(

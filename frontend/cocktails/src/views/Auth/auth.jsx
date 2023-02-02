@@ -14,7 +14,7 @@ export function Auth(){
 
     function changeHendler(e){
         setForm({...form, [e.target.name]:e.target.value})
-        console.log('form',form)
+        //console.log('form',form)
     }
 
     function submitHendler(e){
@@ -22,7 +22,7 @@ export function Auth(){
         axios
             .post(`http://127.0.0.1:8000/auth/token/login/`,form)
             .then(response=>(
-                console.log('login',response)
+                //console.log('login',response)
             ))
             .then(
               navigate(`/placeList`)  

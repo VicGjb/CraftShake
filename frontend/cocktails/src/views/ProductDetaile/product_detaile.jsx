@@ -30,18 +30,18 @@ export function ProductDetaile(){
         .then(product => { 
                 setProduct(product);
                 setIsLoaded(true);
-                console.log(product)
+                //console.log(product)
             })
         }, [productId])
 
     function deleteProduct(){
         network_manager.delete_product(productId)
         .then(response=>{
-            console.log('product deleted',response);
+            //console.log('product deleted',response);
             navigate(`/products`)
         })
         .catch(error=>{
-            console.log(error);
+            //console.log(error);
             throw error;
         });
         

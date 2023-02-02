@@ -14,11 +14,11 @@ export function UploadProductFile ()  {
       uploadData.append('photo',file);  
       network_manager.upload_photo_product(productId, uploadData)
         .then((result) => {
-          console.log(`Success` + result.data);
+          //console.log(`Success` + result.data);
           window.location.href = '/test';
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
         });
     }
 

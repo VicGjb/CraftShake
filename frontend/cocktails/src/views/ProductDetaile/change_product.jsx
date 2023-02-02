@@ -21,12 +21,12 @@ export function ChangeProduct({setChangeProductActive, product}) {
 		e.preventDefault()
         network_manager.change_product(product.id, form)
         .then(product => {
-            console.log(product);
+            //console.log(product);
             setForm(defaultForm);
-            console.log(form)
+            //console.log(form)
         })
         .catch(error => {
-            console.log(error);
+            //console.log(error);
             throw error;
         });		
         window.location.reload();

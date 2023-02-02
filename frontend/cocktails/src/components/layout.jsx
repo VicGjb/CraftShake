@@ -80,7 +80,7 @@ export const Layout = () =>{
             )
         }else if(refresh_token){
             if(user){
-                console.log('i have user in layout',user)
+                //console.log('i have user in layout',user)
                 if(user.role =='counter'){
                     return(
                         renderCounterView()
@@ -91,17 +91,17 @@ export const Layout = () =>{
                     )
                 }
             }else{
-                console.log('No User in Layout')
+                //console.log('No User in Layout')
                 let userId = auth_service.GetAccessTokenData().user_id
                 network_manager.GetConfig(userId)
                 .then(response =>{
-                    console.log('Got user in layout',response.volumes)
+                    //console.log('Got user in layout',response.volumes)
                     main_context.setUserInMainContext(response.user)
                     main_context.setVolumesInMainContext(response.volumes)
                     }
                 )
                 .catch(error=>{
-                    console.log('error',error)
+                    //console.log('error',error)
                     setFatalError(true)
                     throw error;
                     // let fatalError = document.getElementById("fatal_error")

@@ -12,19 +12,19 @@
 //     let [product, setProduct] = useState([]);
 //     let changeHandler = e => {
 // 		setForm({...form, [e.target.name]:e.target.value});
-//         console.log(form)
+//         //console.log(form)
 // 	}
 
 //     let submitHandler = e => {
 // 		e.preventDefault()
-//         console.log(form)
+//         //console.log(form)
 //         axios
 // 			.post('http://127.0.0.1:8000/api/counter/menu-position/create/', form)
 // 			.then(response => {
-// 				console.log(response);
+// 				//console.log(response);
 // 			})
 // 			.catch(error => {
-// 				console.log(error);
+// 				//console.log(error);
 // 				throw error;
 // 			});		
 // 	}
@@ -35,7 +35,7 @@
 // 		  url: 'http://127.0.0.1:8000/api/counter/menu/'
 // 		})
 //         .then(response => {setMenu(response.data.results);
-//             console.log(response.data.results);
+//             //console.log(response.data.results);
 //         })
 // 	  }, [])
 
@@ -45,7 +45,7 @@
 // 		  url: 'http://127.0.0.1:8000/api/counter/product/'
 // 		})
 //         .then(response => {setProduct(response.data.results);
-//             console.log(response.data.results);
+//             //console.log(response.data.results);
 //         })
 // 	  }, [])
 

@@ -17,18 +17,18 @@ export function AddMenu({ setAdd_menu_active}) {
     let navigate = useNavigate();
     let changeHandler = e => {
 		setForm({...form, [e.target.name]:e.target.value});
-        console.log(form)
+        //console.log(form)
 	}
 
     let submitHandler = e => {
 		e.preventDefault()
-        console.log(form)
+        //console.log(form)
         network_manager.create_menu(form)
 			.then(response => {
-				console.log(response);
+				//console.log(response);
 			})
 			.catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});	
             navigate(`/${placeName}/${placeId}/menus`);   

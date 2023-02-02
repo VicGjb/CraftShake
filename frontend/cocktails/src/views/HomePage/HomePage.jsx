@@ -13,7 +13,7 @@ export function HomePage(){
     let user = mainContext.getUserFromMainContext()
 
     useEffect(()=>{
-        console.log('Hello im on the HomePage')
+        //console.log('Hello im on the HomePage')
   
         if(!user){
             return navigate('/login')

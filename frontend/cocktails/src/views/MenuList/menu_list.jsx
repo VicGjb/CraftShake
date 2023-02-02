@@ -23,7 +23,7 @@ export function MenuList(){
         network_manager.get_menus_list(placeId)
             .then((menus) => {
                 setMenuList(menus);
-                console.log('Menus', menus);
+                //console.log('Menus', menus);
         })},[placeId])
 
     function renderAddMenuButton(){

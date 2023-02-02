@@ -9,7 +9,7 @@ export function CurrentMenuChackBox({menu, form}){
 
     function renderMenuCurrentState(){
         if (current){
-            console.log(menu)
+            //console.log(menu)
             return(
                 <div className="menu_card_slot current green" onClick={setNotCurent}>
                      <RegularButton lable={'Current'}/>
@@ -28,11 +28,11 @@ export function CurrentMenuChackBox({menu, form}){
         setCurrent(false)
         network_manager.update_menu(menu.id,{["is_current_menu"]:false})
             .then(response=>{
-                console.log(response);
-                console.log('result',form);
+                //console.log(response);
+                //console.log('result',form);
                 })
                 .catch(error => {
-                    console.log(error);
+                    //console.log(error);
                     throw error;
                 });     
     }
@@ -40,11 +40,11 @@ export function CurrentMenuChackBox({menu, form}){
         setCurrent(true)
         network_manager.update_menu(menu.id,{["is_current_menu"]:true})
             .then(response=>{
-                console.log(response);
-                console.log('result',form);
+                //console.log(response);
+                //console.log('result',form);
                 })
                 .catch(error => {
-                    console.log(error);
+                    //console.log(error);
                     throw error;
                 });     
     }

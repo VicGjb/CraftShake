@@ -19,17 +19,17 @@ export function AddManagerOfPlace({place, setAdd_manager_active}) {
 
     let changeHandler = e => {
 		setForm({...form, [e.target.name]:e.target.value});
-        console.log(form)
+        //console.log(form)
 	}
     let submitHandler = e => {
 		e.preventDefault()
         network_manager.create_manager(form)
 			.then(response => {
                 managersContext.setManagersList(response)
-				console.log(response);
+				//console.log(response);
 			})
 			.catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});		
             setAdd_manager_active(false)

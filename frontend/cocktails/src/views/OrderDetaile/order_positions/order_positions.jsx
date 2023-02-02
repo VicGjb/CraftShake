@@ -23,7 +23,7 @@ export function OrderPositions(){
 
     function renderAddCoctailButton(){
         if (order){
-            console.log('order!!',order)
+            //console.log('order!!',order)
             if (order.open_to_customer || (user.role==='counter' && order.state!=='Delivered' && order.state!=='Paid')){
                 return(
                     <div className="add_cocktails_btn" onClick={()=>{setAdd_cocktails_active(true)}}>

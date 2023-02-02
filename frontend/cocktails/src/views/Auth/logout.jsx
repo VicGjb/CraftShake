@@ -8,7 +8,7 @@ export function Logout() {
     function Logout_1(){
         network_manager.LogOut()
         .then(response => {
-            console.log(response)
+            //console.log(response)
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
             window.location.href = '/login/' 

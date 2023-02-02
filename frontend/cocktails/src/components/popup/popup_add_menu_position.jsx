@@ -31,7 +31,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
         network_manager.get_product_list()
             .then(products => {
                 setProducts(products);
-                console.log(products);
+                //console.log(products);
                 })
 	  }, [])
 
@@ -46,11 +46,11 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
         e.preventDefault()
         network_manager.create_menu_position(form)
 			.then(response => {
-				console.log('responce',response);
+				//console.log('responce',response);
                 menuDetaileContext.addMenuPosition(response.data)
 			})
 			.catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});	
             setForm(defaultForm)
@@ -59,7 +59,7 @@ export function PopupAddMenuPosition({add_menu_position_active, setAdd_menu_posi
     }
     function changeHandler(e){
         setForm({...form, [e.target.name]:e.target.value});
-        console.log(form)
+        //console.log(form)
     }
 
     function getProductListByName(e){

@@ -24,14 +24,14 @@
 //           url: `http://127.0.0.1:8000/api/counter/order/1/` 
 //             }).then(response => { 
 //                 setOrder(response.data);
-//                 console.log(response.data);
-//                 console.log('order', order);
+//                 //console.log(response.data);
+//                 //console.log('order', order);
 //                 axios({
 //                     method: 'GET',
 //                     url: `http://127.0.0.1:8000/api/counter/menu/?place=${response.data.place}`
 //                   }).then(response =>{
 //                       setMenu(response.data.results);
-//                       console.log(response.data.results);
+//                       //console.log(response.data.results);
 //                   })
 //         })
 //     }, [orderId])
@@ -39,26 +39,26 @@
     
 //     function getPositions(props){
 //         let menuId = props
-//         console.log('Heyyy',menuId)
+//         //console.log('Heyyy',menuId)
 //         axios({
 //             method:'GET',
 //             url: `http://127.0.0.1:8000/api/counter/menu-position/?menu=${menuId}`
 //         }).then(response =>{
 //             setPositions(response.data.results);
-//             console.log('PIZDA')
+//             //console.log('PIZDA')
 //         })
 //     }
 
 
 //     function getPosition(props){
-//         console.log('getPoss')
+//         //console.log('getPoss')
 //         let positionId = props
 //         axios({
 //             method:'GET', 
 //             url:`http://127.0.0.1:8000/api/counter/menu-position/${positionId}/`
 //         }).then(response =>{
 //             setPosition(response.data);
-//             console.log('GetPoss',response.data)
+//             //console.log('GetPoss',response.data)
 //         })
 //     }
 //     function calculateTotal(quantity){
@@ -68,31 +68,31 @@
 //         )
 //     }
 //     let changeMenu = e =>{
-//         console.log('ChengeMenu')
+//         //console.log('ChengeMenu')
 //         getPositions(e.target.value);
 //         setForm({...form, [e.target.name]:e.target.value});
 //     }
 //     let changePosition = e =>{
-//         console.log('ChPos');
+//         //console.log('ChPos');
 //         getPosition(e.target.value);
 //         setForm({...form, [e.target.name]:e.target.value, ['quantity']:0, ['item_price']:0});   
 //     }
 //     let changeQuantity = e =>{  
 //         let a=calculateTotal(e.target.value);
 //         setForm({...form, [e.target.name]:e.target.value, ['item_price']:a});
-//         console.log('total',a)
+//         //console.log('total',a)
 //     }
 //     let submitHandler = e => {
 // 		e.preventDefault()
-//         console.log(form)
+//         //console.log(form)
 //         axios
 // 			.post('http://127.0.0.1:8000/api/counter/order-item/create/', form)
 // 			.then(response => {
-// 				console.log(response);
+// 				//console.log(response);
 //                 window.location.reload();
 // 			})
 // 			.catch(error => {
-// 				console.log(error);
+// 				//console.log(error);
 // 				throw error;
 // 			});		
 // 	}

@@ -11,9 +11,9 @@ export function PersonalAccount(){
     let user = main_context.getUserFromMainContext()
 
     useEffect(()=>{
-            console.log('user on personal page',user)
+            //console.log('user on personal page',user)
             if (user.place){
-                console.log('place',user.place)
+                //console.log('place',user.place)
             navigate(`${user.place}/main`)
             }
     },[userId])

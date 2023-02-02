@@ -26,11 +26,11 @@ export function PopupAddMenu({add_menu_active, setAdd_menu_active ,setMenuList})
 
         network_manager.create_menu(form)
 			.then(response => {
-				console.log(response);
+				//console.log(response);
                 setMenuList(response.data)
 			})
 			.catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});	
         setAdd_menu_active(false)

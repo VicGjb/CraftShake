@@ -30,7 +30,7 @@ export function InvoiceDetaileContent(){
             })
             .catch(error=>{
                 setLoaded(false)
-                console.log('error', error)
+                //console.log('error', error)
             })
     }, [invoiceId])
     
@@ -52,7 +52,7 @@ export function InvoiceDetaileContent(){
 
         if(user.role==='counter'){
             if (invoice.is_vat){
-                console.log('VAT',invoiceDetaileContext.getInvoice.is_vat)
+                //console.log('VAT',invoiceDetaileContext.getInvoice.is_vat)
                 return(
                     <div className="remove_vat_button_wrapper" onClick={removeVat}>
                         <RegularButton lable={'Remove VAT'}/>
@@ -73,7 +73,7 @@ export function InvoiceDetaileContent(){
         network_manager.get_invoice_pdf(invoiceId)
         .then(response=>{
             fileDownload(response.data, `Invoice ${invoice.place_name} on ${invoice.date}.pdf`);
-            console.log('RESPONCE PFD', response)
+            //console.log('RESPONCE PFD', response)
         }
         )
     }

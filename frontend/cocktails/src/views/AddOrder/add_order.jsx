@@ -14,19 +14,19 @@
 
 //     let changeHandler = e => {
 // 		setForm({...form, ['date']:e.target.value, ['place']:place.id});
-//         console.log(form)
+//         //console.log(form)
 // 	}   
 
 //     let submitHandler = e => {
 // 		e.preventDefault()
-//         console.log(form)
+//         //console.log(form)
 //         axios
 // 			.post('http://127.0.0.1:8000/api/counter/order/create/', form)
 // 			.then(response => {
-// 				console.log(response);
+// 				//console.log(response);
 // 			})
 // 			.catch(error => {
-// 				console.log(error);
+// 				//console.log(error);
 // 				throw error;
 // 			});		
 // 	}

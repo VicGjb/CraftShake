@@ -8,16 +8,16 @@ export function MenuDetailePositionRow({position}){
     let network_manager = new NetworkManager()
 
     useEffect(()=>{
-        console.log('Menu Position Row Photo', position.photo)
+        //console.log('Menu Position Row Photo', position.photo)
     })
 
     function DeletePosition(){
         network_manager.delete_menu_position(position.id)
             .then(responce =>{
-                console.log(responce);
+                //console.log(responce);
             })
             .catch(error => {
-                console.log(error);
+                //console.log(error);
                 throw error;
             })
             window.location.reload();

@@ -11,7 +11,7 @@ export function PlaceListMobile(){
     let networkManager = new NetworkManager()
     
     function getPlaceListByName(e){
-        console.log('hey')
+        //console.log('hey')
         if (e.target.value === ''){
             networkManager.get_place_list()
             .then(places => {

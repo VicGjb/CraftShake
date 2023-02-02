@@ -39,15 +39,15 @@ export function SignIn() {
     }
 
     useEffect(() => {
-        console.log('Check user in login',main_context.getUserFromMainContext())
+        //console.log('Check user in login',main_context.getUserFromMainContext())
         if(user){
-            console.log('i have user in login',user)
+            //console.log('i have user in login',user)
             if (user.role == 'counter'){
-                console.log('go to placeList')  
+                //console.log('go to placeList')  
                 navigate(`/placeList/`)
                 return;
             }else{
-                console.log('go to my id',user)
+                //console.log('go to my id',user)
                 navigate(`/customer/${user.id}/`)
                 return;
             }
@@ -58,7 +58,7 @@ export function SignIn() {
                     .then((response)=>{
                         main_context.setUserInMainContext(response.user)
                         main_context.setVolumesInMainContext(response.volumes)
-                        console.log('Seting user in login')
+                        //console.log('Seting user in login')
                 })
             }
         }
@@ -78,13 +78,13 @@ export function SignIn() {
     )
 
 	function handleSubmit(form){
-		console.log(form);
+		//console.log(form);
         network_manager.SingIn(form)
         .then(()=>{
             window.location.href='/'
         })  
         .catch(error => {
-            console.log('dsdscsdcsd',error.response.status);
+            //console.log('dsdscsdcsd',error.response.status);
             if (error.response.status == 401){
                 setMessage('Wrong login/password') 
                 }

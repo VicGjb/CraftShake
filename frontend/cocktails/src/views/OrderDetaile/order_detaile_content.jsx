@@ -45,13 +45,13 @@ export function OrderDetaileContent({orderId, menus}){
 
 
     function dateChangeHendler(e){
-        console.log(e.target.value)
+        //console.log(e.target.value)
         setDateOrder(e.target.value)
     }
 
     function renderNewOrderDate(order,dateNow){
         if (!order){
-            console.log(dateNow)
+            //console.log(dateNow)
             return(
             <div className="add_order_date">
                 <div className="add_order_date_container">
@@ -118,7 +118,7 @@ export function OrderDetaileContent({orderId, menus}){
             return(
                 <div className="order_detaile_menu_wrapper" key={menu.id}>
                     <div className="order_detaile_menu_title">
-                        {menu.name}{console.log('Menu',menu)}
+                        {menu.name}
                     </div>
                     <div className="order_detaile_menu_positions">
                         {menu.position_in_menu.map(position=>(

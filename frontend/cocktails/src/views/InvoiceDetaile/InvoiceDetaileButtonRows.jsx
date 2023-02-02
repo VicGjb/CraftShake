@@ -54,15 +54,15 @@ export function DeleteInvoiceButton(){
     let [delete_active,setDelete_active] = useState(false)
 
     function DeleteInvoice(){
-        console.log('Order ID', invoice.id)
+        //console.log('Order ID', invoice.id)
         if(invoice.state=='Created'){
             networkManager.delete_invoice(invoice.id)
                 .then(response =>{
-                    console.log('invoice was deleted', response);
+                    //console.log('invoice was deleted', response);
                     navigate(`/${placeName}/${placeId}/invoices`,{replace:false})
                 })
                 .catch(error=>{
-                    console.log(error);
+                    //console.log(error);
                     throw error;
                 });
                 
@@ -96,10 +96,10 @@ export function UpdateInvoiceButton(){
     function updateInvoice(){
         networkManager.update_invoice(invoice.id, form)
             .then(response => {
-				console.log('UPDATE INVOICE',response);
+				//console.log('UPDATE INVOICE',response);
             })
             .catch(error => {
-				console.log(error);
+				//console.log(error);
 				throw error;
 			});
         navigate(`/${placeName}/${placeId}/invoices`, {replace:false})
