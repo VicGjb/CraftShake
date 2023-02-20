@@ -38,10 +38,13 @@ export function PlaceDetaile(){
         network_manager.get_place_detaile(placeId)
         .then(place_detaile => {  
                 setPlace(place_detaile);
+                mainContext.analyticManager.setEventData('Place Detaile', {'place id':place_detaile.id, 'place name':place_detaile.name })
                 setLoaded(true);
         })
         mainContext.setOrderBackUrl(`/${placeName}/${placeId}/detaile`)
+        
     }, [placeId])
+
 
     function DeletePlace(){
         network_manager.delete_place(placeId)
@@ -54,6 +57,27 @@ export function PlaceDetaile(){
             throw error;
         });
     }
+
+    function openPopupEditPlace(){
+        setAdd_place_active(true)
+        mainContext.analyticManager.setEventData('Place Detaile - Edit place button',{}) 
+    }
+    function openPopupDeletePlace(){
+        setDelete_active(true)
+        mainContext.analyticManager.setEventData('Place Detaile - Delete place button',{})
+    }
+    function openPopupAddManager(){
+        setAdd_manager_active(true)
+        mainContext.analyticManager.setEventData('Place Detaile - Add manager button',{})
+    }
+    function openPopupAddMenu(){
+        setAdd_menu_active(true)
+        mainContext.analyticManager.setEventData('Place Detaile - Add menu button',{})
+    }
+    function openPopupAddInvoice(){
+        setAdd_invoce_active(true)
+        mainContext.analyticManager.setEventData('Place Detaile - Add invoice button',{})
+    }    
 
     function PlaceDetileView(){
         if(user.role === 'counter'){
@@ -70,12 +94,12 @@ export function PlaceDetaile(){
                                     <RegularButton lable={'Back'}/>
                                 </Link>
                             </div>
-                            <div className="service_row_button_wrapper delete" onClick={()=>setDelete_active(true)}>
+                            <div className="service_row_button_wrapper delete" onClick={openPopupDeletePlace}>
                                 <RegularButton lable={'Delete place'} />
                             </div>
 
-                            <div className="service_row_button_wrapper change" onClick={()=>setAdd_place_active(true)}>
-                                <RegularButton lable={'Change place'} />
+                            <div className="service_row_button_wrapper change" onClick={openPopupEditPlace}>
+                                <RegularButton lable={'Edit place'} />
                             </div>      
                     </div>
                     <div className="main_buttons_wrapper">
@@ -93,7 +117,7 @@ export function PlaceDetaile(){
                             </div>
                             <div className="main_btn_container">
                                 <MenusMainBtn place={place}/>
-                                <div className="place_detaile_button_wrapper" onClick={()=>setAdd_menu_active(true)}>
+                                <div className="place_detaile_button_wrapper" onClick={openPopupAddMenu}>
                                     <AddButton lable={'Add menu'} />
                                 </div>
                             </div>
@@ -102,13 +126,13 @@ export function PlaceDetaile(){
                         <div className="place_detaile_main_buttons_wrapper">
                             <div className="main_btn_container">
                                 <ManagersMainBtn place={place}/>
-                                <div className="place_detaile_button_wrapper" onClick={()=>setAdd_manager_active(true)}>
+                                <div className="place_detaile_button_wrapper" onClick={openPopupAddManager}>
                                     <AddButton lable={'Add manager'} />
                                 </div>
                             </div>
                             <div className="main_btn_container">
                                 <InvoicesMainBtn place={place}/>
-                                <div className="place_detaile_button_wrapper" onClick={()=>setAdd_invoce_active(true)}>
+                                <div className="place_detaile_button_wrapper" onClick={openPopupAddInvoice}>
                                     <AddButton lable={'Add invoice'} />
                                 </div>
                             </div>  
@@ -116,12 +140,12 @@ export function PlaceDetaile(){
                     </div>
                     <div className="plce_detile_footer"></div>
                     <div className="mobile_service_btn_row">
-                        <div className="service_row_button_wrapper delete" onClick={()=>setDelete_active(true)}>
+                        <div className="service_row_button_wrapper delete" onClick={openPopupDeletePlace}>
                             <RegularButton lable={'Delete place'} />
                         </div>
 
-                        <div className="service_row_button_wrapper change" onClick={()=>setAdd_place_active(true)}>
-                            <RegularButton lable={'Change place'} />
+                        <div className="service_row_button_wrapper change" onClick={openPopupEditPlace}>
+                            <RegularButton lable={'Edit place'} />
                         </div>   
                     </div>
 

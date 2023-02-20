@@ -36,7 +36,11 @@ class Place(models.Model):
         default=True,
         verbose_name='Current place'
     )
-    
+    reference_code = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
 
     def __str__ (self)  -> str:
         return self.name

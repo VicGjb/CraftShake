@@ -562,11 +562,12 @@ export class NetworkManager{
 
 
 // Auth
-	async SingIn(from){
+	async SingIn(form){
+		console.log('sign in', form)
 		return this.axiosInstance
 			.post(`token/`, {
-				username: from.username,
-				password: from.password,
+				email: form.email,
+				password: form.password,
 			})
 			.then((response) => {
 				localStorage.setItem('access_token', response.data.access);
@@ -594,26 +595,47 @@ export class NetworkManager{
 	GoogleLogIn(){
 		// //console.log('URL',window.location.href)
 		let url = new URL(window.location.href)
-		let host = url.host
-		// //console.log('host',host)																													 407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com
-		let result = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=https://${host}/get_code&prompt=consent&response_type=code&client_id=407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline`
+		let host = url.host																												 
+		let result = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=${process.env.REACT_APP_GOOGLE_AUTH_URL_SSL}://${host}/get_code&prompt=consent&response_type=code&client_id=407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline`
 		return result
 	}
 
-	async GooglePain(code){
+	async GooglePain(code, referralCode){
+
 		let form = {  
             "access_token": "",	
             "code": code,
-            "id_token": ""
+            "id_token": "",
+			"referral_code":referralCode,
         }
+		console.log('form',form)
 		return this.axiosInstance
-			.post(`dj-rest-auth/google/`,form)
+			.post(`craft_shake_auth/dj-rest-auth/google/`, form)
 			.then((response)=>{
+				localStorage.removeItem('referralCode');
 				localStorage.setItem('access_token', response.data.access_token);
 				localStorage.setItem('refresh_token', response.data.refresh_token);
 				this.axiosInstance.defaults.headers['Authorization'] =
 						'JWT ' + localStorage.getItem('access_token');
 				return response
+			})
+	}
+
+
+	async ReferralRegistration(form){
+		return this.axiosInstance
+		.post(`craft_shake_auth/referral-registration/`,form)
+		.then((response) => {
+			console.log('response_1',response)
+			localStorage.removeItem('referralCode');
+			return response.data
+		})
+	}
+	async CreateReferralUrl(form){
+		return this.axiosInstance
+			.post(`craft_shake_auth/referral-code/create/`,form)
+			.then((response)=>{
+				return response.data
 			})
 	}
 
@@ -627,7 +649,7 @@ export class NetworkManager{
 	}
 
 	async GetConfig(id){
-		//console.log('Try to get user by ID', id)
+		console.log('Try to get user by ID', id)
 		return this.axiosInstance
 			.get(`craft_shake_auth/config/${id}/`)
 			.then(response=>{

@@ -134,8 +134,10 @@ COMPRESS_PRECOMPILERS = (
 SITE_ID=1
 
 # Provider specific settings
+
 SOCIALACCOUNT_AUTO_SIGNUP = True
 # ACCOUNT_ADAPTER='Cocktails.servise.account_adapter.DefaultAccountAdapterCustom'
+SOCIALACCOUNT_ADAPTER = 'craft_shake_auth.views.CustomSocialAccountAdapter'
 SOCIALACCOUNT_LOGIN_ON_GET=True
 JWT_AUTH_COOKIE = 'auth-token'
 JWT_AUTH_REFRESH_COOKIE = 'refresh_token'
@@ -154,6 +156,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        # 'craft_shake_auth.serializers.MyTokenObtainPairSerializer'
     ),
     
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
@@ -172,7 +175,7 @@ REST_FRAMEWORK = {
 # Djoser
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}', # change to email?
     'ACTIVATION_URL': '#/activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'SERIALIZERS': {},

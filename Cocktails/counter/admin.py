@@ -42,7 +42,7 @@ class UserInLine(admin.TabularInline):
     fieldsets = (
         (None, {
             'fields':(
-                (('place', 'username', 'email'),)
+                (('place', 'email'),)
             )
         }),
     )

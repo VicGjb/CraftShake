@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { AnalyticManager } from "./AnalyticManager";
+
 
 let MainContext = React.createContext();
 
@@ -19,7 +21,7 @@ export function MainContextProvider({children}){
     let [place,setPlace] = useState({})
     let [volumes, setVolumes] = useState([]);
     let placeHolderPhoto = 'https://craftshake.s3.eu-central-1.amazonaws.com/Product_photo/cocktailDefault.jpeg'
-    
+    let analyticManager = new AnalyticManager()
     function goBack(){
         //console.log('-1')
     }
@@ -28,6 +30,8 @@ export function MainContextProvider({children}){
     // User info
     function setUserInContext(param){
        setUser(param)
+       analyticManager.setUserId(param.id)
+       analyticManager.setUserProperties({'email': param.email})
        return
     }
     function getUserFromContext(){
@@ -84,7 +88,8 @@ export function MainContextProvider({children}){
             getVolumesFromMainContext:getVolumesFromContext,
             getVolomeNameFromMainContext:getVolumeNameFromContext,
             getDefaultVolume:getDefaultVolume,
-            getPhoto:getPhoto
+            getPhoto:getPhoto,
+            analyticManager:analyticManager
         }}>
             {children}
         </MainContext.Provider>

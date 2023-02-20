@@ -7,7 +7,7 @@ import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import { Formik, Form, Field } from 'formik';
 import '../../styles/popup_add_place.scss'
 
-export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces, newPlace}){
+export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces, newPlace,setPopupAddMenuPlaceListActive}){
     let emptyForm = {
         name:'',
         address:'',
@@ -75,12 +75,6 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
         return error;
     }
 
-
-
-
-
-
-
     let changeHandler = e => {
 		setForm({...form, [e.target.name]:e.target.value})
         //console.log('form',form)
@@ -90,7 +84,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
         if(newPlace){
             networkManager.create_place(form)
 			.then(response => {
-                setPlaces(response)
+                mainContext.setPlaces(response)
 				// setForm(emptyForm);
 			})
 			.catch(error => {
@@ -98,7 +92,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
 				throw error;
 			});		
             setAdd_place_active(false)
-
+            setPopupAddMenuPlaceListActive(false)
         }else{
             networkManager.change_place(placeContext.id, form)
             .then(response => {
@@ -112,19 +106,28 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
             setAdd_place_active(false)
         }        
 	}
+    function closePopup(){
+        // if (setPopupAddMenuPlaceListActive){
+        //     console.log('close everything')
+        //     setPopupAddMenuPlaceListActive(false)
+        // }
+        setAdd_place_active(false)
+        mainContext.analyticManager.setEventData(newPlace?'Place List - Close add place':'Place Detaile - Close Edit Place')
+        
+    }
 
     return(
-        <div className={add_place_active ? 'popup_mobile_wrapper active' : 'popup_mobile_wrapper'} onClick={()=>{setAdd_place_active(false)}}>
+        <div className={add_place_active ? 'popup_mobile_wrapper active' : 'popup_mobile_wrapper'} onClick={closePopup}>
             <div className="popup_mobile_content add_place" onClick={e => e.stopPropagation()}>
                 <div className="popup_filter_sevice_button_wrapper">
-                    <div className="popup_filter_close_button" onClick={()=>{setAdd_place_active(false)}}>
+                    <div className="popup_filter_close_button" onClick={closePopup}>
                         <CloseIcon className='close_button_icon'/>
                     </div> 
                 </div>
                 
                 
                 <div className="popup_title add_place">
-                    {newPlace? `Add new place`: `Change place " ${placeContext.name} "`}
+                    {newPlace? `Add new place`: `Edit place " ${placeContext.name} "`}
                 </div>
 
                 <Formik

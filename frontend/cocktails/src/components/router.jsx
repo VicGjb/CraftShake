@@ -24,10 +24,13 @@ import { AuthLayout } from "./auth_layout";
 import { GetCodeGoogleLogin } from "../views/Auth/get_code_google_login";
 import { SignIn } from "../views/Auth/login";
 import { PersonalAccount } from "../views_customer/personal_account";
+import { ReferralRegistration } from "../views/Auth/ReferralRegistration";
 import { HomePage } from "../views/HomePage/HomePage";
 import { MainPage } from "../views/TestProps/MainPage";
 import { PageTracking } from "./analytic";
+
 export function Routing(){
+
     return(
         
         <Router>
@@ -58,6 +61,9 @@ export function Routing(){
                     <Route path='/' element={<HomePage/>} />
                 </Route> 
                 <Route path='login' element={<MainContextProvider><SignIn/></MainContextProvider>}/> 
+                {/* <Route path='reregistration/' element={<ReferralRegistration/>}/> */}
+                <Route path='reregistration/:referralCode' element={<ReferralRegistration/>}/>
+
                 <Route path='test' element={<MainPage/>}/>
                 <Route path='get_code' element={<GetCodeGoogleLogin/>}/>
             </Routes>

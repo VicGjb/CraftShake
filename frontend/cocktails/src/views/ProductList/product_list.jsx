@@ -49,7 +49,7 @@ export function ProductList(){
         return(
             <div className="product_list_wrapper">
                 <div className="greetings">
-                    Hello, {user.username}!
+                    Hello, {user.first_name}!
                 </div>
                 <div className="mobile_content">
                     <ProductListMobile products={products} setProducts={setProducts}/>

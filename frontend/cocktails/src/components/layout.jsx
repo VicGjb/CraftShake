@@ -96,8 +96,10 @@ export const Layout = () =>{
                 network_manager.GetConfig(userId)
                 .then(response =>{
                     //console.log('Got user in layout',response.volumes)
+
                     main_context.setUserInMainContext(response.user)
                     main_context.setVolumesInMainContext(response.volumes)
+
                     }
                 )
                 .catch(error=>{

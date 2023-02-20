@@ -7,6 +7,8 @@ import { PlaceListMobile } from "./place_list_mobile";
 import '../../styles/place_list.scss';
 import {ReactComponent as SearchBtn} from "../../svg/search.svg";
 import { Loading } from "../../components/loader";
+import { RegularButton } from "../../components/buttons/regular_button";
+import { PopupAddMenuPlaceList } from "../../components/popup/PopupAddMenuPlaceList";
 
 export function PlaceList(){
     let [place, setPlace] = useState([]);
@@ -16,14 +18,16 @@ export function PlaceList(){
     let main_context =  useManeContext()
     let user = main_context.getUserFromMainContext()
     let newPlace = true
+    let [popupAddMenuPlaceListActive, setPopupAddMenuPlaceListActive] = useState(false)
 
     useEffect(()=> {
         network_manager.get_place_list()
         .then(placeList=>{
             main_context.setPlaces(placeList)
-            setPlace(placeList);
+            
             setLoaded(true);
         })
+        main_context.analyticManager.setEventData('Place List',{'user ': user.role,})
     }, [])
   
     function getPlaceListByName(e){
@@ -38,7 +42,7 @@ export function PlaceList(){
         network_manager.getPlaceByName(e.target.value)
             .then(placeList=>{
                 main_context.setPlaces(placeList);
-                setPlace(placeList);
+                
             })
     }
 
@@ -47,14 +51,13 @@ export function PlaceList(){
         return(
             <div className="place_list_wrapper">
                 <div className="greetings">
-                    Hello dear, {user.username}!
+                    Hello dear, {user.first_name}!
                 </div>
 
                 <div className="mobile_content">
                     <PlaceListMobile/>
                 </div>
-
-                <div className="monitor_content">
+                <div className="monitor_content">              
                     <div className="search_wrapper">
                         <input 
                                 type="text" 
@@ -64,19 +67,17 @@ export function PlaceList(){
                         <SearchBtn className='search_icon'/>
                     </div>
                     <div className="place_list_cards_buttons">
-                        {place.map(p => (
+                        {main_context.getPlaces.map(p => (
                                     <PlaceCardBtn p={p} key={p.id}/>
                                 ))}    
                     </div>
                 </div>
-                    
-                <div className="add_place_button" onClick={()=>{setAdd_place_active(true)}}></div>  
-                <PopupAddPlace
-                    add_place_active={add_place_active} 
-                    setAdd_place_active={setAdd_place_active} 
-                    setPlaces={setPlace}
-                    newPlace={newPlace}
-                    />
+                <div className="add_place_button" onClick={()=>{setPopupAddMenuPlaceListActive(true)}}></div>  
+
+                <PopupAddMenuPlaceList
+                    popupAddMenuPlaceListActive = {popupAddMenuPlaceListActive}
+                    setPopupAddMenuPlaceListActive = {setPopupAddMenuPlaceListActive}
+                />
             </div>        
         )
     }
