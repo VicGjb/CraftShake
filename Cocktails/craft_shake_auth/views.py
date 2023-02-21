@@ -186,7 +186,8 @@ class CraftShakeGoogleLogin(SocialLoginView):
 
 class GoogleLogin(CraftShakeGoogleLogin):
     adapter_class = GoogleOAuth2Adapter
-    callback_url = os.environ.get('GOOGLE_CALLBACK_URL')
+    callback_url = 'https://craft-shake.com/get_code'
+    # callback_url = os.environ.get('GOOGLE_CALLBACK_URL')
     client_class = OAuth2Client
 
     def post(self, request, *args, **kwargs):
