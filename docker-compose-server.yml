@@ -33,7 +33,9 @@ services:
       environment:
         HOST: "0.0.0.0"  
         REACT_APP_BASE_URL: ${REACT_APP_BASE_URL}
-        GOOGLE_ANALYTICS_ID: ${GOOGLE_ANALYTICS_ID}
+        REACT_APP_GOOGLE_ANALYTICS_ID: ${REACT_APP_GOOGLE_ANALYTICS_ID}
+        REACT_APP_DOMAIN: ${REACT_APP_DOMAIN}
+        REACT_APP_GOOGLE_AUTH_URL_SSL: ${REACT_APP_GOOGLE_AUTH_URL_SSL}
       depends_on:   
         - backend  
 
@@ -55,6 +57,7 @@ services:
         AWS_STORAGE_BUCKET_NAME: ${AWS_STORAGE_BUCKET_NAME}
         SECRET_KEY: ${SECRET_KEY}
         ENVIRONMENT: ${ENVIRONMENT}
+        GOOGLE_CALLBACK_URL: ${GOOGLE_CALLBACK_URL}
       volumes:
         - static_volume:/usr/local/lib/python3.10/site-packages/django/contrib/admin/static
 
