@@ -137,7 +137,7 @@ SITE_ID=1
 
 SOCIALACCOUNT_AUTO_SIGNUP = True
 # ACCOUNT_ADAPTER='Cocktails.servise.account_adapter.DefaultAccountAdapterCustom'
-SOCIALACCOUNT_ADAPTER = 'craft_shake_auth.views.CustomSocialAccountAdapter'
+# SOCIALACCOUNT_ADAPTER = 'craft_shake_auth.views.CustomSocialAccountAdapter'
 SOCIALACCOUNT_LOGIN_ON_GET=True
 JWT_AUTH_COOKIE = 'auth-token'
 JWT_AUTH_REFRESH_COOKIE = 'refresh_token'
