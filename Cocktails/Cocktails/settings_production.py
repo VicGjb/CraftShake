@@ -24,8 +24,6 @@ CSRF_COOKIE_DOMAIN='.craft-shake.com'
 CORS_ALLOWED_ORIGINS = [
     'https://craft-shake.com',
     'https://django.craft-shake.com',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:8000',
 ]
 
 DATABASES = {
