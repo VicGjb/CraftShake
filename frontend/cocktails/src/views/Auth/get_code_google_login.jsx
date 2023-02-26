@@ -11,26 +11,25 @@ export function GetCodeGoogleLogin(){
     let referralCode = localStorage.getItem('referralCode')
     
     useEffect(()=>{
-        // if (localStorage.getItem('referralCode')){
-        //     console.log('i have referance code', referralCode)
-        //     network_manager.GooglePain(code, referralCode)
-        //     .then((response)=>{
-        //     console.log('RESPONSE',response)
-        //     console.log('access_token',localStorage.getItem('access_token'))
-        //     console.log('refresh_token',localStorage.getItem('refresh_token'))
-        //     window.close()
-        // })
-        // }else{
-        //     console.log('i DONT have referance code', referralCode)
-        //     network_manager.GooglePain(code, '')
-        //     .then((response)=>{
-        //     console.log('RESPONSE',response)
-        //     console.log('access_token',localStorage.getItem('access_token'))
-        //     console.log('refresh_token',localStorage.getItem('refresh_token'))
-        //     window.close()
-        // })
-        // }
-        console.log('code', code)
+        if (localStorage.getItem('referralCode')){
+            console.log('i have referance code', referralCode)
+            network_manager.GooglePain(code, referralCode)
+            .then((response)=>{
+            console.log('RESPONSE',response)
+            console.log('access_token',localStorage.getItem('access_token'))
+            console.log('refresh_token',localStorage.getItem('refresh_token'))
+            window.close()
+        })
+        }else{
+            console.log('i DONT have referance code', referralCode)
+            network_manager.GooglePain(code, '')
+            .then((response)=>{
+            console.log('RESPONSE',response)
+            console.log('access_token',localStorage.getItem('access_token'))
+            console.log('refresh_token',localStorage.getItem('refresh_token'))
+            window.close()
+        })
+        }
         
     })
 
