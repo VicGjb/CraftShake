@@ -8,7 +8,6 @@ SECRET_KEY=os.environ.get("SECRET_KEY")
 
 DEBUG = True
 
-
 ALLOWED_HOSTS = [
     'craft-shake.com',
     'django.craft-shake.com',
