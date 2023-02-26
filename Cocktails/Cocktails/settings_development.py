@@ -4,7 +4,6 @@ load_dotenv()
 
 
 SECRET_KEY=os.environ.get("POSTGRES_DB")
-print(SECRET_KEY)
 DEBUG = True
 
 ALLOWED_HOSTS = [

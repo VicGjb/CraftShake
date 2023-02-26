@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SECRET_KEY=os.environ.get("SECRET_KEY")
-
+print(f'SECRET!!!!!! {SECRET_KEY}')
 
 DEBUG = True
 
