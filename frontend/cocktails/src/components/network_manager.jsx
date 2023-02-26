@@ -606,7 +606,7 @@ export class NetworkManager{
             "access_token": "",	
             "code": code,
             "id_token": "",
-			// "referral_code":referralCode,
+			"referral_code":referralCode
         }
 		console.log('form',form)
 		return this.axiosInstance
