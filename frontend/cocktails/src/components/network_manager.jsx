@@ -593,7 +593,6 @@ export class NetworkManager{
 	}
 
 	GoogleLogIn(){
-		// //console.log('URL',window.location.href)
 		let url = new URL(window.location.href)
 		let host = url.host		
 		console.log('host',host)																										 
