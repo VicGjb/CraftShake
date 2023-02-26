@@ -40,6 +40,6 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'test',
         'HOST': 'static.95.158.90.157.clients.your-server.de',
-        'PORT': '5433',
+        'PORT': '5432',
   }
 }
