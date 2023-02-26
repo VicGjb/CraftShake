@@ -8,7 +8,9 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-
+from .views import (
+    GoogleLogin
+)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/counter/', include('counter.urls')),
@@ -20,7 +22,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('accounts/', include('allauth.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    # path('api/dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
+    path('api/dj-rest-auth/google/', GoogleLogin.as_view(), name='google_login'),
 ]
 
 urlpatterns += doc_urls

@@ -1,6 +1,7 @@
 import os
 from .settings_common import *
-
+from dotenv import load_dotenv
+load_dotenv()
 
 SECRET_KEY=os.environ.get("SECRET_KEY")
 
@@ -22,7 +23,9 @@ CSRF_COOKIE_DOMAIN='.craft-shake.com'
 
 CORS_ALLOWED_ORIGINS = [
     'https://craft-shake.com',
-    'https://django.craft-shake.com'
+    'https://django.craft-shake.com',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:8000',
 ]
 
 DATABASES = {
@@ -34,6 +37,7 @@ DATABASES = {
         'HOST': os.environ.get('POSTGRES_URL'),
         'PORT': '5432',
   }
+
     
 }
 

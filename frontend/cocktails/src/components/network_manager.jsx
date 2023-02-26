@@ -596,7 +596,7 @@ export class NetworkManager{
 		// //console.log('URL',window.location.href)
 		let url = new URL(window.location.href)
 		let host = url.host																												 
-		let result = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=https://${host}/get_code&prompt=consent&response_type=code&client_id=407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline`
+		let result = `https://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http://${host}/get_code&prompt=consent&response_type=code&client_id=407812134261-0ocad46bbff1ur3kieba62jpfafuutgm.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline`
 		return result
 	}
 
@@ -610,7 +610,8 @@ export class NetworkManager{
         }
 		console.log('form',form)
 		return this.axiosInstance
-			.post(`craft_shake_auth/dj-rest-auth/google/`, form)
+			// .post(`craft_shake_auth/dj-rest-auth/google/`, form)
+			.post(`dj-rest-auth/google/`,form)
 			.then((response)=>{
 				localStorage.removeItem('referralCode');
 				localStorage.setItem('access_token', response.data.access_token);
