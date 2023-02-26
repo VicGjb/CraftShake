@@ -610,8 +610,8 @@ export class NetworkManager{
         }
 		console.log('form',form)
 		return this.axiosInstance
-			// .post(`craft_shake_auth/dj-rest-auth/google/`, form)
-			.post(`dj-rest-auth/google/`,form)
+			.post(`craft_shake_auth/dj-rest-auth/google/`, form)
+			// .post(`dj-rest-auth/google/`,form)
 			.then((response)=>{
 				localStorage.removeItem('referralCode'); 
 				localStorage.setItem('access_token', response.data.access_token);
