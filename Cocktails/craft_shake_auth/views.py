@@ -210,4 +210,5 @@ class GoogleLogin(CraftShakeGoogleLogin):
                 referral_code.save()
                 return Response(status=400, data={'error': 'Referral code has expired or is no longer valid.'})
         else:
+            print(f'Hey try to login with google {request.data}')
             return super().post(request, *args, **kwargs)

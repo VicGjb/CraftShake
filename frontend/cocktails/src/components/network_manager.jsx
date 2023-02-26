@@ -605,7 +605,7 @@ export class NetworkManager{
 		let form = {  
             "access_token": "",	
             "code": code,
-            "id_token": null,
+            "id_token": '',
 			"referral_code":referralCode
         }
 		console.log('form',form)
