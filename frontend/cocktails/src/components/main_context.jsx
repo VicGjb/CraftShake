@@ -89,7 +89,7 @@ export function MainContextProvider({children}){
             getVolomeNameFromMainContext:getVolumeNameFromContext,
             getDefaultVolume:getDefaultVolume,
             getPhoto:getPhoto,
-            analyticManager:analyticManager
+            analyticManager:analyticManager,
         }}>
             {children}
         </MainContext.Provider>

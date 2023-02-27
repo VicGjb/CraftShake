@@ -13,7 +13,7 @@ export function MenuPositionRow({position}){
 
     let menu_position = position;
     let main_context = useManeContext();
-    let volumes = main_context.getVolumesFromMainContext();
+    let volume_list = main_context.getVolumesFromMainContext();
     let order_detile_context = useOrderItemListContext();
     
     let orderId = order_detile_context.getOrderIdContext
@@ -33,7 +33,7 @@ export function MenuPositionRow({position}){
 
 
     function AddButton(){
-            let amount_volume = Number(form['quantity']) * Number(volumes.filter(volume=>(volume.id == form['volume']))[0].value)
+            let amount_volume = Number(form['quantity']) * Number(volume_list.filter(volume=>(volume.id == form['volume']))[0].value)
             let item_price = amount_volume/Number(menu_position.volume) * Number(menu_position.sale_price)
             form.item_price = item_price.toFixed(2)
             if(form.quantity>0){
@@ -46,7 +46,7 @@ export function MenuPositionRow({position}){
     function ChangeHendler(qnty){
         form.quantity = qnty
         order_detile_context.addItemMobile(form)
-        let amount_volume = Number(form['quantity']) * Number(volumes.filter(volume=>(volume.id == form['volume']))[0].value)
+        let amount_volume = Number(form['quantity']) * Number(volume_list.filter(volume=>(volume.id == form['volume']))[0].value)
         let item_price = amount_volume/Number(menu_position.volume) * Number(menu_position.sale_price)
         form.item_price = item_price.toFixed(2)
         setForm({...form, ['quantity']:qnty, ['uuid']:uuidv4()})
@@ -56,7 +56,7 @@ export function MenuPositionRow({position}){
     function changeVolumeHandler(prop){
         form.volume = prop.id
         order_detile_context.addItemMobile(form)
-        let amount_volume = Number(form['quantity']) * Number(volumes.filter(volume=>(volume.id == form['volume']))[0].value)
+        let amount_volume = Number(form['quantity']) * Number(volume_list.filter(volume=>(volume.id == form['volume']))[0].value)
         let item_price = amount_volume/Number(menu_position.volume) * Number(menu_position.sale_price)
         form.item_price = item_price.toFixed(2)
         setForm({...form, ['volume']:prop.id,['uuid']:uuidv4() })
