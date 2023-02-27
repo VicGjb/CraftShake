@@ -293,7 +293,8 @@ class ProductDeleteView(viewsets.ModelViewSet):
     def destroy(self, request,pk=None, *args, **kwargs):
         product = Product.objects.get(id=pk)
         print(product.photo)
-        remove_file_from_aws_3(product.photo)
+        if product.photo:
+            remove_file_from_aws_3(product.photo)
         return super().destroy(request, *args, **kwargs)
 
 

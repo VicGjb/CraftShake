@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SECRET_KEY=os.environ.get("SECRET_KEY")
-print(f'SECRET!!! {SECRET_KEY}')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SETTINGS_PATH =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
