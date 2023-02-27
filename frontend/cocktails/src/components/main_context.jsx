@@ -53,8 +53,8 @@ export function MainContextProvider({children}){
        return volumes.filter(volume=>(volume.id == id))[0].name
     }
     function getDefaultVolume(){
-        //console.log('Default', volumes[1].id)
-        return volumes[1]
+        let sortedVolumes = [...volumes].sort((a, b) => parseFloat(a.value) - parseFloat(b.value));
+        return sortedVolumes[1]
     }
     
     // Photo for product
