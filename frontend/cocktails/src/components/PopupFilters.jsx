@@ -59,7 +59,7 @@ export function PopupFilters({
                 break
             case 'invoices':
                 return(
-                    <span>Applye</span>
+                    <span>Filters</span>
                 )
                 break
         }

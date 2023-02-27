@@ -27,7 +27,7 @@ export function SelectVolume({onChange}){
             onChange={changeHandler}
             required               
             >
-            {volume_list.reverse().map(volume=>(
+            {[...volume_list].reverse().map(volume=>(
                 <option key={volume.id} value={volume.id}>{volume.name}</option>
             ))}
         </select>
