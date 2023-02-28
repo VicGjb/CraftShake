@@ -49,7 +49,7 @@ export function ManagerCard({manager}){
                 </div>
                 
                 <div className={manager.description?'manager_card_description active':"manager_card_description"}>
-                    Note:<br/>
+                    <div className="manager-description_title">Note:</div>
                     <div className="manager-description-wrapper">{manager.description}</div>
                 </div>
 

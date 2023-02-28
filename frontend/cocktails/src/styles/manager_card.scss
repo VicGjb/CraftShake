@@ -17,6 +17,7 @@
 }
 .manager_card_title{
     display: flex;
+    flex-direction: column;
     margin-top: 25px;
     width: 95%;
     justify-content: space-between;
@@ -27,6 +28,7 @@
 .manager_card_name{
     font-weight: 600;
     font-size: 24px;
+    margin-bottom: 7px;
 }
 .manager_card_phone{
     display: flex;
@@ -44,12 +46,19 @@
 .manager_card_description{
     margin-top:15px;
     align-self: center;
-    text-align: center;
+    // text-align: center;
     display: none;
     color: #909090;
+    
     font-size: 25px;
     padding-bottom: 20px;
-    width: 90%;
+    width: 95%;
+}
+.manager-description_title{
+    padding-bottom: 5px;
+    // border-top: 1px solid whitesmoke;
+    // text-decoration: underline;
+    // margin-bottom: 5px;
 }
 .manager_card_description.active{
     display: inline;
@@ -60,6 +69,8 @@
     font-size: 22px;
     display: -moz-box;
     -moz-box-orient: vertical;
+    
+    color: whitesmoke;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
