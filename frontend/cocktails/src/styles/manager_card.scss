@@ -18,7 +18,7 @@
 .manager_card_title{
     display: flex;
     flex-direction: column;
-    margin-top: 25px;
+    margin-top: 10px;
     width: 95%;
     justify-content: space-between;
     align-self: center;
@@ -44,7 +44,7 @@
     }
 }
 .manager_card_description{
-    margin-top:15px;
+    margin-top:10px;
     align-self: center;
     // text-align: center;
     display: none;
@@ -78,6 +78,7 @@
     box-orient: vertical;
     line-height: 25px; 
     width: 100%;
+    margin-bottom: 5px;
 }
 
 
@@ -110,7 +111,7 @@
 }
 @media (max-width:770px){
     .manager_card_wrapper{
-        height: 120px;
+        height: 140px;
     }
     .manager-description-wrapper{
         font-size: 16px;

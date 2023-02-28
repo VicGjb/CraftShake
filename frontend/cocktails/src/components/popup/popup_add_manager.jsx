@@ -147,7 +147,7 @@ export function PopupAddManager({add_manager_active, setAdd_manager_active, mana
                                 </div>  
                             </div>
                             <div className='submit_button add_place' onClick={()=>{validateForm().then(()=>console.log('hey'))}}>
-                                    <RegularButton lable={'Accept'} type='submit'/>
+                                    <RegularButton lable={'Save'} type='submit'/>
                             </div>
                         </Form>
                     )}

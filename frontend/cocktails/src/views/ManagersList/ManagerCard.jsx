@@ -56,7 +56,7 @@ export function ManagerCard({manager}){
                 <div className={subMenu?'sub_menu_wrapper active':"sub_menu_wrapper"} onClick={()=>{setSubMenu(false)}}>
                     <div className="sub_menu_content">
                     <div className="menu_position_card_slot update" onClick={()=>{setAdd_manager_active(true)}}>
-                            <RegularButton lable={'Update'}/>
+                            <RegularButton lable={'Edit'}/>
                         </div>
                         <div className="menu_position_card_slot delete" onClick={()=>{setDelete_active(true)}}>
                             <RegularButton lable={'Delete'}/>
