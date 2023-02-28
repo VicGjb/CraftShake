@@ -18,5 +18,4 @@ class CraftShakeCustomerPermissions(permissions.BasePermission):
             user = obj.users.filter(id=request.user.id)
             if (user or request.user.is_staff and request.method in permitted_methods):
                 print(request.method )
-                print('fefefefefefpvoks')
                 return True
