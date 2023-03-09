@@ -52,6 +52,7 @@ export class NetworkManager{
 									//console.log('Token error', error)
 									localStorage.removeItem('access_token');
             						localStorage.removeItem('refresh_token');
+									request.headers.Authorization = null;
 									window.location.href = '/login/' 
 								})
 								request.headers.Authorization = localStorage.getItem('access_token')
@@ -98,6 +99,9 @@ export class NetworkManager{
 								error.response.status === 401 &&
 								originalRequest.url === baseURL + 'token/refresh/'
 							) {
+								localStorage.removeItem('access_token');
+        						localStorage.removeItem('refresh_token');
+								this.axiosInstance.defaults.headers['Authorization'] = null;
 								window.location.href = '/login/';
 								return Promise.reject(error);
 							}
@@ -119,6 +123,7 @@ export class NetworkManager{
 										//console.log('Refresh token is expired', refresh_token_data.exp, now);
 										localStorage.removeItem('access_token');
         								localStorage.removeItem('refresh_token');
+										this.axiosInstance.defaults.headers['Authorization'] = null;
 										window.location.href = '/login/';
 										
 									}

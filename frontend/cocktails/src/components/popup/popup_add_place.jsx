@@ -196,7 +196,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
                                     </div>
                                 </div>
                                 <div className='submit_button add_place' onClick={()=>{validateForm().then(()=>console.log('hey'))}}>
-                                    <RegularButton lable={'Accept'} type='submit'/>
+                                    <RegularButton lable={'Save'} type='submit'/>
                                 </div>
                             </Form>
                         )}

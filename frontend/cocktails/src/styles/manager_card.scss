@@ -56,9 +56,7 @@
 }
 .manager-description_title{
     padding-bottom: 5px;
-    // border-top: 1px solid whitesmoke;
-    // text-decoration: underline;
-    // margin-bottom: 5px;
+
 }
 .manager_card_description.active{
     display: inline;
@@ -111,7 +109,7 @@
 }
 @media (max-width:770px){
     .manager_card_wrapper{
-        height: 140px;
+        height: 130px;
     }
     .manager-description-wrapper{
         font-size: 16px;

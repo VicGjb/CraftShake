@@ -105,7 +105,7 @@ export function PopupCreateReferralUrl({
                             </div>
 
                             <div className='submit_button add_place' onClick={()=>{validateForm().then(()=>console.log('hey'))}}>
-                                    <RegularButton lable={'Accept'} type='submit'/>
+                                    <RegularButton lable={'Create'} type='submit'/>
                             </div>
                         </Form>
                     )}
