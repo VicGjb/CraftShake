@@ -68,7 +68,7 @@ export function SignIn() {
         }else{
         let timer = setInterval(() => {
             if(externalPopup.closed){
-                window.location.href='/'
+                window.location.href='/check_user'
             return;  
             }
             }, 500)
@@ -81,7 +81,7 @@ export function SignIn() {
 		//console.log(form);
         network_manager.SingIn(form)
         .then(()=>{
-            window.location.href='/'
+            window.location.href='/check_user'
         })  
         .catch(error => {
             //console.log('dsdscsdcsd',error.response.status);

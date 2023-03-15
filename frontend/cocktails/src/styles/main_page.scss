@@ -1,28 +1,186 @@
 .main-page__wrapper{
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
 }
 .main-page__head{
-    width: 100%;
-    height: 100%;
-    img{
-        height: 100%;
-        width: 100%;
-        
+    height: 100vh;
+    background-image: url('https://craftshake.s3.eu-central-1.amazonaws.com/svg/head_img.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .button{
+        margin-top: 20px;
+        width: 400px;
+        height: 75px;
+        border-radius: 20px;
+        border: 1px solid #FBEA92;
+        .button_label{
+            font-size: 28px;
+            color: whitesmoke;
+        }
+    }
+    .button:hover{
+        border: 1px solid #FFBF1C;
+        .button_label{
+            color: #FFBF1C;
+            
+        }
     }
 }
-.main-page_head__logo{
-    position:absolute;
-    top:50px;
-    right: 50px;
+.main-page__head___logo{
+   .main-page__head___logo____svg{
+    width: 100%;
+    height: 100%;
+   }
 }
-.main-page__content{}
-.main-page__block-conteiner{}
-.main-page__block-conteiner___title{}
-.main-page__block-conteiner__row{}
-.main-page_block-conteiner__row___text{}
-.main-page_block-conteiner__row___image{}
-.main-page_footer{}
-.main-page__block-conteiner{}
+.main-page__content{
+    color: whitesmoke;
+    font-size: 36px;
+    width: 75%;
+    align-self: center;
+}
+.main-page__block-conteiner{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.main-page__block-conteiner___title{
+    color: #FFBF1C;
+    font-size: 38px;
+    text-decoration: underline;
+    margin-top: 20px;
+}
+.main-page__block-conteiner__row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+.main-page_block-conteiner__row___text{
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+.main-page__block-conteiner__row.second{
+    flex-wrap: wrap-reverse;
+}
+.main-page_block-conteiner__row___image{
+    flex: 1;
+    text-align: center;
+    img{
+        width: 100%;
+        max-width: 100%;
+        min-width: 300px;
+        height: auto;
+    }
+}
+
+
+
+.main-page_footer{
+    background-color: #323131;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+
+}
+.main-page_footer__content{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+.main-page_footer__title{
+    margin-top: 5px;
+    align-self: center;
+    color: #FFBF1C;
+    font-size: 22px;
+}
+.main-page_footer__info{
+    margin-top: 15px;
+    align-self: start;
+    font-size: 18px;
+    color: #909090;
+
+}
+
+
+@media (min-width:1280px){
+
+}
+@media (max-width:1280px){
+    .main-page__content,.main-page_footer__content{
+        width: 80%;
+
+    }
+    .main-page_block-conteiner__row___text{
+        font-size: 22px;
+    }
+}
+@media (max-width:769px){
+    .main-page__head{
+        .button{
+            margin-top: 20px;
+            width: 300px;
+            height: 55px;
+            border-radius: 20px;
+            .button_label{
+                font-size: 26px;
+            }
+        }
+    }
+    .main-page__head___logo{
+        width: 90%;
+        
+        .main-page__head___logo____svg{
+         width: 100%;
+         height: 100%;
+        }
+     }
+
+     .main-page__content{
+        width: 90%;
+        align-self: center;
+    }
+    .main-page__block-conteiner__row{
+        flex-direction: column;
+    }
+    .main-page__block-conteiner__row.second{
+        flex-direction: column-reverse;
+    }
+    .main-page_block-conteiner__row___text,.main-page_block-conteiner__row___image{
+        flex-basis: 100%;
+        text-align: center;
+    }
+}
+@media (max-width:450px){
+    .main-page__head{
+        .button{
+            margin-top: 20px;
+            width: 240px;
+            height: 45px;
+            border-radius: 15px;
+            .button_label{
+                font-size: 22px;
+            }
+        }
+    }
+    .main-page__head___logo{
+        width: 90%;
+        
+        .main-page__head___logo____svg{
+         width: 100%;
+         height: 100%;
+        }
+     }
+}
