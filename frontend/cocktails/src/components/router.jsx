@@ -102,8 +102,9 @@ import { SignIn } from "../views/Auth/login";
 import { PersonalAccount } from "../views_customer/personal_account";
 import { ReferralRegistration } from "../views/Auth/ReferralRegistration";
 import { HomePage } from "../views/HomePage/HomePage";
-import { MainPage } from "../views/TestProps/MainPage";
+import { MainPage } from "../views/HomePage/MainPage";
 import { PageTracking } from "./analytic";
+import { SoundButton } from "./sound_button";
 
 export function Routing(){
 
@@ -135,12 +136,15 @@ export function Routing(){
                         </Route>
                     </Route>    
                     <Route path='/' element={<HomePage/>} />
+                    
                 </Route> 
                 <Route path='login' element={<SignIn/>}/> 
+                <Route path='vitos_button' element={<SoundButton/>}/>
+                <Route path='main' element={<MainPage/>} />
                 {/* <Route path='reregistration/' element={<ReferralRegistration/>}/> */}
                 <Route path='reregistration/:referralCode' element={<ReferralRegistration/>}/>
 
-                <Route path='test' element={<MainPage/>}/>
+                // <Route path='test' element={<MainPage/>}/>
                 <Route path='get_code' element={<GetCodeGoogleLogin/>}/>
             </Routes>
         </Router>
