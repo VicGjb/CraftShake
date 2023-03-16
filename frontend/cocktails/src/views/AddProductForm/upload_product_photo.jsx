@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { NetworkManager } from '../../components/network_manager';
+import { NetworkManager } from '../../api/network_manager';
 import { useParams } from 'react-router-dom';
 import { RegularButton } from '../../components/buttons/regular_button';
 

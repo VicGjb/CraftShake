@@ -3,16 +3,16 @@ import { useState } from "react"
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context"
 import { UploadOrderPhotoPopup } from "./UploadOrderPhoto"
 import { RegularButton } from "../../../components/buttons/regular_button"
-import { NetworkManager } from "../../../components/network_manager"
+import { NetworkManager } from "../../../api/network_manager"
 import '../../../styles/order_states.scss'
-import { useManeContext } from "../../../components/main_context"
+import { useMainContext } from "../../../router/main_context"
 
 export function OrderStates(){
     let orderItemContext = useOrderItemListContext()
     let [upload_photo_active, setUploadPhotoActive] = useState(false);
     let network_manager = new NetworkManager()
     let order = orderItemContext.getOrderContext
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
     
     function setStateApproved(){

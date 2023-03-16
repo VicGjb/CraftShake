@@ -2,13 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { Loading } from "../../components/loader";
 import { AuthServise } from "../Auth/auth_service";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 
 export function HomePage(){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let navigate = useNavigate()
     let user = mainContext.getUserFromMainContext()
 

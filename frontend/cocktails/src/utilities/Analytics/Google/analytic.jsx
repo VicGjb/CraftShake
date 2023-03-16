@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useLocation } from "react-router-dom";
 import ReactGA from 'react-ga';
 import { useEffect } from 'react';
-import { sendAmplitudeData } from '../utilities/amplitude';
-import { initAmplitude } from '../utilities/amplitude';
+import { sendAmplitudeData } from '../Amplitude/amplitude';
+import { initAmplitude } from '../Amplitude/amplitude';
 
 function initialiseAnalytics() {
   let TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_ID; 

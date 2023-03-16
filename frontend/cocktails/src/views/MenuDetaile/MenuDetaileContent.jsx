@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { PopupAddMenuPosition } from "../../components/popup/popup_add_menu_position";
 import { PopupDelete } from "../../components/popup/popup_delete";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { MenuDetaileButtonRow } from "./MenuDetaileButtonRow";
 import { useMenuDetaileContext } from "./MenuDetaileContext";
 import { Loading } from "../../components/loader";
@@ -15,7 +15,7 @@ import '../../styles/menu_detaile.scss'
 export function MenuDetaileContent(){
     let {placeName} = useParams();
     let {placeId} = useParams();
-    let main_context = useManeContext();
+    let main_context = useMainContext();
     let [menu, setMenu] = useState({});
     let [loaded, setLoaded] = useState(false);
     let {menuId} = useParams();

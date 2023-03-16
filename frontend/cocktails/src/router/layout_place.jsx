@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
-import { PlaceSubtitle } from "./place_subtitle";
-import { NetworkManager } from "./network_manager";
-import { useManeContext } from "./main_context";
-import { Loading } from "./loader";
+import { PlaceSubtitle } from "../components/place_subtitle";
+import { NetworkManager } from "../api/network_manager";
+import { useMainContext } from "./main_context";
+import { Loading } from "../components/loader";
 import '../styles/layout_place.scss'
 
 export function LayoutPlace(){
     let {placeId} = useParams()
     let [loaded, setLoaded] = useState()
     let network_manager = new NetworkManager()
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
 
     useEffect(() => {
         network_manager.get_place_detaile(placeId)

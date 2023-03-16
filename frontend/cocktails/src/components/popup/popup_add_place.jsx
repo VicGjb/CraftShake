@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useManeContext } from "../main_context";
+import { useMainContext } from "../../router/main_context";
 import { RegularButton } from "../buttons/regular_button";
-import { NetworkManager } from '../../components/network_manager';
+import { NetworkManager } from '../../api/network_manager';
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import { Formik, Form, Field } from 'formik';
 import '../../styles/popup_add_place.scss'
@@ -15,7 +15,7 @@ export function PopupAddPlace({add_place_active, setAdd_place_active, setPlaces,
         email:'',
         is_current_place:true,
     }
-    let mainContext = useManeContext();
+    let mainContext = useMainContext();
     let placeContext = mainContext.getPlace
     let defaultForm = setDefaultForm()
 	let [form, setForm] =  useState(defaultForm);

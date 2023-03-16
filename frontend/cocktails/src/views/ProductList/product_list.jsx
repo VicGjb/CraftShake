@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { AddButton } from "../../components/buttons/add_button";
 import { Link } from "react-router-dom";
 import { PopupAddProduct } from "../../components/popup/popup_add_product";
 import {ReactComponent as SearchBtn} from "../../svg/search.svg"
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { ProductListMobile } from "./ProductListMobile";
 import { RegularButton } from "../../components/buttons/regular_button";
 import '../../styles/product_list.scss'
@@ -17,7 +17,7 @@ export function ProductList(){
     let [add_product_active, setAddProductActive] = useState(false)
     let [isLoaded, setIsLoaded] = useState(false)
     let network_manager = new NetworkManager()
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
     
     useEffect(()=> {

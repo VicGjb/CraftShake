@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupDelete } from "../../components/popup/popup_delete";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { useMenuDetaileContext } from "./MenuDetaileContext";
 import { PopupMenuPositionCard } from "./PopupMenuPositionCard";
 import '../../styles/menu_position_card.scss'
 
 export function MenuPositionCard({menuPosition}){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
     let [subMenu, setSubMenu] = useState(false)
     let [delete_active, setDelete_active] = useState(false)

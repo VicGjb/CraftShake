@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "../styles/sound_button.scss";
+import "../../styles/sound_button.scss";
 
 export function SoundButton() {
   const audioRef = useRef(null);

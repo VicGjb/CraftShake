@@ -2,14 +2,14 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { PopupAddMenuPosition } from "../../components/popup/popup_add_menu_position";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { useNavigate } from "react-router-dom";
 import { AddButton } from "../../components/buttons/add_button";
 import { useMenuDetaileContext } from "./MenuDetaileContext";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import '../../styles/menu_detaile_button_row.scss'
 
 export function MenuDetaileButtonRow(){
@@ -30,7 +30,7 @@ export function MenuDetaileButtonRow(){
 
 export function DeleteMenuButton(){
     let networkManager = new NetworkManager()
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
     let {placeName} = useParams();
     let {placeId} = useParams();
@@ -69,7 +69,7 @@ export function DeleteMenuButton(){
 
 export function AddMenuPosition(){
     let [add_menu_position_active, setAdd_menu_position_active] = useState(false)   
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
 
     if(user.role==='counter'){

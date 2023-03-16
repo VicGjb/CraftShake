@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { SideBarPlaceBtn } from "./side_bar_place_btn";
 import { SideBarProductBtn } from "./side_bar_product_btn";
-import { useManeContext } from "../main_context";
+import { useMainContext } from "../../router/main_context";
 
 
 import '../../styles/side_bar.scss';
 
 export function SideBar(){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
 
 

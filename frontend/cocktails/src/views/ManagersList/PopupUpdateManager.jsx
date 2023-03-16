@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { useManagersContext } from "./ManagersContext";
 import { RegularButton } from "../../components/buttons/regular_button";
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"

@@ -4,9 +4,9 @@ import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import { RegularButton } from "../buttons/regular_button";
 import { Formik, Form, Field } from "formik";
 import * as Yup from 'yup';
-import { NetworkManager } from "../network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { PopupRegularMessage } from "./popup_regular_message";
-import { useManeContext } from "../main_context";
+import { useMainContext } from "../../router/main_context";
 import '../../styles/popup_create_referral_url.scss'
 
 export function PopupCreateReferralUrl({
@@ -18,7 +18,7 @@ export function PopupCreateReferralUrl({
         role:'',
         place:'',
     }
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let places = mainContext.getPlaces
     let [referralCode, setReferralCode] = useState('') 
     let domain = process.env.REACT_APP_DOMAIN

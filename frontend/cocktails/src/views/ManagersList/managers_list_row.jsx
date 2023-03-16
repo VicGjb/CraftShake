@@ -1,4 +1,4 @@
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import React from "react";
 import { ReactComponent as CrossDel } from "../../svg/cross_del.svg";
 

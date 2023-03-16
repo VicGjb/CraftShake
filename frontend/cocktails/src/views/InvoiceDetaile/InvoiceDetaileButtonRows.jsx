@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RegularButton } from "../../components/buttons/regular_button";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { PopupRegularMessage } from "../../components/popup/popup_regular_message";
 import { useInvoiceDetaileContext } from "./InvoiceDetileContext";

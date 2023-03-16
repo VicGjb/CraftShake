@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupManagerCard } from "./PopupManagerCard";
 import { PopupDelete } from "../../components/popup/popup_delete";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { useManagersContext } from "./ManagersContext";
 import { PopupAddManager } from "../../components/popup/popup_add_manager";
 import '../../styles/manager_card.scss'

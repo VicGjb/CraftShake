@@ -1,11 +1,11 @@
 import React from "react";
 import '../../../styles/order_position_table_head.scss'
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
-import { useManeContext } from "../../../components/main_context";
+import { useMainContext } from "../../../router/main_context";
 
 export function OrderPositionTableHead(){
     let orderDetaileContext = useOrderItemListContext()
-    let mainContext =useManeContext()
+    let mainContext =useMainContext()
     let order = orderDetaileContext.getOrderContext
     let user = mainContext.getUserFromMainContext()
 

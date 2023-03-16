@@ -1,5 +1,5 @@
 import React from "react";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { useState } from "react";
 
 export function InvoiceListState({invoice}){

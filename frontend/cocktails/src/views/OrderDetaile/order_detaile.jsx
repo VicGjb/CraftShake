@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react"
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import {useParams} from 'react-router-dom';
 import { OrderItemListContextProvider } from "./OrderDetaileContext/order_item_list_context";
 import {OrderDetaileContent} from "./order_detaile_content"; 

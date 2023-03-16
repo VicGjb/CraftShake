@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { useState } from "react";
 import { OrderPositions } from "./order_positions/order_positions";
 import { useOrderItemListContext } from "./OrderDetaileContext/order_item_list_context";
@@ -9,13 +9,13 @@ import { OrderTopButtonLine } from "./OrderTopButtonLine/OrderTopButtonLine";
 import { DeliveredPhotoPopup } from "./DeliveredPhoto";
 import {ReactComponent as CameraIcon} from "../../svg/camera_icon.svg"
 import { MenuPositionRow } from "./menu_position/menu_position_row";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { Loading } from "../../components/loader";
 import { UploadOrderPhotoPopup } from "./OrderStates/UploadOrderPhoto";
 import '../../styles/order_detile.scss'
 
 export function OrderDetaileContent({orderId, menus}){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
     let [loaded, setLoaded] = useState(false);
     let order_detaile_context = useOrderItemListContext();

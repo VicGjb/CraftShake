@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRef } from "react";
-import { NetworkManager } from "../network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { useEffect } from "react";
 import { RegularButton } from "../buttons/regular_button";
 import { useNavigate, useParams } from "react-router-dom";

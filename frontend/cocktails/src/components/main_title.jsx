@@ -2,12 +2,12 @@ import React from "react";
 import { useState } from "react";
 import '../styles/main_title.scss'
 import {ReactComponent as Logo} from "../svg/logo.svg";
-import { useManeContext } from "./main_context";
+import { useMainContext } from "../router/main_context";
 import { Logout } from "../views/Auth/logout";
 
 
 export function MainTitle(){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
 
 

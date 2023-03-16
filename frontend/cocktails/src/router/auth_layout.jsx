@@ -1,14 +1,14 @@
 import React from "react";
 import {Outlet } from "react-router-dom";
 import {AuthServise} from "../views/Auth/auth_service"
-import {useManeContext} from "../components/main_context"
+import {useMainContext} from "./main_context"
 import { useEffect } from "react";
 
 
 export function AuthLayout(){
     let auth_servise = new AuthServise()
     let isLoggedIn = auth_servise.CheckAuth()
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
    
     useEffect(()=>{
         //console.log('HEYYY')

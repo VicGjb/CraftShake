@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { NetworkManager } from '../../components/network_manager';
+import { NetworkManager } from '../../api/network_manager';
 import { RegularButton } from '../../components/buttons/regular_button';
 
 export function AddProduct({setAddProductActive}) {

@@ -3,7 +3,7 @@ import { RegularButton } from "../buttons/regular_button";
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import { useManagersContext } from "../../views/ManagersList/ManagersContext";
 import '../../styles/popup_delete.scss'
-import { useManeContext } from "../main_context";
+import { useMainContext } from "../../router/main_context";
 
 export function PopupDelete({
     subject, 
@@ -12,7 +12,7 @@ export function PopupDelete({
     func 
     }){
 
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     
     function closePopup(){
         setDelete_active(false)

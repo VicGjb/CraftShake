@@ -1,5 +1,5 @@
 import React from "react";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import '../../styles/popup_menu_position_card.scss'
 export function PopupMenuPositionCard({
@@ -7,7 +7,7 @@ export function PopupMenuPositionCard({
     setMenuPositionCardPopupActiv,
     menuPosition,
 }){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     
     
     return(

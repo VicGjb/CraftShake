@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { useManeContext } from "../../components/main_context";
-import { NetworkManager } from "../../components/network_manager";
+import { useMainContext } from "../../router/main_context";
+import { NetworkManager } from "../../api/network_manager";
 import {ReactComponent as SearchBtn} from "../../svg/search.svg";
 import '../../styles/product_list_mobile.scss'
 import { RegularButton } from "../../components/buttons/regular_button";
@@ -11,7 +11,7 @@ import { ProductTableHead } from "./ProductTableHead";
 import { PopupAddProduct } from "../../components/popup/popup_add_product";
 
 export function ProductListMobile({products,setProducts}){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let [add_product_active, setAddProductActive] = useState(false)
     let networkManager = new NetworkManager()
     

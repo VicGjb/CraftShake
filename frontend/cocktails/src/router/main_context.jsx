@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { AnalyticManager } from "./AnalyticManager";
+import { AnalyticManager } from "../utilities/Analytics/AnalyticManager";
 
 
 let MainContext = React.createContext();
 
-export function useManeContext(){
+export function useMainContext(){
     return useContext(MainContext)
 }
 

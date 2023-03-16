@@ -1,5 +1,5 @@
 import React from "react";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AddButton } from "../../components/buttons/add_button";
@@ -8,7 +8,7 @@ import { PopupAddInvoice } from "../../components/popup/popup_add_invoice";
 import { InvoiceCard } from "./InvoiceCard";
 import { InvoiceListTableHead } from "./InvoiceListTableHead";
 import { PopupFilters } from "../../components/PopupFilters";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { Loading } from "../../components/loader";
 import '../../styles/invoice_list.scss'
 
@@ -21,7 +21,7 @@ export function InvoiceList(){
     let network_manager = new NetworkManager()
     let[add_invoice_active, setAdd_invoice_active] = useState(false)
     let [filterActive, setFilterActive] = useState(false)
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
 
 

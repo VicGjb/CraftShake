@@ -1,11 +1,11 @@
 import React from "react"
 import { useState } from "react"
 import { RegularButton } from "../../../components/buttons/regular_button"
-import { NetworkManager } from "../../../components/network_manager"
+import { NetworkManager } from "../../../api/network_manager"
 import { PopupRegularMessage } from "../../../components/popup/popup_regular_message"
 import { PopupYesNoQuestion } from "./PopupYesNoQuestion"
 import { useInvoiceDetaileContext } from "../InvoiceDetileContext"
-import { useManeContext } from "../../../components/main_context"
+import { useMainContext } from "../../../router/main_context"
 
 import '../../../styles/order_states.scss'
 
@@ -15,7 +15,7 @@ export function InvoiceStates(){
     let networkManager = new NetworkManager()
     let invoiceDetaileContext = useInvoiceDetaileContext()
     let invoice = invoiceDetaileContext.getInvoice
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
 
 

@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from "react";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import {useParams} from 'react-router-dom';
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { useInvoiceDetaileContext } from "./InvoiceDetileContext";
 import { InvoiceDetileButtonRow } from "./InvoiceDetaileButtonRows";
@@ -17,7 +17,7 @@ export function InvoiceDetaileContent(){
     let invoice = invoiceDetaileContext.getInvoice
     let [loaded, setLoaded] = useState(false);
     let {invoiceId} = useParams();
-    let mainCintext = useManeContext();
+    let mainCintext = useMainContext();
     let user = mainCintext.getUserFromMainContext()
 
 

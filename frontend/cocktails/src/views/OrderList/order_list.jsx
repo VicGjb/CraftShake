@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { AddButton } from "../../components/buttons/add_button";
 import { PopupFilters } from "../../components/PopupFilters";
 import { RegularButton } from "../../components/buttons/regular_button";
@@ -11,7 +11,7 @@ import { OrderListTableHead } from "./OrderListTableHead";
 import '../../styles/order_list.scss'
 
 export function OrderList(){
-    let main_context = useManeContext()
+    let main_context = useMainContext()
     let network_manager = new NetworkManager()
     let [order, setOrder] = useState([]);
     let {placeId} = useParams();

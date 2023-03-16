@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { SideBar } from "./side_bar/side_bar";
-import { MainTitle } from "./main_title";
-import { useManeContext } from "./main_context";
-import { NetworkManager } from "./network_manager";
+import { SideBar } from "../components/side_bar/side_bar";
+import { MainTitle } from "../components/main_title";
+import { useMainContext } from "./main_context";
+import { NetworkManager } from "../api/network_manager";
 import { AuthServise } from "../views/Auth/auth_service";
 import { useNavigate } from "react-router-dom";
-import { SideBarBurger } from "./side_bar/side_bar_burrger";
-import { PopupRegularMessage } from "./popup/popup_regular_message";
+import { SideBarBurger } from "../components/side_bar/side_bar_burrger";
+import { PopupRegularMessage } from "../components/popup/popup_regular_message";
 import '../styles/layout.scss'
 
 
 export const Layout = () =>{
-    let main_context = useManeContext()
+    let main_context = useMainContext()
     let navigate = useNavigate()
     let network_manager = new NetworkManager()
     let auth_service = new AuthServise()

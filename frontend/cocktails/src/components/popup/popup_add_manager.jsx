@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { RegularButton } from "../buttons/regular_button";
-import { NetworkManager } from "../network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { useManagersContext } from "../../views/ManagersList/ManagersContext";
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
 import { Formik, Form, Field } from 'formik';

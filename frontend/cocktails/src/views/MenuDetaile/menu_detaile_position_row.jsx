@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { ReactComponent as CrossDel } from "../../svg/cross_del.svg";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 
 export function MenuDetailePositionRow({position}){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let network_manager = new NetworkManager()
 
     useEffect(()=>{

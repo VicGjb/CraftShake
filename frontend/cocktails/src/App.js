@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routing } from './components/router';
+import { Routing } from './router/router';
 
 function App() {
   return (

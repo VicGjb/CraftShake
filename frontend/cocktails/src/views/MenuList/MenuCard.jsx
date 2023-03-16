@@ -1,14 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import '../../styles/menu_card.scss'
 import { CurrentMenuChackBox } from "./menu_list_current_btn";
 
 export function MenuCard({menu}){
     let {placeId} = useParams();
     let {placeName} = useParams();
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user =  mainContext.getUserFromMainContext()
 
     function renderCurrentButton(){

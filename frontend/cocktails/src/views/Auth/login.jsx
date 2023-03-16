@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import {ReactComponent as Logo} from "../../svg/main_page_logo.svg"
 import {ReactComponent as GoogleLogo} from "../../svg/google_logo.svg"
 import { useEffect } from 'react';
-import { NetworkManager } from '../../components/network_manager';
+import { NetworkManager } from '../../api/network_manager';
 import { useNavigate } from 'react-router-dom';
 import { AuthServise } from './auth_service';
-import { useManeContext } from '../../components/main_context';
+import { useMainContext } from '../../router/main_context';
 import { RegularButton } from '../../components/buttons/regular_button';
 import { PopupRegularMessage } from '../../components/popup/popup_regular_message';
 import { Formik, Form, Field } from 'formik';
@@ -14,7 +14,7 @@ import '../../styles/login.scss'
 
 export function SignIn() {
 	let navigate = useNavigate();
-    let main_context = useManeContext();
+    let main_context = useMainContext();
 	let initialFormData = Object.freeze({
 		email: '',
 		password: '',

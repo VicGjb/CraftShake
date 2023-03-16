@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Formik,Field,Form } from "formik";
 import * as Yup from 'yup';
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupRegularMessage } from "../../components/popup/popup_regular_message";
 import {ReactComponent as GoogleLogo} from "../../svg/google_logo.svg"

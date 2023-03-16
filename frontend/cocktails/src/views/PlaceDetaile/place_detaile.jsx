@@ -2,7 +2,7 @@ import React, {useEffect,useState} from "react";
 import {useParams} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { InvoicesMainBtn } from "../../components/buttons/invoices_main_btn";
 import { OrdersMainBtn } from "../../components/buttons/orders_main_btn";
 import { MenusMainBtn } from "../../components/buttons/menus_main_btn";
@@ -14,7 +14,7 @@ import { PopupAddManager } from "../../components/popup/popup_add_manager";
 import { PopupAddPlace } from "../../components/popup/popup_add_place";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { RegularButton } from "../../components/buttons/regular_button";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { Loading } from "../../components/loader";
 
 import '../../styles/place_detaile.scss'
@@ -25,7 +25,7 @@ export function PlaceDetaile(){
     let {placeName} = useParams();
     let [loaded, setLoaded] = useState(false);
     let network_manager = new NetworkManager()
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
     let [add_invoice_active, setAdd_invoce_active] = useState(false)
     let [add_menu_active, setAdd_menu_active] = useState(false)

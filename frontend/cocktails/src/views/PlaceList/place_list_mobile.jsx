@@ -1,12 +1,12 @@
 import React from "react";
 import { PlaceCardBtn } from "../../components/buttons/place_card_btn";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import {ReactComponent as SearchBtn} from "../../svg/search.svg"
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import '../../styles/place_list_mobile.scss'
 
 export function PlaceListMobile(){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let places = mainContext.getPlaces
     let networkManager = new NetworkManager()
     

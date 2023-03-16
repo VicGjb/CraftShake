@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { NetworkManager } from "../../../components/network_manager";
+import { NetworkManager } from "../../../api/network_manager";
 import { MenuPositionRow } from "./menu_position_row";
 import { Loading } from "../../../components/loader";
 import { useParams } from "react-router-dom";

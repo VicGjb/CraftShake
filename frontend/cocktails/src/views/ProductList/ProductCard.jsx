@@ -1,9 +1,9 @@
 import React from "react";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import '../../styles/product_card.scss'
 
 export function ProductCard({product}){
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     return(
         <div className="product_card_wrapper">
             <div className="product_card_value_wrapper photo">

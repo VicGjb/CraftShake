@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import '../../styles/side_bar_burger.scss'
-import { useManeContext } from "../main_context";
+import { useMainContext } from "../../router/main_context";
 import { SideBarPlaceBtn } from "./side_bar_place_btn";
 import { SideBarProductBtn } from "./side_bar_product_btn";
 
 export function SideBarBurger(){
 
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
 
     useEffect(() => {
         mainContext.getSideMenuBurgerActiv && (document.body.style.overflow = 'hidden');

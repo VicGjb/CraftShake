@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useManeContext } from "../components/main_context";
-import '../styles/personal_account.scss'
+import { useMainContext } from "../../router/main_context";
+import '../../styles/personal_account.scss'
 
 export function PersonalAccount(){
     let {userId} = useParams()
     let navigate = useNavigate()
-    let main_context = useManeContext()    
+    let main_context = useMainContext()    
     let user = main_context.getUserFromMainContext()
 
     useEffect(()=>{

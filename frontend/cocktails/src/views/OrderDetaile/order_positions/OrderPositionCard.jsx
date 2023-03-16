@@ -1,11 +1,11 @@
 import React from "react";
 import { ReactComponent as CrossDel } from "../../../svg/cross_del.svg";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
-import { useManeContext } from "../../../components/main_context";
+import { useMainContext } from "../../../router/main_context";
 import '../../../styles/order_position_card.scss'
 
 export function OrderPositionCard({order_item}){
-    let main_context = useManeContext()
+    let main_context = useMainContext()
     let user = main_context.getUserFromMainContext()
     let order_detile_context = useOrderItemListContext()
     let volume = main_context.getVolomeNameFromMainContext(order_item.volume)

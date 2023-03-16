@@ -1,9 +1,9 @@
 import React,{useState} from "react";
-import { NetworkManager } from '../../components/network_manager';
+import { NetworkManager } from '../../api/network_manager';
 import { useParams } from 'react-router-dom';
 import { RegularButton } from '../../components/buttons/regular_button';
 import {ReactComponent as CloseIcon} from "../../svg/close_icon.svg"
-import { PhotoUploader } from "../../views/PhotoUploader";
+import { PhotoUploader } from "../PhotoUploader";
 import '../../styles/popup_upload_photo.scss'
 
 export function PopupUploadProductPhoto({upload_product_photo_active, setUploadProductPhotoActive, setProduct}){

@@ -13,22 +13,22 @@ import { PlaceDetaile } from "../views/PlaceDetaile/place_detaile";
 import { PlaceList } from "../views/PlaceList/place_list";
 import { ProductList } from "../views/ProductList/product_list";
 import { ProductDetaile } from "../views/ProductDetaile/product_detaile";
-import { Layout } from "./layout";
-import { LayoutPlace } from "./layout_place";
+import { Layout } from "../router/layout";
+import { LayoutPlace } from "../router/layout_place";
 import { InvoiceList } from "../views/InvoiceList/invoice_list";
 import { InvoiceDetaile } from "../views/InvoiceDetaile/InvoiceDetaile";
 import { MenuList } from "../views/MenuList/menu_list";
 import { MenuDetaile } from "../views/MenuDetaile/MenuDetaile";
 import { ManagersList } from "../views/ManagersList/ManagersList";
-import { AuthLayout } from "./auth_layout";
+import { AuthLayout } from "../router/auth_layout";
 import { GetCodeGoogleLogin } from "../views/Auth/get_code_google_login";
 import { SignIn } from "../views/Auth/login";
-import { PersonalAccount } from "../views_customer/personal_account";
+import { PersonalAccount } from "../views/PersonalAccount/personal_account";
 import { ReferralRegistration } from "../views/Auth/ReferralRegistration";
 import { HomePage } from "../views/HomePage/HomePage";
 import { MainPage } from "../views/HomePage/MainPage";
-import { PageTracking } from "./analytic";
-import { SoundButton } from "./sound_button";
+import { PageTracking } from "../utilities/Analytics/Google/analytic";
+import { SoundButton } from "../components/buttons/sound_button";
 
 export function Routing(){
 

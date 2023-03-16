@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { PlaceCardBtn } from "../../components/buttons/place_card_btn";
 import { PopupAddPlace } from "../../components/popup/popup_add_place";
-import { NetworkManager } from "../../components/network_manager";
-import { useManeContext } from "../../components/main_context";
+import { NetworkManager } from "../../api/network_manager";
+import { useMainContext } from "../../router/main_context";
 import { PlaceListMobile } from "./place_list_mobile";
 import '../../styles/place_list.scss';
 import {ReactComponent as SearchBtn} from "../../svg/search.svg";
@@ -15,7 +15,7 @@ export function PlaceList(){
     let [loaded, setLoaded] = useState(false)
     let [add_place_active, setAdd_place_active] = useState(false)
     let network_manager = new NetworkManager()
-    let main_context =  useManeContext()
+    let main_context =  useMainContext()
     let user = main_context.getUserFromMainContext()
     let newPlace = true
     let [popupAddMenuPlaceListActive, setPopupAddMenuPlaceListActive] = useState(false)

@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { useManeContext } from "./main_context";
+import { useMainContext } from "../router/main_context";
 import { Volume } from "./volume/volume";
 
 
 export function SelectVolume({onChange}){
 
-    let main_context = useManeContext()
+    let main_context = useMainContext()
     let volume_list = main_context.getVolumesFromMainContext()
     let [volume, setVolome] = useState(main_context.getDefaultVolume())
 

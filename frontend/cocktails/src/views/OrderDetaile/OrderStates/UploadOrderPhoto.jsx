@@ -1,8 +1,8 @@
 import React from "react";
-import { NetworkManager } from "../../../components/network_manager";
+import { NetworkManager } from "../../../api/network_manager";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
 import { RegularButton } from "../../../components/buttons/regular_button";
-import { PhotoUploader } from "../../PhotoUploader";
+import { PhotoUploader } from "../../../components/PhotoUploader";
 import {ReactComponent as CloseIcon} from "../../../svg/close_icon.svg"
 
 export function UploadOrderPhotoPopup({upload_photo_active, setUploadPhotoActive}){

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { NetworkManager } from '../../components/network_manager';
+import { NetworkManager } from '../../api/network_manager';
 import { RegularButton } from '../../components/buttons/regular_button';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup'

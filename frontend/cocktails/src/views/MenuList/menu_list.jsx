@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from "react";
-import { NetworkManager} from "../../components/network_manager";
+import { NetworkManager} from "../../api/network_manager";
 import {useParams} from 'react-router-dom';
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { AddButton } from "../../components/buttons/add_button";
 import { RegularButton } from "../../components/buttons/regular_button";
 import { PopupAddMenu } from "../../components/popup/popup_add_menu";
@@ -16,7 +16,7 @@ export function MenuList(){
     let {placeName} = useParams();
     let [add_menu_active, setAdd_menu_active] = useState(false);
     let network_manager = new NetworkManager();
-    let mainContext = useManeContext();
+    let mainContext = useMainContext();
     let user = mainContext.getUserFromMainContext()
 
     useEffect(() => {

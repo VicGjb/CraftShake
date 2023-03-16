@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from "react";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import {useParams} from 'react-router-dom';
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import { PopupAddManager } from "../../components/popup/popup_add_manager";
 import { ManagerCard } from "./ManagerCard";
 import { ManagerListButtonRow } from "./ManagerListButtonRow";
@@ -14,7 +14,7 @@ export function ManagersListContent(){
     let [is_loaded, setLoaded] = useState(false)
     let {placeId} = useParams();
     let {placeName} = useParams();
-    let main_context = useManeContext();
+    let main_context = useMainContext();
     let network_manager = new NetworkManager()
     let managersContext = useManagersContext()
     let managers = managersContext.getManagersList

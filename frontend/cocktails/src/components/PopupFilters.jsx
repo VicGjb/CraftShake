@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { NetworkManager } from "./network_manager";
+import { NetworkManager } from "../api/network_manager";
 import { RegularButton } from "./buttons/regular_button";
 import {ReactComponent as CloseIcon} from "../svg/close_icon.svg"
 import '../styles/popup_filters.scss'

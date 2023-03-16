@@ -1,5 +1,5 @@
 import React from 'react';
-import { NetworkManager } from '../../components/network_manager';
+import { NetworkManager } from '../../api/network_manager';
 import { useNavigate } from 'react-router-dom';
 
 export function Logout() {

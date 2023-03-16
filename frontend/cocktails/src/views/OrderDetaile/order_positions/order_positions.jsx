@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useManeContext } from "../../../components/main_context";
+import { useMainContext } from "../../../router/main_context";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
 import { OrderPositionCard } from "./OrderPositionCard";
 import { OrderPositionTableHead } from "./OrderPositionTableHead";
@@ -9,7 +9,7 @@ import { PopupAddCocktailsMenu } from "../PopupAddCocktail";
 export function OrderPositions(){   
     let [add_cocktails_active, setAdd_cocktails_active] = useState(false)
     let order_detaile_context = useOrderItemListContext()
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
     let order = order_detaile_context.getOrderContext
 

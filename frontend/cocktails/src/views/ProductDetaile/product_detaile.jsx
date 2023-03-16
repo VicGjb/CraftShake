@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react";
-import { NetworkManager } from "../../components/network_manager";
+import { NetworkManager } from "../../api/network_manager";
 import { Link } from "react-router-dom";
 import {useParams} from 'react-router-dom';
 import { RegularButton } from "../../components/buttons/regular_button";
@@ -9,7 +9,7 @@ import { PopupAddProduct } from "../../components/popup/popup_add_product";
 import { PopupDelete } from "../../components/popup/popup_delete";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useManeContext } from "../../components/main_context";
+import { useMainContext } from "../../router/main_context";
 import '../../styles/product_detaile.scss'
 import {ReactComponent as CameraIcon} from "../../svg/camera_icon.svg"
 
@@ -18,7 +18,7 @@ export function ProductDetaile(){
     let [is_loaded, setIsLoaded] = useState(false)
     let {productId} = useParams();
     let network_manager = new NetworkManager();
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let navigate = useNavigate();
 
     let [upload_product_photo_active, setUploadProductPhotoActive] = useState(false);

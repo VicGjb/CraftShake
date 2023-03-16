@@ -1,8 +1,8 @@
 import React from "react";
 import { useOrderItemListContext } from "../OrderDetaileContext/order_item_list_context";
 import { useParams } from "react-router-dom";
-import { NetworkManager } from "../../../components/network_manager";
-import { useManeContext } from "../../../components/main_context";
+import { NetworkManager } from "../../../api/network_manager";
+import { useMainContext } from "../../../router/main_context";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -19,7 +19,7 @@ export function UpdateOrderButton(){
     let {placeId} = useParams();
     let network_manager = new NetworkManager()
     let navigate = useNavigate()
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
     let [regular_message_active, setRegular_message_active] = useState(false)
 
@@ -117,7 +117,7 @@ export function DeleteOrderButton(){
     let {placeName} = useParams();
     let {placeId} = useParams();
     let navigate = useNavigate()
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
     let user = mainContext.getUserFromMainContext()
     let order = orderItemContext.getOrderContext
     let [delete_active,setDelete_active] = useState(false);
@@ -160,7 +160,7 @@ export function OrderTopButtonLine({date}){
     let navigate = useNavigate()
     let {placeName} = useParams();
     let {placeId} = useParams();
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
 
     function renderButtonLine(order){
         if (order){
@@ -200,7 +200,7 @@ export function MobileButtonLineTop({date}){
     let orderItemContext = useOrderItemListContext()
     let order = orderItemContext.getOrderContext
     let navigate = useNavigate()
-    let mainContext = useManeContext()
+    let mainContext = useMainContext()
 
     if(order){
         return(
