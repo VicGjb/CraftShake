@@ -122,7 +122,7 @@ class PlaceUpdateView(viewsets.ModelViewSet):
         return product
 
 class PlaceCreateView(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAdminUser]
+
     permission_classes = [CraftShakeCounterPermissions]
     serializer_class = PlaceCreateSerializer
 
@@ -155,8 +155,6 @@ class PlaceCreateView(viewsets.ModelViewSet):
 
 
 class PlaceDeleteView(viewsets.ModelViewSet):
-    # permission_classes = [permissions.IsAuthenticated]
-    # permission_classes = [CraftShakeCounterPermissions]
     queryset = Place.objects.all()
     serializer_class = PlaceDetailSerializer
 
@@ -436,7 +434,7 @@ class InvoiceView(viewsets.ReadOnlyModelViewSet):
     def create_pdf(self, request, pk=None):
         invoice = Invoice.objects.get(id=pk)
         users = invoice.place.users.filter(place=invoice.place)
-        print(f' hello im user in create_pfd invoice {request.user}')
+        # print(f' hello im user in create_pfd invoice {request.user}')
         if request.user in users or request.user.is_staff:
             
             orders = Order.objects.filter(invoice = pk).order_by('date')
@@ -553,8 +551,6 @@ class InvoiceUpdateView(viewsets.ModelViewSet):
         else:
             data = InvoiceSerializer(invoice)
             return Response(status=201, data=data.data)
-
-
 
 
 
@@ -686,7 +682,23 @@ class OrderView(viewsets.ModelViewSet):
             return super().destroy(request, *args, **kwargs)
         else:
             return Response(status=403)
+    
+    @action(detail=True, methods=['get','create_pdf'])
+    def create_pdf(self, request, pk=None):
+        order = Order.objects.get(id=pk)
+        order_items=[]
+        date_now = datetime.now()
+        date = date_now.strftime("%d/%m")
+        for item in order.order_item.all():
+            order_items.append(item.name)
 
+        print(f'order_items {order_items}')
+        context = {'items':order_items, 'date':date}
+        print(f'context in view order {context}')
+        return PdfCreator.render_pdf_cocktails_label(
+            request=request,
+            context=context
+        )
 
 class OrderStatesView(viewsets.ModelViewSet):
     serializer_class = OrderViewSerializer

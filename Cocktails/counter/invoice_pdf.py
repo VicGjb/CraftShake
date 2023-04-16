@@ -73,3 +73,19 @@ class PdfCreator():
                 if pisa_status.err:
                         return HttpResponse('We had some errors <pre>' + html + '</pre>')
                 return response
+        
+
+        def render_pdf_cocktails_label(request,context):
+                print(f'context {context}')
+                template_path = '../templates/cocktails_label.html'
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = f'attachment; filename=Labels for order {context["date"]}.pdf"'
+                # find the template and render it.
+                template = get_template(template_path)
+                html = template.render(context)
+                pisa_status = pisa.CreatePDF(
+                        html, dest=response, link_callback=PdfCreator.link_callback)
+                # if error then show some funny view
+                if pisa_status.err:
+                        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+                return response

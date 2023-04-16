@@ -110,6 +110,7 @@ urlpatterns = format_suffix_patterns(
         path('order/<int:pk>/set-approve/',OrderStatesView.as_view({'post':'approve'})),
         path('order/<int:pk>/set-delivered/',OrderStatesView.as_view({'post':'delivered'})),
         path('order/<int:pk>/set-paid/',OrderStatesView.as_view({'post':'paid'})),
+        path('order/<int:pk>/label/',OrderView.as_view({'get':'create_pdf'})),
         # path('order/<int:pk>/upload_photo/',OrderView.as_view({'post':'upload_photo'})),
 
         path('order-item/', OrderItemView.as_view({'get':'list'})),

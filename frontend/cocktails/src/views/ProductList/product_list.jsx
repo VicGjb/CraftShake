@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { NetworkManager } from "../../api/network_manager";
-import { AddButton } from "../../components/buttons/add_button";
 import { Link } from "react-router-dom";
 import { PopupAddProduct } from "../../components/popup/popup_add_product";
 import {ReactComponent as SearchBtn} from "../../svg/search.svg"

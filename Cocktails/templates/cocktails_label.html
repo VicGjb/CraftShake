@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static%}
+{% load compress%}
+<html lang="ru">
+<head>
+    <title>{% block title %} {% endblock title %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .content {
+            width: 2000px;
+        }
+        .label {
+            display: inline; /* Display labels horizontally */
+            margin-right: 10px; /* Add some spacing between labels */
+        }
+    </style>
+</head>
+
+<body>
+    {% block date %}
+    {% block items %}
+    <div class="wrapper">
+        <div class="content">
+            {% for item in items %}
+            <span class='label'>
+                <p class='name'>
+                    {{ item }} {{ date }}
+                </p>
+            </span>             
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock items %}
+    {% endblock date %}
+</body>
+</html>
