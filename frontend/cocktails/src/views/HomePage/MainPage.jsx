@@ -17,6 +17,9 @@ export function MainPage(){
                         <RegularButton lable={'Login'}/>
                     </Link>
                 </div>
+                <div className="main-page__head__title">
+                        Crafts cocktails for bars and restaurant
+                    </div>
                 
             </div>
             <div className="main-page__content">
