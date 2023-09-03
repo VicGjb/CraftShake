@@ -11,9 +11,12 @@
         .content {
             width: 2000px;
         }
-        .label {
-            display: inline; /* Display labels horizontally */
-            margin-right: 10px; /* Add some spacing between labels */
+        .tableRow{
+            padding-top: 20px;
+            border-bottom: 1px solid #bdc6cc;
+        }
+        .name{
+            font-size: 14px;
         }
     </style>
 </head>
@@ -23,13 +26,18 @@
     {% block items %}
     <div class="wrapper">
         <div class="content">
-            {% for item in items %}
-            <span class='label'>
-                <p class='name'>
-                    {{ item }} {{ date }}
-                </p>
-            </span>             
-            {% endfor %}
+            <table>
+                {% for item_row in items %}
+                <tr class='tableRow'>
+                    {% for item in item_row %}
+                    
+                        <th class='name'>
+                            {{ item }} <br> {{ date }}
+                        </th>
+                    {% endfor %}  
+                </tr>
+                {% endfor %}
+            </table>  
         </div>
     </div>
     {% endblock items %}

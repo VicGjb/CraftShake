@@ -345,7 +345,17 @@ export class NetworkManager{
 			})
 		}
 
+	async get_order_label_pdf(orderId){
+		return this.axiosInstance
+			.get(`counter/order/${orderId}/label/`,{
+				responseType: 'blob',
+			})
+			.then (response=>{
+				return response
+			})
+		}
 
+		
 	// Menu
 	async create_menu(form){
 		return this.axiosInstance

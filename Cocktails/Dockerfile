@@ -40,3 +40,11 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY . /project/
 ENTRYPOINT ["python", "/project/manage.py", "runserver", "0.0.0.0:8000","--settings=Cocktails.settings_production"]
+
+FROM python:3.10.2
+COPY ./requirements.txt /root/requirements.txt
+RUN pip install --upgrade pip && \
+    pip install -r /root/requirements.txt
+WORKDIR /root/docker
+COPY . /root/docker
+CMD ["python", "src/bot.py"]

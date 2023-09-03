@@ -690,11 +690,13 @@ class OrderView(viewsets.ModelViewSet):
         date_now = datetime.now()
         date = date_now.strftime("%d/%m")
         for item in order.order_item.all():
-            order_items.append(item.name)
-
-        print(f'order_items {order_items}')
+            for i in range(item.quantity):
+                i+=1
+                order_items.append(item.name)
+        order_items = [order_items[i:i + 5] for i in range(0, len(order_items), 5)]
+        # print(f'order_items {order_items}')
         context = {'items':order_items, 'date':date}
-        print(f'context in view order {context}')
+        # print(f'context in view order {context}')
         return PdfCreator.render_pdf_cocktails_label(
             request=request,
             context=context
