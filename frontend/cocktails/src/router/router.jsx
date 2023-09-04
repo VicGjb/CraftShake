@@ -29,6 +29,7 @@ import { HomePage } from "../views/HomePage/HomePage";
 import { MainPage } from "../views/HomePage/MainPage";
 import { PageTracking } from "../utilities/Analytics/Google/analytic";
 import { SoundButton } from "../components/buttons/sound_button";
+import { SoundButtonAug } from "../components/buttons/sound_button_aug";
 
 export function Routing(){
 
@@ -64,7 +65,7 @@ export function Routing(){
                 </Route> 
                 <Route path='login' element={<SignIn/>}/> 
                 <Route path='vitos_button' element={<SoundButton/>}/>
-                
+                <Route path='my_button' element={<SoundButtonAug/>}/>
                 {/* <Route path='reregistration/' element={<ReferralRegistration/>}/> */}
                 <Route path='reregistration/:referralCode' element={<ReferralRegistration/>}/>
                 {/* // <Route path='test' element={<MainPage/>}/> */}
