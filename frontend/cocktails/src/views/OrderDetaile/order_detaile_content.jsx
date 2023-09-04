@@ -54,7 +54,7 @@ export function OrderDetaileContent({orderId, menus}){
         let fileDownload = require('js-file-download');
         network_manager.get_order_label_pdf(orderId)
         .then(response=>{
-            fileDownload(response.data, `Labels for order ${orderId}`)
+            fileDownload(response.data, `Labels for order ${orderId}.pdf`)
         })
     }
 
