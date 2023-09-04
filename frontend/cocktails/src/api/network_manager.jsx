@@ -8,7 +8,7 @@ export class NetworkManager{
 		this.refresh_token = localStorage.getItem('refresh_token')
 		this.axiosInstance = axios.create({
 			baseURL,
-			timeout: 5000,
+			timeout: 9000,
 			headers: {
 				Authorization: this.access_token
 					? 'JWT ' + this.access_token
@@ -355,7 +355,7 @@ export class NetworkManager{
 			})
 		}
 
-		
+
 	// Menu
 	async create_menu(form){
 		return this.axiosInstance
