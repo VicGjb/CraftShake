@@ -8,6 +8,7 @@ import { MobileButtonLineBottom } from "./OrderTopButtonLine/OrderTopButtonLine"
 import { OrderTopButtonLine } from "./OrderTopButtonLine/OrderTopButtonLine";
 import { DeliveredPhotoPopup } from "./DeliveredPhoto";
 import {ReactComponent as CameraIcon} from "../../svg/camera_icon.svg"
+import { ReactComponent as PrintIcon } from "../../svg/print_icon.svg";
 import { MenuPositionRow } from "./menu_position/menu_position_row";
 import { useMainContext } from "../../router/main_context";
 import { Loading } from "../../components/loader";
@@ -49,6 +50,14 @@ export function OrderDetaileContent({orderId, menus}){
         setDateOrder(e.target.value)
     }
 
+    function printLabels(orderId){
+        let fileDownload = require('js-file-download');
+        network_manager.get_order_label_pdf(orderId)
+        .then(response=>{
+            fileDownload(response.data, `Labels for order ${orderId}`)
+        })
+    }
+
     function renderNewOrderDate(order,dateNow){
         if (!order){
             //console.log(dateNow)
@@ -86,6 +95,24 @@ export function OrderDetaileContent({orderId, menus}){
         }else{
             return(
                 <div className="indent"></div>
+            )
+        }
+    }
+
+
+    function renderPrintLabelButton(order){
+        if(user.role==='counter'){
+            return(
+                <div>
+                    <div className="print-label-icon-conteiner" onClick={()=>printLabels(orderId)}>
+                        <PrintIcon className='camera_icon' />
+                    </div>
+                </div>
+            )
+        }else{
+            return(
+
+                <div className='intedent'></div>
             )
         }
     }
@@ -136,7 +163,8 @@ export function OrderDetaileContent({orderId, menus}){
                 <OrderTopButtonLine order={order} date={dateOrder}/>
                 <MobileButtonLineTop date={dateOrder}/>
                 <div className="order_detaile_content_title">
-                    <div className="indent"></div>
+                    {/* <div className="indent"></div> */}
+                    {renderPrintLabelButton()}
                     <div className="order_title">
                         {orderId 
                             ? `Order №: ${order.id} on ${order.date.split('-').reverse().join('.')}`
